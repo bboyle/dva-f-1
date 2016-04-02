@@ -11,4 +11,9 @@ describe('story page', function() {
 		expect( browser.getTitle() ).toEqual( 'Prepare your application for a domestic violence protection order' );
 	});
 
+	it('should ask who needs protection', function() {
+		var label = element( by.css( 'label '));
+		expect( label.getText() ).toEqual( 'Do you need protection?' );
+	});
+
 });
