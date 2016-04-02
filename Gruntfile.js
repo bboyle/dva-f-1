@@ -15,10 +15,11 @@ module.exports = function( grunt ) {
 
 		// local server
 		connect: {
-			qunit: {
+			dev: {
 				options: {
 					port: 8000,
-					base: '.'
+					base: '.',
+					middleware: require( './lib/ssi-include' ).ssiInclude
 				}
 			}
 		},
