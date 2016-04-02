@@ -54,6 +54,10 @@ module.exports = function( grunt ) {
 				files: 'src/js/*.js',
 				tasks: [ 'eslint:src', 'protractor' ]
 			},
+			html: {
+				files: 'src/*.html',
+				tasks: [ 'protractor' ]
+			}
 		},
 	});
 

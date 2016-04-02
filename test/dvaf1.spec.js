@@ -1,15 +1,14 @@
 'use strict';
 
-// spec.js
-describe('first test', function() {
+describe('story page', function() {
 
 	beforeEach(function() {
 		browser.ignoreSynchronization = true;
-		browser.get('http://localhost:8000/src/');
+		browser.get( 'http://localhost:8000/src/' );
 	});
 
 	it('should have a title', function() {
-		expect(browser.getTitle()).toEqual('DVA-F1');
+		expect( browser.getTitle() ).toEqual( 'Prepare your application for a domestic violence protection order' );
 	});
 
 });
