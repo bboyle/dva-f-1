@@ -1,11 +1,14 @@
 ---
 root: true
-env:
-  browser: true
-  jquery: true
 extends:
   "eslint:recommended"
 rules:
-  indent: ["error", "tab"]
-  quotes: ["error", "single"]
-  semi: ["error", "always"]
+  indent:
+    - error
+    - tab
+  quotes:
+    - error
+    - single
+  semi:
+    - error
+    - always
