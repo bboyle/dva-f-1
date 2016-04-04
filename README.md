@@ -1,5 +1,6 @@
 # Form DV1 - Application for a Protection Order (Queensland)
 
+[![Build Status](https://travis-ci.org/bboyle/dva-f-1.svg?branch=master)](https://travis-ci.org/bboyle/dva-f-1)
 [![bitHound Overall Score](https://www.bithound.io/github/bboyle/dva-f-1/badges/score.svg)](https://www.bithound.io/github/bboyle/dva-f-1)
 
 In Queensland, applications for domestic violence protection orders must be made through the magistrates court on the approved form.
