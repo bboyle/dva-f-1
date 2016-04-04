@@ -4,11 +4,11 @@ extends:
   "eslint:recommended"
 rules:
   indent:
-    - error
+    - 2
     - tab
   quotes:
-    - error
+    - 2
     - single
   semi:
-    - error
+    - 2
     - always
