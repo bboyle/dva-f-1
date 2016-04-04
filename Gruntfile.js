@@ -43,6 +43,14 @@ module.exports = function( grunt ) {
 						seleniumPort: 4444
 					}
 				}
+			},
+			saucelabs: {
+				options: {
+					args: {
+						sauceUser: process.env.SAUCE_USERNAME,
+						sauceKey: process.env.SAUCE_ACCESS_KEY
+					}
+				}
 			}
 		},
 		watch: {
@@ -70,8 +78,9 @@ module.exports = function( grunt ) {
 	// Default task.
 	grunt.registerTask( 'build',    []);
 	grunt.registerTask( 'test',     [ 'eslint' ]);
-	grunt.registerTask( 'test-e2e', [ 'connect', 'protractor' ]);
+	grunt.registerTask( 'test-e2e', [ 'connect', 'protractor:auto' ]);
+	grunt.registerTask( 'travis',   [ 'test', 'connect', 'protractor:saucelabs' ]);
 	grunt.registerTask( 'dev',      [ 'connect', 'watch' ]);
-	grunt.registerTask( 'default',  [ 'connect', 'protractor', 'watch' ]);
+	grunt.registerTask( 'default',  [ 'connect', 'protractor:auto', 'watch' ]);
 
 };
