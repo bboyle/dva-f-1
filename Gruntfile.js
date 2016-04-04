@@ -68,7 +68,10 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks( 'grunt-contrib-watch' );
 
 	// Default task.
-	grunt.registerTask( 'dev', [ 'connect', 'watch' ]);
-	grunt.registerTask( 'default', [ 'connect', 'protractor', 'watch' ]);
+	grunt.registerTask( 'build',    []);
+	grunt.registerTask( 'test',     [ 'eslint' ]);
+	grunt.registerTask( 'test-e2e', [ 'connect', 'protractor' ]);
+	grunt.registerTask( 'dev',      [ 'connect', 'watch' ]);
+	grunt.registerTask( 'default',  [ 'connect', 'protractor', 'watch' ]);
 
 };
