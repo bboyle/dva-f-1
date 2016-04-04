@@ -1,3 +1,5 @@
+'use strict';
+
 exports.config = {
 	framework: 'jasmine',
 
