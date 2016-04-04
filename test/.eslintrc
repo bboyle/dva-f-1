@@ -1,7 +1,1 @@
 ---
-env:
-  node: false
-  protractor: true
-  jasmine: true
-rules:
-  strict: [2, global]

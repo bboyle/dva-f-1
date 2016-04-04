@@ -1,14 +1,2 @@
 ---
 root: true
-extends:
-  "eslint:recommended"
-rules:
-  indent:
-    - 2
-    - tab
-  quotes:
-    - 2
-    - single
-  semi:
-    - 2
-    - always
