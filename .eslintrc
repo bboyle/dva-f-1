@@ -1,0 +1,16 @@
+---
+root: true
+extends:
+  "eslint:recommended"
+env:
+  node: true
+rules:
+  indent:
+    - 2
+    - tab
+  quotes:
+    - 2
+    - single
+  semi:
+    - 2
+    - always
