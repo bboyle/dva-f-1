@@ -1,7 +1,5 @@
-{
-  "env": {
-    "node": false,
-    "browser": true,
-    "jquery": true
-  }
-}
+---
+env:
+  node: false
+  browser: true
+  jquery: true
