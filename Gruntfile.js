@@ -27,7 +27,8 @@ module.exports = function( grunt ) {
 		// lint
 		eslint: {
 			src: [ 'src/js/*.js' ],
-			test: [ 'test/*.js' ]
+			test: [ 'test/*.js' ],
+			build: [ '*.js', 'lib/*.js' ]
 		},
 
 		// e2e tests
@@ -65,8 +66,12 @@ module.exports = function( grunt ) {
 			html: {
 				files: 'src/**/*.html',
 				tasks: [ 'protractor' ]
+			},
+			build: {
+				files: '<%= eslint.build %>',
+				tasks: [ 'eslint:build' ]
 			}
-		},
+		}
 	});
 
 	// These plugins provide necessary tasks.
@@ -76,11 +81,11 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks( 'grunt-contrib-watch' );
 
 	// Default task.
-	grunt.registerTask( 'build',    []);
+	grunt.registerTask( 'build',    [ 'eslint:build' ]);
 	grunt.registerTask( 'test',     [ 'eslint' ]);
 	grunt.registerTask( 'test-e2e', [ 'connect', 'protractor:auto' ]);
-	grunt.registerTask( 'travis',   [ 'test', 'connect', 'protractor:saucelabs' ]);
-	grunt.registerTask( 'dev',      [ 'connect', 'watch' ]);
+	grunt.registerTask( 'travis',   [ 'build', 'test', 'connect', 'protractor:saucelabs' ]);
+	grunt.registerTask( 'dev',      [ 'build', 'connect', 'watch' ]);
 	grunt.registerTask( 'default',  [ 'connect', 'protractor:auto', 'watch' ]);
 
 };

@@ -1,4 +1,5 @@
 ---
 env:
+  node: false
   protractor: true
   jasmine: true
