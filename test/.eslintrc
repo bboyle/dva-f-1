@@ -1,9 +1,10 @@
+---
 env:
-    protractor: true
-    jasmine: true
+  protractor: true
+  jasmine: true
 extends:
-    "eslint:recommended"
+  "eslint:recommended"
 rules:
-    indent: ["error", "tab"]
-    quotes: ["error", "single"]
-    semi: ["error", "always"]
+  indent: ["error", "tab"]
+  quotes: ["error", "single"]
+  semi: ["error", "always"]
