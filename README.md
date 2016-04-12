@@ -23,5 +23,6 @@ You may publish variations of this form to assist applicants with the protection
 
 ## Documentation
 
-- [API](docs/API.md) covers the HTTP backend for generating the PDF documents
-- [Developer notes](docs/Developer.md) for advice on working with the source code
+- [Usage](docs/Usage.md) - how to use their form on your own website
+- [API](docs/API.md) - HTTP backend for generating a PDF application pack
+- [Developer notes](docs/Developer.md) - notes on working with the source code

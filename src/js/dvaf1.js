@@ -4,8 +4,9 @@
 $(function( $ ) {
 	'use strict';
 
+	var formView = $( '#dvaf1-form-view' );
 	var template = Handlebars.compile( $( '#dvaf1-story-template' ).html() );
 
-	$( document.body ).append( template );
+	formView.html( template );
 
 });

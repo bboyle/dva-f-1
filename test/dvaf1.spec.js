@@ -9,6 +9,7 @@ describe('story page', function() {
 
 	it('should have a title', function() {
 		expect( browser.getTitle() ).toEqual( 'Prepare your application for a domestic violence protection order' );
+		expect( element( by.css( 'h1' )).getText() ).toEqual( 'Prepare your application for a domestic violence protection order' );
 	});
 
 	it('should ask who needs protection', function() {
