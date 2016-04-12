@@ -37,7 +37,7 @@ module.exports = function( grunt ) {
 				keepAlive: true,
 				configFile: 'protractor.conf.js'
 			},
-			auto: {
+			localhost: {
 				keepAlive: true,
 				options: {
 					args: {
@@ -57,15 +57,15 @@ module.exports = function( grunt ) {
 		watch: {
 			test: {
 				files: 'test/*.spec.js',
-				tasks: [ 'eslint:test', 'protractor' ]
+				tasks: [ 'eslint:test', 'protractor:localhost' ]
 			},
 			src: {
 				files: 'src/js/*.js',
-				tasks: [ 'eslint:src', 'protractor' ]
+				tasks: [ 'eslint:src', 'protractor:localhost' ]
 			},
 			html: {
 				files: 'src/**/*.html',
-				tasks: [ 'protractor' ]
+				tasks: [ 'protractor:localhost' ]
 			},
 			build: {
 				files: '<%= eslint.build %>',
@@ -83,9 +83,9 @@ module.exports = function( grunt ) {
 	// Default task.
 	grunt.registerTask( 'build', [ 'eslint:build' ]);
 	grunt.registerTask( 'test', [ 'eslint' ]);
-	grunt.registerTask( 'test-e2e', [ 'connect', 'protractor:auto' ]);
+	grunt.registerTask( 'test-e2e', [ 'connect', 'protractor:localhost' ]);
 	grunt.registerTask( 'travis', [ 'build', 'test', 'connect', 'protractor:saucelabs' ]);
 	grunt.registerTask( 'dev', [ 'build', 'connect', 'watch' ]);
-	grunt.registerTask( 'default', [ 'connect', 'protractor:auto', 'watch' ]);
+	grunt.registerTask( 'default', [ 'connect', 'protractor:localhost', 'watch' ]);
 
 };
