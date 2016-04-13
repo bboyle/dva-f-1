@@ -5,6 +5,7 @@
 $(function( $ ) {
 	'use strict';
 
+	var interview = {};
 	var formView = $( '#dvaf1-form-view' );
 	var view = [
 		'dvaf1-preamble-template',
@@ -30,8 +31,9 @@ $(function( $ ) {
 		return Handlebars.compile( $( '#' + id ).html() );
 	});
 
+// TODO where should focus be when new page is shown!?
 	function showPage( index ) {
-		formView.html( view[ index ] );
+		formView.html( view[ index ]( interview ));
 	}
 
 
@@ -40,6 +42,14 @@ $(function( $ ) {
 		event.preventDefault();
 
 		page++;
+		showPage( page );
+	});
+
+
+	// handle radio button relevance
+	formView.on( 'click', ':radio', function() {
+		interview[ this.name + '_' + this.value ] = true;
+		// TODO update view, don't lose focus
 		showPage( page );
 	});
 

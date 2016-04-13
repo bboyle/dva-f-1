@@ -6,7 +6,7 @@ var DvaForm1Page = function() {
 };
 
 
-DvaForm1Page.prototype = Object.create({}, {
+DvaForm1Page.prototype = Object.create( {}, {
 	title: {
 		get: function() {
 			return element( by.css( 'h2' )).getText();
@@ -15,7 +15,7 @@ DvaForm1Page.prototype = Object.create({}, {
 
 	continueButton: {
 		get: function() {
-			return element( by.css( 'button' ));
+			return element( by.buttonText( 'Continue' ));
 		}
 	},
 
@@ -28,6 +28,13 @@ DvaForm1Page.prototype = Object.create({}, {
 	continue: {
 		value: function() {
 			this.continueButton.click();
+		}
+	},
+
+	// general helpers
+	focus: {
+		value: function( element ) {
+			element.sendKeys( '' );
 		}
 	}
 });

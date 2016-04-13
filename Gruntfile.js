@@ -58,7 +58,8 @@ module.exports = function( grunt ) {
 			test: {
 				files: [
 					'test/spec/*.spec.js',
-					'test/page/*.page.js'
+					'test/page/*.page.js',
+					'test/page/*.view.js'
 				],
 				tasks: [ 'eslint:test', 'protractor:localhost' ]
 			},
