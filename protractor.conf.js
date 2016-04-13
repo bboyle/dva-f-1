@@ -1,3 +1,4 @@
+ /* global browser */
 'use strict';
 
 exports.config = {
@@ -5,6 +6,12 @@ exports.config = {
 
 	suites: {
 		e2e: ['test/*.spec.js']
+	},
+
+	baseUrl: 'http://localhost:8000',
+
+	onPrepare: function() {
+		browser.ignoreSynchronization = true;
 	}
 };
 

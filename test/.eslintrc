@@ -1,6 +1,6 @@
 ---
 env:
-  node: false
+  node: true
   protractor: true
   jasmine: true
 rules:

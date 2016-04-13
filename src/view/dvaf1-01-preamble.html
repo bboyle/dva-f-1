@@ -1,0 +1,43 @@
+<div>
+	<h2>Before you begin</h2>
+	<ul>
+		<li>This online form can take an hour or more to complete. You can apply yourself. You can also ask a friend or lawyer to apply on your behalf. In some situations, the police may apply for you.</li>
+		<li>You may find answering these questions difficult because we will ask questions about your situation—what happened and when—what protection you need.</li>
+		<li>At the end of this guide you will have the necessary forms  (possibly 2 or 3) to take to court.</li>
+		<li>Once you lodge the forms at court, the person you are wanting protection from will get a copy of your application.</li>
+	</ul>
+</div>
+
+<form class="form" name="formPreamble" ng-submit="interview.completePreamble()">
+	<ol class="questions">
+		<li>
+			<fieldset>
+				<legend>
+					<span class="label">Do you need legal advice?</span>
+					<small class="hint">You may wish to get legal advice before or after preparing your forms to get a protection order.</small>
+				</legend>
+				<ul class="choices">
+					<li>
+						<input type="radio" name="legal-advice" ng-model="interview.legalAdvice" value="how" id="legal-advice-how">
+						<label for="legal-advice-how">How do I get legal advice?</label>
+					</li>
+					<li>
+						<input type="radio" name="legal-advice" ng-model="interview.legalAdvice" value="later" id="legal-advice-later">
+						<label for="legal-advice-later">Continue to prepare an application for a protection order</label>
+						<small class="hint">You can talk to a lawyer about your application before or after you lodge it with the court</small>
+					</li>
+					<li>
+						<input type="radio" name="legal-advice" ng-model="interview.legalAdvice" value="done" id="legal-advice-yes">
+						<label for="legal-advice-yes">I've already talked to a lawyer</label>
+					</li>
+				</ul>
+			</fieldset>
+		</li>
+
+		<li>
+			<ul class="actions">
+				<li><strong><button>Continue</button></strong></li>
+			</ul>
+		</li>
+	</ol>
+</form>
