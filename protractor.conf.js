@@ -5,7 +5,7 @@ exports.config = {
 	framework: 'jasmine',
 
 	suites: {
-		e2e: ['test/*.spec.js']
+		e2e: ['test/spec/*.spec.js']
 	},
 
 	baseUrl: 'http://localhost:8000',

@@ -1,7 +1,7 @@
 'use strict';
 
 
-var DvaForm1Page = require( './page/dvaf1.page.js' );
+var DvaForm1Page = require( '../page/dvaf1.page.js' );
 var page;
 
 
