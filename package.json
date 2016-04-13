@@ -6,6 +6,10 @@
   "directories": {
     "doc": "docs"
   },
+  "engines": {
+    "node": "^4.3.2",
+    "npm": "^3.7.5"
+  },
   "scripts": {
     "install": "node ./node_modules/protractor/bin/webdriver-manager update",
     "test": "grunt test",
