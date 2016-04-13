@@ -85,10 +85,10 @@ module.exports = function( grunt ) {
 
 	// Default task.
 	grunt.registerTask( 'build', [ 'eslint:build' ]);
-	grunt.registerTask( 'test', [ 'eslint' ]);
 	grunt.registerTask( 'test-e2e', [ 'connect', 'protractor:localhost' ]);
-	grunt.registerTask( 'travis', [ 'build', 'test', 'connect', 'protractor:saucelabs' ]);
+	grunt.registerTask( 'travis', [ 'build', 'eslint', 'connect', 'protractor:saucelabs' ]);
 	grunt.registerTask( 'dev', [ 'build', 'connect', 'watch' ]);
+	grunt.registerTask( 'test', [ 'eslint', 'test-e2e' ]);
 	grunt.registerTask( 'default', [ 'connect', 'protractor:localhost', 'watch' ]);
 
 };
