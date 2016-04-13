@@ -4,6 +4,7 @@ node_js:
 addons:
   sauce_connect: true
 before_install:
+  - if [[ `npm -v` != 3* ]]; then npm i -g npm@3; fi
   - npm install -g grunt-cli
 script:
   - grunt travis
