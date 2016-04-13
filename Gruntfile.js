@@ -27,7 +27,7 @@ module.exports = function( grunt ) {
 		// lint
 		eslint: {
 			src: [ 'src/js/*.js' ],
-			test: [ 'test/*.js' ],
+			test: [ 'test/**/*.js' ],
 			build: [ '*.js', 'lib/*.js' ]
 		},
 
@@ -56,7 +56,10 @@ module.exports = function( grunt ) {
 		},
 		watch: {
 			test: {
-				files: 'test/*.spec.js',
+				files: [
+					'test/*.spec.js',
+					'test/page/*.js'
+				],
 				tasks: [ 'eslint:test', 'protractor:localhost' ]
 			},
 			src: {
