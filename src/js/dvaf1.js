@@ -7,6 +7,13 @@ $(function( $ ) {
 
 	var interview = {};
 	var formView = $( '#dvaf1-form-view' );
+
+	var partials = {
+		dfnAggrieved: {
+			id: 'dvaf1-dfn-aggrieved-partial'
+		}
+	};
+
 	var views = {
 		formPreamble: {
 			id: 'dvaf1-preamble-template',
@@ -18,7 +25,34 @@ $(function( $ ) {
 			}
 		},
 		formSituation: {
-			id: 'dvaf1-situation-template'
+			id: 'dvaf1-situation-template',
+			relevance: {
+				'#dvaf1-dfn-aggrieved': [{
+					name: 'userIsAggrieved',
+					value: 'true'
+				}, {
+					name: 'userRelationship',
+					// TODO read this list from the HTML for easier maintenance
+					values: [
+						'girlfriend',
+						'boyfriend',
+						'daughter',
+						'son',
+						'mother',
+						'father',
+						'sister',
+						'brother',
+						'friend',
+						'neighbour',
+						'coworker',
+						'someone'
+					]
+				}],
+				'#dvaf1-user-relationship': {
+					name: 'userIsAggrieved',
+					value: 'false'
+				}
+			}
 		},
 		formAggrievedBasic: {
 			id: 'dvaf1-aggrieved-basic-template'
@@ -85,9 +119,23 @@ $(function( $ ) {
 
 	var page = 0;
 
+	partials = $.each( partials, function( key, partial ) {
+		partial.template = Handlebars.compile( $( '#' + partial.id ).html() );
+		Handlebars.registerPartial( key, partial.template );
+	});
+
 	views = $.each( views, function( key, view ) {
 		view.template = Handlebars.compile( $( '#' + view.id ).html() );
 	});
+
+
+	function parseValue( value ) {
+		if ( /^true|false$/.test( value )) {
+			return value === 'true';
+		}
+		return value;
+	}
+
 
 // TODO where should focus be when new page is shown!?
 	function showPage( index ) {
@@ -95,17 +143,42 @@ $(function( $ ) {
 		formView.html( $( view.template( interview )) );
 
 		$.each( view.relevance, function( target, condition ) {
-			formView.find( target ).relevance( 'relevantWhen', condition );
+			if ( $.isArray( condition )) {
+				$.each( condition, function( i, condition ) {
+					formView.find( target ).relevance( 'relevantWhen', condition );
+				});
+			} else {
+				formView.find( target ).relevance( 'relevantWhen', condition );
+			}
 		});
 	}
 
 
 	// handle form view navigation
-	formView.on( 'submit', function(event) {
+	formView.on( 'submit', function( event ) {
 		event.preventDefault();
 
 		page++;
 		showPage( page );
+	});
+
+
+	// store state
+	formView.on( 'change', function() {
+		var form = event.target.form.name;
+		var name = event.target.name;
+		var value = parseValue( $( event.target ).val() );
+
+		interview[ form ] = interview[ form ] || {};
+		interview[ form ][ name ] = value;
+
+		// regenerate status blocks
+		switch ( name ) {
+		case 'userIsAggrieved':
+		case 'userRelationship':
+			$( '#dvaf1-dfn-aggrieved' ).html( partials.dfnAggrieved.template( interview ));
+			break;
+		}
 	});
 
 

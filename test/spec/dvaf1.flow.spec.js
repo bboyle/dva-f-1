@@ -76,4 +76,7 @@ describe( 'sequential order', function() {
 		expect( page.title ).toEqual( 'Download your application' );
 		expect( page.form.getAttribute( 'name' )).toBe( 'formDownload' );
 	});
+
+
+	xit( 'should scroll to top when loading each page' );
 });

@@ -8,23 +8,36 @@ var SituationView = function() {
 
 
 SituationView.prototype = Object.create( DvaForm1Page.prototype, {
-	// legalAdvice: {
-	// 	get: function() {
-	// 		return element( by.id( 'dvaf1-legal-advice' ));
-	// 	}
-	// },
+	infoBoxHeading: {
+		get: function() {
+			return element( by.css( '.status.info > h2' )).getText();
+		}
+	},
 
-	// radioRequestLegalAdvice: {
-	// 	get: function() {
-	// 		return element( by.id( 'legal-advice-how' ));
-	// 	}
-	// },
+	radioUserIsAggrieved: {
+		get: function() {
+			return element( by.id( 'user-is-aggrieved-true' ));
+		}
+	},
 
-	// askForLegalAdvice: {
-	// 	value: function() {
-	// 		return this.radioRequestLegalAdvice.click();
-	// 	}
-	// }
+	radioUserIsNotAggrieved: {
+		get: function() {
+			return element( by.id( 'user-is-aggrieved-false' ));
+		}
+	},
+
+	chooseUserIsAggrieved: {
+		value: function() {
+			this.radioUserIsAggrieved.click();
+		}
+	},
+
+	chooseAggrievedIsUsers: {
+		value: function( relationship ) {
+			this.radioUserIsNotAggrieved.click();
+			element( by.name( 'userRelationship' )).element( by.css( 'option[value = "' + relationship + '"]' )).click();
+		}
+	},
 
 	get: {
 		value: function() {

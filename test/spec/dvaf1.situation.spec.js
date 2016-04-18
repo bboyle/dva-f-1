@@ -19,5 +19,12 @@ describe( 'situation view', function() {
 		expect( situationView.visibleQuestions.count() ).toEqual( 3 );
 	});
 
+	it( 'should define "the aggrieved"', function() {
+		situationView.chooseUserIsAggrieved();
+		expect( situationView.infoBoxHeading ).toBe( 'You are the aggrieved' );
+
+		situationView.chooseAggrievedIsUsers( 'daughter' );
+		expect( situationView.infoBoxHeading ).toBe( 'Your daughter is the aggrieved' );
+	});
 
 });
