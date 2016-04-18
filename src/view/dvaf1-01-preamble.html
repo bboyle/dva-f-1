@@ -27,40 +27,38 @@
 					</legend>
 					<ul class="choices">
 						<li>
-							<input type="radio" name="legalAdvice" value="how" id="legal-advice-how" {{#if legalAdvice_how}}checked{{/if}}>
+							<input type="radio" name="legalAdvice" value="How do I get legal advice?" id="legal-advice-how" {{#if formPreamble.legalAdvice.howdoi}}checked{{/if}}>
 							<label for="legal-advice-how">How do I get legal advice?</label>
 						</li>
 						<li>
-							<input type="radio" name="legalAdvice" value="later" id="legal-advice-later">
+							<input type="radio" name="legalAdvice" value="Continue to prepare an application for a protection order" id="legal-advice-later">
 							<label for="legal-advice-later">Continue to prepare an application for a protection order</label>
 							<small class="hint">You can talk to a lawyer about your application before or after you lodge it with the court</small>
 						</li>
 						<li>
-							<input type="radio" name="legalAdvice" value="done" id="legal-advice-yes">
+							<input type="radio" name="legalAdvice" value="I've already talked to a lawyer" id="legal-advice-yes">
 							<label for="legal-advice-yes">I've already talked to a lawyer</label>
 						</li>
 					</ul>
 				</fieldset>
 			</li>
 
-			<li>
+			<li class="footer">
 				<ul class="actions">
 					<li><strong><button>Continue</button></strong></li>
 				</ul>
 			</li>
 		</ol>
-	</form>
 
-	{{#if legalAdvice_how}}
-	<section id="dvaf1-legal-advice" class="status info">
-		<h3>How can I get legal advice?</h3>
-		<p>You can get legal advice from:</p>
-		<ul>
-			<li>Legal Aid Queensland – call <a href="tel:1300-65-11-88">1300 65 11 88</a> for free legal advice</li>
-			<li>a community legal centre – go to <a href="http://www.qails.org.au">www.qails.org.au</a> or <a href="http://www.legalaid.qld.gov.au">www.legalaid.qld.gov.au</a> or call <a href="tel:1300-65-11-88">1300 65 11 88</a> to check services in your area</li>
-			<li>a private solicitor – call the Queensland Law Society or visit <a href="http://www.qls.com.au">www.qls.com.au</a> for names of solicitors who can help.</li>
-			<li>In some areas there are programs to help people apply for a domestic violence order — these include domestic violence prevention programs, application assistance programs or domestic violence services. You can ask at the magistrates court about these programs.</li>
-		</ul>
-	</section>
-	{{/if}}
+		<section id="dvaf1-legal-advice" class="status info">
+			<h3>How can I get legal advice?</h3>
+			<p>You can get legal advice from:</p>
+			<ul>
+				<li>Legal Aid Queensland – call <a href="tel:1300-65-11-88">1300 65 11 88</a> for free legal advice</li>
+				<li>a community legal centre – go to <a href="http://www.qails.org.au">www.qails.org.au</a> or <a href="http://www.legalaid.qld.gov.au">www.legalaid.qld.gov.au</a> or call <a href="tel:1300-65-11-88">1300 65 11 88</a> to check services in your area</li>
+				<li>a private solicitor – call the Queensland Law Society or visit <a href="http://www.qls.com.au">www.qls.com.au</a> for names of solicitors who can help.</li>
+				<li>In some areas there are programs to help people apply for a domestic violence order — these include domestic violence prevention programs, application assistance programs or domestic violence services. You can ask at the magistrates court about these programs.</li>
+			</ul>
+		</section>
+	</form>
 </section>

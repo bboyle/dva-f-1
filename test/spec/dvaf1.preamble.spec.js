@@ -14,8 +14,8 @@ describe( 'preamble page', function() {
 		expect( preamble.title ).toEqual( 'Before you begin' );
 	});
 
-	it( 'should have a continue button', function() {
-		expect( preamble.continueButton.getText() ).toEqual( 'Continue' );
+	it( 'should not initially have a continue button', function() {
+		expect( preamble.continueButton.isDisplayed() ).toBe( false );
 	});
 
 	it( 'should use the respondent name in the court description', function() {
@@ -27,15 +27,16 @@ describe( 'preamble page', function() {
 	});
 
 	it( 'should show how to get legal advice when asked', function() {
-		expect( preamble.radioRequestLegalAdvice.getAttribute( 'checked' )).toBeFalsy();
-		expect( preamble.legalAdvice.isPresent() ).toBe( false );
+		expect( preamble.legalAdvice.isDisplayed() ).toBe( false );
 
 		preamble.askForLegalAdvice();
-		expect( preamble.radioRequestLegalAdvice.getAttribute( 'checked' )).toBeTruthy();
-		expect( preamble.radioRequestLegalAdvice ).toBe.checked;
+		expect( preamble.legalAdvice.isDisplayed() ).toBe( true );
+	});
 
-		// verify continue button is hidden (do we care?)
-		// verify selecting another choice restores continue
+	it( 'should show the continue button when relevant', function() {
+		expect( preamble.continueButton.isDisplayed() ).toBe( false );
+		preamble.prefillForContinue();
+		expect( preamble.continueButton.isDisplayed() ).toBe( true );
 	});
 
 });

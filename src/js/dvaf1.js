@@ -7,33 +7,103 @@ $(function( $ ) {
 
 	var interview = {};
 	var formView = $( '#dvaf1-form-view' );
-	var view = [
-		'dvaf1-preamble-template',
-		'dvaf1-situation-template',
-		'dvaf1-aggrieved-basic-template',
-		'dvaf1-respondent-basic-template',
-		'dvaf1-relationship-template',
-		'dvaf1-grounds-template',
-		'dvaf1-conditions-template',
-		'dvaf1-urgent-template',
-		'dvaf1-aggrieved-template',
-		'dvaf1-children-template',
-		'dvaf1-associates-template',
-		'dvaf1-respondent-template',
-		'dvaf1-orders-template',
-		'dvaf1-applicant-template',
-		'dvaf1-court-template',
-		'dvaf1-download-template'
+	var views = {
+		formPreamble: {
+			id: 'dvaf1-preamble-template',
+			relevance: {
+				'#dvaf1-legal-advice': {
+					name: 'legalAdvice',
+					value: 'How do I get legal advice?'
+				},
+				'.footer': {
+					name: 'legalAdvice',
+					values: [
+						'Continue to prepare an application for a protection order',
+						'I\'ve already talked to a lawyer'
+					]
+				}
+			}
+		},
+		formSituation: {
+			id: 'dvaf1-situation-template'
+		},
+		formAggrievedBasic: {
+			id: 'dvaf1-aggrieved-basic-template'
+		},
+		formRespondentBasic: {
+			id: 'dvaf1-respondent-basic-template'
+		},
+		formRelationship: {
+			id: 'dvaf1-relationship-template'
+		},
+		formGrounds: {
+			id: 'dvaf1-grounds-template'
+		},
+		formConditions: {
+			id: 'dvaf1-conditions-template'
+		},
+		formUrgent: {
+			id: 'dvaf1-urgent-template'
+		},
+		formAggrieved: {
+			id: 'dvaf1-aggrieved-template'
+		},
+		formChildren: {
+			id: 'dvaf1-children-template'
+		},
+		formAssociates: {
+			id: 'dvaf1-associates-template'
+		},
+		formRespondent: {
+			id: 'dvaf1-respondent-template'
+		},
+		formOrders: {
+			id: 'dvaf1-orders-template'
+		},
+		formApplicant: {
+			id: 'dvaf1-applicant-template'
+		},
+		formCourt: {
+			id: 'dvaf1-court-template'
+		},
+		formDownload: {
+			id: 'dvaf1-download-template'
+		}
+	};
+
+	var viewSequence = [
+		'formPreamble',
+		'formSituation',
+		'formAggrievedBasic',
+		'formRespondentBasic',
+		'formRelationship',
+		'formGrounds',
+		'formConditions',
+		'formUrgent',
+		'formAggrieved',
+		'formChildren',
+		'formAssociates',
+		'formRespondent',
+		'formOrders',
+		'formApplicant',
+		'formCourt',
+		'formDownload'
 	];
+
 	var page = 0;
 
-	view = $.map( view, function( id ) {
-		return Handlebars.compile( $( '#' + id ).html() );
+	views = $.each( views, function( key, view ) {
+		view.template = Handlebars.compile( $( '#' + view.id ).html() );
 	});
 
 // TODO where should focus be when new page is shown!?
 	function showPage( index ) {
-		formView.html( view[ index ]( interview ));
+		var view = views[ viewSequence[ index ]];
+		formView.html( $( view.template( interview )) );
+
+		$.each( view.relevance, function( target, condition ) {
+			formView.find( target ).relevance( 'relevantWhen', condition );
+		});
 	}
 
 
@@ -48,9 +118,8 @@ $(function( $ ) {
 
 	// handle radio button relevance
 	formView.on( 'click', ':radio', function() {
-		interview[ this.name + '_' + this.value ] = true;
-		// TODO update view, don't lose focus
-		showPage( page );
+		var key = ( this.form.name + '_' + this.name + '_' + this.value.slice( 0, 8 ).toLowerCase().replace( /[^a-z0-9]/g, '' ));
+		interview[ key ] = true;
 	});
 
 

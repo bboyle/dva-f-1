@@ -2,6 +2,7 @@
 
 
 var DvaForm1Page = require( '../page/dvaf1.page.js' );
+var PreambleView = require( '../page/dvaf1.preamble.view.js' );
 var page;
 
 
@@ -15,6 +16,7 @@ describe( 'sequential order', function() {
 
 		expect( page.title ).toEqual( 'Before you begin' );
 		expect( page.form.getAttribute( 'name' )).toBe( 'formPreamble' );
+		( new PreambleView() ).prefillForContinue();
 		page.continue();
 
 		expect( page.title ).toEqual( 'Your situation' );
