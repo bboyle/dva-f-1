@@ -19,7 +19,7 @@ describe( 'preamble page', function() {
 	});
 
 	it( 'should use the respondent name in the court description', function() {
-		expect( element( by.css( 'section > section > ul > li:last-child' )).getText() ).toMatch( /^The respondent/ );
+		expect( element( by.css( '#court li:last-child' )).getText() ).toMatch( /^The respondent/ );
 	});
 
 	it( 'should ask about legal advice', function() {

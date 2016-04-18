@@ -9,7 +9,7 @@ var DvaForm1Page = function() {
 DvaForm1Page.prototype = Object.create( {}, {
 	title: {
 		get: function() {
-			return element( by.css( 'h2' )).getText();
+			return element.all( by.css( 'h2' )).get( 0 ).getText();
 		}
 	},
 
