@@ -116,13 +116,6 @@ $(function( $ ) {
 	});
 
 
-	// handle radio button relevance
-	formView.on( 'click', ':radio', function() {
-		var key = ( this.form.name + '_' + this.name + '_' + this.value.slice( 0, 8 ).toLowerCase().replace( /[^a-z0-9]/g, '' ));
-		interview[ key ] = true;
-	});
-
-
 	// init
 	showPage( page );
 
