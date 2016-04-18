@@ -6,6 +6,11 @@ var DvaForm1Page = function() {
 };
 
 
+function filterIsDisplayed( element ) {
+	return element.isDisplayed();
+}
+
+
 DvaForm1Page.prototype = Object.create( {}, {
 	title: {
 		get: function() {
@@ -22,6 +27,12 @@ DvaForm1Page.prototype = Object.create( {}, {
 	form: {
 		get: function() {
 			return element( by.css( 'form' ));
+		}
+	},
+
+	visibleQuestions: {
+		get: function() {
+			return element.all( by.css( '.questions > li' )).filter( filterIsDisplayed );
 		}
 	},
 
