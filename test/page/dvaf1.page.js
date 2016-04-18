@@ -15,7 +15,7 @@ DvaForm1Page.prototype = Object.create( {}, {
 
 	continueButton: {
 		get: function() {
-			return element( by.buttonText( 'Continue' ));
+			return element( by.css( 'strong > button' ));
 		}
 	},
 

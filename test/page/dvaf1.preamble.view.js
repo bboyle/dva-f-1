@@ -24,12 +24,6 @@ PreambleView.prototype = Object.create( DvaForm1Page.prototype, {
 		value: function() {
 			return this.radioRequestLegalAdvice.click();
 		}
-	},
-
-	prefillForContinue: {
-		value: function() {
-			return element( by.id( 'legal-advice-yes' )).click();
-		}
 	}
 });
 PreambleView.constructor = PreambleView;

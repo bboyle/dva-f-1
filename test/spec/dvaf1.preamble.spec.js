@@ -14,10 +14,6 @@ describe( 'preamble page', function() {
 		expect( preamble.title ).toEqual( 'Before you begin' );
 	});
 
-	it( 'should not initially have a continue button', function() {
-		expect( preamble.continueButton.isDisplayed() ).toBe( false );
-	});
-
 	it( 'should use the respondent name in the court description', function() {
 		expect( element( by.css( '#court li:last-child' )).getText() ).toMatch( /^The respondent/ );
 	});
@@ -34,8 +30,6 @@ describe( 'preamble page', function() {
 	});
 
 	it( 'should show the continue button when relevant', function() {
-		expect( preamble.continueButton.isDisplayed() ).toBe( false );
-		preamble.prefillForContinue();
 		expect( preamble.continueButton.isDisplayed() ).toBe( true );
 	});
 

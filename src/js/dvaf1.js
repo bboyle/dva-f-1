@@ -14,13 +14,6 @@ $(function( $ ) {
 				'#dvaf1-legal-advice': {
 					name: 'legalAdvice',
 					value: 'How do I get legal advice?'
-				},
-				'.footer': {
-					name: 'legalAdvice',
-					values: [
-						'Continue to prepare an application for a protection order',
-						'I\'ve already talked to a lawyer'
-					]
 				}
 			}
 		},
