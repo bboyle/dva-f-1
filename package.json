@@ -27,7 +27,8 @@
   "homepage": "https://github.com/bboyle/dva-f-1#readme",
   "dependencies": {
     "handlebars": "^4.0.5",
-    "jquery": "^2.2.2"
+    "jquery": "^2.2.2",
+    "relevance": "github:bboyle/relevance"
   },
   "devDependencies": {
     "eslint": "^2.6.0",

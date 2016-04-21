@@ -3,7 +3,59 @@
 <form class="form" name="formStory">
 	<ol class="questions">
 		<li>
-			<label>Do you need protection?</label>
+			<fieldset>
+				<legend>
+					<span class="label">Do you need protection?</span>
+				</legend>
+				<ul class="choices">
+					<li>
+						<input type="radio"
+						       name="userIsAggrieved"
+						       value="true"
+						       id="user-is-aggrieved-true">
+						<label for="user-is-aggrieved-true">Yes</label>
+					</li>
+					<li>
+						<input type="radio"
+						       name="userIsAggrieved"
+						       value="false"
+						       id="user-is-aggrieved-false">
+						<label for="user-is-aggrieved-false">No, I am applying for someone else</label>
+					</li>
+				</ul>
+			</fieldset>
+		</li>
+
+		<li id="dvaf1-user-relationship">
+			<fieldset>
+				<legend>
+					<span class="label">Who do they need protection from?</span>
+				</legend>
+				<p>
+					<select name="userRelationship">
+						<option value="" class="placeholder">Please select…</option>
+						<option value="girlfriend">My girlfriend</option>
+						<option value="boyfriend">My boyfriend</option>
+						<option value="daughter">My daughter</option>
+						<option value="son">My son</option>
+						<option value="mother">My mother</option>
+						<option value="father">My father</option>
+						<option value="sister">My sister</option>
+						<option value="brother">My brother</option>
+						<option value="friend">My friend</option>
+						<option value="neighbour">My neighbour</option>
+						<option value="coworker">My coworker</option>
+						<option value="someone">Someone I know</option>
+					</select>
+					needs protection.
+				</p>
+			</fieldset>
+		</li>
+
+		<li id="dvaf1-dfn-aggrieved">{{> dfnAggrieved}}</li>
+
+		<li>
+			<label>Does the aggrieved already have a protection order?</label>
 		</li>
 
 		<li>
