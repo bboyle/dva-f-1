@@ -165,7 +165,7 @@ $(function( $ ) {
 
 
 	// store state
-	formView.on( 'change', function() {
+	formView.on( 'change', function( event ) {
 		var form = event.target.form.name;
 		var name = event.target.name;
 		var value = parseValue( $( event.target ).val() );

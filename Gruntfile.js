@@ -34,17 +34,9 @@ module.exports = function( grunt ) {
 		// e2e tests
 		protractor: {
 			options: {
-				keepAlive: true,
 				configFile: 'protractor.conf.js'
 			},
-			localhost: {
-				keepAlive: true,
-				options: {
-					args: {
-						seleniumPort: 4444
-					}
-				}
-			},
+			localhost: {},
 			saucelabs: {
 				options: {
 					args: {
@@ -75,12 +67,32 @@ module.exports = function( grunt ) {
 				files: '<%= eslint.build %>',
 				tasks: [ 'eslint:build' ]
 			}
+		},
+
+
+		// env
+		shell: {
+			protractor: {
+				options: { stdout: true },
+				command: 'node ' + require( 'path' ).resolve( 'node_modules/protractor/bin/webdriver-manager' ) + ' update --standalone --chrome --firefox --ie'
+			}
+		},
+
+		protractor_webdriver: {
+			alive: {
+				options: {
+					keepAlive: true
+				}
+			},
+			dead: {}
 		}
 	});
 
 	// These plugins provide necessary tasks.
 	grunt.loadNpmTasks( 'grunt-eslint' );
 	grunt.loadNpmTasks( 'grunt-contrib-connect' );
+	grunt.loadNpmTasks( 'grunt-shell' );
+	grunt.loadNpmTasks( 'grunt-protractor-webdriver' );
 	grunt.loadNpmTasks( 'grunt-protractor-runner' );
 	grunt.loadNpmTasks( 'grunt-contrib-watch' );
 
@@ -88,7 +100,7 @@ module.exports = function( grunt ) {
 	grunt.registerTask( 'build', [ 'eslint:build' ]);
 	grunt.registerTask( 'test-e2e', [ 'connect', 'protractor:localhost' ]);
 	grunt.registerTask( 'travis', [ 'build', 'eslint', 'connect', 'protractor:saucelabs' ]);
-	grunt.registerTask( 'dev', [ 'build', 'connect', 'watch' ]);
+	grunt.registerTask( 'dev', [ 'build', 'shell:protractor', 'protractor_webdriver:alive', 'connect', 'watch' ]);
 	grunt.registerTask( 'test', [ 'eslint', 'test-e2e' ]);
 	grunt.registerTask( 'default', [ 'connect', 'protractor:localhost', 'watch' ]);
 
