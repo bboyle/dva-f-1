@@ -32,9 +32,15 @@ SituationView.prototype = Object.create( DvaForm1Page.prototype, {
 		}
 	},
 
+	chooseUserIsNotAggrieved: {
+		value: function() {
+			this.radioUserIsNotAggrieved.click();
+		}
+	},
+
 	chooseAggrievedIsUsers: {
 		value: function( relationship ) {
-			this.radioUserIsNotAggrieved.click();
+			this.chooseUserIsNotAggrieved();
 			element( by.name( 'userRelationship' )).element( by.css( 'option[value = "' + relationship + '"]' )).click();
 		}
 	},

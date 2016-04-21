@@ -32,22 +32,13 @@ $(function( $ ) {
 					value: 'true'
 				}, {
 					name: 'userRelationship',
-					// TODO read this list from the HTML for easier maintenance
-					values: [
-						'girlfriend',
-						'boyfriend',
-						'daughter',
-						'son',
-						'mother',
-						'father',
-						'sister',
-						'brother',
-						'friend',
-						'neighbour',
-						'coworker',
-						'someone'
-					]
+					values: '*'
 				}],
+				'#dvaf1-user-relationship-placeholder': {
+					name: 'userIsAggrieved',
+					value: 'false',
+					negate: true
+				},
 				'#dvaf1-user-relationship': {
 					name: 'userIsAggrieved',
 					value: 'false'
@@ -133,6 +124,15 @@ $(function( $ ) {
 	}
 
 
+	function processCondition( view, condition ) {
+		if ( condition.values === '*' ) {
+			condition.values = $.map( $( view.find( 'form' ).get( 0 ).elements[ condition.name ]).find( 'option' ), function( option ) {
+				return option.value ? option.value : null;
+			});
+		}
+		return condition;
+	}
+
 // TODO where should focus be when new page is shown!?
 	function showPage( index ) {
 		var view = views[ viewSequence[ index ]];
@@ -141,10 +141,10 @@ $(function( $ ) {
 		$.each( view.relevance, function( target, condition ) {
 			if ( $.isArray( condition )) {
 				$.each( condition, function( i, condition ) {
-					formView.find( target ).relevance( 'relevantWhen', condition );
+					formView.find( target ).relevance( 'relevantWhen', processCondition( formView, condition ));
 				});
 			} else {
-				formView.find( target ).relevance( 'relevantWhen', condition );
+				formView.find( target ).relevance( 'relevantWhen', processCondition( formView, condition ));
 			}
 		});
 	}
@@ -166,19 +166,29 @@ $(function( $ ) {
 
 	// store state
 	formView.on( 'change', function( event ) {
+		var question = $( event.target );
 		var form = event.target.form.name;
 		var name = event.target.name;
 		var value = parseValue( $( event.target ).val() );
 
-		interview[ form ] = interview[ form ] || {};
+		interview[ form ] = interview[ form ] || { selected: {} };
 		interview[ form ][ name ] = value;
 
-		// regenerate status blocks
-		switch ( name ) {
-		case 'userIsAggrieved':
-		case 'userRelationship':
-			$( '#dvaf1-dfn-aggrieved' ).html( partials.dfnAggrieved.template( interview ));
-			break;
+		if ( question.is( 'select,:radio,:checkbox' )) {
+			if ( question.is( ':checkbox' )) {
+				interview[ form ].selected[ name ][ value ] = event.target.checked;
+			} else {
+				interview[ form ].selected[ name ] = {};
+				interview[ form ].selected[ name ][ value ] = true;
+			}
+
+			// regenerate status blocks
+			switch ( name ) {
+			case 'userIsAggrieved':
+			case 'userRelationship':
+				$( '#dvaf1-dfn-aggrieved' ).html( partials.dfnAggrieved.template( interview ));
+				break;
+			}
 		}
 	});
 
