@@ -2,6 +2,52 @@
 
 <form class="form" name="formRespondentBasic">
 	<ol class="questions">
+		<li class="group atomic">
+			<fieldset>
+				<legend>
+					<span class="label">
+					{{#if formStory.userIsAggrieved}}
+						Who do you need protection from?
+					{{else if formStory.selected.userRelationship.someone}}
+						Who does the aggrieved need protection from?
+					{{else if formStory.userRelationship}}
+						Who does your {{formStory.userRelationship}} need protection from?
+					{{else}}
+						Who does the aggrieved need protection from?
+					{{/if}}
+					</span>
+				</legend>
+				<ol class="questions compact">
+					<li>
+						<label for="respondent-name-given">
+							<span class="label">Given name</span>
+						</label>
+						<input type="text" size="15" id="respondent-name-given" name="respondentNameGiven">
+					</li>
+					<li>
+						<label for="respondent-name-family">
+							<span class="label">Family name</span>
+						</label>
+						<input type="text" size="15" id="respondent-name-family" name="respondentNameFamily">
+					</li>
+				</ol>
+			</fieldset>
+		</li>
+
+		<li>
+			<label for="respondent-date-birth">
+				<span class="label">Date of birth</span>
+			</label>
+			<input type="text" id="respondent-date-birth" name="respondentDateBirth">
+		</li>
+
+		<li>
+			<label for="respondent-gender">
+				<span class="label">Gender</span>
+			</label>
+			<input type="text" id="respondent-gender" name="respondentGenderIdentity" list="datalist-gender">
+		</li>
+
 		<li>
 			<ul class="actions">
 				<li><strong><button>Continue</button></strong></li>

@@ -9,8 +9,8 @@ exports.config = {
 		'browserName': 'chrome'
 	}, {
 		'browserName': 'firefox'
-	}, {
-		'browserName': 'internet explorer'
+	// }, {
+	// 	'browserName': 'internet explorer'
 	}],
 
 	suites: {
