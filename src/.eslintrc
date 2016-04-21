@@ -3,3 +3,7 @@ env:
   node: false
   browser: true
   jquery: true
+rules:
+  no-restricted-globals:
+    - 2
+    - event
