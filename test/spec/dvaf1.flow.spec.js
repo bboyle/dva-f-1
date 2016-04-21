@@ -92,4 +92,12 @@ describe( 'split preamble', function() {
 	});
 
 	it( 'should support preamble in a separate HTML file', itShouldVisitPagesInOrder );
+
+	it( 'should not save pages in browser history', function() {
+		expect( browser.getCurrentUrl() ).toMatch( /split-index\.html$/ );
+		page.continue();
+		expect( browser.getCurrentUrl() ).toMatch( /app\.html$/ );
+		browser.navigate().back();
+		expect( browser.getCurrentUrl() ).toMatch( /app\.html$/ );
+	});
 });

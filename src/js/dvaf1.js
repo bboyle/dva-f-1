@@ -159,7 +159,7 @@ $(function( $ ) {
 		if ( viewSequence[ page ]) {
 			showPage( page );
 		} else if ( event.target.action ) {
-			window.location = event.target.action;
+			window.location.replace( event.target.action );
 		}
 	});
 
