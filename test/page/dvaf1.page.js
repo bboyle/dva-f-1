@@ -1,8 +1,9 @@
 'use strict';
 
 
-var DvaForm1Page = function() {
-	browser.get( '/src/' );
+var DvaForm1Page = function( url ) {
+	url = url || 'index.html';
+	browser.get( '/src/' + url );
 };
 
 

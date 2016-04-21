@@ -98,34 +98,30 @@ $(function( $ ) {
 		}
 	};
 
-	var viewSequence = [
-		'formPreamble',
-		'formSituation',
-		'formAggrievedBasic',
-		'formRespondentBasic',
-		'formRelationship',
-		'formGrounds',
-		'formConditions',
-		'formUrgent',
-		'formAggrieved',
-		'formChildren',
-		'formAssociates',
-		'formRespondent',
-		'formOrders',
-		'formApplicant',
-		'formCourt',
-		'formDownload'
-	];
+	var viewSequence = [];
 
 	var page = 0;
 
-	partials = $.each( partials, function( key, partial ) {
-		partial.template = Handlebars.compile( $( '#' + partial.id ).html() );
-		Handlebars.registerPartial( key, partial.template );
+	$.each( partials, function( key, partial ) {
+		var template = $( '#' + partial.id ).remove();
+		if ( template.length ) {
+			partial.template = Handlebars.compile( template.html() );
+			Handlebars.registerPartial( key, partial.template );
+			return partial;
+		} else {
+			delete partials[ key ];
+		}
 	});
 
-	views = $.each( views, function( key, view ) {
-		view.template = Handlebars.compile( $( '#' + view.id ).html() );
+	$.each( views, function( key, view ) {
+		var template = $( '#' + view.id ).remove();
+		if ( template.length ) {
+			view.template = Handlebars.compile( template.html() );
+			viewSequence.push( key );
+			return view;
+		} else {
+			delete views[ key ];
+		}
 	});
 
 
@@ -159,7 +155,12 @@ $(function( $ ) {
 		event.preventDefault();
 
 		page++;
-		showPage( page );
+
+		if ( viewSequence[ page ]) {
+			showPage( page );
+		} else if ( event.target.action ) {
+			window.location = event.target.action;
+		}
 	});
 
 
