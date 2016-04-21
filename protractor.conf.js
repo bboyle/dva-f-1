@@ -26,6 +26,7 @@ exports.config = {
 
 // http://dev.topheman.com/setup-travis-ci-saucelabs-for-protractor/
 if (process.env.TRAVIS) {
+	delete exports.config.seleniumAddress;
 	exports.config.multiCapabilities = [{
 		browserName: 'chrome',
 		build: process.env.TRAVIS_BUILD_NUMBER,
