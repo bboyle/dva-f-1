@@ -1,4 +1,4 @@
 <div class="status info">
-	<h2>{{#if formStory.userIsAggrieved}}You are{{else}}Your {{formStory.userRelationship}} is{{/if}} the aggrieved</h2>
+	<h2>{{#if formStory.userIsAggrieved}}You are{{else if formStory.selected.userRelationship.someone}}They are{{else}}Your {{formStory.userRelationship}} is{{/if}} the aggrieved</h2>
 	<p>The <dfn>aggrieved</dfn> is the person who needs protection.</p>
 </div>
