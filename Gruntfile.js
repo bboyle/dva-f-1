@@ -9,9 +9,45 @@ module.exports = function( grunt ) {
 		banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
 			'<%= grunt.template.today("yyyy-mm-dd") %>\n' +
 			'<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
-			'* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
-			' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
+			'* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>;' +
+			' Licensed <%= pkg.license %> */\n',
 		// Task configuration.
+
+		// build
+		uglify: {
+			options: {
+				banner: '<%= banner %>',
+				compress: {
+					dead_code: true
+				}
+			},
+			dev: {
+				options: {
+					beautify: true,
+					mangle: false,
+					preserveComments: true
+				},
+				files: {
+					'dist/dvaf1.js': [
+						'src/js/dvaf1-data.js',
+						'src/js/dvaf1-lib.js',
+						'src/js/dvaf1-flow.js'
+					]
+				}
+			},
+			production: {
+				options: {
+					preserveComments: /(?:^!|@(?:license|preserve|cc_on))/
+				},
+				files: {
+					'dist/dvaf1.min.js': [
+						'src/js/dvaf1-data.js',
+						'src/js/dvaf1-lib.js',
+						'src/js/dvaf1-flow.js'
+					]
+				}
+			}
+		},
 
 		// local server
 		connect: {
@@ -62,7 +98,7 @@ module.exports = function( grunt ) {
 			},
 			src: {
 				files: 'src/js/*.js',
-				tasks: [ 'eslint:src', 'protractor:watch' ]
+				tasks: [ 'eslint:src', 'uglify', 'protractor:watch' ]
 			},
 			html: {
 				files: 'src/**/*.html',
@@ -94,6 +130,7 @@ module.exports = function( grunt ) {
 
 	// These plugins provide necessary tasks.
 	grunt.loadNpmTasks( 'grunt-eslint' );
+	grunt.loadNpmTasks( 'grunt-contrib-uglify' );
 	grunt.loadNpmTasks( 'grunt-contrib-connect' );
 	grunt.loadNpmTasks( 'grunt-shell' );
 	grunt.loadNpmTasks( 'grunt-protractor-webdriver' );
@@ -101,10 +138,10 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks( 'grunt-contrib-watch' );
 
 	// task aliases
-	grunt.registerTask( 'build', [ 'eslint:build' ]);
+	grunt.registerTask( 'build', [ 'eslint:build', 'uglify' ]);
 	grunt.registerTask( 'dev', [ 'build', 'shell:protractor', 'protractor_webdriver:alive', 'connect', 'watch' ]);
 	grunt.registerTask( 'test-e2e', [ 'shell:protractor', 'protractor_webdriver:alive', 'connect', 'protractor:acceptance' ]);
-	grunt.registerTask( 'test', [ 'eslint', 'test-e2e' ]);
+	grunt.registerTask( 'test', [ 'eslint', 'uglify', 'test-e2e' ]);
 	grunt.registerTask( 'travis', [ 'build', 'eslint', 'connect', 'protractor:saucelabs' ]);
 	grunt.registerTask( 'default', [ 'dev' ]);
 

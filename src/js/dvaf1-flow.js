@@ -1,11 +1,7 @@
-/* global Handlebars */
-
-
-// onready
+/* global Handlebars, dvaf1Data */
 $(function( $ ) {
 	'use strict';
 
-	var interview = { selected: {} };
 	var formView = $( '#dvaf1-form-view' );
 
 	var partials = {
@@ -116,14 +112,6 @@ $(function( $ ) {
 	});
 
 
-	function parseValue( value ) {
-		if ( /^true|false$/.test( value )) {
-			return value === 'true';
-		}
-		return value;
-	}
-
-
 	function processCondition( view, condition ) {
 		if ( condition.values === '*' ) {
 			condition.values = $.map( $( view.find( 'form' ).get( 0 ).elements[ condition.name ]).find( 'option' ), function( option ) {
@@ -134,33 +122,9 @@ $(function( $ ) {
 	}
 
 
-	function initHelpers() {
-		Handlebars.registerHelper( 'doesTheAggrieved', function() {
-			if ( interview.userIsAggrieved ) {
-				return 'do you';
-			}
-			if ( interview.userRelationship ) {
-				return interview.userRelationship === 'someone' ? 'do they' : 'does your ' + interview.userRelationship;
-			}
-
-			return 'does the aggrieved';
-		});
-		Handlebars.registerHelper( 'TheAggrievedIs', function() {
-			if ( interview.userIsAggrieved ) {
-				return 'You are';
-			}
-			if ( interview.userRelationship ) {
-				return interview.userRelationship === 'someone' ? 'They are' : 'Your ' + interview.userRelationship + ' is';
-			}
-
-			return 'The aggrieved is';
-		});
-	}
-
-
 	function showPage( index ) {
 		var view = views[ viewSequence[ index ]];
-		formView.html( $( view.template( interview )) );
+		formView.html( $( view.template( dvaf1Data )) );
 
 		$.each( view.relevance, function( target, condition ) {
 			if ( $.isArray( condition )) {
@@ -188,27 +152,17 @@ $(function( $ ) {
 	});
 
 
-	// store state
+	// relevance
 	formView.on( 'change', function( event ) {
 		var question = $( event.target );
 		var name = event.target.name;
-		var value = parseValue( $( event.target ).val() );
-
-		interview[ name ] = value;
 
 		if ( question.is( 'select,:radio,:checkbox' )) {
-			if ( question.is( ':checkbox' )) {
-				interview.selected[ name ][ value ] = event.target.checked;
-			} else {
-				interview.selected[ name ] = {};
-				interview.selected[ name ][ value ] = true;
-			}
-
 			// regenerate status blocks
 			switch ( name ) {
 			case 'userIsAggrieved':
 			case 'userRelationship':
-				$( '#dvaf1-dfn-aggrieved' ).html( partials.dfnAggrieved.template( interview ));
+				$( '#dvaf1-dfn-aggrieved' ).html( partials.dfnAggrieved.template( dvaf1Data ));
 				break;
 			}
 		}
@@ -216,7 +170,6 @@ $(function( $ ) {
 
 
 	// init
-	initHelpers();
 	showPage( page );
 
 });
