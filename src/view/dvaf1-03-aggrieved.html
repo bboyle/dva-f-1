@@ -6,12 +6,12 @@
 			<fieldset>
 				<legend>
 					<span class="label">
-					{{#if formStory.userIsAggrieved}}
+					{{#if userIsAggrieved}}
 						What is your name?
-					{{else if formStory.selected.userRelationship.someone}}
+					{{else if selected.userRelationship.someone}}
 						What is the name of the person in need of protection?
-					{{else if formStory.userRelationship}}
-						What is your {{formStory.userRelationship}}’s name?
+					{{else if userRelationship}}
+						What is your {{userRelationship}}’s name?
 					{{else}}
 						What is the name of the person in need of protection?
 					{{/if}}

@@ -20,7 +20,7 @@
 
 <section>
 	<h2>Start preparing your application</h2>
-	<form class="form" name="formPreamble" ng-submit="interview.completePreamble()">
+	<form class="form" name="formPreamble">
 		<ol class="questions">
 			<li>
 				<fieldset>
@@ -30,7 +30,7 @@
 					</legend>
 					<ul class="choices">
 						<li>
-							<input type="radio" name="legalAdvice" value="How do I get legal advice?" id="legal-advice-how" {{#if formPreamble.legalAdvice.howdoi}}checked{{/if}}>
+							<input type="radio" name="legalAdvice" value="How do I get legal advice?" id="legal-advice-how">
 							<label for="legal-advice-how">How do I get legal advice?</label>
 						</li>
 						<li>

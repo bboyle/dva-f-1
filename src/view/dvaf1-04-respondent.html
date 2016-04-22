@@ -5,17 +5,7 @@
 		<li class="group atomic">
 			<fieldset>
 				<legend>
-					<span class="label">
-					{{#if formStory.userIsAggrieved}}
-						Who do you need protection from?
-					{{else if formStory.selected.userRelationship.someone}}
-						Who does the aggrieved need protection from?
-					{{else if formStory.userRelationship}}
-						Who does your {{formStory.userRelationship}} need protection from?
-					{{else}}
-						Who does the aggrieved need protection from?
-					{{/if}}
-					</span>
+					<span class="label">Who {{doesTheAggrieved}} need protection from?</span>
 				</legend>
 				<ol class="questions compact">
 					<li>
