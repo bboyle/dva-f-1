@@ -37,8 +37,8 @@ describe( 'respondent (basic) view', function() {
 		expect( respondentView.firstQuestionPrompt ).toBe( 'Who does your brother need protection from?' );
 	});
 
-	xit( 'should refer to the aggrieved by name', function() {
-		respondentView.setAggrieved({ firstName: 'Kim' });
+	it( 'should refer to the aggrieved by name', function() {
+		respondentView.setAggrieved({ aggrievedNameGiven: 'Kim' });
 		respondentView.get();
 
 		expect( respondentView.firstQuestionPrompt ).toBe( 'Who does Kim need protection from?' );

@@ -7,6 +7,9 @@ $(function() {
 		if ( dvaf1Data.userIsAggrieved ) {
 			return 'do you';
 		}
+		if ( dvaf1Data.aggrievedNameGiven ) {
+			return 'does ' + dvaf1Data.aggrievedNameGiven;
+		}
 		if ( dvaf1Data.userRelationship ) {
 			return dvaf1Data.userRelationship === 'someone' ? 'do they' : 'does your ' + dvaf1Data.userRelationship;
 		}
