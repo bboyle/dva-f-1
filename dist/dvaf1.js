@@ -31,7 +31,7 @@ $(function($) {
     };
     $.each(partials, function(key, partial) {
         var template = $("#" + key + "-partial").remove();
-        return template.length ? (partial.template = Handlebars.compile(template.html()),
+        return template.length ? (partial.template = Handlebars.compile(template.html()), 
         Handlebars.registerPartial(partial.name, partial.template), partial) : void delete partials[key];
     }), // relevance
     formView.on("click change", function(event) {
@@ -39,7 +39,7 @@ $(function($) {
         if (// store data
         data[name] = parseValue(value), value = value.replace(/\s+/g, ""), question.is("select,:radio,:checkbox")) // regenerate status blocks
         switch (// store boolean helpers
-        question.is(":checkbox") ? data.selected[name][value] = event.target.checked : (data.selected[name] = {},
+        question.is(":checkbox") ? data.selected[name][value] = event.target.checked : (data.selected[name] = {}, 
         data.selected[name][value] = !0), name) {
           case "userIsAggrieved":
           case "userRelationship":
@@ -61,9 +61,24 @@ $(function($) {
 }), /* global Handlebars, dvaf1Data */
 $(function() {
     "use strict";
-    Handlebars.registerHelper("doesTheAggrieved", function() {
+    function TitleCase(word) {
+        return word.charAt(0).toUpperCase() + word.slice(1);
+    }
+    function theAggrieved() {
+        return dvaf1Data.userIsAggrieved ? "you" : dvaf1Data.userRelationship && "someone" !== dvaf1Data.userRelationship ? "your " + dvaf1Data.userRelationship : "the aggrieved";
+    }
+    function TheAggrieved() {
+        return TitleCase(theAggrieved());
+    }
+    function doesTheAggrieved() {
         return dvaf1Data.userIsAggrieved ? "do you" : dvaf1Data.aggrievedNameGiven ? "does " + dvaf1Data.aggrievedNameGiven : dvaf1Data.userRelationship ? "someone" === dvaf1Data.userRelationship ? "do they" : "does your " + dvaf1Data.userRelationship : "does the aggrieved";
-    }), Handlebars.registerHelper("TheAggrievedIs", function() {
+    }
+    function DoesTheAggrieved() {
+        return TitleCase(doesTheAggrieved());
+    }
+    Handlebars.registerHelper("theAggrieved", theAggrieved), Handlebars.registerHelper("TheAggrieved", TheAggrieved), 
+    Handlebars.registerHelper("doesTheAggrieved", doesTheAggrieved), Handlebars.registerHelper("DoesTheAggrieved", DoesTheAggrieved), 
+    Handlebars.registerHelper("TheAggrievedIs", function() {
         return dvaf1Data.userIsAggrieved ? "You are" : dvaf1Data.userRelationship ? "someone" === dvaf1Data.userRelationship ? "They are" : "Your " + dvaf1Data.userRelationship + " is" : "The aggrieved is";
     }), Handlebars.registerHelper("aggrievedTheir", function() {
         return dvaf1Data.userIsAggrieved ? "your" : "their";
@@ -154,7 +169,7 @@ $(function($) {
     }, viewSequence = [], page = 0;
     $.each(views, function(key, view) {
         var template = $("#" + key).remove();
-        return template.length ? (view.template = Handlebars.compile(template.html()), viewSequence.push(key),
+        return template.length ? (view.template = Handlebars.compile(template.html()), viewSequence.push(key), 
         view) : void delete views[key];
     }), // handle form view navigation
     formView.on("submit", function(event) {
@@ -162,7 +177,7 @@ $(function($) {
     }), // navigation by menu links
     $(document).on("click", "a", function(event) {
         var target = event.target.href.split("#");
-        target.length > 1 && /^dvaf1/.test(target[1]) && (target = viewSequence.indexOf(target[1]),
+        target.length > 1 && /^dvaf1/.test(target[1]) && (target = viewSequence.indexOf(target[1]), 
         -1 !== target && (event.preventDefault(), showPage(target)));
     }), // init
     showPage(page);
