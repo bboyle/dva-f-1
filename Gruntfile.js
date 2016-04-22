@@ -115,7 +115,7 @@ module.exports = function( grunt ) {
 		shell: {
 			protractor: {
 				options: { stdout: true },
-				command: 'node ' + require( 'path' ).resolve( 'node_modules/protractor/bin/webdriver-manager' ) + ' update --standalone --chrome --firefox --ie'
+				command: 'node ' + require( 'path' ).resolve( 'node_modules/protractor/bin/webdriver-manager' ) + ' update --standalone --chrome --firefox --ie32'
 			}
 		},
 
@@ -141,7 +141,7 @@ module.exports = function( grunt ) {
 	grunt.registerTask( 'build', [ 'eslint:build', 'uglify' ]);
 	grunt.registerTask( 'dev', [ 'build', 'shell:protractor', 'protractor_webdriver:alive', 'connect', 'watch' ]);
 	grunt.registerTask( 'test-e2e', [ 'shell:protractor', 'protractor_webdriver:alive', 'connect', 'protractor:acceptance' ]);
-	grunt.registerTask( 'test', [ 'eslint', 'uglify', 'test-e2e' ]);
+	grunt.registerTask( 'test', [ 'shell:protractor', 'eslint', 'uglify', 'test-e2e' ]);
 	grunt.registerTask( 'travis', [ 'build', 'eslint', 'connect', 'protractor:saucelabs' ]);
 	grunt.registerTask( 'default', [ 'dev' ]);
 
