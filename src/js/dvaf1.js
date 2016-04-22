@@ -5,7 +5,7 @@
 $(function( $ ) {
 	'use strict';
 
-	var interview = {};
+	var interview = { selected: {} };
 	var formView = $( '#dvaf1-form-view' );
 
 	var partials = {
@@ -133,7 +133,31 @@ $(function( $ ) {
 		return condition;
 	}
 
-// TODO where should focus be when new page is shown!?
+
+	function initHelpers() {
+		Handlebars.registerHelper( 'doesTheAggrieved', function() {
+			if ( interview.userIsAggrieved ) {
+				return 'do you';
+			}
+			if ( interview.userRelationship ) {
+				return interview.userRelationship === 'someone' ? 'do they' : 'does your ' + interview.userRelationship;
+			}
+
+			return 'does the aggrieved';
+		});
+		Handlebars.registerHelper( 'TheAggrievedIs', function() {
+			if ( interview.userIsAggrieved ) {
+				return 'You are';
+			}
+			if ( interview.userRelationship ) {
+				return interview.userRelationship === 'someone' ? 'They are' : 'Your ' + interview.userRelationship + ' is';
+			}
+
+			return 'The aggrieved is';
+		});
+	}
+
+
 	function showPage( index ) {
 		var view = views[ viewSequence[ index ]];
 		formView.html( $( view.template( interview )) );
@@ -167,19 +191,17 @@ $(function( $ ) {
 	// store state
 	formView.on( 'change', function( event ) {
 		var question = $( event.target );
-		var form = event.target.form.name;
 		var name = event.target.name;
 		var value = parseValue( $( event.target ).val() );
 
-		interview[ form ] = interview[ form ] || { selected: {} };
-		interview[ form ][ name ] = value;
+		interview[ name ] = value;
 
 		if ( question.is( 'select,:radio,:checkbox' )) {
 			if ( question.is( ':checkbox' )) {
-				interview[ form ].selected[ name ][ value ] = event.target.checked;
+				interview.selected[ name ][ value ] = event.target.checked;
 			} else {
-				interview[ form ].selected[ name ] = {};
-				interview[ form ].selected[ name ][ value ] = true;
+				interview.selected[ name ] = {};
+				interview.selected[ name ][ value ] = true;
 			}
 
 			// regenerate status blocks
@@ -194,6 +216,7 @@ $(function( $ ) {
 
 
 	// init
+	initHelpers();
 	showPage( page );
 
 });
