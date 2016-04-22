@@ -4,12 +4,6 @@ $(function( $ ) {
 
 	var formView = $( '#dvaf1-form-view' );
 
-	var partials = {
-		'dvaf1-dfn-aggrieved': {
-			name: 'dfnAggrieved'
-		}
-	};
-
 	var views = {
 		'dvaf1-preamble-template': {
 			relevance: {
@@ -36,6 +30,22 @@ $(function( $ ) {
 				'#dvaf1-user-relationship': {
 					name: 'userIsAggrieved',
 					value: 'false'
+				},
+				'#dvaf1-aggrieved-danger-question': {
+					name: 'userIsAggrieved',
+					value: 'true'
+				},
+				'#dvaf1-aggrieved-privacy-question': {
+					name: 'userIsAggrieved',
+					value: 'true'
+				},
+				'#dvaf1-info-aggrieved-danger': {
+					name: 'userDanger',
+					values: [ 'Yes', 'Maybe' ]
+				},
+				'#dvaf1-info-aggrieved-privacy': {
+					name: 'userWebPrivacy',
+					values: [ 'No', 'Not sure' ]
 				}
 			}
 		},
@@ -58,17 +68,6 @@ $(function( $ ) {
 	var viewSequence = [];
 
 	var page = 0;
-
-	$.each( partials, function( key, partial ) {
-		var template = $( '#' + key + '-partial' ).remove();
-		if ( template.length ) {
-			partial.template = Handlebars.compile( template.html() );
-			Handlebars.registerPartial( partial.name, partial.template );
-			return partial;
-		} else {
-			delete partials[ key ];
-		}
-	});
 
 	$.each( views, function( key, view ) {
 		var template = $( '#' + key ).remove();
@@ -132,28 +131,6 @@ $(function( $ ) {
 					event.preventDefault();
 					showPage( target );
 				}
-			}
-		}
-	});
-
-
-	function refreshPartial( partial ) {
-		$( '#' + partial ).html( partials[ partial ].template( dvaf1Data ));
-	}
-
-
-	// relevance
-	formView.on( 'change', function( event ) {
-		var question = $( event.target );
-		var name = event.target.name;
-
-		if ( question.is( 'select,:radio,:checkbox' )) {
-			// regenerate status blocks
-			switch ( name ) {
-			case 'userIsAggrieved':
-			case 'userRelationship':
-				refreshPartial( 'dvaf1-dfn-aggrieved' );
-				break;
 			}
 		}
 	});

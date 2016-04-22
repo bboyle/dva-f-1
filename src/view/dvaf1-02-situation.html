@@ -47,6 +47,56 @@
 
 		<li id="dvaf1-dfn-aggrieved">{{> dfnAggrieved}}</li>
 
+		<li id="dvaf1-aggrieved-danger-question">
+			<fieldset>
+				<legend>
+					<span class="label">Are you in danger right now?</span>
+					<small class="hint">If someone could hurt you while you're completing this form you should call the police. Police can help you right now and apply for a protection order for you.</small>
+				</legend>
+				<ul class="choices">
+					<li>
+						<input type="radio" name="userDanger" value="Yes" id="applicant-danger-yes"{{#if selected.userDanger.Yes}} checked{{/if}}>
+						<label for="applicant-danger-yes">Yes</label>—call <a href="tel:000">000</a> and ask for police
+					</li>
+					<li>
+						<input type="radio" name="userDanger" value="Maybe" id="applicant-danger-dunno"{{#if selected.userDanger.Maybe}} checked{{/if}}>
+						<label for="applicant-danger-dunno">I don't know</label>—contact DVConnect
+					</li>
+					<li>
+						<input type="radio" name="userDanger" value="No" id="applicant-danger-no"{{#if selected.userDanger.No}} checked{{/if}}>
+						<label for="applicant-danger-no">It's safe for me to fill out this form</label> (I know it could take 1 hour or longer)
+					</li>
+				</ul>
+			</fieldset>
+		</li>
+
+		<li id="dvaf1-info-aggrieved-danger">{{> infoAggrievedDanger}}</li>
+
+		<li id="dvaf1-aggrieved-privacy-question">
+			<fieldset>
+				<legend>
+					<span class="label">Is your web use private?</span>
+					<small class="hint">Someone you know may be able to tell you visited this web page.</small>
+				</legend>
+				<ul class="choices">
+					<li>
+						<input type="radio" name="userWebPrivacy" value="No" id="interview-is-safe-no"{{#if selected.userWebPrivacy.No}} checked{{/if}}>
+						<label for="interview-is-safe-no">No—someone I know could spy on my web use</label>
+					</li>
+					<li>
+						<input type="radio" name="userWebPrivacy" value="Not sure" id="interview-is-safe-not-sure"{{#if selected.userWebPrivacy.Notsure}} checked{{/if}}>
+						<label for="interview-is-safe-not-sure">Not sure</label>
+					</li>
+					<li>
+						<input type="radio" name="userWebPrivacy" value="Yes" id="interview-is-safe-yes"{{#if selected.userWebPrivacy.Yes}} checked{{/if}}>
+						<label for="interview-is-safe-yes">Yes—this computer is safe to use</label>
+					</li>
+				</ul>
+			</fieldset>
+		</li>
+
+		<li id="dvaf1-info-aggrieved-privacy">{{> infoAggrievedPrivacy}}</li>
+
 		<li>
 			<label>Does the aggrieved already have a protection order?</label>
 		</li>

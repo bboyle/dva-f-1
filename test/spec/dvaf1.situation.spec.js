@@ -38,4 +38,22 @@ describe( 'situation view', function() {
 		expect( situationView.infoBoxHeading ).toBe( 'They are the aggrieved' );
 	});
 
+	it( 'should ask safety questions if user is the aggrieved', function() {
+		expect( situationView.dangerQuestion.isDisplayed() ).toBe( false );
+		expect( situationView.privacyQuestion.isDisplayed() ).toBe( false );
+		expect( situationView.dangerAdvice.isDisplayed() ).toBe( false );
+		expect( situationView.privacyAdvice.isDisplayed() ).toBe( false );
+
+		situationView.chooseUserIsAggrieved();
+		expect( situationView.dangerQuestion.isDisplayed() ).toBe( true );
+		expect( situationView.privacyQuestion.isDisplayed() ).toBe( true );
+		expect( situationView.dangerAdvice.isDisplayed() ).toBe( false );
+		expect( situationView.privacyAdvice.isDisplayed() ).toBe( false );
+
+		situationView.choose( 'userDanger', 'Yes' );
+		expect( situationView.dangerAdvice.isDisplayed() ).toBe( true );
+		expect( situationView.dangerAdvice.element( by.css( 'h2' )).getText() ).toBe( 'What can I do if I need help urgently?' );
+		expect( situationView.dangerAdvice.element( by.css( 'a[href^="tel"]' )).getText() ).toBe( '000' );
+	});
+
 });

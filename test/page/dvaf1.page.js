@@ -89,6 +89,12 @@ DvaForm1Page.prototype = Object.create( {}, {
 		}
 	},
 
+	choose: {
+		value: function( name, value ) {
+			element( by.css( '[name="' + name + '"][value="' + value + '"]' )).click();
+		}
+	},
+
 	chooseUserIsAggrieved: {
 		value: function() {
 			this.gotoSituationView();
