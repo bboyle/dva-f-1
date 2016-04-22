@@ -14,41 +14,9 @@ SituationView.prototype = Object.create( DvaForm1Page.prototype, {
 		}
 	},
 
-	radioUserIsAggrieved: {
-		get: function() {
-			return element( by.id( 'user-is-aggrieved-true' ));
-		}
-	},
-
-	radioUserIsNotAggrieved: {
-		get: function() {
-			return element( by.id( 'user-is-aggrieved-false' ));
-		}
-	},
-
-	chooseUserIsAggrieved: {
-		value: function() {
-			this.radioUserIsAggrieved.click();
-		}
-	},
-
-	chooseUserIsNotAggrieved: {
-		value: function() {
-			this.radioUserIsNotAggrieved.click();
-		}
-	},
-
-	chooseAggrievedIsUsers: {
-		value: function( relationship ) {
-			this.chooseUserIsNotAggrieved();
-			element( by.name( 'userRelationship' )).element( by.css( 'option[value = "' + relationship + '"]' )).click();
-		}
-	},
-
 	get: {
 		value: function() {
-			// navigate from home view
-			this.continue();
+			this.gotoSituationView();
 		}
 	}
 });

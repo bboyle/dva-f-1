@@ -33,19 +33,21 @@ $(function($) {
     }
     function showPage(index) {
         var view = views[viewSequence[index]];
-        formView.html($(view.template(dvaf1Data))), $.each(view.relevance, function(target, condition) {
+        page = index, formView.html($(view.template(dvaf1Data))), $.each(view.relevance, function(target, condition) {
             $.isArray(condition) ? $.each(condition, function(i, condition) {
                 formView.find(target).relevance("relevantWhen", processCondition(formView, condition));
             }) : formView.find(target).relevance("relevantWhen", processCondition(formView, condition));
         });
     }
+    function refreshPartial(partial) {
+        $("#" + partial).html(partials[partial].template(dvaf1Data));
+    }
     var formView = $("#dvaf1-form-view"), partials = {
-        dfnAggrieved: {
-            id: "dvaf1-dfn-aggrieved-partial"
+        "dvaf1-dfn-aggrieved": {
+            name: "dfnAggrieved"
         }
     }, views = {
-        formPreamble: {
-            id: "dvaf1-preamble-template",
+        "dvaf1-preamble-template": {
             relevance: {
                 "#dvaf1-legal-advice": {
                     name: "legalAdvice",
@@ -53,8 +55,7 @@ $(function($) {
                 }
             }
         },
-        formSituation: {
-            id: "dvaf1-situation-template",
+        "dvaf1-situation-template": {
             relevance: {
                 "#dvaf1-dfn-aggrieved": [ {
                     name: "userIsAggrieved",
@@ -74,60 +75,37 @@ $(function($) {
                 }
             }
         },
-        formAggrievedBasic: {
-            id: "dvaf1-aggrieved-basic-template"
-        },
-        formRespondentBasic: {
-            id: "dvaf1-respondent-basic-template"
-        },
-        formRelationship: {
-            id: "dvaf1-relationship-template"
-        },
-        formGrounds: {
-            id: "dvaf1-grounds-template"
-        },
-        formConditions: {
-            id: "dvaf1-conditions-template"
-        },
-        formUrgent: {
-            id: "dvaf1-urgent-template"
-        },
-        formAggrieved: {
-            id: "dvaf1-aggrieved-template"
-        },
-        formChildren: {
-            id: "dvaf1-children-template"
-        },
-        formAssociates: {
-            id: "dvaf1-associates-template"
-        },
-        formRespondent: {
-            id: "dvaf1-respondent-template"
-        },
-        formOrders: {
-            id: "dvaf1-orders-template"
-        },
-        formApplicant: {
-            id: "dvaf1-applicant-template"
-        },
-        formCourt: {
-            id: "dvaf1-court-template"
-        },
-        formDownload: {
-            id: "dvaf1-download-template"
-        }
+        "dvaf1-aggrieved-basic-template": {},
+        "dvaf1-respondent-basic-template": {},
+        "dvaf1-relationship-template": {},
+        "dvaf1-grounds-template": {},
+        "dvaf1-conditions-template": {},
+        "dvaf1-urgent-template": {},
+        "dvaf1-aggrieved-template": {},
+        "dvaf1-children-template": {},
+        "dvaf1-associates-template": {},
+        "dvaf1-respondent-template": {},
+        "dvaf1-orders-template": {},
+        "dvaf1-applicant-template": {},
+        "dvaf1-court-template": {},
+        "dvaf1-download-template": {}
     }, viewSequence = [], page = 0;
     $.each(partials, function(key, partial) {
-        var template = $("#" + partial.id).remove();
+        var template = $("#" + key + "-partial").remove();
         return template.length ? (partial.template = Handlebars.compile(template.html()), 
-        Handlebars.registerPartial(key, partial.template), partial) : void delete partials[key];
+        Handlebars.registerPartial(partial.name, partial.template), partial) : void delete partials[key];
     }), $.each(views, function(key, view) {
-        var template = $("#" + view.id).remove();
+        var template = $("#" + key).remove();
         return template.length ? (view.template = Handlebars.compile(template.html()), viewSequence.push(key), 
         view) : void delete views[key];
     }), // handle form view navigation
     formView.on("submit", function(event) {
-        event.preventDefault(), page++, viewSequence[page] ? showPage(page) : event.target.action && window.location.replace(event.target.action);
+        event.preventDefault(), viewSequence[page + 1] ? showPage(page + 1) : event.target.action && window.location.replace(event.target.action);
+    }), // navigation by menu links
+    $(document).on("click", "a", function(event) {
+        var target = event.target.href.split("#");
+        target.length > 1 && /^dvaf1/.test(target[1]) && (target = viewSequence.indexOf(target[1]), 
+        -1 !== target && (event.preventDefault(), showPage(target)));
     }), // relevance
     formView.on("change", function(event) {
         var question = $(event.target), name = event.target.name;
@@ -135,7 +113,7 @@ $(function($) {
         switch (name) {
           case "userIsAggrieved":
           case "userRelationship":
-            $("#dvaf1-dfn-aggrieved").html(partials.dfnAggrieved.template(dvaf1Data));
+            refreshPartial("dvaf1-dfn-aggrieved");
         }
     }), // init
     showPage(page);
