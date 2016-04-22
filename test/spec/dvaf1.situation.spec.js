@@ -54,6 +54,25 @@ describe( 'situation view', function() {
 		expect( situationView.dangerAdvice.isDisplayed() ).toBe( true );
 		expect( situationView.dangerAdvice.element( by.css( 'h2' )).getText() ).toBe( 'What can I do if I need help urgently?' );
 		expect( situationView.dangerAdvice.element( by.css( 'a[href^="tel"]' )).getText() ).toBe( '000' );
+
+		situationView.choose( 'userDanger', 'Maybe' );
+		expect( situationView.dangerAdvice.isDisplayed() ).toBe( true );
+		expect( situationView.dangerAdvice.element( by.css( 'h2' )).getText() ).toBe( 'What can I do if I need help urgently?' );
+		expect( situationView.dangerAdvice.element( by.css( 'a[href^="tel"]' )).isPresent() ).toBe( false );
+
+		situationView.choose( 'userDanger', 'No' );
+		expect( situationView.dangerAdvice.isDisplayed() ).toBe( false );
+
+		situationView.choose( 'userPrivacy', 'No' );
+		expect( situationView.privacyAdvice.isDisplayed() ).toBe( true );
+		expect( situationView.privacyAdvice.element( by.css( 'h2' )).getText() ).toBe( 'Protect yourself online' );
+
+		situationView.choose( 'userPrivacy', 'Not sure' );
+		expect( situationView.privacyAdvice.isDisplayed() ).toBe( true );
+		expect( situationView.privacyAdvice.element( by.css( 'h2' )).getText() ).toBe( 'Different ways to apply for protection' );
+
+		situationView.choose( 'userPrivacy', 'Yes' );
+		expect( situationView.privacyAdvice.isDisplayed() ).toBe( false );
 	});
 
 });

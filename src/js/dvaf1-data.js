@@ -51,6 +51,9 @@ $(function( $ ) {
 
 		// store data
 		data[ name ] = value;
+		if ( typeof value === 'string' ) {
+			value = value.replace( /\s+/g, '' );
+		}
 
 		if ( question.is( 'select,:radio,:checkbox' )) {
 			// store boolean helpers

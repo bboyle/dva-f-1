@@ -44,7 +44,7 @@ $(function( $ ) {
 					values: [ 'Yes', 'Maybe' ]
 				},
 				'#dvaf1-info-aggrieved-privacy': {
-					name: 'userWebPrivacy',
+					name: 'userPrivacy',
 					values: [ 'No', 'Not sure' ]
 				}
 			}

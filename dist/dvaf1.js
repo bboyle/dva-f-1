@@ -31,7 +31,8 @@ $(function($) {
     formView.on("click", function(event) {
         var question = $(event.target), name = event.target.name, value = parseValue($(event.target).val());
         if (// store data
-        data[name] = value, question.is("select,:radio,:checkbox")) // regenerate status blocks
+        data[name] = value, "string" == typeof value && (value = value.replace(/\s+/g, "")), 
+        question.is("select,:radio,:checkbox")) // regenerate status blocks
         switch (// store boolean helpers
         question.is(":checkbox") ? data.selected[name][value] = event.target.checked : (data.selected[name] = {}, 
         data.selected[name][value] = !0), name) {
@@ -112,7 +113,7 @@ $(function($) {
                     values: [ "Yes", "Maybe" ]
                 },
                 "#dvaf1-info-aggrieved-privacy": {
-                    name: "userWebPrivacy",
+                    name: "userPrivacy",
                     values: [ "No", "Not sure" ]
                 }
             }
