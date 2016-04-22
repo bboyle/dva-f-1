@@ -43,4 +43,22 @@ describe( 'respondent (basic) view', function() {
 
 		expect( respondentView.firstQuestionPrompt ).toBe( 'Who does Kim need protection from?' );
 	});
+
+	it( 'should remember respondent data that is entered', function() {
+		respondentView.setRespondent({
+			respondentNameGiven: 'Ashley',
+			respondentNameFamily: 'Smith',
+			respondentDateBirth: '22 June 1984',
+			respondentGender: 'Man'
+		});
+		respondentView.continue();
+		respondentView.get();
+
+		expect( respondentView.firstName.getAttribute( 'value' )).toBe( 'Ashley' );
+		expect( respondentView.lastName.getAttribute( 'value' )).toBe( 'Smith' );
+		expect( respondentView.dateBirth.getAttribute( 'value' )).toBe( '22 June 1984' );
+		expect( respondentView.gender.getAttribute( 'value' )).toBe( 'Man' );
+	});
+
+
 });

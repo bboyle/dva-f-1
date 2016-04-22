@@ -52,7 +52,7 @@ describe( 'aggrieved (basic) view', function() {
 			aggrievedGender: 'Woman'
 		});
 		aggrievedView.continue();
-		aggrievedView.gotoAggrievedBasicView();
+		aggrievedView.get();
 
 		expect( aggrievedView.firstName.getAttribute( 'value' )).toBe( 'Kim' );
 		expect( aggrievedView.lastName.getAttribute( 'value' )).toBe( 'Smith' );

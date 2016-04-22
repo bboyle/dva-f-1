@@ -111,13 +111,26 @@ DvaForm1Page.prototype = Object.create( {}, {
 		}
 	},
 
-	setAggrieved: {
-		value: function( aggrievedData ) {
-			this.gotoAggrievedBasicView();
+	fill: {
+		value: function( data ) {
 			var page = this;
-			Object.keys( aggrievedData ).forEach(function( key ) {
-				page.answer( key, aggrievedData[ key ]);
+			Object.keys( data ).forEach(function( key ) {
+				page.answer( key, data[ key ]);
 			});
+		}
+	},
+
+	setAggrieved: {
+		value: function( data ) {
+			this.gotoAggrievedBasicView();
+			this.fill( data );
+		}
+	},
+
+	setRespondent: {
+		value: function( data ) {
+			this.gotoRespondentBasicView();
+			this.fill( data );
 		}
 	},
 

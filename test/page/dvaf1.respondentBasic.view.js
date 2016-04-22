@@ -18,7 +18,32 @@ RespondentBasicView.prototype = Object.create( DvaForm1Page.prototype, {
 		get: function() {
 			return element( by.css( 'legend > .label' )).getText();
 		}
+	},
+
+	firstName: {
+		get: function() {
+			return element( by.name( 'respondentNameGiven' ));
+		}
+	},
+
+	lastName: {
+		get: function() {
+			return element( by.name( 'respondentNameFamily' ));
+		}
+	},
+
+	dateBirth: {
+		get: function() {
+			return element( by.name( 'respondentDateBirth' ));
+		}
+	},
+
+	gender: {
+		get: function() {
+			return element( by.name( 'respondentGender' ));
+		}
 	}
+
 });
 RespondentBasicView.constructor = RespondentBasicView;
 
