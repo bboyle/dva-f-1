@@ -38,4 +38,72 @@ describe( 'situation view', function() {
 		expect( situationView.infoBoxHeading ).toBe( 'They are the aggrieved' );
 	});
 
+	it( 'should ask safety questions if user is the aggrieved', function() {
+		expect( situationView.dangerQuestion.isDisplayed() ).toBe( false );
+		expect( situationView.privacyQuestion.isDisplayed() ).toBe( false );
+		expect( situationView.dangerAdvice.isDisplayed() ).toBe( false );
+		expect( situationView.privacyAdvice.isDisplayed() ).toBe( false );
+
+		situationView.chooseUserIsAggrieved();
+		expect( situationView.dangerQuestion.isDisplayed() ).toBe( true );
+		expect( situationView.privacyQuestion.isDisplayed() ).toBe( true );
+		expect( situationView.dangerAdvice.isDisplayed() ).toBe( false );
+		expect( situationView.privacyAdvice.isDisplayed() ).toBe( false );
+
+		situationView.choose( 'userDanger', 'Yes' );
+		expect( situationView.dangerAdvice.isDisplayed() ).toBe( true );
+		expect( situationView.dangerAdvice.element( by.css( 'h2' )).getText() ).toBe( 'What can I do if I need help urgently?' );
+		expect( situationView.dangerAdvice.element( by.css( 'a[href^="tel"]' )).getText() ).toBe( '000' );
+
+		situationView.choose( 'userDanger', 'Maybe' );
+		expect( situationView.dangerAdvice.isDisplayed() ).toBe( true );
+		expect( situationView.dangerAdvice.element( by.css( 'h2' )).getText() ).toBe( 'What can I do if I need help urgently?' );
+		expect( situationView.dangerAdvice.element( by.css( 'a[href^="tel"]' )).isPresent() ).toBe( false );
+
+		situationView.choose( 'userDanger', 'No' );
+		expect( situationView.dangerAdvice.isDisplayed() ).toBe( false );
+
+		situationView.choose( 'userPrivacy', 'No' );
+		expect( situationView.privacyAdvice.isDisplayed() ).toBe( true );
+		expect( situationView.privacyAdvice.element( by.css( 'h2' )).getText() ).toBe( 'Protect yourself online' );
+
+		situationView.choose( 'userPrivacy', 'Not sure' );
+		expect( situationView.privacyAdvice.isDisplayed() ).toBe( true );
+		expect( situationView.privacyAdvice.element( by.css( 'h2' )).getText() ).toBe( 'Different ways to apply for protection' );
+
+		situationView.choose( 'userPrivacy', 'Yes' );
+		expect( situationView.privacyAdvice.isDisplayed() ).toBe( false );
+	});
+
+	it( 'should ask about existing orders', function() {
+		situationView.chooseUserIsAggrieved();
+
+		expect( situationView.existingOrderJurisdiction.isDisplayed() ).toBe( false );
+		expect( situationView.existingOrderAdvice.isDisplayed() ).toBe( false );
+
+		situationView.choose( 'aggrievedExistingOrder', 'Yes' );
+		expect( situationView.existingOrderJurisdiction.isDisplayed() ).toBe( true );
+		expect( situationView.existingOrderAdvice.isDisplayed() ).toBe( false );
+
+		situationView.select( 'aggrievedExistingOrderJurisdiction', 'QLD' );
+		expect( situationView.existingOrderAdvice.isDisplayed() ).toBe( true );
+		expect( situationView.existingOrderAdvice.element( by.css( 'h2' )).getText() ).toBe( 'You can vary the existing protection order' );
+
+		situationView.select( 'aggrievedExistingOrderJurisdiction', 'Vic' );
+		expect( situationView.existingOrderAdvice.isDisplayed() ).toBe( true );
+		expect( situationView.existingOrderAdvice.element( by.css( 'h2' )).getText() ).toBe( 'You can register your protection order in Queensland' );
+
+		situationView.select( 'aggrievedExistingOrderJurisdiction', 'NZ' );
+		expect( situationView.existingOrderAdvice.isDisplayed() ).toBe( true );
+		expect( situationView.existingOrderAdvice.element( by.css( 'h2' )).getText() ).toBe( 'You can register your protection order in Queensland' );
+
+		situationView.select( 'aggrievedExistingOrderJurisdiction', 'Other' );
+		expect( situationView.existingOrderAdvice.isDisplayed() ).toBe( true );
+		expect( situationView.existingOrderAdvice.element( by.css( 'p' )).getText() ).toBe( 'Attach a copy of the existing protection order when you lodge this application.' );
+
+		situationView.choose( 'aggrievedExistingOrder', 'No' );
+		expect( situationView.existingOrderJurisdiction.isDisplayed() ).toBe( false );
+		expect( situationView.existingOrderAdvice.isDisplayed() ).toBe( false );
+	});
+
 });

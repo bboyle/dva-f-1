@@ -1,0 +1,15 @@
+<fieldset>
+	<legend>
+		{{DoesTheAggrieved}} already have a protection order?
+	</legend>
+	<ul class="choices compact">
+		<li>
+			<input type="radio" name="aggrievedExistingOrder" value="No" id="existing-protection-order-no"{{#if selected.aggrievedExistingOrder.No}} checked{{/if}}>
+			<label for="existing-protection-order-no">No</label>
+		</li>
+		<li>
+			<input type="radio" name="aggrievedExistingOrder" value="Yes" id="existing-protection-order-yes"{{#if selected.aggrievedExistingOrder.Yes}} checked{{/if}}>
+			<label for="existing-protection-order-yes">Yes</label>
+		</li>
+	</ul>
+</fieldset>

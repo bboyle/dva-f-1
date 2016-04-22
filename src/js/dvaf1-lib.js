@@ -2,8 +2,26 @@
 $(function() {
 	'use strict';
 
+	function TitleCase( word ) {
+		return word.charAt(0).toUpperCase() + word.slice(1);
+	}
 
-	Handlebars.registerHelper( 'doesTheAggrieved', function() {
+	function theAggrieved() {
+		if ( dvaf1Data.userIsAggrieved ) {
+			return 'you';
+		}
+		if ( dvaf1Data.userRelationship && dvaf1Data.userRelationship !== 'someone') {
+			return 'your ' + dvaf1Data.userRelationship;
+		}
+
+		return 'the aggrieved';
+	}
+	function TheAggrieved() {
+		return TitleCase( theAggrieved() );
+	}
+
+
+	function doesTheAggrieved() {
 		if ( dvaf1Data.userIsAggrieved ) {
 			return 'do you';
 		}
@@ -15,7 +33,17 @@ $(function() {
 		}
 
 		return 'does the aggrieved';
-	});
+	}
+	function DoesTheAggrieved() {
+		return TitleCase( doesTheAggrieved() );
+	}
+
+
+	Handlebars.registerHelper( 'theAggrieved', theAggrieved );
+	Handlebars.registerHelper( 'TheAggrieved', TheAggrieved );
+
+	Handlebars.registerHelper( 'doesTheAggrieved', doesTheAggrieved );
+	Handlebars.registerHelper( 'DoesTheAggrieved', DoesTheAggrieved );
 
 
 	Handlebars.registerHelper( 'TheAggrievedIs', function() {
@@ -29,4 +57,8 @@ $(function() {
 		return 'The aggrieved is';
 	});
 
+
+	Handlebars.registerHelper( 'aggrievedTheir', function() {
+		return dvaf1Data.userIsAggrieved ? 'your' : 'their';
+	});
 });

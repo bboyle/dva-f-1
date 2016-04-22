@@ -1,27 +1,87 @@
-/*! dva-f-1 - v1.0.0 - 2016-04-22
+/*! dva-f-1 - v1.0.0 - 2016-04-23
 * https://github.com/bboyle/dva-f-1#readme
 * Copyright (c) 2016 Queensland Government; Licensed BSD-3-Clause */
+/* global Handlebars */
 $(function($) {
     "use strict";
     function parseValue(value) {
-        return /^true|false$/.test(value) ? "true" === value : value;
+        return /^Yes|No$/.test(value) ? "Yes" === value : value;
+    }
+    function refreshPartial(partial) {
+        $("#" + partial).html(partials[partial].template(data));
     }
     var data = window.dvaf1Data = {
         selected: {}
-    }, formView = $("#dvaf1-form-view");
-    // store state
-    formView.on("change", function(event) {
-        var question = $(event.target), name = event.target.name, value = parseValue($(event.target).val());
-        data[name] = value, question.is("select,:radio,:checkbox") && (question.is(":checkbox") ? data.selected[name][value] = event.target.checked : (data.selected[name] = {}, 
-        data.selected[name][value] = !0));
+    }, formView = $("#dvaf1-form-view"), partials = {
+        "dvaf1-dfn-aggrieved": {
+            name: "dfnAggrieved"
+        },
+        "dvaf1-info-aggrieved-danger": {
+            name: "infoAggrievedDanger"
+        },
+        "dvaf1-info-aggrieved-privacy": {
+            name: "infoAggrievedPrivacy"
+        },
+        "dvaf1-aggrieved-existing-order": {
+            name: "aggrievedExistingOrderQuestion"
+        },
+        "dvaf1-aggrieved-existing-order-advice": {
+            name: "infoExistingOrder"
+        }
+    };
+    $.each(partials, function(key, partial) {
+        var template = $("#" + key + "-partial").remove();
+        return template.length ? (partial.template = Handlebars.compile(template.html()), 
+        Handlebars.registerPartial(partial.name, partial.template), partial) : void delete partials[key];
+    }), // relevance
+    formView.on("click change", function(event) {
+        var question = $(event.target), name = event.target.name, value = $(event.target).val();
+        if (// store data
+        data[name] = parseValue(value), value = value.replace(/\s+/g, ""), question.is("select,:radio,:checkbox")) // regenerate status blocks
+        switch (// store boolean helpers
+        question.is(":checkbox") ? data.selected[name][value] = event.target.checked : (data.selected[name] = {}, 
+        data.selected[name][value] = !0), name) {
+          case "userIsAggrieved":
+          case "userRelationship":
+            refreshPartial("dvaf1-dfn-aggrieved"), refreshPartial("dvaf1-aggrieved-existing-order-advice");
+            break;
+
+          case "userDanger":
+            refreshPartial("dvaf1-info-aggrieved-danger");
+            break;
+
+          case "userPrivacy":
+            refreshPartial("dvaf1-info-aggrieved-privacy");
+            break;
+
+          case "aggrievedExistingOrderJurisdiction":
+            refreshPartial("dvaf1-aggrieved-existing-order-advice");
+        }
     });
 }), /* global Handlebars, dvaf1Data */
 $(function() {
     "use strict";
-    Handlebars.registerHelper("doesTheAggrieved", function() {
+    function TitleCase(word) {
+        return word.charAt(0).toUpperCase() + word.slice(1);
+    }
+    function theAggrieved() {
+        return dvaf1Data.userIsAggrieved ? "you" : dvaf1Data.userRelationship && "someone" !== dvaf1Data.userRelationship ? "your " + dvaf1Data.userRelationship : "the aggrieved";
+    }
+    function TheAggrieved() {
+        return TitleCase(theAggrieved());
+    }
+    function doesTheAggrieved() {
         return dvaf1Data.userIsAggrieved ? "do you" : dvaf1Data.aggrievedNameGiven ? "does " + dvaf1Data.aggrievedNameGiven : dvaf1Data.userRelationship ? "someone" === dvaf1Data.userRelationship ? "do they" : "does your " + dvaf1Data.userRelationship : "does the aggrieved";
-    }), Handlebars.registerHelper("TheAggrievedIs", function() {
+    }
+    function DoesTheAggrieved() {
+        return TitleCase(doesTheAggrieved());
+    }
+    Handlebars.registerHelper("theAggrieved", theAggrieved), Handlebars.registerHelper("TheAggrieved", TheAggrieved), 
+    Handlebars.registerHelper("doesTheAggrieved", doesTheAggrieved), Handlebars.registerHelper("DoesTheAggrieved", DoesTheAggrieved), 
+    Handlebars.registerHelper("TheAggrievedIs", function() {
         return dvaf1Data.userIsAggrieved ? "You are" : dvaf1Data.userRelationship ? "someone" === dvaf1Data.userRelationship ? "They are" : "Your " + dvaf1Data.userRelationship + " is" : "The aggrieved is";
+    }), Handlebars.registerHelper("aggrievedTheir", function() {
+        return dvaf1Data.userIsAggrieved ? "your" : "their";
     });
 }), /* global Handlebars, dvaf1Data */
 $(function($) {
@@ -39,14 +99,7 @@ $(function($) {
             }) : formView.find(target).relevance("relevantWhen", processCondition(formView, condition));
         });
     }
-    function refreshPartial(partial) {
-        $("#" + partial).html(partials[partial].template(dvaf1Data));
-    }
-    var formView = $("#dvaf1-form-view"), partials = {
-        "dvaf1-dfn-aggrieved": {
-            name: "dfnAggrieved"
-        }
-    }, views = {
+    var formView = $("#dvaf1-form-view"), views = {
         "dvaf1-preamble-template": {
             relevance: {
                 "#dvaf1-legal-advice": {
@@ -59,19 +112,43 @@ $(function($) {
             relevance: {
                 "#dvaf1-dfn-aggrieved": [ {
                     name: "userIsAggrieved",
-                    value: "true"
+                    value: "Yes"
                 }, {
                     name: "userRelationship",
                     values: "*"
                 } ],
                 "#dvaf1-user-relationship-placeholder": {
                     name: "userIsAggrieved",
-                    value: "false",
+                    value: "No",
                     negate: !0
                 },
                 "#dvaf1-user-relationship": {
                     name: "userIsAggrieved",
-                    value: "false"
+                    value: "No"
+                },
+                "#dvaf1-aggrieved-danger-question": {
+                    name: "userIsAggrieved",
+                    value: "Yes"
+                },
+                "#dvaf1-aggrieved-privacy-question": {
+                    name: "userIsAggrieved",
+                    value: "Yes"
+                },
+                "#dvaf1-info-aggrieved-danger": {
+                    name: "userDanger",
+                    values: [ "Yes", "Maybe" ]
+                },
+                "#dvaf1-info-aggrieved-privacy": {
+                    name: "userPrivacy",
+                    values: [ "No", "Not sure" ]
+                },
+                "#dvaf1-aggrieved-existing-order-jurisdiction": {
+                    name: "aggrievedExistingOrder",
+                    value: "Yes"
+                },
+                "#dvaf1-aggrieved-existing-order-advice": {
+                    name: "aggrievedExistingOrderJurisdiction",
+                    values: [ "ACT", "NSW", "NT", "QLD", "SA", "Tas", "Vic", "WA", "NZ", "Other" ]
                 }
             }
         },
@@ -90,11 +167,7 @@ $(function($) {
         "dvaf1-court-template": {},
         "dvaf1-download-template": {}
     }, viewSequence = [], page = 0;
-    $.each(partials, function(key, partial) {
-        var template = $("#" + key + "-partial").remove();
-        return template.length ? (partial.template = Handlebars.compile(template.html()), 
-        Handlebars.registerPartial(partial.name, partial.template), partial) : void delete partials[key];
-    }), $.each(views, function(key, view) {
+    $.each(views, function(key, view) {
         var template = $("#" + key).remove();
         return template.length ? (view.template = Handlebars.compile(template.html()), viewSequence.push(key), 
         view) : void delete views[key];
@@ -106,15 +179,6 @@ $(function($) {
         var target = event.target.href.split("#");
         target.length > 1 && /^dvaf1/.test(target[1]) && (target = viewSequence.indexOf(target[1]), 
         -1 !== target && (event.preventDefault(), showPage(target)));
-    }), // relevance
-    formView.on("change", function(event) {
-        var question = $(event.target), name = event.target.name;
-        if (question.is("select,:radio,:checkbox")) // regenerate status blocks
-        switch (name) {
-          case "userIsAggrieved":
-          case "userRelationship":
-            refreshPartial("dvaf1-dfn-aggrieved");
-        }
     }), // init
     showPage(page);
 });
