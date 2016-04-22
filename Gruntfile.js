@@ -36,7 +36,12 @@ module.exports = function( grunt ) {
 			options: {
 				configFile: 'protractor.conf.js'
 			},
-			localhost: {},
+			watch: {
+				options: {
+					configFile: 'protractor-watch.conf.js'
+				}
+			},
+			acceptance: {},
 			saucelabs: {
 				options: {
 					args: {
@@ -53,15 +58,15 @@ module.exports = function( grunt ) {
 					'test/page/*.page.js',
 					'test/page/*.view.js'
 				],
-				tasks: [ 'eslint:test', 'protractor:localhost' ]
+				tasks: [ 'eslint:test', 'protractor:watch' ]
 			},
 			src: {
 				files: 'src/js/*.js',
-				tasks: [ 'eslint:src', 'protractor:localhost' ]
+				tasks: [ 'eslint:src', 'protractor:watch' ]
 			},
 			html: {
 				files: 'src/**/*.html',
-				tasks: [ 'protractor:localhost' ]
+				tasks: [ 'protractor:watch' ]
 			},
 			build: {
 				files: '<%= eslint.build %>',
@@ -83,8 +88,7 @@ module.exports = function( grunt ) {
 				options: {
 					keepAlive: true
 				}
-			},
-			dead: {}
+			}
 		}
 	});
 
@@ -96,12 +100,12 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks( 'grunt-protractor-runner' );
 	grunt.loadNpmTasks( 'grunt-contrib-watch' );
 
-	// Default task.
+	// task aliases
 	grunt.registerTask( 'build', [ 'eslint:build' ]);
-	grunt.registerTask( 'test-e2e', [ 'connect', 'protractor:localhost' ]);
-	grunt.registerTask( 'travis', [ 'build', 'eslint', 'connect', 'protractor:saucelabs' ]);
 	grunt.registerTask( 'dev', [ 'build', 'shell:protractor', 'protractor_webdriver:alive', 'connect', 'watch' ]);
+	grunt.registerTask( 'test-e2e', [ 'shell:protractor', 'protractor_webdriver:alive', 'connect', 'protractor:acceptance' ]);
 	grunt.registerTask( 'test', [ 'eslint', 'test-e2e' ]);
-	grunt.registerTask( 'default', [ 'connect', 'protractor:localhost', 'watch' ]);
+	grunt.registerTask( 'travis', [ 'build', 'eslint', 'connect', 'protractor:saucelabs' ]);
+	grunt.registerTask( 'default', [ 'dev' ]);
 
 };
