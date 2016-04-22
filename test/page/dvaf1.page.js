@@ -31,6 +31,15 @@ DvaForm1Page.prototype = Object.create( {}, {
 		}
 	},
 
+	answer: {
+		value: function( name, value ) {
+			var input = element( by.name( name ));
+
+			input.clear().sendKeys( value );
+			input.sendKeys( protractor.Key.TAB );
+		}
+	},
+
 	visibleQuestions: {
 		get: function() {
 			return element.all( by.css( '.questions > li' )).filter( filterIsDisplayed );
@@ -99,6 +108,29 @@ DvaForm1Page.prototype = Object.create( {}, {
 			this.gotoSituationView();
 			this.chooseUserIsNotAggrieved();
 			element( by.name( 'userRelationship' )).element( by.css( 'option[value = "' + relationship + '"]' )).click();
+		}
+	},
+
+	fill: {
+		value: function( data ) {
+			var page = this;
+			Object.keys( data ).forEach(function( key ) {
+				page.answer( key, data[ key ]);
+			});
+		}
+	},
+
+	setAggrieved: {
+		value: function( data ) {
+			this.gotoAggrievedBasicView();
+			this.fill( data );
+		}
+	},
+
+	setRespondent: {
+		value: function( data ) {
+			this.gotoRespondentBasicView();
+			this.fill( data );
 		}
 	},
 

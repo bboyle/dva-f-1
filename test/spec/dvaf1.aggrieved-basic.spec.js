@@ -44,4 +44,20 @@ describe( 'aggrieved (basic) view', function() {
 		expect( aggrievedView.firstQuestionPrompt ).toBe( 'What is the name of the person in need of protection?' );
 	});
 
+	it( 'should remember aggrieved data that is entered', function() {
+		aggrievedView.setAggrieved({
+			aggrievedNameGiven: 'Kim',
+			aggrievedNameFamily: 'Smith',
+			aggrievedDateBirth: '17 April 1983',
+			aggrievedGender: 'Woman'
+		});
+		aggrievedView.continue();
+		aggrievedView.get();
+
+		expect( aggrievedView.firstName.getAttribute( 'value' )).toBe( 'Kim' );
+		expect( aggrievedView.lastName.getAttribute( 'value' )).toBe( 'Smith' );
+		expect( aggrievedView.dateBirth.getAttribute( 'value' )).toBe( '17 April 1983' );
+		expect( aggrievedView.gender.getAttribute( 'value' )).toBe( 'Woman' );
+	});
+
 });
