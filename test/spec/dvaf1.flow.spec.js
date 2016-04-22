@@ -79,11 +79,57 @@ describe( 'sequential order', function() {
 	});
 
 	it( 'should visit pages in order', itShouldVisitPagesInOrder );
-
-
-	xit( 'should scroll to top when loading each page' );
 });
 
+
+describe( 'random access', function() {
+	beforeEach(function() {
+		page = new DvaForm1Page();
+	});
+
+	it( 'should support visiting pages in any order', function() {
+		expect( browser.getTitle() ).toEqual( 'Prepare your application for a domestic violence protection order' );
+
+		expect( page.title ).toEqual( 'Before you begin' );
+		expect( page.form.getAttribute( 'name' )).toBe( 'formPreamble' );
+
+		page.goto( 'Applicant details' );
+
+		expect( page.title ).toEqual( 'Is this application being made on someone else’s behalf?' );
+		expect( page.form.getAttribute( 'name' )).toBe( 'formApplicant' );
+
+		page.goto( 'Grounds' );
+
+		expect( page.title ).toEqual( 'Why does the aggrieved need protection?' );
+		expect( page.form.getAttribute( 'name' )).toBe( 'formGrounds' );
+
+		page.continue();
+
+		expect( page.title ).toEqual( 'Request extra conditions' );
+		expect( page.form.getAttribute( 'name' )).toBe( 'formConditions' );
+
+		page.goto( 'Download your application' );
+
+		expect( page.title ).toEqual( 'Download your application' );
+		expect( page.form.getAttribute( 'name' )).toBe( 'formDownload' );
+	});
+});
+
+
+describe( 'scroll position', function() {
+	beforeEach(function() {
+		page = new DvaForm1Page();
+	});
+
+	xit( 'should scroll to the top when loading a new page', function() {
+		// visit a long page
+		// scroll down
+		// verify scroll position
+		// continue
+		// use goto() to return to page
+		// check scroll position
+	});
+});
 
 
 describe( 'split preamble', function() {

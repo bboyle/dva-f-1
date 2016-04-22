@@ -23,11 +23,11 @@ describe( 'respondent (basic) view', function() {
 		expect( respondentView.visibleQuestions.count() ).toEqual( 6 );
 	});
 
-	it( 'should use refer to the aggrieved generically by default', function() {
+	it( 'should refer to the aggrieved generically by default', function() {
 		expect( respondentView.firstQuestionPrompt ).toBe( 'Who does the aggrieved need protection from?' );
 	});
 
-	it( 'should use refer to the aggrieved in first person when relevant', function() {
+	it( 'should refer to the aggrieved in first person when relevant', function() {
 		situationView = new SituationView();
 		situationView.get();
 		situationView.chooseUserIsAggrieved();
@@ -37,7 +37,7 @@ describe( 'respondent (basic) view', function() {
 		expect( respondentView.firstQuestionPrompt ).toBe( 'Who do you need protection from?' );
 	});
 
-	it( 'should use refer to the aggrieved by relationship', function() {
+	it( 'should refer to the aggrieved by relationship', function() {
 		situationView = new SituationView();
 		situationView.get();
 		situationView.chooseAggrievedIsUsers( 'brother' );
@@ -47,7 +47,7 @@ describe( 'respondent (basic) view', function() {
 		expect( respondentView.firstQuestionPrompt ).toBe( 'Who does your brother need protection from?' );
 	});
 
-	xit( 'should use refer to the aggrieved by name', function() {
+	xit( 'should refer to the aggrieved by name', function() {
 		aggrievedView = new AggrievedBasicView();
 		aggrievedView.get();
 		aggrievedView.setAggrieved({ firstName: 'Kim' });

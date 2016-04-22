@@ -43,6 +43,12 @@ DvaForm1Page.prototype = Object.create( {}, {
 		}
 	},
 
+	goto: {
+		value: function( link ) {
+			element( by.linkText( link )).click();
+		}
+	},
+
 	// general helpers
 	focus: {
 		value: function( element ) {

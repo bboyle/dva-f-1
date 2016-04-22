@@ -5,14 +5,13 @@ $(function( $ ) {
 	var formView = $( '#dvaf1-form-view' );
 
 	var partials = {
-		dfnAggrieved: {
-			id: 'dvaf1-dfn-aggrieved-partial'
+		'dvaf1-dfn-aggrieved': {
+			name: 'dfnAggrieved'
 		}
 	};
 
 	var views = {
-		formPreamble: {
-			id: 'dvaf1-preamble-template',
+		'dvaf1-preamble-template': {
 			relevance: {
 				'#dvaf1-legal-advice': {
 					name: 'legalAdvice',
@@ -20,8 +19,7 @@ $(function( $ ) {
 				}
 			}
 		},
-		formSituation: {
-			id: 'dvaf1-situation-template',
+		'dvaf1-situation-template': {
 			relevance: {
 				'#dvaf1-dfn-aggrieved': [{
 					name: 'userIsAggrieved',
@@ -41,48 +39,20 @@ $(function( $ ) {
 				}
 			}
 		},
-		formAggrievedBasic: {
-			id: 'dvaf1-aggrieved-basic-template'
-		},
-		formRespondentBasic: {
-			id: 'dvaf1-respondent-basic-template'
-		},
-		formRelationship: {
-			id: 'dvaf1-relationship-template'
-		},
-		formGrounds: {
-			id: 'dvaf1-grounds-template'
-		},
-		formConditions: {
-			id: 'dvaf1-conditions-template'
-		},
-		formUrgent: {
-			id: 'dvaf1-urgent-template'
-		},
-		formAggrieved: {
-			id: 'dvaf1-aggrieved-template'
-		},
-		formChildren: {
-			id: 'dvaf1-children-template'
-		},
-		formAssociates: {
-			id: 'dvaf1-associates-template'
-		},
-		formRespondent: {
-			id: 'dvaf1-respondent-template'
-		},
-		formOrders: {
-			id: 'dvaf1-orders-template'
-		},
-		formApplicant: {
-			id: 'dvaf1-applicant-template'
-		},
-		formCourt: {
-			id: 'dvaf1-court-template'
-		},
-		formDownload: {
-			id: 'dvaf1-download-template'
-		}
+		'dvaf1-aggrieved-basic-template': {},
+		'dvaf1-respondent-basic-template': {},
+		'dvaf1-relationship-template': {},
+		'dvaf1-grounds-template': {},
+		'dvaf1-conditions-template': {},
+		'dvaf1-urgent-template': {},
+		'dvaf1-aggrieved-template': {},
+		'dvaf1-children-template': {},
+		'dvaf1-associates-template': {},
+		'dvaf1-respondent-template': {},
+		'dvaf1-orders-template': {},
+		'dvaf1-applicant-template': {},
+		'dvaf1-court-template': {},
+		'dvaf1-download-template': {}
 	};
 
 	var viewSequence = [];
@@ -90,10 +60,10 @@ $(function( $ ) {
 	var page = 0;
 
 	$.each( partials, function( key, partial ) {
-		var template = $( '#' + partial.id ).remove();
+		var template = $( '#' + key + '-partial' ).remove();
 		if ( template.length ) {
 			partial.template = Handlebars.compile( template.html() );
-			Handlebars.registerPartial( key, partial.template );
+			Handlebars.registerPartial( partial.name, partial.template );
 			return partial;
 		} else {
 			delete partials[ key ];
@@ -101,7 +71,7 @@ $(function( $ ) {
 	});
 
 	$.each( views, function( key, view ) {
-		var template = $( '#' + view.id ).remove();
+		var template = $( '#' + key ).remove();
 		if ( template.length ) {
 			view.template = Handlebars.compile( template.html() );
 			viewSequence.push( key );
@@ -124,6 +94,8 @@ $(function( $ ) {
 
 	function showPage( index ) {
 		var view = views[ viewSequence[ index ]];
+
+		page = index;
 		formView.html( $( view.template( dvaf1Data )) );
 
 		$.each( view.relevance, function( target, condition ) {
@@ -142,14 +114,32 @@ $(function( $ ) {
 	formView.on( 'submit', function( event ) {
 		event.preventDefault();
 
-		page++;
-
-		if ( viewSequence[ page ]) {
-			showPage( page );
+		if ( viewSequence[ page + 1 ]) {
+			showPage( page + 1 );
 		} else if ( event.target.action ) {
 			window.location.replace( event.target.action );
 		}
 	});
+
+
+	// navigation by menu links
+	$( document ).on( 'click', 'a', function( event ) {
+		var target = event.target.href.split( '#' );
+		if ( target.length > 1 ) {
+			if ( /^dvaf1/.test( target[ 1 ] )) {
+				target = viewSequence.indexOf( target[ 1 ]);
+				if ( target !== -1 ) {
+					event.preventDefault();
+					showPage( target );
+				}
+			}
+		}
+	});
+
+
+	function refreshPartial( partial ) {
+		$( '#' + partial ).html( partials[ partial ].template( dvaf1Data ));
+	}
 
 
 	// relevance
@@ -162,7 +152,7 @@ $(function( $ ) {
 			switch ( name ) {
 			case 'userIsAggrieved':
 			case 'userRelationship':
-				$( '#dvaf1-dfn-aggrieved' ).html( partials.dfnAggrieved.template( dvaf1Data ));
+				refreshPartial( 'dvaf1-dfn-aggrieved' );
 				break;
 			}
 		}
