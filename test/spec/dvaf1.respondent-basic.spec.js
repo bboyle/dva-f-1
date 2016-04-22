@@ -3,10 +3,6 @@
 
 var RespondentBasicView = require( '../page/dvaf1.respondentBasic.view.js' );
 var respondentView;
-var SituationView = require( '../page/dvaf1.situation.view.js' );
-var situationView;
-var AggrievedBasicView = require( '../page/dvaf1.aggrievedBasic.view.js' );
-var aggrievedView;
 
 
 describe( 'respondent (basic) view', function() {
@@ -28,30 +24,22 @@ describe( 'respondent (basic) view', function() {
 	});
 
 	it( 'should refer to the aggrieved in first person when relevant', function() {
-		situationView = new SituationView();
-		situationView.get();
-		situationView.chooseUserIsAggrieved();
-		situationView.continue();
-		situationView.continue();
+		respondentView.chooseUserIsAggrieved();
+		respondentView.get();
 
 		expect( respondentView.firstQuestionPrompt ).toBe( 'Who do you need protection from?' );
 	});
 
 	it( 'should refer to the aggrieved by relationship', function() {
-		situationView = new SituationView();
-		situationView.get();
-		situationView.chooseAggrievedIsUsers( 'brother' );
-		situationView.continue();
-		situationView.continue();
+		respondentView.chooseAggrievedIsUsers( 'brother' );
+		respondentView.get();
 
 		expect( respondentView.firstQuestionPrompt ).toBe( 'Who does your brother need protection from?' );
 	});
 
 	xit( 'should refer to the aggrieved by name', function() {
-		aggrievedView = new AggrievedBasicView();
-		aggrievedView.get();
-		aggrievedView.setAggrieved({ firstName: 'Kim' });
-		aggrievedView.continue();
+		respondentView.setAggrieved({ firstName: 'Kim' });
+		respondentView.get();
 
 		expect( respondentView.firstQuestionPrompt ).toBe( 'Who does Kim need protection from?' );
 	});

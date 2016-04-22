@@ -10,10 +10,7 @@ var RespondentBasicView = function() {
 RespondentBasicView.prototype = Object.create( DvaForm1Page.prototype, {
 	get: {
 		value: function() {
-			// navigate from home view
-			this.continue();
-			this.continue();
-			this.continue();
+			this.gotoRespondentBasicView();
 		}
 	},
 

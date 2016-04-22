@@ -3,8 +3,6 @@
 
 var AggrievedBasicView = require( '../page/dvaf1.aggrievedBasic.view.js' );
 var aggrievedView;
-var SituationView = require( '../page/dvaf1.situation.view.js' );
-var situationView;
 
 
 describe( 'aggrieved (basic) view', function() {
@@ -26,28 +24,22 @@ describe( 'aggrieved (basic) view', function() {
 	});
 
 	it( 'should refer to the aggrieved in first person when relevant', function() {
-		situationView = new SituationView();
-		situationView.get();
-		situationView.chooseUserIsAggrieved();
-		situationView.continue();
+		aggrievedView.chooseUserIsAggrieved();
+		aggrievedView.get();
 
 		expect( aggrievedView.firstQuestionPrompt ).toBe( 'What is your name?' );
 	});
 
 	it( 'should refer to the aggrieved by relationship', function() {
-		situationView = new SituationView();
-		situationView.get();
-		situationView.chooseAggrievedIsUsers( 'client' );
-		situationView.continue();
+		aggrievedView.chooseAggrievedIsUsers( 'client' );
+		aggrievedView.get();
 
 		expect( aggrievedView.firstQuestionPrompt ).toBe( 'What is your client’s name?' );
 	});
 
 	it( 'should refer to the aggrieved generic when relationship is generic', function() {
-		situationView = new SituationView();
-		situationView.get();
-		situationView.chooseAggrievedIsUsers( 'someone' );
-		situationView.continue();
+		aggrievedView.chooseAggrievedIsUsers( 'someone' );
+		aggrievedView.get();
 
 		expect( aggrievedView.firstQuestionPrompt ).toBe( 'What is the name of the person in need of protection?' );
 	});

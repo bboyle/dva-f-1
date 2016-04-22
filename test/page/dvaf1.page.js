@@ -49,6 +49,59 @@ DvaForm1Page.prototype = Object.create( {}, {
 		}
 	},
 
+	gotoSituationView: {
+		value: function() {
+			this.goto( 'Your situation' );
+		}
+	},
+
+	gotoAggrievedBasicView: {
+		value: function() {
+			this.goto( 'Who needs protection?' );
+		}
+	},
+
+	gotoRespondentBasicView: {
+		value: function() {
+			this.goto( 'Who do they need protection from?' );
+		}
+	},
+
+	// convenience: toggle user is aggrieved
+	radioUserIsAggrieved: {
+		get: function() {
+			return element( by.id( 'user-is-aggrieved-true' ));
+		}
+	},
+
+	radioUserIsNotAggrieved: {
+		get: function() {
+			return element( by.id( 'user-is-aggrieved-false' ));
+		}
+	},
+
+	chooseUserIsAggrieved: {
+		value: function() {
+			this.gotoSituationView();
+			this.radioUserIsAggrieved.click();
+		}
+	},
+
+	chooseUserIsNotAggrieved: {
+		value: function() {
+			this.gotoSituationView();
+			this.radioUserIsNotAggrieved.click();
+		}
+	},
+
+	chooseAggrievedIsUsers: {
+		value: function( relationship ) {
+			this.gotoSituationView();
+			this.chooseUserIsNotAggrieved();
+			element( by.name( 'userRelationship' )).element( by.css( 'option[value = "' + relationship + '"]' )).click();
+		}
+	},
+
 	// general helpers
 	focus: {
 		value: function( element ) {
