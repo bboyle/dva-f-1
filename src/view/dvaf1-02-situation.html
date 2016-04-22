@@ -9,36 +9,30 @@
 				</legend>
 				<ul class="choices">
 					<li>
-						<input type="radio"
-						       name="userIsAggrieved"
-						       value="true"
-						       id="user-is-aggrieved-true">
-						<label for="user-is-aggrieved-true">Yes</label>
+						<input type="radio" name="userIsAggrieved" value="Yes" id="user-is-aggrieved-Yes"{{#if selected.userIsAggrieved.Yes}} checked{{/if}}>
+						<label for="user-is-aggrieved-Yes">Yes</label>
 					</li>
 					<li>
-						<input type="radio"
-						       name="userIsAggrieved"
-						       value="false"
-						       id="user-is-aggrieved-false">
-						<label for="user-is-aggrieved-false">No, I am applying for
+						<input type="radio" name="userIsAggrieved" value="No" id="user-is-aggrieved-No"{{#if selected.userIsAggrieved.No}} checked{{/if}}>
+						<label for="user-is-aggrieved-No">No, I am applying for
 							<span id="dvaf1-user-relationship-placeholder">someone else</span>
 						</label>
 						<label class="sr-only visuallyhidden" for="dvaf1-user-relationship">Who needs protection?</label>
 						<select id="dvaf1-user-relationship" name="userRelationship">
 							<option value="" class="placeholder">please select…</option>
-							<option value="girlfriend">my girlfriend</option>
-							<option value="boyfriend">my boyfriend</option>
-							<option value="daughter">my daughter</option>
-							<option value="son">my son</option>
-							<option value="mother">my mother</option>
-							<option value="father">my father</option>
-							<option value="sister">my sister</option>
-							<option value="brother">my brother</option>
-							<option value="friend">my friend</option>
-							<option value="neighbour">my neighbour</option>
-							<option value="client">my client</option>
-							<option value="coworker">my coworker</option>
-							<option value="someone">someone I know</option>
+							<option value="girlfriend"{{#if selected.userRelationship.girlfriend}} selected{{/if}}>my girlfriend</option>
+							<option value="boyfriend"{{#if selected.userRelationship.boyfriend}} selected{{/if}}>my boyfriend</option>
+							<option value="daughter"{{#if selected.userRelationship.daughter}} selected{{/if}}>my daughter</option>
+							<option value="son"{{#if selected.userRelationship.son}} selected{{/if}}>my son</option>
+							<option value="mother"{{#if selected.userRelationship.mother}} selected{{/if}}>my mother</option>
+							<option value="father"{{#if selected.userRelationship.father}} selected{{/if}}>my father</option>
+							<option value="sister"{{#if selected.userRelationship.sister}} selected{{/if}}>my sister</option>
+							<option value="brother"{{#if selected.userRelationship.brother}} selected{{/if}}>my brother</option>
+							<option value="friend"{{#if selected.userRelationship.friend}} selected{{/if}}>my friend</option>
+							<option value="neighbour"{{#if selected.userRelationship.neighbour}} selected{{/if}}>my neighbour</option>
+							<option value="client"{{#if selected.userRelationship.client}} selected{{/if}}>my client</option>
+							<option value="coworker"{{#if selected.userRelationship.coworker}} selected{{/if}}>my coworker</option>
+							<option value="someone"{{#if selected.userRelationship.someone}} selected{{/if}}>someone I know</option>
 						</select>
 					</li>
 				</ul>
@@ -97,9 +91,27 @@
 
 		<li id="dvaf1-info-aggrieved-privacy">{{> infoAggrievedPrivacy}}</li>
 
-		<li>
-			<label>Does the aggrieved already have a protection order?</label>
+		<li id="dvaf1-aggrieved-existing-order">{{> aggrievedExistingOrderQuestion}}</li>
+
+		<li id="dvaf1-aggrieved-existing-order-jurisdiction">
+			<label for="dvaf1-aggrieved-existing-order-jurisdiction-select">
+				<span class="label">Where was the protection order granted?</span>
+			</legend>
+			<select name="aggrievedExistingOrderJurisdiction" id="dvaf1-aggrieved-existing-order-jurisdiction-select">
+				<option value="" class="placeholder">Please select…</option>
+				<option value="ACT"  {{#if selected.aggrievedExistingOrderJurisdiction.ACT}} selected{{/if}}>Australian Capital Territory</option>
+				<option value="NSW"  {{#if selected.aggrievedExistingOrderJurisdiction.NSW}} selected{{/if}}>New South Wales</option>
+				<option value="NT"   {{#if selected.aggrievedExistingOrderJurisdiction.NT}} selected{{/if}}>Northern Territory</option>
+				<option value="QLD"  {{#if selected.aggrievedExistingOrderJurisdiction.QLD}} selected{{/if}}>Queensland</option>
+				<option value="SA"   {{#if selected.aggrievedExistingOrderJurisdiction.SA}} selected{{/if}}>South Australia</option>
+				<option value="Tas"  {{#if selected.aggrievedExistingOrderJurisdiction.Tas}} selected{{/if}}>Tasmania</option>
+				<option value="Vic"  {{#if selected.aggrievedExistingOrderJurisdiction.Vic}} selected{{/if}}>Victoria</option>
+				<option value="WA"   {{#if selected.aggrievedExistingOrderJurisdiction.WA}} selected{{/if}}>Western Australia</option>
+				<option value="NZ"   {{#if selected.aggrievedExistingOrderJurisdiction.NZ}} selected{{/if}}>New Zealand</option>
+				<option value="Other"{{#if selected.aggrievedExistingOrderJurisdiction.Other}} selected{{/if}}>Other country</option>
+			</select>
 		</li>
+		<li id="dvaf1-aggrieved-existing-order-advice">{{> infoExistingOrder}}</li>
 
 		<li>
 			<ul class="actions">

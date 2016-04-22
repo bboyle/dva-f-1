@@ -5,7 +5,7 @@
 $(function($) {
     "use strict";
     function parseValue(value) {
-        return /^true|false$/.test(value) ? "true" === value : value;
+        return /^Yes|No$/.test(value) ? "Yes" === value : value;
     }
     function refreshPartial(partial) {
         $("#" + partial).html(partials[partial].template(data));
@@ -21,24 +21,29 @@ $(function($) {
         },
         "dvaf1-info-aggrieved-privacy": {
             name: "infoAggrievedPrivacy"
+        },
+        "dvaf1-aggrieved-existing-order": {
+            name: "aggrievedExistingOrderQuestion"
+        },
+        "dvaf1-aggrieved-existing-order-advice": {
+            name: "infoExistingOrder"
         }
     };
     $.each(partials, function(key, partial) {
         var template = $("#" + key + "-partial").remove();
-        return template.length ? (partial.template = Handlebars.compile(template.html()), 
+        return template.length ? (partial.template = Handlebars.compile(template.html()),
         Handlebars.registerPartial(partial.name, partial.template), partial) : void delete partials[key];
     }), // relevance
-    formView.on("click", function(event) {
-        var question = $(event.target), name = event.target.name, value = parseValue($(event.target).val());
+    formView.on("click change", function(event) {
+        var question = $(event.target), name = event.target.name, value = $(event.target).val();
         if (// store data
-        data[name] = value, "string" == typeof value && (value = value.replace(/\s+/g, "")), 
-        question.is("select,:radio,:checkbox")) // regenerate status blocks
+        data[name] = parseValue(value), value = value.replace(/\s+/g, ""), question.is("select,:radio,:checkbox")) // regenerate status blocks
         switch (// store boolean helpers
-        question.is(":checkbox") ? data.selected[name][value] = event.target.checked : (data.selected[name] = {}, 
+        question.is(":checkbox") ? data.selected[name][value] = event.target.checked : (data.selected[name] = {},
         data.selected[name][value] = !0), name) {
           case "userIsAggrieved":
           case "userRelationship":
-            refreshPartial("dvaf1-dfn-aggrieved");
+            refreshPartial("dvaf1-dfn-aggrieved"), refreshPartial("dvaf1-aggrieved-existing-order-advice");
             break;
 
           case "userDanger":
@@ -47,6 +52,10 @@ $(function($) {
 
           case "userPrivacy":
             refreshPartial("dvaf1-info-aggrieved-privacy");
+            break;
+
+          case "aggrievedExistingOrderJurisdiction":
+            refreshPartial("dvaf1-aggrieved-existing-order-advice");
         }
     });
 }), /* global Handlebars, dvaf1Data */
@@ -56,6 +65,8 @@ $(function() {
         return dvaf1Data.userIsAggrieved ? "do you" : dvaf1Data.aggrievedNameGiven ? "does " + dvaf1Data.aggrievedNameGiven : dvaf1Data.userRelationship ? "someone" === dvaf1Data.userRelationship ? "do they" : "does your " + dvaf1Data.userRelationship : "does the aggrieved";
     }), Handlebars.registerHelper("TheAggrievedIs", function() {
         return dvaf1Data.userIsAggrieved ? "You are" : dvaf1Data.userRelationship ? "someone" === dvaf1Data.userRelationship ? "They are" : "Your " + dvaf1Data.userRelationship + " is" : "The aggrieved is";
+    }), Handlebars.registerHelper("aggrievedTheir", function() {
+        return dvaf1Data.userIsAggrieved ? "your" : "their";
     });
 }), /* global Handlebars, dvaf1Data */
 $(function($) {
@@ -86,27 +97,27 @@ $(function($) {
             relevance: {
                 "#dvaf1-dfn-aggrieved": [ {
                     name: "userIsAggrieved",
-                    value: "true"
+                    value: "Yes"
                 }, {
                     name: "userRelationship",
                     values: "*"
                 } ],
                 "#dvaf1-user-relationship-placeholder": {
                     name: "userIsAggrieved",
-                    value: "false",
+                    value: "No",
                     negate: !0
                 },
                 "#dvaf1-user-relationship": {
                     name: "userIsAggrieved",
-                    value: "false"
+                    value: "No"
                 },
                 "#dvaf1-aggrieved-danger-question": {
                     name: "userIsAggrieved",
-                    value: "true"
+                    value: "Yes"
                 },
                 "#dvaf1-aggrieved-privacy-question": {
                     name: "userIsAggrieved",
-                    value: "true"
+                    value: "Yes"
                 },
                 "#dvaf1-info-aggrieved-danger": {
                     name: "userDanger",
@@ -115,6 +126,14 @@ $(function($) {
                 "#dvaf1-info-aggrieved-privacy": {
                     name: "userPrivacy",
                     values: [ "No", "Not sure" ]
+                },
+                "#dvaf1-aggrieved-existing-order-jurisdiction": {
+                    name: "aggrievedExistingOrder",
+                    value: "Yes"
+                },
+                "#dvaf1-aggrieved-existing-order-advice": {
+                    name: "aggrievedExistingOrderJurisdiction",
+                    values: [ "ACT", "NSW", "NT", "QLD", "SA", "Tas", "Vic", "WA", "NZ", "Other" ]
                 }
             }
         },
@@ -135,7 +154,7 @@ $(function($) {
     }, viewSequence = [], page = 0;
     $.each(views, function(key, view) {
         var template = $("#" + key).remove();
-        return template.length ? (view.template = Handlebars.compile(template.html()), viewSequence.push(key), 
+        return template.length ? (view.template = Handlebars.compile(template.html()), viewSequence.push(key),
         view) : void delete views[key];
     }), // handle form view navigation
     formView.on("submit", function(event) {
@@ -143,7 +162,7 @@ $(function($) {
     }), // navigation by menu links
     $(document).on("click", "a", function(event) {
         var target = event.target.href.split("#");
-        target.length > 1 && /^dvaf1/.test(target[1]) && (target = viewSequence.indexOf(target[1]), 
+        target.length > 1 && /^dvaf1/.test(target[1]) && (target = viewSequence.indexOf(target[1]),
         -1 !== target && (event.preventDefault(), showPage(target)));
     }), // init
     showPage(page);

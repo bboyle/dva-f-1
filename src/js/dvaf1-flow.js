@@ -17,27 +17,27 @@ $(function( $ ) {
 			relevance: {
 				'#dvaf1-dfn-aggrieved': [{
 					name: 'userIsAggrieved',
-					value: 'true'
+					value: 'Yes'
 				}, {
 					name: 'userRelationship',
 					values: '*'
 				}],
 				'#dvaf1-user-relationship-placeholder': {
 					name: 'userIsAggrieved',
-					value: 'false',
+					value: 'No',
 					negate: true
 				},
 				'#dvaf1-user-relationship': {
 					name: 'userIsAggrieved',
-					value: 'false'
+					value: 'No'
 				},
 				'#dvaf1-aggrieved-danger-question': {
 					name: 'userIsAggrieved',
-					value: 'true'
+					value: 'Yes'
 				},
 				'#dvaf1-aggrieved-privacy-question': {
 					name: 'userIsAggrieved',
-					value: 'true'
+					value: 'Yes'
 				},
 				'#dvaf1-info-aggrieved-danger': {
 					name: 'userDanger',
@@ -46,6 +46,14 @@ $(function( $ ) {
 				'#dvaf1-info-aggrieved-privacy': {
 					name: 'userPrivacy',
 					values: [ 'No', 'Not sure' ]
+				},
+				'#dvaf1-aggrieved-existing-order-jurisdiction': {
+					name: 'aggrievedExistingOrder',
+					value: 'Yes'
+				},
+				'#dvaf1-aggrieved-existing-order-advice': {
+					name: 'aggrievedExistingOrderJurisdiction',
+					values: [ 'ACT', 'NSW', 'NT', 'QLD', 'SA', 'Tas', 'Vic', 'WA', 'NZ', 'Other' ]
 				}
 			}
 		},

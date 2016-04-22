@@ -79,13 +79,19 @@ DvaForm1Page.prototype = Object.create( {}, {
 	// convenience: toggle user is aggrieved
 	radioUserIsAggrieved: {
 		get: function() {
-			return element( by.id( 'user-is-aggrieved-true' ));
+			return element( by.id( 'user-is-aggrieved-Yes' ));
 		}
 	},
 
 	radioUserIsNotAggrieved: {
 		get: function() {
-			return element( by.id( 'user-is-aggrieved-false' ));
+			return element( by.id( 'user-is-aggrieved-No' ));
+		}
+	},
+
+	select: {
+		value: function( name, value ) {
+			element( by.name( name )).element( by.css( 'option[value="' + value + '"]' )).click();
 		}
 	},
 

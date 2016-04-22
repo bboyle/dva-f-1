@@ -14,6 +14,12 @@ $(function( $ ) {
 		},
 		'dvaf1-info-aggrieved-privacy': {
 			name: 'infoAggrievedPrivacy'
+		},
+		'dvaf1-aggrieved-existing-order': {
+			name: 'aggrievedExistingOrderQuestion'
+		},
+		'dvaf1-aggrieved-existing-order-advice': {
+			name: 'infoExistingOrder'
 		}
 	};
 
@@ -31,8 +37,8 @@ $(function( $ ) {
 
 
 	function parseValue( value ) {
-		if ( /^true|false$/.test( value )) {
-			return value === 'true';
+		if ( /^Yes|No$/.test( value )) {
+			return value === 'Yes';
 		}
 		return value;
 	}
@@ -44,16 +50,14 @@ $(function( $ ) {
 
 
 	// relevance
-	formView.on( 'click', function( event ) {
+	formView.on( 'click change', function( event ) {
 		var question = $( event.target );
 		var name = event.target.name;
-		var value = parseValue( $( event.target ).val() );
+		var value = $( event.target ).val();
 
 		// store data
-		data[ name ] = value;
-		if ( typeof value === 'string' ) {
-			value = value.replace( /\s+/g, '' );
-		}
+		data[ name ] = parseValue( value );
+		value = value.replace( /\s+/g, '' );
 
 		if ( question.is( 'select,:radio,:checkbox' )) {
 			// store boolean helpers
@@ -69,12 +73,16 @@ $(function( $ ) {
 			case 'userIsAggrieved':
 			case 'userRelationship':
 				refreshPartial( 'dvaf1-dfn-aggrieved' );
+				refreshPartial( 'dvaf1-aggrieved-existing-order-advice' );
 				break;
 			case 'userDanger':
 				refreshPartial( 'dvaf1-info-aggrieved-danger' );
 				break;
 			case 'userPrivacy':
 				refreshPartial( 'dvaf1-info-aggrieved-privacy' );
+				break;
+			case 'aggrievedExistingOrderJurisdiction':
+				refreshPartial( 'dvaf1-aggrieved-existing-order-advice' );
 				break;
 			}
 		}

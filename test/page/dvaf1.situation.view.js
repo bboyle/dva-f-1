@@ -10,7 +10,7 @@ var SituationView = function() {
 SituationView.prototype = Object.create( DvaForm1Page.prototype, {
 	infoBoxHeading: {
 		get: function() {
-			return element( by.css( '.status.info > h2' )).getText();
+			return element.all( by.css( '.status.info' )).get( 0 ).element( by.css( 'h2' )).getText();
 		}
 	},
 
@@ -41,6 +41,18 @@ SituationView.prototype = Object.create( DvaForm1Page.prototype, {
 	privacyAdvice: {
 		get: function() {
 			return element( by.id( 'dvaf1-info-aggrieved-privacy' ));
+		}
+	},
+
+	existingOrderJurisdiction: {
+		get: function() {
+			return element( by.id( 'dvaf1-aggrieved-existing-order-jurisdiction' ));
+		}
+	},
+
+	existingOrderAdvice: {
+		get: function() {
+			return element( by.id( 'dvaf1-aggrieved-existing-order-advice' ));
 		}
 	}
 });
