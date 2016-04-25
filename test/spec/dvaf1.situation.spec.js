@@ -106,4 +106,18 @@ describe( 'situation view', function() {
 		expect( situationView.existingOrderAdvice.isDisplayed() ).toBe( false );
 	});
 
+	it( 'should use gender pronouns when applicable', function() {
+		situationView.chooseAggrievedIsUsers( 'girlfriend' );
+		situationView.choose( 'aggrievedExistingOrder', 'Yes' );
+		situationView.select( 'aggrievedExistingOrderJurisdiction', 'ACT' );
+
+		expect( situationView.existingOrderAdvice.isDisplayed() ).toBe( true );
+		expect( situationView.existingOrderAdvice.element( by.css( 'h2' )).getText() ).toBe( 'Your girlfriend can register her protection order in Queensland' );
+
+		situationView.chooseAggrievedIsUsers( 'father' );
+		situationView.select( 'aggrievedExistingOrderJurisdiction', 'NT' );
+		expect( situationView.existingOrderAdvice.isDisplayed() ).toBe( true );
+		expect( situationView.existingOrderAdvice.element( by.css( 'h2' )).getText() ).toBe( 'Your father can register his protection order in Queensland' );
+	});
+
 });
