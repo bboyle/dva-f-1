@@ -3,6 +3,9 @@ $(function( $ ) {
 	'use strict';
 
 	var data = window.dvaf1Data = { selected: {} };
+	data.MASCULINE_GENDER = /^(man|male|father|son|brother|nephew|uncle|husband|boy|boyfriend|him|his|he)$/i;
+	data.FEMININE_GENDER  = /^(woman|female|mother|daughter|sister|neice|aunt|wife|girl|girlfriend|her|she)$/i;
+
 	var formView = $( '#dvaf1-form-view' );
 
 	var partials = {
@@ -22,6 +25,8 @@ $(function( $ ) {
 			name: 'infoExistingOrder'
 		}
 	};
+
+
 
 
 	$.each( partials, function( key, partial ) {
@@ -66,6 +71,11 @@ $(function( $ ) {
 			} else {
 				data.selected[ name ] = {};
 				data.selected[ name ][ value ] = true;
+			}
+
+			// identify aggrieved gender from relationship to user
+			if ( name === 'userRelationship' ) {
+				data.aggrievedGender = data.FEMININE_GENDER.test( value ) ? 'Woman' : data.MASCULINE_GENDER.test( value ) ? 'Man' : data.aggrievedGender;
 			}
 
 			// regenerate status blocks

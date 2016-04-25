@@ -2,9 +2,11 @@
 $(function() {
 	'use strict';
 
+
 	function TitleCase( word ) {
 		return word.charAt(0).toUpperCase() + word.slice(1);
 	}
+
 
 	function theAggrieved() {
 		if ( dvaf1Data.userIsAggrieved ) {
@@ -39,6 +41,11 @@ $(function() {
 	}
 
 
+	function genderPronoun( gender, feminine, masculine, generic ) {
+		return dvaf1Data.FEMININE_GENDER.test( gender ) ? feminine : dvaf1Data.MASCULINE_GENDER.test( gender ) ? masculine : generic;
+	}
+
+
 	Handlebars.registerHelper( 'theAggrieved', theAggrieved );
 	Handlebars.registerHelper( 'TheAggrieved', TheAggrieved );
 
@@ -59,6 +66,6 @@ $(function() {
 
 
 	Handlebars.registerHelper( 'aggrievedTheir', function() {
-		return dvaf1Data.userIsAggrieved ? 'your' : 'their';
+		return dvaf1Data.userIsAggrieved ? 'your' : genderPronoun( dvaf1Data.aggrievedGender, 'her', 'his', 'their' );
 	});
 });
