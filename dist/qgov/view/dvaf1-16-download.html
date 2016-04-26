@@ -1,11 +1,297 @@
-<h2>Download your application</h2>
+<div class="status success">
+	<h2>Download your application</h2>
+	<p>You will need to sign it in front of a lawyer or JP, then bring it to a magistrates court to lodge your application.</p>
+</div>
 
-<form class="form" name="formDownload">
-	<ol class="questions">
-		<li>
-			<ul class="actions">
-				<li><strong><button>Download</button></strong></li>
-			</ul>
-		</li>
-	</ol>
-</form>
+<ol class="questions">
+	<li class="footer">
+		<ul class="actions">
+			<li>
+				<form class="form" name="formDownload" method="POST" id="download-prepared" target="_blank" action="https://test.smartservice.qld.gov.au/services/submissions/pdf/yrcl/prepared1">
+					<input type="hidden" name="aggrievedNameGiven" value="{{aggrievedNameGiven}}">
+					<input type="hidden" name="aggrievedNameFamily" value="{{aggrievedNameFamily}}">
+					<input type="hidden" name="aggrievedDateBirth" value="{{aggrievedDateBirth}}">
+					<input type="hidden" name="aggrievedAddressConfidential" value="{{aggrievedAddressConfidential}}">
+					<input type="hidden" name="aggrievedAddress" value="{{aggrievedAddress}}">
+					<input type="hidden" name="aggrievedGender" value="{{aggrievedGender}}">
+
+					<input type="hidden" name="aggrievedContactConfidential" value="{{aggrievedContactConfidential}}">
+					<input type="hidden" name="aggrievedPhoneHome" value="{{aggrievedPhoneHome}}">
+					<input type="hidden" name="aggrievedPhoneMobile" value="{{aggrievedPhoneMobile}}">
+					<input type="hidden" name="aggrievedPhoneWork" value="{{aggrievedPhoneWork}}">
+					<input type="hidden" name="aggrievedEmail" value="{{aggrievedEmail}}">
+
+					<input type="hidden" name="aggrievedSPI" value="">
+
+					<input type="hidden" name="aggrievedInterpreter" value="{{aggrievedInterpreter}}">
+					<input ng-if="aggrieved.requiresInterpreter" type="hidden" name="aggrievedLanguage" value="{{aggrievedLanguage}}">
+
+					<input type="hidden" name="aggrievedIdentifiesAsAboriginal" value="{{aggrievedIdentifiesAsAboriginal}}">
+					<input type="hidden" name="aggrievedIdentifiesAsTorresStraitIslander" value="{{aggrievedIdentifiesAsTorresStraitIslander}}">
+					<input type="hidden" name="aggrievedDisability" value="{{aggrievedDisability}}">
+					<input ng-if="aggrieved.hasDisability" type="hidden" name="aggrievedDisabilityDescription" value="{{aggrievedDisabilityDescription}}">
+
+					<input type="hidden" name="aggrievedUnder18" value="{{aggrievedUnder18}}">
+					<input ng-if="aggrieved.under18" type="hidden" name="aggrievedParentName" value="{{aggrievedParentName}}">
+					<input ng-if="aggrieved.under18" type="hidden" name="aggrievedParentAddressConfidential" value="{{aggrievedParentAddressConfidential}}">
+					<input ng-if="aggrieved.under18" type="hidden" name="aggrievedParentAddress" value="{{aggrievedParentAddress}}">
+
+					<input ng-if="aggrieved.courtSafetyConcern" type="hidden" name="aggrievedCourtSafetyAttending" value="{{aggrievedCourtSafetyAttending}}">
+					<input ng-if="aggrieved.courtSafetyConcern" type="hidden" name="aggrievedCourtSafetyLeaving" value="{{aggrievedCourtSafetyLeaving}}">
+
+
+					<input type="hidden" name="respondentNameGiven" value="{{respondentNameGiven}}">
+					<input type="hidden" name="respondentNameFamily" value="{{respondentNameFamily}}">
+					<input type="hidden" name="respondentDateBirth" value="{{respondentDateBirth}}">
+					<input type="hidden" name="respondentAddress" value="{{respondentAddress}}">
+					<input type="hidden" name="respondentGender" value="{{respondentGender}}">
+
+					<input type="hidden" name="respondentPhoneHome" value="{{respondentPhoneHome}}">
+					<input type="hidden" name="respondentPhoneMobile" value="{{respondentPhoneMobile}}">
+					<input type="hidden" name="respondentPhoneWork" value="{{respondentPhoneWork}}">
+					<input type="hidden" name="respondentEmail" value="{{respondentEmail}}">
+
+					<input type="hidden" name="respondentSPI" value="">
+
+					<input type="hidden" name="respondentInterpreter" value="{{respondentInterpreter}}">
+					<input ng-if="respondent.requiresInterpreter" type="hidden" name="respondentLanguage" value="{{respondentLanguage}}">
+
+					<input type="hidden" name="respondentIdentifiesAsAboriginal" value="{{respondentIdentifiesAsAboriginal}}">
+					<input type="hidden" name="respondentIdentifiesAsTorresStraitIslander" value="{{respondentIdentifiesAsTorresStraitIslander}}">
+					<input type="hidden" name="respondentDisability" value="{{respondentDisability}}">
+					<input ng-if="respondent.hasDisability" type="hidden" name="respondentDisabilityDescription" value="{{respondentDisabilityDescription}}">
+
+					<input type="hidden" name="respondentEmploymentPlace" value="{{respondentEmploymentPlace}}">
+					<input type="hidden" name="respondentVehicleModel" value="{{respondentVehicleModel}}">
+					<input type="hidden" name="respondentVehicleRegistration" value="{{respondentVehicleRegistration}}">
+
+					<input type="hidden" name="respondentUnder18" value="{{respondentUnder18}}">
+					<input ng-if="respondent.under18" type="hidden" name="respondentParentName" value="{{respondentParentName}}">
+					<input ng-if="respondent.under18" type="hidden" name="respondentParentAddress" value="{{respondentParentAddress}}">
+
+
+					<!-- applicant part  -->
+					{{#unless userIsAggrieved}}
+						<input type="hidden" name="applicantRelationship" value="{{applicantRelationship}}">
+
+						<!-- shared by A, B and D -->
+						<input type="hidden" name="applicantNameGiven" value="{{applicantNameGiven}}">
+						<input type="hidden" name="applicantNameFamily" value="{{applicantNameFamily}}">
+						<input type="hidden" name="applicantGender" value="{{applicantGender}}">
+						<input type="hidden" name="applicantAddressConfidential" value="{{applicantAddressConfidential}}">
+						<input type="hidden" name="applicantAddress" value="{{applicantAddress}}">
+
+						{{#if applicantPartA}}
+							<input type="hidden" name="applicantAuthorisedInWriting" value="{{applicantAuthorisedInWriting}}">
+							{{#unless applicantAuthorisationWritten}}<input type="hidden" name="applicantAuthorisedDescription" value="{{applicantAuthorisedDescription}}">{{/unless}}
+						{{else if applicantPartB}}
+							<input type="hidden" name="applicantActingAs" value="{{applicantActingAs}}"> <!-- Guardian OR Adult Guardian OR Enduring power of attorney OR Other -->
+							{{#if applicantActingOther}}<input type="hidden" name="applicantActingAsDescription" value="{{applicantActingAsDescription}}">{{/if}}
+						{{else if applicantPartD}}
+							<input type="hidden" name="applicantChildProtectionPartyChild" value="{{applicantChildProtectionPartyChild}}">
+							<input type="hidden" name="applicantChildProtectionPartyLegalRepresentative" value="{{applicantChildProtectionPartyLegalRepresentative}}">
+							<input type="hidden" name="applicantChildProtectionPartyApplicant" value="{{applicantChildProtectionPartyApplicant}}">
+							<input type="hidden" name="applicantChildProtectionPartyRespondent" value="{{applicantChildProtectionPartyRespondent}}">
+						{{/if}}
+					{{/unless}}
+
+
+					<!-- urgent protection -->
+					<input type="hidden" name="tpoApply" value="{{tpoApply}}">
+					<input ng-if="tpo.apply" type="hidden" name="tpoGrounds" value="{{tpoGrounds}}">
+
+
+					<input type="hidden" name="relationshipPersonal" value="{{relationshipPersonal}}">
+					{{#if aggrievedRelationshipIntimate}}
+						<input type="hidden" name="relationshipPersonalMarried" value="{{relationshipPersonalMarried}}">
+						<input type="hidden" name="relationshipPersonalFormerSpouse" value="{{relationshipPersonalFormerSpouse}}">
+						<input type="hidden" name="relationshipPersonalDeFacto" value="{{relationshipPersonalDeFacto}}">
+						<input type="hidden" name="relationshipPersonalRegistered" value="{{relationshipPersonalRegistered}}">
+						<input type="hidden" name="relationshipPersonalParent" value="{{relationshipPersonalParent}}">
+						<input type="hidden" name="relationshipPersonalEngaged" value="{{relationshipPersonalEngaged}}">
+						<input type="hidden" name="relationshipPersonalWereEngaged" value="{{relationshipPersonalWereEngaged}}">
+						<input type="hidden" name="relationshipPersonalCouple" value="{{relationshipPersonalCouple}}">
+						{{#if aggrievedRelationshipTypeCouple}}
+							<input type="hidden" name="relationshipPersonalDescription" value="{{relationshipPersonalDescription}}">
+						{{else if aggrievedRelationshipTypeFormerCouple}}
+							<input type="hidden" name="relationshipPersonalDescription" value="{{relationshipPersonalDescription}}">
+						{{/if}}
+					{{/if}}
+
+					<input type="hidden" name="relationshipFamily" value="{{relationshipFamily}}">
+					{{#if aggrievedRelationshipFamily}}<input type="hidden" name="relationshipFamilyDescription" value="{{relationshipFamilyDescription}}">{{/if}}
+
+					<input type="hidden" name="relationshipCare" value="{{relationshipCare}}">
+					{{#if aggrievedRelationshipInformalCare}}<input type="hidden" name="relationshipCareDescription" value="{{relationshipCareDescription}}">{{/if}}
+
+
+					<!-- TODO construct grounds -->
+					<input type="hidden" name="grounds" value="{{grounds}}">
+
+
+					<input type="hidden" name="respondentWeaponsAccess" value="{{respondentWeaponsAccess}}">
+					{{#if respondentWeaponAccess}}<input type="hidden" name="respondentWeaponsAccessDescription" value="{{respondentWeaponsAccessDescription}}">{{/if}}
+					<input type="hidden" name="respondentWeaponsUsed" value="{{respondentWeaponsUsed}}">
+					{{#if respondentWeaponThreat}}
+						<input type="hidden" name="respondentWeaponsUsedDescription" value="{{respondentWeaponsUsedDescription}}">
+					{{else if respondentWeaponThreat2}}
+						<input type="hidden" name="respondentWeaponsUsedDescription" value="{{respondentWeaponsUsedDescription}}">
+					{{/if}}
+					<input type="hidden" name="respondentWeaponsLicence" value="{{respondentWeaponsLicence}}">
+					{{#if respondentWeaponLicence}}<input type="hidden" name="respondentWeaponsLicenceDescription" value="{{respondentWeaponsLicenceDescription}}">{{/if}}
+
+
+					{{#if ordersExist}}
+						<input type="hidden" name="ordersChildrensCourtCurrent" value="{{ordersChildrensCourtCurrent}}">
+						<input type="hidden" name="ordersChildrensCourtPast" value="{{ordersChildrensCourtPast}}">
+						<input type="hidden" name="ordersQldDVOCurrent" value="{{ordersQldDVOCurrent}}">
+						<input type="hidden" name="ordersQldDVOPast" value="{{ordersQldDVOPast}}">
+						<input type="hidden" name="ordersPoliceProtectionCurrent" value="{{ordersPoliceProtectionCurrent}}">
+						<input type="hidden" name="ordersPoliceProtectionPast" value="{{ordersPoliceProtectionPast}}">
+						<input type="hidden" name="ordersVoluntaryInterventionCurrent" value="{{ordersVoluntaryInterventionCurrent}}">
+						<input type="hidden" name="ordersVoluntaryInterventionPast" value="{{ordersVoluntaryInterventionPast}}">
+						<input type="hidden" name="ordersInterstateDVOCurrent" value="{{ordersInterstateDVOCurrent}}">
+						<input type="hidden" name="ordersInterstateDVOPast" value="{{ordersInterstateDVOPast}}">
+						<input type="hidden" name="ordersNZDVOCurrent" value="{{ordersNZDVOCurrent}}">
+						<input type="hidden" name="ordersNZDVOPast" value="{{ordersNZDVOPast}}">
+						<input type="hidden" name="ordersFamilyCourtCurrent" value="{{ordersFamilyCourtCurrent}}">
+						<input type="hidden" name="ordersFamilyCourtPast" value="{{ordersFamilyCourtPast}}">
+						{{#if ordersOther}}
+							<input type="hidden" name="ordersOtherTitle" value="{{ordersOtherTitle}}">
+							<input type="hidden" name="ordersOtherCurrent" value="">
+							<input type="hidden" name="ordersOtherPast" value="">
+						{{/if}}
+					{{/if}}
+					<input type="hidden" name="ordersProtectionOrderInProgress" value="{{ordersProtectionOrderInProgress}}">
+					<input type="hidden" name="ordersCrossApplicationInProgress" value="{{ordersCrossApplicationInProgress}}">
+
+
+					<input type="hidden" name="conditionOuster" value="{{conditionOuster}}">
+					<input type="hidden" name="conditionOusterAddress" value="{{conditionOusterAddress}}">
+					<input type="hidden" name="conditionOusterGrounds" value="{{conditionOusterGrounds}}">
+
+					{{#if conditionsDistanceAggrievedPlacesRequested}}
+						<input type="hidden" name="conditionProhibitEntryResidence" value="{{conditionProhibitEntryResidence}}">
+						<input type="hidden" name="conditionProhibitEntryEmployment" value="{{conditionProhibitEntryEmployment}}">
+						<input type="hidden" name="conditionProhibitEntryStaying" value="{{conditionProhibitEntryStaying}}">
+						<input type="hidden" name="conditionProhibitEntryOther" value="{{conditionProhibitEntryOther}}">
+						{{#if conditionsDistanceAggrievedOtherRequested}}<input type="hidden" name="conditionProhibitEntryOtherTitle" value="{{conditionProhibitEntryOtherTitle}}">{{/if}}
+						<input type="hidden" name="conditionProhibitEntryGrounds" value="{{conditionProhibitEntryGrounds}}">
+					{{/if}}
+
+					{{#if conditionsRespondentHasContactedAggrieved}}
+						<input type="hidden" name="conditionProhibitContact" value="{{conditionProhibitContact}}">
+						{{#if conditionsAggrievedNoContactRequested}}
+							<input type="hidden" name="conditionProhibitContactGrounds" value="{{conditionProhibitContactGrounds}}">
+							{{#if respondentHasContactedAssociated}}<input type="hidden" name="conditionProhibitContactAssociates" value="{{conditionProhibitContactAssociates}}">{{/if}}
+						{{/if}}
+					{{/if}}
+
+					<input type="hidden" name="conditionProhibitLocating" value="{{conditionProhibitLocating}}">
+					{{#if conditionsAggrievedLocateRequested}}<input type="hidden" name="conditionProhibitLocatingGrounds" value="{{conditionProhibitLocatingGrounds}}">{{/if}}
+
+					<input type="hidden" name="conditionRecoverProperty" value="{{conditionRecoverProperty}}">
+					{{#if conditionsPropertyRequested}}<input type="hidden" name="conditionRecoverPropertyDescription" value="{{conditionRecoverPropertyDescription}}">{{/if}}
+
+					<input type="hidden" name="conditionProhibitConduct" value="{{conditionProhibitConduct}}">
+					{{#if conditionsBehaviourRequested}}<input type="hidden" name="conditionProhibitConductGrounds" value="{{conditionProhibitConductGrounds}}">{{/if}}
+
+
+					<!-- repeat for children -->
+					{{#if conditionsNameChildren}}
+						<input type="hidden" name="nameChildrenGrounds" value="{{nameChildrenGrounds}}">
+						{{#each children as |child|}}
+						<input type="hidden" name="child{{@index}}Name" value="{{child.Name}}">
+						<input type="hidden" name="child{{@index}}Gender" value="{{child.Gender}}">
+						<input type="hidden" name="child{{@index}}DateBirth" value="{{child.DateBirth}}">
+						<input type="hidden" name="child{{@index}}Address" value="{{child.Address}}">
+						<input type="hidden" name="child{{@index}}AddressConfidential" value="{{child.AddressConfidential}}">
+						<input type="hidden" name="child{{@index}}Named" value="{{child.Named}}"> <!-- optional, default: true -->
+						<input type="hidden" name="child{{@index}}SPI" value="">
+						{{/each}}
+
+						{{#if conditionsDistanceChildrenRequested}}
+							<input type="hidden" name="conditionProhibitChildLocations" value="{{conditionProhibitChildLocations}}">
+							<input type="hidden" name="conditionProhibitChildLocationsGrounds" value="{{conditionProhibitChildLocationsGrounds}}">
+						{{/if}}
+					{{/if}}
+
+
+					<!-- repeat for associates -->
+					{{#if conditionsNameAssociates}}
+					{{#if conditionsRespondentAbusedAssociated}}
+						<input type="hidden" name="nameAssociatesGrounds" value="{{nameAssociatesGrounds}}">
+						{{#each associates as |associate|}}
+						<input type="hidden" name="associate{{@index}}Name" value="{{associate.Name}}">
+						<input type="hidden" name="associate{{@index}}Gender" value="{{associate.Gender}}">
+						<input type="hidden" name="associate{{@index}}DateBirth" value="{{associate.DateBirth}}">
+						<input type="hidden" name="associate{{@index}}Address" value="{{associate.Address}}">
+						<input type="hidden" name="associate{{@index}}AddressConfidential" value="{{associate.AddressConfidential}}">
+						<input type="hidden" name="associate{{@index}}SPI" value="">
+						{{/each}}
+
+						<input type="hidden" name="conditionProhibitEntryAssociates" value="{{conditionProhibitEntryAssociates}}">
+						{{#if conditionsDistanceAssociatesHomeRequested}}<input type="hidden" name="conditionProhibitEntryAssociatesGrounds" value="{{conditionProhibitEntryAssociatesGrounds}}">{{/if}}
+
+						<input type="hidden" name="conditionProhibitApproachAssociates" value="{{conditionProhibitApproachAssociates}}">
+						{{#if conditionsDistanceAssociatesRequested}}<input type="hidden" name="conditionProhibitApproachAssociatesGrounds" value="{{conditionProhibitApproachAssociatesGrounds}}">{{/if}}
+					{{else if conditionsRespondentAbusedApplicant}}
+						<input type="hidden" name="nameAssociatesGrounds" value="{{nameAssociatesGrounds}}">
+						{{#each associates as |associate|}}
+						<input type="hidden" name="associate{{@index}}Name" value="{{associate.Name}}">
+						<input type="hidden" name="associate{{@index}}Gender" value="{{associate.Gender}}">
+						<input type="hidden" name="associate{{@index}}DateBirth" value="{{associate.DateBirth}}">
+						<input type="hidden" name="associate{{@index}}Address" value="{{associate.Address}}">
+						<input type="hidden" name="associate{{@index}}AddressConfidential" value="{{associate.AddressConfidential}}">
+						<input type="hidden" name="associate{{@index}}SPI" value="">
+						{{/each}}
+
+						<input type="hidden" name="conditionProhibitEntryAssociates" value="{{conditionProhibitEntryAssociates}}">
+						{{#if conditionsDistanceAssociatesHomeRequested}}<input type="hidden" name="conditionProhibitEntryAssociatesGrounds" value="{{conditionProhibitEntryAssociatesGrounds}}">{{/if}}
+
+						<input type="hidden" name="conditionProhibitApproachAssociates" value="{{conditionProhibitApproachAssociates}}">
+						{{#if conditionsDistanceAssociatesRequested}}<input type="hidden" name="conditionProhibitApproachAssociatesGrounds" value="{{conditionProhibitApproachAssociatesGrounds}}">{{/if}}
+					{{/if}}
+					{{/if}}
+
+
+					<!-- nearby courthouse -->
+					{{#each nearbyMagistratesCourt as |court|}}
+						<input type="hidden" name="nearbyCourt{{@index}}Title" value="{{court.Title}}">
+						<input type="hidden" name="nearbyCourt{{@index}}Address" value="{{court.Address}}">
+						<input type="hidden" name="nearbyCourt{{@index}}Phone" value="{{court.Phone}}">
+					{{/each}}
+
+					<!-- nearby JP -->
+					{{#each nearby.jp as |jp|}}
+						<input type="hidden" name="nearbyJP{{@index}}Title" value="{{jp.Title}}">
+						<input type="hidden" name="nearbyJP{{@index}}Address" value="{{jp.Address}}">
+						<input type="hidden" name="nearbyJP{{@index}}Phone" value="{{jp.Phone}}">
+						<input type="hidden" name="nearbyJP{{@index}}Hours" value="{{jp.Hours}}">
+					{{/each}}
+
+					<!-- nearby services -->
+					{{#each nearby.victimServices as |service|}}
+						<input type="hidden" name="nearbyService{{@index}}Title" value="{{service.Title}}">
+						<input type="hidden" name="nearbyService{{@index}}Contact" value="{{service.Contact}}">
+						<input type="hidden" name="nearbyService{{@index}}Description" value="{{service.Description}}">
+					{{/each}}
+
+
+					<strong><button>
+						Download your application
+						<small class="hint">PDF: ready to edit, print, sign and lodge</small>
+					</button></strong>
+				</form>
+			</li>
+			<li>
+				<form method="POST" id="download-blank" target="_blank" action="https://test.smartservice.qld.gov.au/services/submissions/pdf/yrcl/prepared1">
+					<button>
+						Download blank forms
+						<small class="hint">PDF forms to fill out later</small>
+					</button>
+				</form>
+			</li>
+		</ul>
+	</li>
+</ol>

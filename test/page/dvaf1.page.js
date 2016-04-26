@@ -27,7 +27,7 @@ DvaForm1Page.prototype = Object.create( {}, {
 
 	form: {
 		get: function() {
-			return element( by.css( 'form' ));
+			return element.all( by.css( 'form' )).get( 0 );
 		}
 	},
 
