@@ -104,13 +104,13 @@ $(function($) {
     }
     function showPage(index) {
         var view = views[viewSequence[index]];
-        page = index, formView.html($(view.template(dvaf1Data))), $.each(view.relevance, function(target, condition) {
+        page = index, formView.html($(view.template(dvaf1Data))), view.relevance && $.each(view.relevance, function(target, condition) {
             $.isArray(condition) ? $.each(condition, function(i, condition) {
                 formView.find(target).relevance("relevantWhen", processCondition(formView, condition));
             }) : formView.find(target).relevance("relevantWhen", processCondition(formView, condition));
-        }), refresh();
+        }), $("html, body").scrollTop(scrollReset.top).scrollLeft(scrollReset.left), refresh();
     }
-    var formView = $("#dvaf1-form-view"), views = {
+    var formView = $("#dvaf1-form-view"), scrollReset = formView.offset(), views = {
         "dvaf1-preamble-template": {
             relevance: {
                 "#dvaf1-legal-advice": {

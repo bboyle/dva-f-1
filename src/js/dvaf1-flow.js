@@ -3,6 +3,7 @@ $(function( $ ) {
 	'use strict';
 
 	var formView = $( '#dvaf1-form-view' );
+	var scrollReset = formView.offset();
 
 	var views = {
 		'dvaf1-preamble-template': {
@@ -113,16 +114,19 @@ $(function( $ ) {
 		page = index;
 		formView.html( $( view.template( dvaf1Data )) );
 
-		$.each( view.relevance, function( target, condition ) {
-			if ( $.isArray( condition )) {
-				$.each( condition, function( i, condition ) {
+		if ( view.relevance ) {
+			$.each( view.relevance, function( target, condition ) {
+				if ( $.isArray( condition )) {
+					$.each( condition, function( i, condition ) {
+						formView.find( target ).relevance( 'relevantWhen', processCondition( formView, condition ));
+					});
+				} else {
 					formView.find( target ).relevance( 'relevantWhen', processCondition( formView, condition ));
-				});
-			} else {
-				formView.find( target ).relevance( 'relevantWhen', processCondition( formView, condition ));
-			}
-		});
+				}
+			});
+		}
 
+		$( 'html, body' ).scrollTop( scrollReset.top ).scrollLeft( scrollReset.left );
 		refresh();
 	}
 
