@@ -1,0 +1,57 @@
+<h2>Aggrieved’s details (person in need of protection)</h2>
+
+<form class="form" name="formAggrievedBasic">
+	<ol class="questions">
+		<li class="group atomic">
+			<fieldset>
+				<legend>
+					<span class="label">
+					{{#if userIsAggrieved}}
+						What is your name?
+					{{else if selected.userRelationship.someone}}
+						What is the name of the person in need of protection?
+					{{else if userRelationship}}
+						What is your {{userRelationship}}’s name?
+					{{else}}
+						What is the name of the person in need of protection?
+					{{/if}}
+					</span>
+				</legend>
+				<ol class="questions compact">
+					<li>
+						<label for="aggrieved-name-given">
+							<span class="label">Given name</span>
+						</label>
+						<input type="text" size="15" id="aggrieved-name-given" name="aggrievedNameGiven" value="{{aggrievedNameGiven}}" autocomplete="given-name">
+					</li>
+					<li>
+						<label for="aggrieved-name-family">
+							<span class="label">Family name</span>
+						</label>
+						<input type="text" size="15" id="aggrieved-name-family" name="aggrievedNameFamily" value="{{aggrievedNameFamily}}" autocomplete="family-name">
+					</li>
+				</ol>
+			</fieldset>
+		</li>
+
+		<li>
+			<label for="aggrieved-date-birth">
+				<span class="label">Date of birth</span>
+			</label>
+			<input type="text" id="aggrieved-date-birth" name="aggrievedDateBirth" value="{{aggrievedDateBirth}}" autocomplete="bday">
+		</li>
+
+		<li>
+			<label for="aggrieved-gender">
+				<span class="label">Gender</span>
+			</label>
+			<input type="text" id="aggrieved-gender" name="aggrievedGender" value="{{aggrievedGender}}" autocomplete="sex" list="datalist-gender">
+		</li>
+
+		<li>
+			<ul class="actions">
+				<li><strong><button>Continue</button></strong></li>
+			</ul>
+		</li>
+	</ol>
+</form>
