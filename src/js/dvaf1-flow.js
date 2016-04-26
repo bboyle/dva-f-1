@@ -3,6 +3,7 @@ $(function( $ ) {
 	'use strict';
 
 	var formView = $( '#dvaf1-form-view' );
+	var scrollReset = formView.offset();
 
 	var views = {
 		'dvaf1-preamble-template': {
@@ -99,26 +100,43 @@ $(function( $ ) {
 	}
 
 
+	function refresh() {
+		formView.trigger( 'x-height-change' );
+	}
+
+
+	formView.on( 'relevant irrelevant', refresh );
+
+
 	function showPage( index ) {
 		var view = views[ viewSequence[ index ]];
 
 		page = index;
 		formView.html( $( view.template( dvaf1Data )) );
 
-		$.each( view.relevance, function( target, condition ) {
-			if ( $.isArray( condition )) {
-				$.each( condition, function( i, condition ) {
+		if ( view.relevance ) {
+			$.each( view.relevance, function( target, condition ) {
+				if ( $.isArray( condition )) {
+					$.each( condition, function( i, condition ) {
+						formView.find( target ).relevance( 'relevantWhen', processCondition( formView, condition ));
+					});
+				} else {
 					formView.find( target ).relevance( 'relevantWhen', processCondition( formView, condition ));
-				});
-			} else {
-				formView.find( target ).relevance( 'relevantWhen', processCondition( formView, condition ));
-			}
-		});
+				}
+			});
+		}
+
+		$( 'html, body' ).scrollTop( scrollReset.top ).scrollLeft( scrollReset.left );
+		refresh();
 	}
 
 
 	// handle form view navigation
 	formView.on( 'submit', function( event ) {
+		if ( event.target.method.toUpperCase() === 'POST' ) {
+			return; // abort
+		}
+
 		event.preventDefault();
 
 		if ( viewSequence[ page + 1 ]) {

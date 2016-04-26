@@ -1,0 +1,22 @@
+{{#if selected.aggrievedExistingOrderJurisdiction.QLD}}
+<div class="status info">
+	<h2>{{TheAggrieved}} can vary the existing protection order</h2>
+	<p>Visit the <a href="http://www.courts.qld.gov.au/about/forms?root=131921">Queensland Courts website</a> and use:</p>
+	<ul>
+		<li>Form DV04 - Application to vary a domestic violence order</li>
+	</ul>
+	<p>You do not have to complete this form.</p>
+</div>
+{{else if selected.aggrievedExistingOrderJurisdiction.Other}}
+<p>Attach a copy of the existing protection order when you lodge this application.</p>
+{{else}}
+<div class="status info">
+	<h2>{{TheAggrieved}} can register {{aggrievedTheir}} protection order in Queensland</h2>
+	<p>Visit the <a href="http://www.courts.qld.gov.au/about/forms?root=131921">Queensland Courts website</a> and use:</p>
+	<ul>
+		<li>Form DV14 - Application for registration in Queensland of an interstate domestic violence order</li>
+		<li>Form DV16 - Application to vary or cancel a registered interstate order</li>
+	</ul>
+	<p>You do not have to complete this form.</p>
+</div>
+{{/if}}

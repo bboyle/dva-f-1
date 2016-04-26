@@ -99,15 +99,18 @@ $(function($) {
             return option.value ? option.value : null;
         })), condition;
     }
+    function refresh() {
+        formView.trigger("x-height-change");
+    }
     function showPage(index) {
         var view = views[viewSequence[index]];
-        page = index, formView.html($(view.template(dvaf1Data))), $.each(view.relevance, function(target, condition) {
+        page = index, formView.html($(view.template(dvaf1Data))), view.relevance && $.each(view.relevance, function(target, condition) {
             $.isArray(condition) ? $.each(condition, function(i, condition) {
                 formView.find(target).relevance("relevantWhen", processCondition(formView, condition));
             }) : formView.find(target).relevance("relevantWhen", processCondition(formView, condition));
-        });
+        }), $("html, body").scrollTop(scrollReset.top).scrollLeft(scrollReset.left), refresh();
     }
-    var formView = $("#dvaf1-form-view"), views = {
+    var formView = $("#dvaf1-form-view"), scrollReset = formView.offset(), views = {
         "dvaf1-preamble-template": {
             relevance: {
                 "#dvaf1-legal-advice": {
@@ -179,9 +182,9 @@ $(function($) {
         var template = $("#" + key).remove();
         return template.length ? (view.template = Handlebars.compile(template.html()), viewSequence.push(key), 
         view) : void delete views[key];
-    }), // handle form view navigation
+    }), formView.on("relevant irrelevant", refresh), // handle form view navigation
     formView.on("submit", function(event) {
-        event.preventDefault(), viewSequence[page + 1] ? showPage(page + 1) : event.target.action && window.location.replace(event.target.action);
+        "POST" !== event.target.method.toUpperCase() && (event.preventDefault(), viewSequence[page + 1] ? showPage(page + 1) : event.target.action && window.location.replace(event.target.action));
     }), // navigation by menu links
     $(document).on("click", "a", function(event) {
         var target = event.target.href.split("#");

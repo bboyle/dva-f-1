@@ -49,6 +49,18 @@ module.exports = function( grunt ) {
 			}
 		},
 
+		copy: {
+			qgov: {
+				files: [{
+					expand: true,
+					cwd: 'src/',
+					src: 'view/**',
+					dest: 'dist/qgov/',
+					filter: 'isFile'
+				}]
+			}
+		},
+
 		// local server
 		connect: {
 			dev: {
@@ -102,7 +114,7 @@ module.exports = function( grunt ) {
 			},
 			html: {
 				files: 'src/**/*.html',
-				tasks: [ 'protractor:watch' ]
+				tasks: [ 'copy', 'protractor:watch' ]
 			},
 			build: {
 				files: '<%= eslint.build %>',
@@ -130,6 +142,7 @@ module.exports = function( grunt ) {
 
 	// These plugins provide necessary tasks.
 	grunt.loadNpmTasks( 'grunt-eslint' );
+	grunt.loadNpmTasks( 'grunt-contrib-copy' );
 	grunt.loadNpmTasks( 'grunt-contrib-uglify' );
 	grunt.loadNpmTasks( 'grunt-contrib-connect' );
 	grunt.loadNpmTasks( 'grunt-shell' );
@@ -138,7 +151,7 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks( 'grunt-contrib-watch' );
 
 	// task aliases
-	grunt.registerTask( 'build', [ 'eslint:build', 'uglify' ]);
+	grunt.registerTask( 'build', [ 'eslint:build', 'uglify', 'copy' ]);
 	grunt.registerTask( 'dev', [ 'build', 'shell:protractor', 'protractor_webdriver:alive', 'connect', 'watch' ]);
 	grunt.registerTask( 'test-e2e', [ 'shell:protractor', 'protractor_webdriver:alive', 'connect', 'protractor:acceptance' ]);
 	grunt.registerTask( 'test', [ 'shell:protractor', 'eslint', 'uglify', 'test-e2e' ]);
