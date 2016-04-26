@@ -99,6 +99,14 @@ $(function( $ ) {
 	}
 
 
+	function refresh() {
+		formView.trigger( 'x-height-change' );
+	}
+
+
+	formView.on( 'relevant irrelevant', refresh );
+
+
 	function showPage( index ) {
 		var view = views[ viewSequence[ index ]];
 
@@ -114,6 +122,8 @@ $(function( $ ) {
 				formView.find( target ).relevance( 'relevantWhen', processCondition( formView, condition ));
 			}
 		});
+
+		refresh();
 	}
 
 
