@@ -133,6 +133,10 @@ $(function( $ ) {
 
 	// handle form view navigation
 	formView.on( 'submit', function( event ) {
+		if ( event.target.method.toUpperCase() === 'POST' ) {
+			return; // abort
+		}
+
 		event.preventDefault();
 
 		if ( viewSequence[ page + 1 ]) {

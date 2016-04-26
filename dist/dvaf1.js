@@ -184,7 +184,7 @@ $(function($) {
         view) : void delete views[key];
     }), formView.on("relevant irrelevant", refresh), // handle form view navigation
     formView.on("submit", function(event) {
-        event.preventDefault(), viewSequence[page + 1] ? showPage(page + 1) : event.target.action && window.location.replace(event.target.action);
+        "POST" !== event.target.method.toUpperCase() && (event.preventDefault(), viewSequence[page + 1] ? showPage(page + 1) : event.target.action && window.location.replace(event.target.action));
     }), // navigation by menu links
     $(document).on("click", "a", function(event) {
         var target = event.target.href.split("#");
