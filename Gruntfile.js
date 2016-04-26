@@ -114,7 +114,7 @@ module.exports = function( grunt ) {
 			},
 			html: {
 				files: 'src/**/*.html',
-				tasks: [ 'protractor:watch' ]
+				tasks: [ 'copy', 'protractor:watch' ]
 			},
 			build: {
 				files: '<%= eslint.build %>',
