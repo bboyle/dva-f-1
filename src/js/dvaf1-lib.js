@@ -18,6 +18,9 @@ $(function() {
 
 		return 'the aggrieved';
 	}
+	function theRespondent() {
+		return 'the respondent';
+	}
 	function TheAggrieved() {
 		return TitleCase( theAggrieved() );
 	}
@@ -48,6 +51,7 @@ $(function() {
 
 	Handlebars.registerHelper( 'theAggrieved', theAggrieved );
 	Handlebars.registerHelper( 'TheAggrieved', TheAggrieved );
+	Handlebars.registerHelper( 'theRespondent', theRespondent );
 
 	Handlebars.registerHelper( 'doesTheAggrieved', doesTheAggrieved );
 	Handlebars.registerHelper( 'DoesTheAggrieved', DoesTheAggrieved );
@@ -67,5 +71,10 @@ $(function() {
 
 	Handlebars.registerHelper( 'aggrievedTheir', function() {
 		return dvaf1Data.userIsAggrieved ? 'your' : genderPronoun( dvaf1Data.aggrievedGender, 'her', 'his', 'their' );
+	});
+
+
+	Handlebars.registerHelper( 'respondentTheyKnow', function() {
+		return 'they know';
 	});
 });

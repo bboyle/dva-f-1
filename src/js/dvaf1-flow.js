@@ -10,7 +10,7 @@ $(function( $ ) {
 			relevance: {
 				'#dvaf1-legal-advice': {
 					name: 'legalAdvice',
-					value: 'How do I get legal advice?'
+					value: 'How'
 				}
 			}
 		},

@@ -76,6 +76,12 @@ DvaForm1Page.prototype = Object.create( {}, {
 		}
 	},
 
+	gotoDownloadView: {
+		value: function() {
+			this.goto( 'Download your application' );
+		}
+	},
+
 	// convenience: toggle user is aggrieved
 	radioUserIsAggrieved: {
 		get: function() {
