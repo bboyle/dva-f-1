@@ -1,4 +1,4 @@
-/*! dva-f-1 - v1.0.0 - 2016-04-26
+/*! dva-f-1 - v1.0.0 - 2016-04-28
 * https://github.com/bboyle/dva-f-1#readme
 * Copyright (c) 2016 Queensland Government; Licensed BSD-3-Clause */
 /* global Handlebars */
@@ -72,6 +72,9 @@ $(function() {
     function theAggrieved() {
         return dvaf1Data.userIsAggrieved ? "you" : dvaf1Data.userRelationship && "someone" !== dvaf1Data.userRelationship ? "your " + dvaf1Data.userRelationship : "the aggrieved";
     }
+    function theRespondent() {
+        return "the respondent";
+    }
     function TheAggrieved() {
         return TitleCase(theAggrieved());
     }
@@ -85,11 +88,13 @@ $(function() {
         return dvaf1Data.FEMININE_GENDER.test(gender) ? feminine : dvaf1Data.MASCULINE_GENDER.test(gender) ? masculine : generic;
     }
     Handlebars.registerHelper("theAggrieved", theAggrieved), Handlebars.registerHelper("TheAggrieved", TheAggrieved), 
-    Handlebars.registerHelper("doesTheAggrieved", doesTheAggrieved), Handlebars.registerHelper("DoesTheAggrieved", DoesTheAggrieved), 
-    Handlebars.registerHelper("TheAggrievedIs", function() {
+    Handlebars.registerHelper("theRespondent", theRespondent), Handlebars.registerHelper("doesTheAggrieved", doesTheAggrieved), 
+    Handlebars.registerHelper("DoesTheAggrieved", DoesTheAggrieved), Handlebars.registerHelper("TheAggrievedIs", function() {
         return dvaf1Data.userIsAggrieved ? "You are" : dvaf1Data.userRelationship ? "someone" === dvaf1Data.userRelationship ? "They are" : "Your " + dvaf1Data.userRelationship + " is" : "The aggrieved is";
     }), Handlebars.registerHelper("aggrievedTheir", function() {
         return dvaf1Data.userIsAggrieved ? "your" : genderPronoun(dvaf1Data.aggrievedGender, "her", "his", "their");
+    }), Handlebars.registerHelper("respondentTheyKnow", function() {
+        return "they know";
     });
 }), /* global Handlebars, dvaf1Data */
 $(function($) {
@@ -115,7 +120,7 @@ $(function($) {
             relevance: {
                 "#dvaf1-legal-advice": {
                     name: "legalAdvice",
-                    value: "How do I get legal advice?"
+                    value: "How"
                 }
             }
         },

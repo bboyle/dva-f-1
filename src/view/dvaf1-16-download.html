@@ -24,20 +24,24 @@
 					<input type="hidden" name="aggrievedSPI" value="">
 
 					<input type="hidden" name="aggrievedInterpreter" value="{{aggrievedInterpreter}}">
-					<input ng-if="aggrieved.requiresInterpreter" type="hidden" name="aggrievedLanguage" value="{{aggrievedLanguage}}">
+					{{#if aggrievedRequiresInterpreter}}<input type="hidden" name="aggrievedLanguage" value="{{aggrievedLanguage}}">{{/if}}
 
 					<input type="hidden" name="aggrievedIdentifiesAsAboriginal" value="{{aggrievedIdentifiesAsAboriginal}}">
 					<input type="hidden" name="aggrievedIdentifiesAsTorresStraitIslander" value="{{aggrievedIdentifiesAsTorresStraitIslander}}">
 					<input type="hidden" name="aggrievedDisability" value="{{aggrievedDisability}}">
-					<input ng-if="aggrieved.hasDisability" type="hidden" name="aggrievedDisabilityDescription" value="{{aggrievedDisabilityDescription}}">
+					{{#if aggrievedHasDisability}}<input type="hidden" name="aggrievedDisabilityDescription" value="{{aggrievedDisabilityDescription}}">{{/if}}
 
 					<input type="hidden" name="aggrievedUnder18" value="{{aggrievedUnder18}}">
-					<input ng-if="aggrieved.under18" type="hidden" name="aggrievedParentName" value="{{aggrievedParentName}}">
-					<input ng-if="aggrieved.under18" type="hidden" name="aggrievedParentAddressConfidential" value="{{aggrievedParentAddressConfidential}}">
-					<input ng-if="aggrieved.under18" type="hidden" name="aggrievedParentAddress" value="{{aggrievedParentAddress}}">
+					{{#if aggrievedUnder18}}
+					<input type="hidden" name="aggrievedParentName" value="{{aggrievedParentName}}">
+					<input type="hidden" name="aggrievedParentAddressConfidential" value="{{aggrievedParentAddressConfidential}}">
+					<input type="hidden" name="aggrievedParentAddress" value="{{aggrievedParentAddress}}">
+					{{/if}}
 
-					<input ng-if="aggrieved.courtSafetyConcern" type="hidden" name="aggrievedCourtSafetyAttending" value="{{aggrievedCourtSafetyAttending}}">
-					<input ng-if="aggrieved.courtSafetyConcern" type="hidden" name="aggrievedCourtSafetyLeaving" value="{{aggrievedCourtSafetyLeaving}}">
+					{{#if aggrievedCourtSafetyConcern}}
+					<input type="hidden" name="aggrievedCourtSafetyAttending" value="{{aggrievedCourtSafetyAttending}}">
+					<input type="hidden" name="aggrievedCourtSafetyLeaving" value="{{aggrievedCourtSafetyLeaving}}">
+					{{/if}}
 
 
 					<input type="hidden" name="respondentNameGiven" value="{{respondentNameGiven}}">
@@ -54,20 +58,22 @@
 					<input type="hidden" name="respondentSPI" value="">
 
 					<input type="hidden" name="respondentInterpreter" value="{{respondentInterpreter}}">
-					<input ng-if="respondent.requiresInterpreter" type="hidden" name="respondentLanguage" value="{{respondentLanguage}}">
+					{{#if respondentRequiresInterpeter}}<input type="hidden" name="respondentLanguage" value="{{respondentLanguage}}">{{/if}}
 
 					<input type="hidden" name="respondentIdentifiesAsAboriginal" value="{{respondentIdentifiesAsAboriginal}}">
 					<input type="hidden" name="respondentIdentifiesAsTorresStraitIslander" value="{{respondentIdentifiesAsTorresStraitIslander}}">
 					<input type="hidden" name="respondentDisability" value="{{respondentDisability}}">
-					<input ng-if="respondent.hasDisability" type="hidden" name="respondentDisabilityDescription" value="{{respondentDisabilityDescription}}">
+					{{#if respondentHasDisability}}<input type="hidden" name="respondentDisabilityDescription" value="{{respondentDisabilityDescription}}">{{/if}}
 
 					<input type="hidden" name="respondentEmploymentPlace" value="{{respondentEmploymentPlace}}">
 					<input type="hidden" name="respondentVehicleModel" value="{{respondentVehicleModel}}">
 					<input type="hidden" name="respondentVehicleRegistration" value="{{respondentVehicleRegistration}}">
 
 					<input type="hidden" name="respondentUnder18" value="{{respondentUnder18}}">
-					<input ng-if="respondent.under18" type="hidden" name="respondentParentName" value="{{respondentParentName}}">
-					<input ng-if="respondent.under18" type="hidden" name="respondentParentAddress" value="{{respondentParentAddress}}">
+					{{#if respondentUnder18}}
+					<input type="hidden" name="respondentParentName" value="{{respondentParentName}}">
+					<input type="hidden" name="respondentParentAddress" value="{{respondentParentAddress}}">
+					{{/if}}
 
 
 					<!-- applicant part  -->
@@ -98,7 +104,7 @@
 
 					<!-- urgent protection -->
 					<input type="hidden" name="tpoApply" value="{{tpoApply}}">
-					<input ng-if="tpo.apply" type="hidden" name="tpoGrounds" value="{{tpoGrounds}}">
+					{{#if tpoApply}}<input type="hidden" name="tpoGrounds" value="{{tpoGrounds}}">{{/if}}
 
 
 					<input type="hidden" name="relationshipPersonal" value="{{relationshipPersonal}}">
@@ -295,3 +301,109 @@
 		</ul>
 	</li>
 </ol>
+
+<div class="section">
+	<h2>Lodging your application</h2>
+	<p>Next steps for the applicant:</p>
+
+	<ul>
+		<li><p>
+			Prepare your application
+			<small class="hint">You just did this!</small>
+		</p></li>
+		<li><p>
+			{{#if userIsAggrieved}}Get{{else}}Help {{theAggrieved}} get{{/if}} legal advice
+			<small class="hint">{{#if legalAdviceDone}}
+				Check with your lawyer if you have any more questions now that you have completed the form.
+			{{else}}
+				In some areas there are programs to help people apply for a domestic violence order — these include domestic violence prevention programs, application assistance programs or domestic violence services. You can ask at the magistrates court about these programs.
+			{{/if}}</small>
+		</p></li>
+		<li><p>
+			Print application
+			<small class="hint">You must print the application before you bring it to court.
+			If you are not comfortable printing at home, ask a trusted friend, or try a public library or local business.</small>
+		</p></li>
+		<li><p>
+			Gather evidence and attach to the form
+			<small class="hint">Examples: photos of injuries, statements from witnesses, diary enties, doctors' reports, reports from counsellors, text/voicemail messages, emails, letters or social media entries printed with dates.</small></label>
+		</p></li>
+		<li><p>
+			Attach copies of other court orders
+			<small class="hint">If you have any court orders, like family law orders about your children, Childrens Court orders or any old or current domestic violence orders, you must attach a copy to your domestic violence order application.</small></label>
+		</p></li>
+		<li><p>
+			Sign the declaration
+	        <small class="hint">Must be witnessed by a Justice of the Peace, Commissioner for Declaration or a Solicitor.
+	        All magistrates courts have a Justice of the Peace, but you should check what day and time they are available.
+			<a href="//www.qld.gov.au/law/legal-mediation-and-justice-of-the-peace/about-justice-of-the-peace/search-for-your-nearest-jp-or-cdec/" target="_blank">Find a JP</a> that is convenient for you.
+	        </small></label>
+		</p></li>
+		<li><p>
+			Lodge at a Magistrates Court
+			<small class="hint">Find your nearest <a href="//www.qld.gov.au/law/court/courts/courthouse-locations/" target="_blank">Magistrates Court</a></small>
+			{{#if aggrievedCourtSafetyConcern}}<small class="hint">Give the court safety form to the court staff.</small>{{/if}}
+		</p></li>
+	</ul>
+</div>
+
+<div class="section">
+	<h2>What happens after you lodge the application?</h2>
+	<p>{{#if tpoApply}}
+	You will be given a court date (as soon as possible), depending on the court’s availability, to ask for a temporary protection order.
+	{{else}}
+	You will be given a a date to appear at court (usually in about four weeks time).
+	{{/if}}</p>
+
+	<h3>Serving of the application</h3>
+	<p>Once the application has been lodged, {{theRespondent}} has the right to get a copy of it so that {{respondentTheyKnow}} what has been said and can respond in court. Police will serve the respondent with a copy of the application.</p>
+</div>
+
+{{#if nearbyVictimServices}}<div class="section">
+	<h2>Nearby support services</h2>
+	<ul>
+		{{#each nearbyVictimServices as |service|}}
+		<li>
+			<h3>{{service.Name}}</h3>
+			<p>{{service.Description}}</p>
+			<p>{{service.Contact}}</p>
+		</li>
+		{{/each}}
+	</ul>
+</div>
+{{/if}}
+
+<div id="what-next" class="section">
+	<h2>What can I read or do next?</h2>
+	<ul>
+		<li><a href="http://www.courts.qld.gov.au/courts/magistrates-court/domestic-and-family-violence/how-to-get-protection-from-domestic-violence/court-process-for-applicants">Court process for applicants</a></li>
+		<li><a href="//www.qld.gov.au/law/court/going-to-court/">Going to court</a></li>
+		<li><a href="//www.qld.gov.au/law/court/supporting-someone-going-through-court/">Supporting someone going through court</a></li>
+		<li><a href="//www.qld.gov.au/law/legal-mediation-and-justice-of-the-peace/about-justice-of-the-peace/search-for-your-nearest-jp-or-cdec/">Search for your nearest JP or Cdec</a></li>
+		<li><a href="http://www.courts.qld.gov.au/court-calendars">Court calendars</a></li>
+		<li><a href="http://www.legalaid.qld.gov.au/Find-legal-information/Publications/Legal-information-guides/How-to-apply-for-a-domestic-violence-order">How to apply for a domestic violence order (Legal Aid Queensland)</a></li>
+	</ul>
+</div>
+
+<!--
+<form>
+<ol class="questions">
+	<li class="footer">
+		<ul class="actions">
+			<li>
+				<button type="button" ng-click="interview.reset()">
+					Start new application
+					<small class="hint">Erase all data and start again</small>
+				</button>
+			</li>
+			<li>
+				<button type="button" ng-click="interview.quickExit()">
+					Exit this site
+					<small class="hint">Clear your browser history after</small>
+				</button>
+			</li>
+		</ul>
+	</li>
+</ol>
+</form>
+-->
