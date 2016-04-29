@@ -46,22 +46,25 @@ describe( 'situation view', function() {
 
 		situationView.chooseUserIsAggrieved();
 		expect( situationView.dangerQuestion.isDisplayed() ).toBe( true );
-		expect( situationView.privacyQuestion.isDisplayed() ).toBe( true );
+		expect( situationView.privacyQuestion.isDisplayed() ).toBe( false );
 		expect( situationView.dangerAdvice.isDisplayed() ).toBe( false );
 		expect( situationView.privacyAdvice.isDisplayed() ).toBe( false );
 
 		situationView.choose( 'userDanger', 'Yes' );
 		expect( situationView.dangerAdvice.isDisplayed() ).toBe( true );
+		expect( situationView.privacyQuestion.isDisplayed() ).toBe( true );
 		expect( situationView.dangerAdvice.element( by.css( 'h2' )).getText() ).toBe( 'What can I do if I need help urgently?' );
 		expect( situationView.dangerAdvice.element( by.css( 'a[href^="tel"]' )).getText() ).toBe( '000' );
 
 		situationView.choose( 'userDanger', 'Maybe' );
 		expect( situationView.dangerAdvice.isDisplayed() ).toBe( true );
+		expect( situationView.privacyQuestion.isDisplayed() ).toBe( true );
 		expect( situationView.dangerAdvice.element( by.css( 'h2' )).getText() ).toBe( 'What can I do if I need help urgently?' );
 		expect( situationView.dangerAdvice.element( by.css( 'a[href^="tel"]' )).isPresent() ).toBe( false );
 
 		situationView.choose( 'userDanger', 'No' );
 		expect( situationView.dangerAdvice.isDisplayed() ).toBe( false );
+		expect( situationView.privacyQuestion.isDisplayed() ).toBe( true );
 
 		situationView.choose( 'userPrivacy', 'No' );
 		expect( situationView.privacyAdvice.isDisplayed() ).toBe( true );
@@ -73,6 +76,23 @@ describe( 'situation view', function() {
 
 		situationView.choose( 'userPrivacy', 'Yes' );
 		expect( situationView.privacyAdvice.isDisplayed() ).toBe( false );
+	});
+
+	it( 'should ask about respondent relationship', function() {
+		expect( situationView.relationshipQuestion.isDisplayed() ).toBe( false );
+		situationView.chooseUserIsAggrieved();
+		expect( situationView.relationshipQuestion.isDisplayed() ).toBe( false );
+		situationView.choose( 'userDanger', 'No' );
+		expect( situationView.relationshipQuestion.isDisplayed() ).toBe( false );
+		situationView.choose( 'userPrivacy', 'Yes' );
+
+		expect( situationView.relationshipQuestion.isDisplayed() ).toBe( true );
+		expect( situationView.relationshipQuestionLabelText ).toBe( 'Who do you need protection from?' );
+		expect( situationView.relationshipQuestionPromptText ).toBe( 'I need protection from my' );
+
+		situationView.chooseAggrievedIsUsers( 'girlfriend' );
+		expect( situationView.relationshipQuestionLabelText ).toBe( 'Who does your girlfriend need protection from?' );
+		expect( situationView.relationshipQuestionPromptText ).toBe( 'My girlfriend needs protection from her' );
 	});
 
 	it( 'should ask about existing orders', function() {
@@ -118,6 +138,18 @@ describe( 'situation view', function() {
 		situationView.select( 'aggrievedExistingOrderJurisdiction', 'NT' );
 		expect( situationView.existingOrderAdvice.isDisplayed() ).toBe( true );
 		expect( situationView.existingOrderAdvice.element( by.css( 'h2' )).getText() ).toBe( 'Your father can register his protection order in Queensland' );
+	});
+
+	it( 'should parse gender where possible', function() {
+		situationView.chooseAggrievedIsUsers( 'brother' );
+		situationView.select( 'situationParty', 'stepsister' );
+		expect( situationView.relationshipQuestionPromptText ).toBe( 'My brother needs protection from his' );
+
+		situationView.continue();
+		expect( situationView.value( 'aggrievedGender' )).toBe( 'Man' );
+
+		situationView.continue();
+		expect( situationView.value( 'respondentGender' )).toBe( 'Woman' );
 	});
 
 });

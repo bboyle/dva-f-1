@@ -1,0 +1,94 @@
+<fieldset>
+	<legend>
+		<span class="label">Who {{doesTheAggrieved}} need protection from?</span>
+	</legend>
+	<p>
+		<label for="dvaf1-situation-party">{{TheAggrievedINeed}} protection from {{theAggrievedMy}}</label>
+		<select id="dvaf1-situation-party" name="situationParty">
+			<option value=""></option>
+			<optgroup label="partner">
+				<option value="husband"{{#if selected.situationParty.husband}} selected{{/if}}>husband</option>
+				<option value="wife"{{#if selected.situationParty.wife}} selected{{/if}}>wife</option>
+				<option value="boyfriend"{{#if selected.situationParty.boyfriend}} selected{{/if}}>boyfriend</option>
+				<option value="girlfriend"{{#if selected.situationParty.girlfriend}} selected{{/if}}>girlfriend</option>
+			</optgroup>
+			<optgroup label="ex">
+				<option value="exHusband"{{#if selected.situationParty.exHusband}} selected{{/if}}>ex-husband</option>
+				<option value="exWife"{{#if selected.situationParty.exWife}} selected{{/if}}>ex-wife</option>
+				<option value="exBoyfriend"{{#if selected.situationParty.exBoyfriend}} selected{{/if}}>ex-boyfriend</option>
+				<option value="exGirlfriend"{{#if selected.situationParty.exGirlfriend}} selected{{/if}}>ex-girlfriend</option>
+			</optgroup>
+			<optgroup label="partner’s ex">
+				<option value="partnerExHusband"{{#if selected.situationParty.partnerExHusband}} selected{{/if}}>partner’s ex-husband</option>
+				<option value="partnerExWife"{{#if selected.situationParty.partnerExWife}} selected{{/if}}>partner’s ex-wife</option>
+				<option value="partnerExBoyfriend"{{#if selected.situationParty.partnerExBoyfriend}} selected{{/if}}>partner’s ex-boyfriend</option>
+				<option value="partnerExGirlfriend"{{#if selected.situationParty.partnerExGirlfriend}} selected{{/if}}>partner’s ex-girlfriend</option>
+			</optgroup>
+			<optgroup label="family">
+				<option value="husband"{{#if selected.situationParty.husband}} selected{{/if}}>husband</option>
+				<option value="wife"{{#if selected.situationParty.wife}} selected{{/if}}>wife</option>
+				<option value="mother"{{#if selected.situationParty.mother}} selected{{/if}}>mother</option>
+				<option value="father"{{#if selected.situationParty.father}} selected{{/if}}>father</option>
+				<option value="brother"{{#if selected.situationParty.brother}} selected{{/if}}>brother</option>
+				<option value="sister"{{#if selected.situationParty.sister}} selected{{/if}}>sister</option>
+				<option value="son"{{#if selected.situationParty.son}} selected{{/if}}>son</option>
+				<option value="daughter"{{#if selected.situationParty.daughter}} selected{{/if}}>daughter</option>
+				<!-- extended -->
+				<option value="grandmother"{{#if selected.situationParty.grandmother}} selected{{/if}}>grandmother</option>
+				<option value="grandfather"{{#if selected.situationParty.grandfather}} selected{{/if}}>grandfather</option>
+				<option value="aunt"{{#if selected.situationParty.aunt}} selected{{/if}}>aunt</option>
+				<option value="uncle"{{#if selected.situationParty.uncle}} selected{{/if}}>uncle</option>
+				<option value="grandson"{{#if selected.situationParty.grandson}} selected{{/if}}>grandson</option>
+				<option value="granddaughter"{{#if selected.situationParty.granddaughter}} selected{{/if}}>granddaughter</option>
+				<option value="nephew"{{#if selected.situationParty.nephew}} selected{{/if}}>nephew</option>
+				<option value="neice"{{#if selected.situationParty.neice}} selected{{/if}}>neice</option>
+				<option value="cousin"{{#if selected.situationParty.cousin}} selected{{/if}}>cousin</option>
+				<!-- step family -->
+				<option value="stepfather"{{#if selected.situationParty.stepfather}} selected{{/if}}>stepfather</option>
+				<option value="stepmother"{{#if selected.situationParty.stepmother}} selected{{/if}}>stepmother</option>
+				<option value="stepbrother"{{#if selected.situationParty.stepbrother}} selected{{/if}}>stepbrother</option>
+				<option value="stepsister"{{#if selected.situationParty.stepsister}} selected{{/if}}>stepsister</option>
+				<option value="stepson"{{#if selected.situationParty.stepson}} selected{{/if}}>stepson</option>
+				<option value="stepdaughter"{{#if selected.situationParty.stepdaughter}} selected{{/if}}>stepdaughter</option>
+				<!-- in-laws -->
+				<option value="motherInLaw"{{#if selected.situationParty.motherInLaw}} selected{{/if}}>mother-in-law</option>
+				<option value="fatherInLaw"{{#if selected.situationParty.fatherInLaw}} selected{{/if}}>father-in-law</option>
+				<option value="brotherInLaw"{{#if selected.situationParty.brotherInLaw}} selected{{/if}}>brother-in-law</option>
+				<option value="sisterInLaw"{{#if selected.situationParty.sisterInLaw}} selected{{/if}}>sister-in-law</option>
+			</optgroup>
+			<optgroup label="partner’s family">
+				<option value="partnerHusband"{{#if selected.situationParty.partnerHusband}} selected{{/if}}>partner’s husband</option>
+				<option value="partnerWife"{{#if selected.situationParty.partnerWife}} selected{{/if}}>partner’s wife</option>
+				<option value="partnerMother"{{#if selected.situationParty.partnerMother}} selected{{/if}}>partner’s mother</option>
+				<option value="partnerFather"{{#if selected.situationParty.partnerFather}} selected{{/if}}>partner’s father</option>
+				<option value="partnerBrother"{{#if selected.situationParty.partnerBrother}} selected{{/if}}>partner’s brother</option>
+				<option value="partnerSister"{{#if selected.situationParty.partnerSister}} selected{{/if}}>partner’s sister</option>
+				<option value="partnerSon"{{#if selected.situationParty.partnerSon}} selected{{/if}}>partner’s son</option>
+				<option value="partnerDaughter"{{#if selected.situationParty.partnerDaughter}} selected{{/if}}>partner’s daughter</option>
+				<!-- extended -->
+				<option value="partnerGrandmother"{{#if selected.situationParty.partnerGrandmother}} selected{{/if}}>partner’s grandmother</option>
+				<option value="partnerGrandfather"{{#if selected.situationParty.partnerGrandfather}} selected{{/if}}>partner’s grandfather</option>
+				<option value="partnerAunt"{{#if selected.situationParty.partnerAunt}} selected{{/if}}>partner’s aunt</option>
+				<option value="partnerUncle"{{#if selected.situationParty.partnerUncle}} selected{{/if}}>partner’s uncle</option>
+				<option value="partnerGrandson"{{#if selected.situationParty.partnerGrandson}} selected{{/if}}>partner’s grandson</option>
+				<option value="partnerGranddaughter"{{#if selected.situationParty.partnerGranddaughter}} selected{{/if}}>partner’s granddaughter</option>
+				<option value="partnerNephew"{{#if selected.situationParty.partnerNephew}} selected{{/if}}>partner’s nephew</option>
+				<option value="partnerNeice"{{#if selected.situationParty.partnerNeice}} selected{{/if}}>partner’s neice</option>
+				<option value="partnerCousin"{{#if selected.situationParty.partnerCousin}} selected{{/if}}>partner’s cousin</option>
+				<!-- step family -->
+				<option value="partnerStepfather"{{#if selected.situationParty.partnerStepfather}} selected{{/if}}>partner’s stepfather</option>
+				<option value="partnerStepmother"{{#if selected.situationParty.partnerStepmother}} selected{{/if}}>partner’s stepmother</option>
+				<option value="partnerStepbrother"{{#if selected.situationParty.partnerStepbrother}} selected{{/if}}>partner’s stepbrother</option>
+				<option value="partnerStepsister"{{#if selected.situationParty.partnerStepsister}} selected{{/if}}>partner’s stepsister</option>
+				<option value="partnerStepson"{{#if selected.situationParty.partnerStepson}} selected{{/if}}>partner’s stepson</option>
+				<option value="partnerStepdaughter"{{#if selected.situationParty.partnerStepdaughter}} selected{{/if}}>partner’s stepdaughter</option>
+				<!-- in-laws -->
+				<option value="partnerMotherInLaw"{{#if selected.situationParty.partnerMotherInLaw}} selected{{/if}}>partner’s mother-in-law</option>
+				<option value="partnerFatherInLaw"{{#if selected.situationParty.partnerFatherInLaw}} selected{{/if}}>partner’s father-in-law</option>
+				<option value="partnerBrotherInLaw"{{#if selected.situationParty.partnerBrotherInLaw}} selected{{/if}}>partner’s brother-in-law</option>
+				<option value="partnerSisterInLaw"{{#if selected.situationParty.partner-sisterInLaw}} selected{{/if}}>partner’s sister-in-law</option>
+			</optgroup>
+			<option value="carer"{{#if selected.situationParty.carer}} selected{{/if}}>carer</option>
+		</select>
+	</p>
+</fieldset>

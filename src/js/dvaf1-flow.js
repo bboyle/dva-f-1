@@ -37,8 +37,8 @@ $(function( $ ) {
 					value: 'Yes'
 				},
 				'#dvaf1-aggrieved-privacy-question': {
-					name: 'userIsAggrieved',
-					value: 'Yes'
+					name: 'userDanger',
+					values: [ 'Yes', 'Maybe', 'No' ]
 				},
 				'#dvaf1-info-aggrieved-danger': {
 					name: 'userDanger',
@@ -48,6 +48,13 @@ $(function( $ ) {
 					name: 'userPrivacy',
 					values: [ 'No', 'Not sure' ]
 				},
+				'#dvaf1-situation-relationship': [{
+					name: 'userPrivacy',
+					value: 'Yes'
+				}, {
+					name: 'userRelationship',
+					values: '*'
+				}],
 				'#dvaf1-aggrieved-existing-order-jurisdiction': {
 					name: 'aggrievedExistingOrder',
 					value: 'Yes'
