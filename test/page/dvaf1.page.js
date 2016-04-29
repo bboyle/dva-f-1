@@ -107,6 +107,12 @@ DvaForm1Page.prototype = Object.create( {}, {
 		}
 	},
 
+	value: {
+		value: function( name ) {
+			return element( by.name( name )).getAttribute( 'value' );
+		}
+	},
+
 	chooseUserIsAggrieved: {
 		value: function() {
 			this.gotoSituationView();

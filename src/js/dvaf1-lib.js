@@ -18,6 +18,7 @@ $(function() {
 
 		return 'the aggrieved';
 	}
+
 	function theRespondent() {
 		return 'the respondent';
 	}
@@ -49,12 +50,34 @@ $(function() {
 	}
 
 
+	function TheAggrievedINeed() {
+		if ( dvaf1Data.userIsAggrieved ) {
+			return 'I need';
+		}
+		if ( dvaf1Data.userRelationship && dvaf1Data.userRelationship !== 'someone') {
+			return 'My ' + dvaf1Data.userRelationship + ' needs';
+		}
+
+		return 'The aggrieved needs';
+	}
+
+	function theAggrievedMy() {
+		if ( dvaf1Data.userIsAggrieved ) {
+			return 'my';
+		}
+		return genderPronoun( dvaf1Data.aggrievedGender, 'her', 'his', 'their' );
+	}
+
 	Handlebars.registerHelper( 'theAggrieved', theAggrieved );
 	Handlebars.registerHelper( 'TheAggrieved', TheAggrieved );
+
 	Handlebars.registerHelper( 'theRespondent', theRespondent );
 
 	Handlebars.registerHelper( 'doesTheAggrieved', doesTheAggrieved );
 	Handlebars.registerHelper( 'DoesTheAggrieved', DoesTheAggrieved );
+
+	Handlebars.registerHelper( 'TheAggrievedINeed', TheAggrievedINeed );
+	Handlebars.registerHelper( 'theAggrievedMy', theAggrievedMy );
 
 
 	Handlebars.registerHelper( 'TheAggrievedIs', function() {

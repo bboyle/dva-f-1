@@ -91,7 +91,25 @@
 
 		<li id="dvaf1-info-aggrieved-privacy">{{> infoAggrievedPrivacy}}</li>
 
-		<li id="dvaf1-aggrieved-existing-order">{{> aggrievedExistingOrderQuestion}}</li>
+		<li id="dvaf1-situation-relationship">{{> situationRelationshipQuestion}}</li>
+
+		<li>
+			<fieldset>
+				<legend id="dvaf1-aggrieved-existing-order">
+					{{> aggrievedExistingOrderQuestion}}
+				</legend>
+				<ul class="choices compact">
+					<li>
+						<input type="radio" name="aggrievedExistingOrder" value="No" id="existing-protection-order-no"{{#if selected.aggrievedExistingOrder.No}} checked{{/if}}>
+						<label for="existing-protection-order-no">No</label>
+					</li>
+					<li>
+						<input type="radio" name="aggrievedExistingOrder" value="Yes" id="existing-protection-order-yes"{{#if selected.aggrievedExistingOrder.Yes}} checked{{/if}}>
+						<label for="existing-protection-order-yes">Yes</label>
+					</li>
+				</ul>
+			</fieldset>
+			</li>
 
 		<li id="dvaf1-aggrieved-existing-order-jurisdiction">
 			<label for="dvaf1-aggrieved-existing-order-jurisdiction-select">

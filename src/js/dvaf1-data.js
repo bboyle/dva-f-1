@@ -3,8 +3,8 @@ $(function( $ ) {
 	'use strict';
 
 	var data = window.dvaf1Data = { selected: {} };
-	data.MASCULINE_GENDER = /^(man|male|father|son|brother|nephew|uncle|husband|boy|boyfriend|him|his|he)$/i;
-	data.FEMININE_GENDER  = /^(woman|female|mother|daughter|sister|neice|aunt|wife|girl|girlfriend|her|she)$/i;
+	data.MASCULINE_GENDER = /(^(man|male|he|him|his)$)|father|son|brother|nephew|uncle|husband|boy/i;
+	data.FEMININE_GENDER  = /(^(her|she)$)|woman|female|mother|daughter|sister|neice|aunt|wife|girl/i;
 
 	var formView = $( '#dvaf1-form-view' );
 
@@ -18,6 +18,9 @@ $(function( $ ) {
 		'dvaf1-info-aggrieved-privacy': {
 			name: 'infoAggrievedPrivacy'
 		},
+		'dvaf1-situation-relationship': {
+			name: 'situationRelationshipQuestion'
+		},
 		'dvaf1-aggrieved-existing-order': {
 			name: 'aggrievedExistingOrderQuestion'
 		},
@@ -25,8 +28,6 @@ $(function( $ ) {
 			name: 'infoExistingOrder'
 		}
 	};
-
-
 
 
 	$.each( partials, function( key, partial ) {
@@ -54,6 +55,10 @@ $(function( $ ) {
 	}
 
 
+	function parseGender( key, value ) {
+		data[ key ] = data.FEMININE_GENDER.test( value ) ? 'Woman' : data.MASCULINE_GENDER.test( value ) ? 'Man' : data[ key ];
+	}
+
 	// relevance
 	formView.on( 'click change', function( event ) {
 		var question = $( event.target );
@@ -62,7 +67,9 @@ $(function( $ ) {
 
 		// store data
 		data[ name ] = parseValue( value );
-		value = value.replace( /\s+/g, '' );
+		if ( value.length ) {
+			value = value.replace( /\s+/g, '' );
+		}
 
 		if ( question.is( 'select,:radio,:checkbox' )) {
 			// store boolean helpers
@@ -73,16 +80,18 @@ $(function( $ ) {
 				data.selected[ name ][ value ] = true;
 			}
 
-			// identify aggrieved gender from relationship to user
-			if ( name === 'userRelationship' ) {
-				data.aggrievedGender = data.FEMININE_GENDER.test( value ) ? 'Woman' : data.MASCULINE_GENDER.test( value ) ? 'Man' : data.aggrievedGender;
-			}
-
-			// regenerate status blocks
+			// handle data changes
 			switch ( name ) {
-			case 'userIsAggrieved':
+			case 'situationParty':
+				parseGender( 'respondentGender', value );
+				break;
 			case 'userRelationship':
+				parseGender( 'aggrievedGender', value );
+				// fallthrough
+			case 'userIsAggrieved':
 				refreshPartial( 'dvaf1-dfn-aggrieved' );
+				refreshPartial( 'dvaf1-situation-relationship' );
+				refreshPartial( 'dvaf1-aggrieved-existing-order' );
 				refreshPartial( 'dvaf1-aggrieved-existing-order-advice' );
 				break;
 			case 'userDanger':

@@ -44,6 +44,24 @@ SituationView.prototype = Object.create( DvaForm1Page.prototype, {
 		}
 	},
 
+	relationshipQuestion: {
+		get: function() {
+			return element( by.id( 'dvaf1-situation-relationship' ));
+		}
+	},
+
+	relationshipQuestionLabelText: {
+		get: function() {
+			return this.relationshipQuestion.element( by.css( '.label' )).getText();
+		}
+	},
+
+	relationshipQuestionPromptText: {
+		get: function() {
+			return this.relationshipQuestion.element( by.css( 'label' )).getText();
+		}
+	},
+
 	existingOrderJurisdiction: {
 		get: function() {
 			return element( by.id( 'dvaf1-aggrieved-existing-order-jurisdiction' ));
