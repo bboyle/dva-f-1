@@ -1,7 +1,62 @@
-<h2>Preparing for court</h2>
+<div class="status info">
+	<h2>Preparing for court</h2>
+
+	<p>{{RespondentName}} will be given a copy of the application which includes a notice to appear in court at the same time.</p>
+
+	<p>Courthouses have safety measures in place such as safe rooms (or other rooms or areas where {{theAggrievedYou}} can wait separately).
+	   Most courthouses also have security officers and security cameras.</p>
+	<p>Court staff follow domestic violence protocols which place safety as top priority for all people seeking protection from domestic violence.</p>
+</div>
 
 <form class="form" name="formCourt">
 	<ol class="questions">
+		<li class="group">
+			<fieldset>
+				<legend>
+					<span class="label">Are you concerned that {{ interview.aggrieved.pronoun.you }} may be in danger when going to court?</span>
+				</legend>
+				<ul class="choices compact">
+					<li>
+						<input type="radio" name="aggrievedCourtSafetyConcern" value="No" id="aggrieved-court-safety-concern-no"{{#if selected.aggrievedCourtSafetyConcern.Yes}} checked{{/if}}>
+						<label for="aggrieved-court-safety-concern-no">No</label>
+					</li>
+					<li>
+						<input type="radio" name="aggrievedCourtSafetyConcern" value="Yes" id="aggrieved-court-safety-concern-yes"{{#if selected.aggrievedCourtSafetyConcern.Yes}} checked{{/if}}>
+						<label for="aggrieved-court-safety-concern-yes">Yes</label>
+					</li>
+				</ul>
+			</fieldset>
+		</li>
+
+		<li id="dvaf1-court-safety-info">
+			<div class="status info">
+				<h2>Complete a court safety form</h2>
+				<p>Give this form to court staff when you lodge the application.</p>
+				<p>The court staff will copy the form and give it to the security officer, domestic violence protection worker,
+				   registrar and any other relevant court staff to arrange for your safety.
+				   It will also be placed on your court file, but will not be part of the application.</p>
+				<p>{{RespondentName}} will not see this form.</p>
+			</div>
+		</li>
+
+		<li id="dvaf1-court-safety-attending" class="confidential">
+			<label for="court-safety-attending">
+				<span class="label">Are you concerned that {{theAggrievedThey}} may be in danger while attending court?</span>
+				<small class="hint">CONFIDENTIAL (not shared with {{RespondentName}})</small>
+			</label>
+			<textarea id="court-safety-attending" name="aggrievedCourtSafetyAttending" spellcheck="true" cols="40" rows="10">{{aggrievedCourtSafetyAttending}}</textarea>
+		</li>
+		<li id="dvaf1-court-safety-leaving" class="confidential">
+			<label for="court-safety-leaving">
+				<span class="label">Are you concerned about {{theAggrievedYour}} safety when leaving the court building?</span>
+				<small class="hint">CONFIDENTIAL (not shared with {{RespondentName}})</small>
+			</label>
+			<textarea id="court-safety-leaving" name="aggrievedCourtSafetyLeaving" spellcheck="true" cols="40" rows="10">{{aggrievedCourtSafetyAttending}}</textarea>
+		</li>
+
+		<li>
+			<p>If your safety concerns change for future court dates, you should complete another safety form for court staff.</p>
+		</li>
 		<li>
 			<ul class="actions">
 				<li><strong><button>Continue</button></strong></li>

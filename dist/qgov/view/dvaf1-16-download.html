@@ -24,21 +24,21 @@
 					<input type="hidden" name="aggrievedSPI" value="">
 
 					<input type="hidden" name="aggrievedInterpreter" value="{{aggrievedInterpreter}}">
-					{{#if aggrievedRequiresInterpreter}}<input type="hidden" name="aggrievedLanguage" value="{{aggrievedLanguage}}">{{/if}}
+					{{#if aggrievedRequiresInterpreterYes}}<input type="hidden" name="aggrievedLanguage" value="{{aggrievedLanguage}}">{{/if}}
 
 					<input type="hidden" name="aggrievedIdentifiesAsAboriginal" value="{{aggrievedIdentifiesAsAboriginal}}">
 					<input type="hidden" name="aggrievedIdentifiesAsTorresStraitIslander" value="{{aggrievedIdentifiesAsTorresStraitIslander}}">
 					<input type="hidden" name="aggrievedDisability" value="{{aggrievedDisability}}">
-					{{#if aggrievedHasDisability}}<input type="hidden" name="aggrievedDisabilityDescription" value="{{aggrievedDisabilityDescription}}">{{/if}}
+					{{#if aggrievedHasDisabilityYes}}<input type="hidden" name="aggrievedDisabilityDescription" value="{{aggrievedDisabilityDescription}}">{{/if}}
 
 					<input type="hidden" name="aggrievedUnder18" value="{{aggrievedUnder18}}">
-					{{#if aggrievedUnder18}}
+					{{#if aggrievedUnder18Yes}}
 					<input type="hidden" name="aggrievedParentName" value="{{aggrievedParentName}}">
 					<input type="hidden" name="aggrievedParentAddressConfidential" value="{{aggrievedParentAddressConfidential}}">
 					<input type="hidden" name="aggrievedParentAddress" value="{{aggrievedParentAddress}}">
 					{{/if}}
 
-					{{#if aggrievedCourtSafetyConcern}}
+					{{#if aggrievedCourtSafetyConcernYes}}
 					<input type="hidden" name="aggrievedCourtSafetyAttending" value="{{aggrievedCourtSafetyAttending}}">
 					<input type="hidden" name="aggrievedCourtSafetyLeaving" value="{{aggrievedCourtSafetyLeaving}}">
 					{{/if}}
@@ -58,19 +58,19 @@
 					<input type="hidden" name="respondentSPI" value="">
 
 					<input type="hidden" name="respondentInterpreter" value="{{respondentInterpreter}}">
-					{{#if respondentRequiresInterpeter}}<input type="hidden" name="respondentLanguage" value="{{respondentLanguage}}">{{/if}}
+					{{#if respondentRequiresInterpeterYes}}<input type="hidden" name="respondentLanguage" value="{{respondentLanguage}}">{{/if}}
 
 					<input type="hidden" name="respondentIdentifiesAsAboriginal" value="{{respondentIdentifiesAsAboriginal}}">
 					<input type="hidden" name="respondentIdentifiesAsTorresStraitIslander" value="{{respondentIdentifiesAsTorresStraitIslander}}">
 					<input type="hidden" name="respondentDisability" value="{{respondentDisability}}">
-					{{#if respondentHasDisability}}<input type="hidden" name="respondentDisabilityDescription" value="{{respondentDisabilityDescription}}">{{/if}}
+					{{#if respondentHasDisabilityYes}}<input type="hidden" name="respondentDisabilityDescription" value="{{respondentDisabilityDescription}}">{{/if}}
 
 					<input type="hidden" name="respondentEmploymentPlace" value="{{respondentEmploymentPlace}}">
 					<input type="hidden" name="respondentVehicleModel" value="{{respondentVehicleModel}}">
 					<input type="hidden" name="respondentVehicleRegistration" value="{{respondentVehicleRegistration}}">
 
 					<input type="hidden" name="respondentUnder18" value="{{respondentUnder18}}">
-					{{#if respondentUnder18}}
+					{{#if respondentUnder18Yes}}
 					<input type="hidden" name="respondentParentName" value="{{respondentParentName}}">
 					<input type="hidden" name="respondentParentAddress" value="{{respondentParentAddress}}">
 					{{/if}}
@@ -147,7 +147,7 @@
 					{{#if respondentWeaponLicence}}<input type="hidden" name="respondentWeaponsLicenceDescription" value="{{respondentWeaponsLicenceDescription}}">{{/if}}
 
 
-					{{#if ordersExist}}
+					{{#if ordersExistYes}}
 						<input type="hidden" name="ordersChildrensCourtCurrent" value="{{ordersChildrensCourtCurrent}}">
 						<input type="hidden" name="ordersChildrensCourtPast" value="{{ordersChildrensCourtPast}}">
 						<input type="hidden" name="ordersQldDVOCurrent" value="{{ordersQldDVOCurrent}}">

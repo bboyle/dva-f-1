@@ -76,6 +76,12 @@ DvaForm1Page.prototype = Object.create( {}, {
 		}
 	},
 
+	gotoCourtView: {
+		value: function() {
+			this.goto( 'Preparing for court' );
+		}
+	},
+
 	gotoDownloadView: {
 		value: function() {
 			this.goto( 'Download your application' );
