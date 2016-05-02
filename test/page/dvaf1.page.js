@@ -13,6 +13,28 @@ function filterIsDisplayed( element ) {
 
 
 DvaForm1Page.prototype = Object.create( {}, {
+	ASHLEY: {
+		get: function() {
+			return {
+				respondentNameGiven: 'Ashley',
+				respondentNameFamily: 'Smith',
+				respondentDateBirth: '22 June 1984',
+				respondentGender: 'Man'
+			};
+		}
+	},
+
+	KIM: {
+		get: function() {
+			return {
+				aggrievedNameGiven: 'Kim',
+				aggrievedNameFamily: 'Smith',
+				aggrievedDateBirth: '17 April 1983',
+				aggrievedGender: 'Woman'
+			};
+		}
+	},
+
 	title: {
 		get: function() {
 			return element.all( by.css( 'h2' )).get( 0 ).getText();
@@ -52,6 +74,12 @@ DvaForm1Page.prototype = Object.create( {}, {
 		}
 	},
 
+	firstParagraph: {
+		get: function() {
+			return element.all( by.css( 'p' )).get( 0 );
+		}
+	},
+
 	goto: {
 		value: function( link ) {
 			element( by.linkText( link )).click();
@@ -73,6 +101,12 @@ DvaForm1Page.prototype = Object.create( {}, {
 	gotoRespondentBasicView: {
 		value: function() {
 			this.goto( 'Who do they need protection from?' );
+		}
+	},
+
+	gotoCourtView: {
+		value: function() {
+			this.goto( 'Preparing for court' );
 		}
 	},
 

@@ -45,12 +45,7 @@ describe( 'aggrieved (basic) view', function() {
 	});
 
 	it( 'should remember aggrieved data that is entered', function() {
-		aggrievedView.setAggrieved({
-			aggrievedNameGiven: 'Kim',
-			aggrievedNameFamily: 'Smith',
-			aggrievedDateBirth: '17 April 1983',
-			aggrievedGender: 'Woman'
-		});
+		aggrievedView.setAggrieved( aggrievedView.KIM );
 		aggrievedView.continue();
 		aggrievedView.get();
 

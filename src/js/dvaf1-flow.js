@@ -77,7 +77,22 @@ $(function( $ ) {
 		'dvaf1-respondent-template': {},
 		'dvaf1-orders-template': {},
 		'dvaf1-applicant-template': {},
-		'dvaf1-court-template': {},
+		'dvaf1-court-template': {
+			relevance: {
+				'#dvaf1-court-safety-info': {
+					name: 'aggrievedCourtSafetyConcern',
+					value: 'Yes'
+				},
+				'#dvaf1-court-safety-attending': {
+					name: 'aggrievedCourtSafetyConcern',
+					value: 'Yes'
+				},
+				'#dvaf1-court-safety-leaving': {
+					name: 'aggrievedCourtSafetyConcern',
+					value: 'Yes'
+				}
+			}
+		},
 		'dvaf1-download-template': {}
 	};
 
