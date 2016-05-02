@@ -5,7 +5,7 @@ var CourtView = require( '../page/dvaf1.court.view.js' );
 var courtView;
 
 
-describe( 'download view', function() {
+describe( 'court view', function() {
 	beforeEach(function() {
 		courtView = new CourtView();
 		courtView.get();
