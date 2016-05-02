@@ -148,20 +148,20 @@
 
 
 					{{#if ordersExistYes}}
-						<input type="hidden" name="ordersChildrensCourtCurrent" value="{{ordersChildrensCourtCurrent}}">
-						<input type="hidden" name="ordersChildrensCourtPast" value="{{ordersChildrensCourtPast}}">
-						<input type="hidden" name="ordersQldDVOCurrent" value="{{ordersQldDVOCurrent}}">
-						<input type="hidden" name="ordersQldDVOPast" value="{{ordersQldDVOPast}}">
-						<input type="hidden" name="ordersPoliceProtectionCurrent" value="{{ordersPoliceProtectionCurrent}}">
-						<input type="hidden" name="ordersPoliceProtectionPast" value="{{ordersPoliceProtectionPast}}">
-						<input type="hidden" name="ordersVoluntaryInterventionCurrent" value="{{ordersVoluntaryInterventionCurrent}}">
-						<input type="hidden" name="ordersVoluntaryInterventionPast" value="{{ordersVoluntaryInterventionPast}}">
-						<input type="hidden" name="ordersInterstateDVOCurrent" value="{{ordersInterstateDVOCurrent}}">
-						<input type="hidden" name="ordersInterstateDVOPast" value="{{ordersInterstateDVOPast}}">
-						<input type="hidden" name="ordersNZDVOCurrent" value="{{ordersNZDVOCurrent}}">
-						<input type="hidden" name="ordersNZDVOPast" value="{{ordersNZDVOPast}}">
-						<input type="hidden" name="ordersFamilyCourtCurrent" value="{{ordersFamilyCourtCurrent}}">
-						<input type="hidden" name="ordersFamilyCourtPast" value="{{ordersFamilyCourtPast}}">
+						<input type="hidden" name="ordersChildrensCourtCurrent" value="{{selected.ordersChildrensCourt.Current}}">
+						<input type="hidden" name="ordersChildrensCourtPast" value="{{selected.ordersChildrensCourt.Past}}">
+						<input type="hidden" name="ordersQldDVOCurrent" value="{{selected.ordersQldDVO.Current}}">
+						<input type="hidden" name="ordersQldDVOPast" value="{{selected.ordersQldDVO.Past}}">
+						<input type="hidden" name="ordersPoliceProtectionCurrent" value="{{selected.ordersPoliceProtection.Current}}">
+						<input type="hidden" name="ordersPoliceProtectionPast" value="{{selected.ordersPoliceProtection.Past}}">
+						<input type="hidden" name="ordersVoluntaryInterventionCurrent" value="{{selected.ordersVoluntaryIntervention.Current}}">
+						<input type="hidden" name="ordersVoluntaryInterventionPast" value="{{selected.ordersVoluntaryIntervention.Past}}">
+						<input type="hidden" name="ordersInterstateDVOCurrent" value="{{selected.ordersInterstateDVO.Current}}">
+						<input type="hidden" name="ordersInterstateDVOPast" value="{{selected.ordersInterstateDVO.Past}}">
+						<input type="hidden" name="ordersNZDVOCurrent" value="{{selected.ordersNZDVO.Current}}">
+						<input type="hidden" name="ordersNZDVOPast" value="{{selected.ordersNZDVO.Past}}">
+						<input type="hidden" name="ordersFamilyCourtCurrent" value="{{selected.ordersFamilyCourt.Current}}">
+						<input type="hidden" name="ordersFamilyCourtPast" value="{{selected.ordersFamilyCourt.Past}}">
 						{{#if ordersOther}}
 							<input type="hidden" name="ordersOtherTitle" value="{{ordersOtherTitle}}">
 							<input type="hidden" name="ordersOtherCurrent" value="">

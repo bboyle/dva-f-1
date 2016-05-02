@@ -91,8 +91,20 @@ $(function() {
     function TheAggrieved() {
         return TitleCase(theAggrieved());
     }
+    function aggrievedName(define) {
+        return dvaf1Data.aggrievedNameGiven ? dvaf1Data.aggrievedNameGiven + (define === !0 ? " (the aggrieved)" : "") : "the aggrieved";
+    }
+    function AggrievedName(define) {
+        return dvaf1Data.respondentNameGiven ? dvaf1Data.aggrievedNameGiven + (define === !0 ? " (the aggrieved)" : "") : "The aggrieved";
+    }
+    function respondentName(define) {
+        return dvaf1Data.respondentNameGiven ? dvaf1Data.respondentNameGiven + (define === !0 ? " (the respondent)" : "") : "the respondent";
+    }
+    function RespondentName(define) {
+        return dvaf1Data.respondentNameGiven ? dvaf1Data.respondentNameGiven + (define === !0 ? " (the respondent)" : "") : "The respondent";
+    }
     function theAggrieveds() {
-        return dvaf1Data.userIsAggrieved ? "your" : dvaf1Data.aggrievedNameGiven ? dvaf1Data.aggrievedNameGiven + "’s" : "the aggrieved’s";
+        return dvaf1Data.userIsAggrieved ? "your" : aggrievedName() + "’s";
     }
     function TheAggrieveds() {
         return TitleCase(theAggrieveds());
@@ -130,22 +142,13 @@ $(function() {
         return dvaf1Data.userIsAggrieved === !1 ? dvaf1Data.aggrievedNameGiven : "you";
     }
     function aggrievedYou() {
-        return dvaf1Data.userIsAggrieved === !1 ? dvaf1Data.aggrievedNameGiven : "you";
+        return dvaf1Data.userIsAggrieved === !1 ? aggrievedName() : "you";
+    }
+    function aggrievedYouAre() {
+        return dvaf1Data.userIsAggrieved === !1 ? aggrievedName() + " is" : "you are";
     }
     function aggrievedYour() {
-        return dvaf1Data.userIsAggrieved === !1 ? dvaf1Data.aggrievedNameGiven : "your";
-    }
-    function aggrievedName(define) {
-        return dvaf1Data.aggrievedNameGiven ? dvaf1Data.aggrievedNameGiven + (define === !0 ? " (the aggrieved)" : "") : "the aggrieved";
-    }
-    function AggrievedName(define) {
-        return dvaf1Data.respondentNameGiven ? dvaf1Data.aggrievedNameGiven + (define === !0 ? " (the aggrieved)" : "") : "The aggrieved";
-    }
-    function respondentName(define) {
-        return dvaf1Data.respondentNameGiven ? dvaf1Data.respondentNameGiven + (define === !0 ? " (the respondent)" : "") : "the respondent";
-    }
-    function RespondentName(define) {
-        return dvaf1Data.respondentNameGiven ? dvaf1Data.respondentNameGiven + (define === !0 ? " (the respondent)" : "") : "The respondent";
+        return dvaf1Data.userIsAggrieved === !1 ? aggrievedName() : "your";
     }
     function we() {
         return dvaf1Data.userIsAggrieved === !1 ? aggrievedName() + " and " + respondentName() : "we";
@@ -156,8 +159,9 @@ $(function() {
     Handlebars.registerHelper("theAggrieved", theAggrieved), Handlebars.registerHelper("TheAggrieved", TheAggrieved), 
     Handlebars.registerHelper("aggrievedName", aggrievedName), Handlebars.registerHelper("AggrievedName", AggrievedName), 
     Handlebars.registerHelper("theAggrieveds", theAggrieveds), Handlebars.registerHelper("TheAggrieveds", TheAggrieveds), 
-    Handlebars.registerHelper("aggrievedYou", aggrievedYou), Handlebars.registerHelper("aggrievedYour", aggrievedYour), 
-    Handlebars.registerHelper("we", we), Handlebars.registerHelper("We", We), Handlebars.registerHelper("theRespondent", theRespondent), 
+    Handlebars.registerHelper("aggrievedYou", aggrievedYou), Handlebars.registerHelper("aggrievedYouAre", aggrievedYouAre), 
+    Handlebars.registerHelper("aggrievedYour", aggrievedYour), Handlebars.registerHelper("we", we), 
+    Handlebars.registerHelper("We", We), Handlebars.registerHelper("theRespondent", theRespondent), 
     Handlebars.registerHelper("RespondentName", RespondentName), Handlebars.registerHelper("respondentName", respondentName), 
     Handlebars.registerHelper("doesTheAggrieved", doesTheAggrieved), Handlebars.registerHelper("DoesTheAggrieved", DoesTheAggrieved), 
     Handlebars.registerHelper("aggrievedILive", aggrievedILive), Handlebars.registerHelper("TheAggrievedINeed", TheAggrievedINeed), 
@@ -282,7 +286,22 @@ $(function($) {
         "dvaf1-children-template": {},
         "dvaf1-associates-template": {},
         "dvaf1-respondent-template": {},
-        "dvaf1-orders-template": {},
+        "dvaf1-orders-template": {
+            relevance: {
+                "#dvfa1-orders-existing": {
+                    name: "ordersExist",
+                    value: "Yes"
+                },
+                "#dvfa1-orders-existing-other": {
+                    name: "ordersOther",
+                    values: [ "Current", "Past" ]
+                },
+                "#dvaf1-orders-cross-application-status": {
+                    name: "ordersCrossApplicationInProgress",
+                    value: "Yes"
+                }
+            }
+        },
         "dvaf1-applicant-template": {},
         "dvaf1-court-template": {
             relevance: {

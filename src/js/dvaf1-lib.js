@@ -27,15 +27,25 @@ $(function() {
 	}
 
 
+	function aggrievedName( define ) {
+		return dvaf1Data.aggrievedNameGiven ? dvaf1Data.aggrievedNameGiven + ( define === true ? ' (the aggrieved)' : '' ) : 'the aggrieved';
+	}
+	function AggrievedName( define ) {
+		return dvaf1Data.respondentNameGiven ? dvaf1Data.aggrievedNameGiven + ( define === true ? ' (the aggrieved)' : '' ) : 'The aggrieved';
+	}
+
+	function respondentName( define ) {
+		return dvaf1Data.respondentNameGiven ? dvaf1Data.respondentNameGiven + ( define === true ? ' (the respondent)' : '' ) : 'the respondent';
+	}
+	function RespondentName( define ) {
+		return dvaf1Data.respondentNameGiven ? dvaf1Data.respondentNameGiven + ( define === true ? ' (the respondent)' : '' ) : 'The respondent';
+	}
+
 	function theAggrieveds() {
 		if ( dvaf1Data.userIsAggrieved ) {
 			return 'your';
 		}
-		if ( dvaf1Data.aggrievedNameGiven ) {
-			return dvaf1Data.aggrievedNameGiven + '’s';
-		}
-
-		return 'the aggrieved’s';
+		return aggrievedName() + '’s';
 	}
 	function TheAggrieveds() {
 		return TitleCase( theAggrieveds() );
@@ -115,29 +125,21 @@ $(function() {
 	}
 	function aggrievedYou() {
 		if ( dvaf1Data.userIsAggrieved === false ) {
-			return dvaf1Data.aggrievedNameGiven;
+			return aggrievedName();
 		}
 		return 'you';
 	}
+	function aggrievedYouAre() {
+		if ( dvaf1Data.userIsAggrieved === false ) {
+			return aggrievedName() + ' is';
+		}
+		return 'you are';
+	}
 	function aggrievedYour() {
 		if ( dvaf1Data.userIsAggrieved === false ) {
-			return dvaf1Data.aggrievedNameGiven;
+			return aggrievedName();
 		}
 		return 'your';
-	}
-
-	function aggrievedName( define ) {
-		return dvaf1Data.aggrievedNameGiven ? dvaf1Data.aggrievedNameGiven + ( define === true ? ' (the aggrieved)' : '' ) : 'the aggrieved';
-	}
-	function AggrievedName( define ) {
-		return dvaf1Data.respondentNameGiven ? dvaf1Data.aggrievedNameGiven + ( define === true ? ' (the aggrieved)' : '' ) : 'The aggrieved';
-	}
-
-	function respondentName( define ) {
-		return dvaf1Data.respondentNameGiven ? dvaf1Data.respondentNameGiven + ( define === true ? ' (the respondent)' : '' ) : 'the respondent';
-	}
-	function RespondentName( define ) {
-		return dvaf1Data.respondentNameGiven ? dvaf1Data.respondentNameGiven + ( define === true ? ' (the respondent)' : '' ) : 'The respondent';
 	}
 
 	function we() {
@@ -157,6 +159,7 @@ $(function() {
 	Handlebars.registerHelper( 'theAggrieveds', theAggrieveds );
 	Handlebars.registerHelper( 'TheAggrieveds', TheAggrieveds );
 	Handlebars.registerHelper( 'aggrievedYou', aggrievedYou );
+	Handlebars.registerHelper( 'aggrievedYouAre', aggrievedYouAre );
 	Handlebars.registerHelper( 'aggrievedYour', aggrievedYour );
 
 	Handlebars.registerHelper( 'we', we );

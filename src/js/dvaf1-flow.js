@@ -98,7 +98,22 @@ $(function( $ ) {
 		'dvaf1-children-template': {},
 		'dvaf1-associates-template': {},
 		'dvaf1-respondent-template': {},
-		'dvaf1-orders-template': {},
+		'dvaf1-orders-template': {
+			relevance: {
+				'#dvfa1-orders-existing': {
+					name: 'ordersExist',
+					value: 'Yes'
+				},
+				'#dvfa1-orders-existing-other': {
+					name: 'ordersOther',
+					values: [ 'Current', 'Past' ]
+				},
+				'#dvaf1-orders-cross-application-status': {
+					name: 'ordersCrossApplicationInProgress',
+					value: 'Yes'
+				}
+			}
+		},
 		'dvaf1-applicant-template': {},
 		'dvaf1-court-template': {
 			relevance: {
