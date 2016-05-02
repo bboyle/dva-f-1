@@ -103,6 +103,12 @@ $(function() {
     function TheAggrievedINeed() {
         return dvaf1Data.userIsAggrieved ? "I need" : dvaf1Data.userRelationship && "someone" !== dvaf1Data.userRelationship ? "My " + dvaf1Data.userRelationship + " needs" : "The aggrieved needs";
     }
+    function theAggrievedWants() {
+        return dvaf1Data.userIsAggrieved ? "You want" : dvaf1Data.aggrievedNameGiven ? dvaf1Data.aggrievedNameGiven + " wants" : "The aggrieved wants";
+    }
+    function TheAggrievedWants() {
+        return TitleCase(theAggrievedWants());
+    }
     function theAggrievedMy() {
         return dvaf1Data.userIsAggrieved ? "my" : genderPronoun(dvaf1Data.aggrievedGender, "her", "his", "their");
     }
@@ -126,6 +132,7 @@ $(function() {
     Handlebars.registerHelper("theRespondent", theRespondent), Handlebars.registerHelper("RespondentName", RespondentName), 
     Handlebars.registerHelper("respondentName", respondentName), Handlebars.registerHelper("doesTheAggrieved", doesTheAggrieved), 
     Handlebars.registerHelper("DoesTheAggrieved", DoesTheAggrieved), Handlebars.registerHelper("TheAggrievedINeed", TheAggrievedINeed), 
+    Handlebars.registerHelper("TheAggrievedWants", TheAggrievedWants), Handlebars.registerHelper("theAggrievedWants", theAggrievedWants), 
     Handlebars.registerHelper("theAggrievedMy", theAggrievedMy), Handlebars.registerHelper("theAggrievedThey", theAggrievedThey), 
     Handlebars.registerHelper("TheAggrievedIs", function() {
         return dvaf1Data.userIsAggrieved ? "You are" : dvaf1Data.userRelationship ? "someone" === dvaf1Data.userRelationship ? "They are" : "Your " + dvaf1Data.userRelationship + " is" : "The aggrieved is";

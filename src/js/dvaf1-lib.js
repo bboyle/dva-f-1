@@ -61,6 +61,19 @@ $(function() {
 		return 'The aggrieved needs';
 	}
 
+	function theAggrievedWants() {
+		if ( dvaf1Data.userIsAggrieved ) {
+			return 'You want';
+		} else if ( dvaf1Data.aggrievedNameGiven ) {
+			return dvaf1Data.aggrievedNameGiven + ' wants';
+		}
+
+		return 'The aggrieved wants';
+	}
+	function TheAggrievedWants() {
+		return TitleCase( theAggrievedWants() );
+	}
+
 	function theAggrievedMy() {
 		if ( dvaf1Data.userIsAggrieved ) {
 			return 'my';
@@ -107,6 +120,8 @@ $(function() {
 	Handlebars.registerHelper( 'DoesTheAggrieved', DoesTheAggrieved );
 
 	Handlebars.registerHelper( 'TheAggrievedINeed', TheAggrievedINeed );
+	Handlebars.registerHelper( 'TheAggrievedWants', TheAggrievedWants );
+	Handlebars.registerHelper( 'theAggrievedWants', theAggrievedWants );
 	Handlebars.registerHelper( 'theAggrievedMy', theAggrievedMy );
 	Handlebars.registerHelper( 'theAggrievedThey', theAggrievedThey );
 

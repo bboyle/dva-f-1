@@ -1,4 +1,12 @@
-<h2>Relationship to the respondent</h2>
+<div class="status info" ng-if="interview.aggrieved.name.given &amp;&amp; interview.respondent.name.given">
+	<h2>{{TheAggrievedWants}} protection from {{respondentName}}</h2>
+	<ul>
+		<li>{{TheAggrievedIs}} the <dfn>aggrieved</dfn> (the person wanting protection).</li>
+		{{#if userIsAggrieved}}<li>You are also the <dfn>applicant</dfn> (the person applying for a protection order)</li>{{/if}}
+		<li>{{RespondentName}} is the <dfn>respondent</dfn> (the person {{theAggrievedWants}} protection from).</li>
+		{{#unless userIsAggrieved}}<li>You are the <dfn>applicant</dfn> (the person applying for a protection order).</li>{{/unless}}
+	</ul>
+</div>
 
 <form class="form" name="formRelationship">
 	<ol class="questions">

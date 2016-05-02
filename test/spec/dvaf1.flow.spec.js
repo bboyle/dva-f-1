@@ -24,7 +24,7 @@ function itShouldVisitPagesInOrder() {
 	expect( page.form.getAttribute( 'name' )).toBe( 'formRespondentBasic' );
 	page.continue();
 
-	expect( page.title ).toEqual( 'Relationship to the respondent' );
+	expect( page.title ).toEqual( 'The aggrieved wants protection from the respondent' );
 	expect( page.form.getAttribute( 'name' )).toBe( 'formRelationship' );
 	page.continue();
 
