@@ -74,6 +74,7 @@ $(function( $ ) {
 		if ( question.is( 'select,:radio,:checkbox' )) {
 			// store boolean helpers
 			if ( question.is( ':checkbox' )) {
+				data.selected[ name ] = data.selected[ name ] || {};
 				data.selected[ name ][ value ] = event.target.checked;
 			} else {
 				data.selected[ name ] = {};

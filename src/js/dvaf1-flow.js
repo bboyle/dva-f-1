@@ -67,7 +67,30 @@ $(function( $ ) {
 		},
 		'dvaf1-aggrieved-basic-template': {},
 		'dvaf1-respondent-basic-template': {},
-		'dvaf1-relationship-template': {},
+		'dvaf1-relationship-template': {
+			relevance: {
+				'#dvaf1-relationship-commercialcare': {
+					name: 'aggrievedRelationship',
+					value: 'CommercialCare'
+				},
+				'#dvaf1-relationship-intimate': {
+					name: 'aggrievedRelationship',
+					value: 'Intimate'
+				},
+				'#dvaf1-relationship-intimate-couple': {
+					name: 'aggrievedRelationshipType',
+					values: [ 'Couple', 'FormerCouple' ]
+				},
+				'#dvaf1-relationship-family': {
+					name: 'aggrievedRelationship',
+					value: 'Family'
+				},
+				'#dvaf1-relationship-informalcare': {
+					name: 'aggrievedRelationship',
+					value: 'InformalCare'
+				}
+			}
+		},
 		'dvaf1-grounds-template': {},
 		'dvaf1-conditions-template': {},
 		'dvaf1-urgent-template': {},

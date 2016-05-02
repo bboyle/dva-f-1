@@ -1,4 +1,4 @@
-<div class="status info" ng-if="interview.aggrieved.name.given &amp;&amp; interview.respondent.name.given">
+<div class="status info">
 	<h2>{{TheAggrievedWants}} protection from {{respondentName}}</h2>
 	<ul>
 		<li>{{TheAggrievedIs}} the <dfn>aggrieved</dfn> (the person wanting protection).</li>
@@ -10,6 +10,148 @@
 
 <form class="form" name="formRelationship">
 	<ol class="questions">
+		<li>
+			<fieldset>
+				<legend>
+					<span class="label">What is {{theAggrieveds}} relationship to {{respondentName}}?</span>
+				</legend>
+				<ul class="choices">
+					<li>
+						<input type="checkbox" name="aggrievedRelationship" value="Intimate" id="relationship-intimate-personal"{{#if selected.aggrievedRelationship.Intimate}} checked{{/if}}>
+						<label for="relationship-intimate-personal">{{we}} have (or had) an intimate personal relationship</label>
+						<small class="hint">Example: are/were married or in a civil partnership, have/had a child together, are/were dating, are/were a couple.</small>
+					</li>
+					<li>
+						<input type="checkbox" name="aggrievedRelationship" value="Family" id="relationship-family"{{#if selected.aggrievedRelationship.Family}} checked{{/if}}>
+						<label for="relationship-family">{{#if userIsAggrieved}}we are related{{else}}{{aggrievedName}} is related to {{respondentName}}{{/if}}</label>
+						<small class="hint">Includes {{theAggrieveds}} immediate and extended family, in-laws, step- or foster family.</small>
+					</li>
+					<li>
+						<input type="checkbox" name="aggrievedRelationship" value="InformalCare" id="relationship-informal-care"{{#if selected.aggrievedRelationship.InformalCare}} checked{{/if}}>
+						<label for="relationship-informal-care">{{respondentName}} helps care for {{aggrievedMe}}</label>
+						<small class="hint">Examples of <dfn>informal care</dfn>: dressing or other personal grooming; preparing meals or helping with eating; shopping for groceries; or calling a specialist to make a medical appointment.</small>
+					</li>
+					<li>
+						<input type="checkbox" name="aggrievedRelationship" value="CommercialCare" id="relationship-commercial-care"{{#if selected.aggrievedRelationship.CommercialCare}} checked{{/if}}>
+						<label for="relationship-commercial-care">{{respondentName}} is {{aggrievedMy}} paid carer</label>
+						<small class="hint">Example: <dfn>commercial care</dfn> by a nurse.</small>
+					</li>
+				</ul>
+			</fieldset>
+		</li>
+
+		<li id="dvaf1-relationship-commercialcare">
+			<div class="status warn">
+				<h2>You need to lodge a complaint with the service provider</h2>
+				<p>A domestic violence provention order only applies to domestic relationships. The magistrate cannot give you a protection order naming a carer who is paid.</p>
+				<p>You should seek legal advice.</p>
+			</div>
+		</li>
+
+		<li id="dvaf1-relationship-intimate">
+			<fieldset>
+				<legend>
+					<span class="label">{{we}}:</span>
+				</legend>
+				<ul class="choices">
+					<li>
+						<input type="checkbox" name="aggrievedRelationshipType" value="Married" id="relationship-married"{{#if selected.aggrievedRelationshipType.Married}} checked{{/if}}>
+						<label for="relationship-married">are married</label>
+					</li>
+					<li>
+						<input type="checkbox" name="aggrievedRelationshipType" value="FormerSpouse" id="relationship-former-spouse"{{#if selected.aggrievedRelationshipType.FormerSpouse}} checked{{/if}}>
+						<label for="relationship-former-spouse">were married</label>
+					</li>
+					<li>
+						<input type="checkbox" name="aggrievedRelationshipType" value="DeFacto" id="relationship-de-facto"{{#if selected.aggrievedRelationshipType.DeFacto}} checked{{/if}}>
+						<label for="relationship-de-facto">are in a <dfn>de facto</dfn> relationship</label>
+						<small class="hint">2 people living together as a couple who are not married or related</small>
+					</li>
+					<li>
+						<input type="checkbox" name="aggrievedRelationshipType" value="FormerDeFacto" id="relationship-former-de-facto"{{#if selected.aggrievedRelationshipType.FormerDeFacto}} checked{{/if}}>
+						<label for="relationship-former-de-facto">were in a <dfn>de facto</dfn> relationship</label>
+						<small class="hint">2 people who lived together as a couple who were not married or related</small>
+					</li>
+					<li>
+						<input type="checkbox" name="aggrievedRelationshipType" value="CivilPartnership" id="relationship-registered-relationship"{{#if selected.aggrievedRelationshipType.CivilPartnership}} checked{{/if}}>
+						<label for="relationship-registered-relationship">are in a civil partnership</label>
+					</li>
+					<li>
+						<input type="checkbox" name="aggrievedRelationshipType" value="FormerCivilPartnership" id="relationship-registered-relationship-past"{{#if selected.aggrievedRelationshipType.FormerCivilPartnership}} checked{{/if}}>
+						<label for="relationship-registered-relationship-past">were in a civil partnership</label>
+					</li>
+					<li>
+						<input type="checkbox" name="aggrievedRelationshipType" value="Parent" id="relationship-parent-of-a-child"{{#if selected.aggrievedRelationshipType.Parent}} checked{{/if}}>
+						<label for="relationship-parent-of-a-child">are parents of the same child</label>
+					</li>
+					<li>
+						<input type="checkbox" name="aggrievedRelationshipType" value="FormerParent" id="relationship-former-parent-of-a-child"{{#if selected.aggrievedRelationshipType.FormerParent}} checked{{/if}}>
+						<label for="relationship-former-parent-of-a-child">were parents of the same child</label>
+					</li>
+					<li>
+						<input type="checkbox" name="aggrievedRelationshipType" value="Engaged" id="relationship-engaged"{{#if selected.aggrievedRelationshipType.Engaged}} checked{{/if}}>
+						<label for="relationship-engaged">are engaged</label>
+					</li>
+					<li>
+						<input type="checkbox" name="aggrievedRelationshipType" value="WereEngaged" id="relationship-were-engaged"{{#if selected.aggrievedRelationshipType.WereEngaged}} checked{{/if}}>
+						<label for="relationship-were-engaged">were engaged</label>
+					</li>
+					<li>
+						<input type="checkbox" name="aggrievedRelationshipType" value="Couple" id="relationship-couple"{{#if selected.aggrievedRelationshipType.Couple}} checked{{/if}}>
+						<label for="relationship-couple">are a couple</label>
+					</li>
+					<li>
+						<input type="checkbox" name="aggrievedRelationshipType" value="FormerCouple" id="relationship-couple-past"{{#if selected.aggrievedRelationshipType.FormerCouple}} checked{{/if}}>
+						<label for="relationship-couple-past">were a couple</label>
+					</li>
+				</ul>
+			</fieldset>
+		</li>
+
+		<li id="dvaf1-relationship-family">
+			<label for="family-relationship">
+				<span class="label">How are {{#if userIsAggrieved}}you related to {{respondentName}}{{else}}{{aggrievedName}} and {{respondentName}} related{{/if}}?</span>
+			</label>
+			<input for="family-relationship" type="text" name="situationParty" size="20" value="{{situationParty}}">
+		</li>
+
+		<li id="dvaf1-relationship-intimate-couple">
+			<label for="relationship-couple">
+				<span class="label">Describe how {{aggrievedYou}} and {{respondentName}} {{#if aggrievedRelationshipTypeCouple}}are{{else}}were{{/if}} a couple</span>
+				<small class="hint">Describe {{aggrivedYour}} level of dependence on each other, whether financial or otherwise; how long you've been in a relationship; how often {{aggrievedYou}} have contact and {{aggrievedYour}} degree of intimacy (if any).</small>
+			</label>
+			<textarea cols="40" rows="2" id="relationship-couple" name="aggrievedRelationshipCouple" spellcheck="true">{{aggrievedRelationshipCouple}}</textarea>
+		</li>
+
+		<li id="dvaf1-relationship-informalcare">
+			<label for="relationship-family-informal-care-specify">
+				<span class="label">Describe the relationship {{#if userIsAggrieved}}you have with{{else}}between {{aggrievedName}} and{{/if}} {{respondentName}}</span>
+			</label>
+			<textarea cols="40" rows="2" id="relationship-family-informal-care-specify" name="aggrievedRelationshipInformalCareDescription" spellcheck="true">{{aggrievedRelationshipInformalCareDescription}}</textarea>
+		</li>
+
+		<li>
+			<fieldset>
+				<legend>
+					<span class="label">Do {{#if userIsAggrieved}}you{{else}}{{aggrievedName}} and {{respondentName}}{{/if}} share a home?</span>
+				</legend>
+				<ul class="choices">
+					<li>
+						<input type="radio" name="interview-relationship-home" name="relationshipHome" value="Shared" id="relationship-home-together"{{#if selected.relationshipHome.Shared}} checked{{/if}}>
+						<label for="relationship-home-together">{{we}} live together</label>
+					</li>
+					<li>
+						<input type="radio" name="interview-relationship-home" name="relationshipHome" value="Known" id="relationship-home-known"{{#if selected.relationshipHome.Known}} checked{{/if}}>
+						<label for="relationship-home-known">{{respondentName}} knows where {{aggrievedILive}}</label>
+					</li>
+					<li>
+						<input type="radio" name="interview-relationship-home" name="relationshipHome" value="Private" id="relationship-home-private"{{#if selected.relationshipHome.Private}} checked{{/if}}>
+						<label for="relationship-home-private">{{respondentName}} does <strong>not know</strong> {{aggrievedMy}} home address</label>
+					</li>
+				</ul>
+			</fieldset>
+		</li>
+
 		<li>
 			<ul class="actions">
 				<li><strong><button>Continue</button></strong></li>

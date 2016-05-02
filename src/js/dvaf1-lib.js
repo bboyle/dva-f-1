@@ -27,6 +27,20 @@ $(function() {
 	}
 
 
+	function theAggrieveds() {
+		if ( dvaf1Data.userIsAggrieved ) {
+			return 'your';
+		}
+		if ( dvaf1Data.aggrievedNameGiven ) {
+			return dvaf1Data.aggrievedNameGiven + '’s';
+		}
+
+		return 'the aggrieved’s';
+	}
+	function TheAggrieveds() {
+		return TitleCase( theAggrieveds() );
+	}
+
 	function doesTheAggrieved() {
 		if ( dvaf1Data.userIsAggrieved ) {
 			return 'do you';
@@ -50,6 +64,13 @@ $(function() {
 	}
 
 
+	function aggrievedILive() {
+		if ( dvaf1Data.userIsAggrieved ) {
+			return 'I live';
+		}
+		var she = genderPronoun( dvaf1Data.aggrievedGender, 'she', 'he', 'they' );
+		return she === 'they' ? 'they live' : she + ' lives';
+	}
 	function TheAggrievedINeed() {
 		if ( dvaf1Data.userIsAggrieved ) {
 			return 'I need';
@@ -74,7 +95,13 @@ $(function() {
 		return TitleCase( theAggrievedWants() );
 	}
 
-	function theAggrievedMy() {
+	function aggrievedMe() {
+		if ( dvaf1Data.userIsAggrieved ) {
+			return 'me';
+		}
+		return genderPronoun( dvaf1Data.aggrievedGender, 'her', 'him', 'them' );
+	}
+	function aggrievedMy() {
 		if ( dvaf1Data.userIsAggrieved ) {
 			return 'my';
 		}
@@ -99,6 +126,12 @@ $(function() {
 		return 'your';
 	}
 
+	function aggrievedName( define ) {
+		return dvaf1Data.aggrievedNameGiven ? dvaf1Data.aggrievedNameGiven + ( define === true ? ' (the aggrieved)' : '' ) : 'the aggrieved';
+	}
+	function AggrievedName( define ) {
+		return dvaf1Data.respondentNameGiven ? dvaf1Data.aggrievedNameGiven + ( define === true ? ' (the aggrieved)' : '' ) : 'The aggrieved';
+	}
 
 	function respondentName( define ) {
 		return dvaf1Data.respondentNameGiven ? dvaf1Data.respondentNameGiven + ( define === true ? ' (the respondent)' : '' ) : 'the respondent';
@@ -107,10 +140,27 @@ $(function() {
 		return dvaf1Data.respondentNameGiven ? dvaf1Data.respondentNameGiven + ( define === true ? ' (the respondent)' : '' ) : 'The respondent';
 	}
 
+	function we() {
+		if ( dvaf1Data.userIsAggrieved === false ) {
+			return aggrievedName() + ' and ' + respondentName();
+		}
+		return 'we';
+	}
+	function We() {
+		return TitleCase( we() );
+	}
+
 	Handlebars.registerHelper( 'theAggrieved', theAggrieved );
 	Handlebars.registerHelper( 'TheAggrieved', TheAggrieved );
+	Handlebars.registerHelper( 'aggrievedName', aggrievedName );
+	Handlebars.registerHelper( 'AggrievedName', AggrievedName );
+	Handlebars.registerHelper( 'theAggrieveds', theAggrieveds );
+	Handlebars.registerHelper( 'TheAggrieveds', TheAggrieveds );
 	Handlebars.registerHelper( 'aggrievedYou', aggrievedYou );
 	Handlebars.registerHelper( 'aggrievedYour', aggrievedYour );
+
+	Handlebars.registerHelper( 'we', we );
+	Handlebars.registerHelper( 'We', We );
 
 	Handlebars.registerHelper( 'theRespondent', theRespondent );
 	Handlebars.registerHelper( 'RespondentName', RespondentName );
@@ -119,10 +169,12 @@ $(function() {
 	Handlebars.registerHelper( 'doesTheAggrieved', doesTheAggrieved );
 	Handlebars.registerHelper( 'DoesTheAggrieved', DoesTheAggrieved );
 
+	Handlebars.registerHelper( 'aggrievedILive', aggrievedILive );
 	Handlebars.registerHelper( 'TheAggrievedINeed', TheAggrievedINeed );
 	Handlebars.registerHelper( 'TheAggrievedWants', TheAggrievedWants );
 	Handlebars.registerHelper( 'theAggrievedWants', theAggrievedWants );
-	Handlebars.registerHelper( 'theAggrievedMy', theAggrievedMy );
+	Handlebars.registerHelper( 'aggrievedMe', aggrievedMe );
+	Handlebars.registerHelper( 'aggrievedMy', aggrievedMy );
 	Handlebars.registerHelper( 'theAggrievedThey', theAggrievedThey );
 
 

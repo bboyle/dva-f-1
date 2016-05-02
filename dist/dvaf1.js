@@ -1,4 +1,4 @@
-/*! dva-f-1 - v1.0.0 - 2016-05-02
+/*! dva-f-1 - v1.0.0 - 2016-05-03
 * https://github.com/bboyle/dva-f-1#readme
 * Copyright (c) 2016 Queensland Government; Licensed BSD-3-Clause */
 /* global Handlebars */
@@ -49,7 +49,7 @@ $(function($) {
         data[name] = parseValue(value), value.length && (value = value.replace(/\s+/g, "")), 
         question.is("select,:radio,:checkbox")) // handle data changes
         switch (// store boolean helpers
-        question.is(":checkbox") ? data.selected[name][value] = event.target.checked : (data.selected[name] = {}, 
+        question.is(":checkbox") ? (data.selected[name] = data.selected[name] || {}, data.selected[name][value] = event.target.checked) : (data.selected[name] = {}, 
         data.selected[name][value] = !0), name) {
           case "situationParty":
             parseGender("respondentGender", value);
@@ -91,6 +91,12 @@ $(function() {
     function TheAggrieved() {
         return TitleCase(theAggrieved());
     }
+    function theAggrieveds() {
+        return dvaf1Data.userIsAggrieved ? "your" : dvaf1Data.aggrievedNameGiven ? dvaf1Data.aggrievedNameGiven + "’s" : "the aggrieved’s";
+    }
+    function TheAggrieveds() {
+        return TitleCase(theAggrieveds());
+    }
     function doesTheAggrieved() {
         return dvaf1Data.userIsAggrieved ? "do you" : dvaf1Data.aggrievedNameGiven ? "does " + dvaf1Data.aggrievedNameGiven : dvaf1Data.userRelationship ? "someone" === dvaf1Data.userRelationship ? "do they" : "does your " + dvaf1Data.userRelationship : "does the aggrieved";
     }
@@ -99,6 +105,11 @@ $(function() {
     }
     function genderPronoun(gender, feminine, masculine, generic) {
         return dvaf1Data.FEMININE_GENDER.test(gender) ? feminine : dvaf1Data.MASCULINE_GENDER.test(gender) ? masculine : generic;
+    }
+    function aggrievedILive() {
+        if (dvaf1Data.userIsAggrieved) return "I live";
+        var she = genderPronoun(dvaf1Data.aggrievedGender, "she", "he", "they");
+        return "they" === she ? "they live" : she + " lives";
     }
     function TheAggrievedINeed() {
         return dvaf1Data.userIsAggrieved ? "I need" : dvaf1Data.userRelationship && "someone" !== dvaf1Data.userRelationship ? "My " + dvaf1Data.userRelationship + " needs" : "The aggrieved needs";
@@ -109,7 +120,10 @@ $(function() {
     function TheAggrievedWants() {
         return TitleCase(theAggrievedWants());
     }
-    function theAggrievedMy() {
+    function aggrievedMe() {
+        return dvaf1Data.userIsAggrieved ? "me" : genderPronoun(dvaf1Data.aggrievedGender, "her", "him", "them");
+    }
+    function aggrievedMy() {
         return dvaf1Data.userIsAggrieved ? "my" : genderPronoun(dvaf1Data.aggrievedGender, "her", "his", "their");
     }
     function theAggrievedThey() {
@@ -121,20 +135,35 @@ $(function() {
     function aggrievedYour() {
         return dvaf1Data.userIsAggrieved === !1 ? dvaf1Data.aggrievedNameGiven : "your";
     }
+    function aggrievedName(define) {
+        return dvaf1Data.aggrievedNameGiven ? dvaf1Data.aggrievedNameGiven + (define === !0 ? " (the aggrieved)" : "") : "the aggrieved";
+    }
+    function AggrievedName(define) {
+        return dvaf1Data.respondentNameGiven ? dvaf1Data.aggrievedNameGiven + (define === !0 ? " (the aggrieved)" : "") : "The aggrieved";
+    }
     function respondentName(define) {
         return dvaf1Data.respondentNameGiven ? dvaf1Data.respondentNameGiven + (define === !0 ? " (the respondent)" : "") : "the respondent";
     }
     function RespondentName(define) {
         return dvaf1Data.respondentNameGiven ? dvaf1Data.respondentNameGiven + (define === !0 ? " (the respondent)" : "") : "The respondent";
     }
+    function we() {
+        return dvaf1Data.userIsAggrieved === !1 ? aggrievedName() + " and " + respondentName() : "we";
+    }
+    function We() {
+        return TitleCase(we());
+    }
     Handlebars.registerHelper("theAggrieved", theAggrieved), Handlebars.registerHelper("TheAggrieved", TheAggrieved), 
+    Handlebars.registerHelper("aggrievedName", aggrievedName), Handlebars.registerHelper("AggrievedName", AggrievedName), 
+    Handlebars.registerHelper("theAggrieveds", theAggrieveds), Handlebars.registerHelper("TheAggrieveds", TheAggrieveds), 
     Handlebars.registerHelper("aggrievedYou", aggrievedYou), Handlebars.registerHelper("aggrievedYour", aggrievedYour), 
-    Handlebars.registerHelper("theRespondent", theRespondent), Handlebars.registerHelper("RespondentName", RespondentName), 
-    Handlebars.registerHelper("respondentName", respondentName), Handlebars.registerHelper("doesTheAggrieved", doesTheAggrieved), 
-    Handlebars.registerHelper("DoesTheAggrieved", DoesTheAggrieved), Handlebars.registerHelper("TheAggrievedINeed", TheAggrievedINeed), 
+    Handlebars.registerHelper("we", we), Handlebars.registerHelper("We", We), Handlebars.registerHelper("theRespondent", theRespondent), 
+    Handlebars.registerHelper("RespondentName", RespondentName), Handlebars.registerHelper("respondentName", respondentName), 
+    Handlebars.registerHelper("doesTheAggrieved", doesTheAggrieved), Handlebars.registerHelper("DoesTheAggrieved", DoesTheAggrieved), 
+    Handlebars.registerHelper("aggrievedILive", aggrievedILive), Handlebars.registerHelper("TheAggrievedINeed", TheAggrievedINeed), 
     Handlebars.registerHelper("TheAggrievedWants", TheAggrievedWants), Handlebars.registerHelper("theAggrievedWants", theAggrievedWants), 
-    Handlebars.registerHelper("theAggrievedMy", theAggrievedMy), Handlebars.registerHelper("theAggrievedThey", theAggrievedThey), 
-    Handlebars.registerHelper("TheAggrievedIs", function() {
+    Handlebars.registerHelper("aggrievedMe", aggrievedMe), Handlebars.registerHelper("aggrievedMy", aggrievedMy), 
+    Handlebars.registerHelper("theAggrievedThey", theAggrievedThey), Handlebars.registerHelper("TheAggrievedIs", function() {
         return dvaf1Data.userIsAggrieved ? "You are" : dvaf1Data.userRelationship ? "someone" === dvaf1Data.userRelationship ? "They are" : "Your " + dvaf1Data.userRelationship + " is" : "The aggrieved is";
     }), Handlebars.registerHelper("aggrievedTheir", function() {
         return dvaf1Data.userIsAggrieved ? "your" : genderPronoun(dvaf1Data.aggrievedGender, "her", "his", "their");
@@ -222,7 +251,30 @@ $(function($) {
         },
         "dvaf1-aggrieved-basic-template": {},
         "dvaf1-respondent-basic-template": {},
-        "dvaf1-relationship-template": {},
+        "dvaf1-relationship-template": {
+            relevance: {
+                "#dvaf1-relationship-commercialcare": {
+                    name: "aggrievedRelationship",
+                    value: "CommercialCare"
+                },
+                "#dvaf1-relationship-intimate": {
+                    name: "aggrievedRelationship",
+                    value: "Intimate"
+                },
+                "#dvaf1-relationship-intimate-couple": {
+                    name: "aggrievedRelationshipType",
+                    values: [ "Couple", "FormerCouple" ]
+                },
+                "#dvaf1-relationship-family": {
+                    name: "aggrievedRelationship",
+                    value: "Family"
+                },
+                "#dvaf1-relationship-informalcare": {
+                    name: "aggrievedRelationship",
+                    value: "InformalCare"
+                }
+            }
+        },
         "dvaf1-grounds-template": {},
         "dvaf1-conditions-template": {},
         "dvaf1-urgent-template": {},
