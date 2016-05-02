@@ -1,7 +1,7 @@
 <div class="status info">
 	<h2>Preparing for court</h2>
 
-	<p>{{RespondentName}} will be given a copy of the application which includes a notice to appear in court at the same time.</p>
+	<p>{{RespondentName true}} will be given a copy of the application which includes a notice to appear in court at the same time.</p>
 
 	<p>Courthouses have safety measures in place such as safe rooms (or other rooms or areas where {{theAggrievedYou}} can wait separately).
 	   Most courthouses also have security officers and security cameras.</p>
@@ -42,14 +42,14 @@
 		<li id="dvaf1-court-safety-attending" class="confidential">
 			<label for="court-safety-attending">
 				<span class="label">Are you concerned that {{theAggrievedThey}} may be in danger while attending court?</span>
-				<small class="hint">CONFIDENTIAL (not shared with {{RespondentName}})</small>
+				<small class="hint">CONFIDENTIAL (not shared with {{respondentName}})</small>
 			</label>
 			<textarea id="court-safety-attending" name="aggrievedCourtSafetyAttending" spellcheck="true" cols="40" rows="10">{{aggrievedCourtSafetyAttending}}</textarea>
 		</li>
 		<li id="dvaf1-court-safety-leaving" class="confidential">
 			<label for="court-safety-leaving">
 				<span class="label">Are you concerned about {{theAggrievedYour}} safety when leaving the court building?</span>
-				<small class="hint">CONFIDENTIAL (not shared with {{RespondentName}})</small>
+				<small class="hint">CONFIDENTIAL (not shared with {{respondentName}})</small>
 			</label>
 			<textarea id="court-safety-leaving" name="aggrievedCourtSafetyLeaving" spellcheck="true" cols="40" rows="10">{{aggrievedCourtSafetyAttending}}</textarea>
 		</li>

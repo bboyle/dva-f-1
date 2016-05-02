@@ -26,4 +26,26 @@ describe( 'download view', function() {
 		expect( courtView.safetyFormLeaving.isDisplayed() ).toBe( true );
 	});
 
+	it( 'should use correct pronouns', function() {
+		courtView.choose( 'aggrievedCourtSafetyConcern', 'Yes' );
+
+		expect( courtView.firstParagraph.getText() ).toBe( 'The respondent will be given a copy of the application which includes a notice to appear in court at the same time.' );
+		expect( courtView.safetyFormAttending.element( by.css( '.label' )).getText() ).toBe( 'Are you concerned that you may be in danger while attending court?' );
+		expect( courtView.safetyFormAttending.element( by.css( '.hint' )).getText() ).toBe( 'CONFIDENTIAL (not shared with the respondent)' );
+
+		courtView.chooseUserIsNotAggrieved();
+		courtView.setAggrieved( courtView.KIM );
+		courtView.setRespondent( courtView.ASHLEY );
+		courtView.get();
+
+		expect( courtView.firstParagraph.getText() ).toBe( 'Ashley (the respondent) will be given a copy of the application which includes a notice to appear in court at the same time.' );
+		expect( courtView.safetyFormAttending.element( by.css( '.label' )).getText() ).toBe( 'Are you concerned that Kim may be in danger while attending court?' );
+		expect( courtView.safetyFormAttending.element( by.css( '.hint' )).getText() ).toBe( 'CONFIDENTIAL (not shared with Ashley)' );
+
+		courtView.chooseUserIsAggrieved();
+		courtView.get();
+
+		expect( courtView.safetyFormAttending.element( by.css( '.label' )).getText() ).toBe( 'Are you concerned that you may be in danger while attending court?' );
+	});
+
 });

@@ -67,17 +67,48 @@ $(function() {
 		}
 		return genderPronoun( dvaf1Data.aggrievedGender, 'her', 'his', 'their' );
 	}
+	function theAggrievedThey() {
+		if ( dvaf1Data.userIsAggrieved === false ) {
+			return dvaf1Data.aggrievedNameGiven;
+		}
+		return 'you';
+	}
+	function aggrievedYou() {
+		if ( dvaf1Data.userIsAggrieved === false ) {
+			return dvaf1Data.aggrievedNameGiven;
+		}
+		return 'you';
+	}
+	function aggrievedYour() {
+		if ( dvaf1Data.userIsAggrieved === false ) {
+			return dvaf1Data.aggrievedNameGiven;
+		}
+		return 'your';
+	}
+
+
+	function respondentName( define ) {
+		return dvaf1Data.respondentNameGiven ? dvaf1Data.respondentNameGiven + ( define === true ? ' (the respondent)' : '' ) : 'the respondent';
+	}
+	function RespondentName( define ) {
+		return dvaf1Data.respondentNameGiven ? dvaf1Data.respondentNameGiven + ( define === true ? ' (the respondent)' : '' ) : 'The respondent';
+	}
 
 	Handlebars.registerHelper( 'theAggrieved', theAggrieved );
 	Handlebars.registerHelper( 'TheAggrieved', TheAggrieved );
+	Handlebars.registerHelper( 'aggrievedYou', aggrievedYou );
+	Handlebars.registerHelper( 'aggrievedYour', aggrievedYour );
 
 	Handlebars.registerHelper( 'theRespondent', theRespondent );
+	Handlebars.registerHelper( 'RespondentName', RespondentName );
+	Handlebars.registerHelper( 'respondentName', respondentName );
 
 	Handlebars.registerHelper( 'doesTheAggrieved', doesTheAggrieved );
 	Handlebars.registerHelper( 'DoesTheAggrieved', DoesTheAggrieved );
 
 	Handlebars.registerHelper( 'TheAggrievedINeed', TheAggrievedINeed );
 	Handlebars.registerHelper( 'theAggrievedMy', theAggrievedMy );
+	Handlebars.registerHelper( 'theAggrievedThey', theAggrievedThey );
 
 
 	Handlebars.registerHelper( 'TheAggrievedIs', function() {

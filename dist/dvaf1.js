@@ -1,4 +1,4 @@
-/*! dva-f-1 - v1.0.0 - 2016-04-29
+/*! dva-f-1 - v1.0.0 - 2016-05-02
 * https://github.com/bboyle/dva-f-1#readme
 * Copyright (c) 2016 Queensland Government; Licensed BSD-3-Clause */
 /* global Handlebars */
@@ -106,10 +106,28 @@ $(function() {
     function theAggrievedMy() {
         return dvaf1Data.userIsAggrieved ? "my" : genderPronoun(dvaf1Data.aggrievedGender, "her", "his", "their");
     }
+    function theAggrievedThey() {
+        return dvaf1Data.userIsAggrieved === !1 ? dvaf1Data.aggrievedNameGiven : "you";
+    }
+    function aggrievedYou() {
+        return dvaf1Data.userIsAggrieved === !1 ? dvaf1Data.aggrievedNameGiven : "you";
+    }
+    function aggrievedYour() {
+        return dvaf1Data.userIsAggrieved === !1 ? dvaf1Data.aggrievedNameGiven : "your";
+    }
+    function respondentName(define) {
+        return dvaf1Data.respondentNameGiven ? dvaf1Data.respondentNameGiven + (define === !0 ? " (the respondent)" : "") : "the respondent";
+    }
+    function RespondentName(define) {
+        return dvaf1Data.respondentNameGiven ? dvaf1Data.respondentNameGiven + (define === !0 ? " (the respondent)" : "") : "The respondent";
+    }
     Handlebars.registerHelper("theAggrieved", theAggrieved), Handlebars.registerHelper("TheAggrieved", TheAggrieved), 
-    Handlebars.registerHelper("theRespondent", theRespondent), Handlebars.registerHelper("doesTheAggrieved", doesTheAggrieved), 
+    Handlebars.registerHelper("aggrievedYou", aggrievedYou), Handlebars.registerHelper("aggrievedYour", aggrievedYour), 
+    Handlebars.registerHelper("theRespondent", theRespondent), Handlebars.registerHelper("RespondentName", RespondentName), 
+    Handlebars.registerHelper("respondentName", respondentName), Handlebars.registerHelper("doesTheAggrieved", doesTheAggrieved), 
     Handlebars.registerHelper("DoesTheAggrieved", DoesTheAggrieved), Handlebars.registerHelper("TheAggrievedINeed", TheAggrievedINeed), 
-    Handlebars.registerHelper("theAggrievedMy", theAggrievedMy), Handlebars.registerHelper("TheAggrievedIs", function() {
+    Handlebars.registerHelper("theAggrievedMy", theAggrievedMy), Handlebars.registerHelper("theAggrievedThey", theAggrievedThey), 
+    Handlebars.registerHelper("TheAggrievedIs", function() {
         return dvaf1Data.userIsAggrieved ? "You are" : dvaf1Data.userRelationship ? "someone" === dvaf1Data.userRelationship ? "They are" : "Your " + dvaf1Data.userRelationship + " is" : "The aggrieved is";
     }), Handlebars.registerHelper("aggrievedTheir", function() {
         return dvaf1Data.userIsAggrieved ? "your" : genderPronoun(dvaf1Data.aggrievedGender, "her", "his", "their");
