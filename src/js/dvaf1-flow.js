@@ -91,7 +91,22 @@ $(function( $ ) {
 				}
 			}
 		},
-		'dvaf1-grounds-template': {},
+		'dvaf1-grounds-template': {
+			relevance: {
+				'#dvaf1-weapon-other-question': {
+					name: 'respondentWeaponThreat',
+					value: 'No'
+				},
+				'#dvaf1-weapon-details': {
+					name: 'respondentWeaponThreat',
+					value: 'Yes'
+				},
+				'#dvaf1-weapon-details2': {
+					name: 'respondentWeaponThreat2',
+					value: 'Yes'
+				}
+			}
+		},
 		'dvaf1-conditions-template': {},
 		'dvaf1-urgent-template': {},
 		'dvaf1-aggrieved-template': {},

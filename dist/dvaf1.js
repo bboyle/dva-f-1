@@ -1,4 +1,4 @@
-/*! dva-f-1 - v1.0.0 - 2016-05-03
+/*! dva-f-1 - v1.0.0 - 2016-05-09
 * https://github.com/bboyle/dva-f-1#readme
 * Copyright (c) 2016 Queensland Government; Licensed BSD-3-Clause */
 /* global Handlebars */
@@ -123,8 +123,18 @@ $(function() {
         var she = genderPronoun(dvaf1Data.aggrievedGender, "she", "he", "they");
         return "they" === she ? "they live" : she + " lives";
     }
+    function aggrievedYouLive() {
+        if (dvaf1Data.userIsAggrieved) return "you live";
+        var she = genderPronoun(dvaf1Data.aggrievedGender, "she", "he", "they");
+        return "they" === she ? "they live" : she + " lives";
+    }
     function TheAggrievedINeed() {
         return dvaf1Data.userIsAggrieved ? "I need" : dvaf1Data.userRelationship && "someone" !== dvaf1Data.userRelationship ? "My " + dvaf1Data.userRelationship + " needs" : "The aggrieved needs";
+    }
+    function aggrievedYouNeed() {
+        if (dvaf1Data.userIsAggrieved) return "you need";
+        var she = genderPronoun(dvaf1Data.aggrievedGender, "she", "he", "they");
+        return "they" === she ? "they need" : she + " needs";
     }
     function theAggrievedWants() {
         return dvaf1Data.userIsAggrieved ? "You want" : dvaf1Data.aggrievedNameGiven ? dvaf1Data.aggrievedNameGiven + " wants" : "The aggrieved wants";
@@ -148,7 +158,7 @@ $(function() {
         return dvaf1Data.userIsAggrieved === !1 ? aggrievedName() + " is" : "you are";
     }
     function aggrievedYour() {
-        return dvaf1Data.userIsAggrieved === !1 ? aggrievedName() : "your";
+        return dvaf1Data.userIsAggrieved === !1 ? genderPronoun(dvaf1Data.aggrievedGender, "her", "his", aggrievedName()) : "your";
     }
     function we() {
         return dvaf1Data.userIsAggrieved === !1 ? aggrievedName() + " and " + respondentName() : "we";
@@ -164,15 +174,26 @@ $(function() {
     Handlebars.registerHelper("We", We), Handlebars.registerHelper("theRespondent", theRespondent), 
     Handlebars.registerHelper("RespondentName", RespondentName), Handlebars.registerHelper("respondentName", respondentName), 
     Handlebars.registerHelper("doesTheAggrieved", doesTheAggrieved), Handlebars.registerHelper("DoesTheAggrieved", DoesTheAggrieved), 
-    Handlebars.registerHelper("aggrievedILive", aggrievedILive), Handlebars.registerHelper("TheAggrievedINeed", TheAggrievedINeed), 
+    Handlebars.registerHelper("aggrievedILive", aggrievedILive), Handlebars.registerHelper("aggrievedYouLive", aggrievedYouLive), 
+    Handlebars.registerHelper("aggrievedYouNeed", aggrievedYouNeed), Handlebars.registerHelper("TheAggrievedINeed", TheAggrievedINeed), 
     Handlebars.registerHelper("TheAggrievedWants", TheAggrievedWants), Handlebars.registerHelper("theAggrievedWants", theAggrievedWants), 
     Handlebars.registerHelper("aggrievedMe", aggrievedMe), Handlebars.registerHelper("aggrievedMy", aggrievedMy), 
     Handlebars.registerHelper("theAggrievedThey", theAggrievedThey), Handlebars.registerHelper("TheAggrievedIs", function() {
         return dvaf1Data.userIsAggrieved ? "You are" : dvaf1Data.userRelationship ? "someone" === dvaf1Data.userRelationship ? "They are" : "Your " + dvaf1Data.userRelationship + " is" : "The aggrieved is";
     }), Handlebars.registerHelper("aggrievedTheir", function() {
         return dvaf1Data.userIsAggrieved ? "your" : genderPronoun(dvaf1Data.aggrievedGender, "her", "his", "their");
+    }), Handlebars.registerHelper("aggrievedThey", function() {
+        return dvaf1Data.userIsAggrieved ? "your" : genderPronoun(dvaf1Data.aggrievedGender, "she", "he", "they");
+    }), Handlebars.registerHelper("aggrievedThem", function() {
+        return dvaf1Data.userIsAggrieved ? "your" : genderPronoun(dvaf1Data.aggrievedGender, "her", "him", "them");
+    }), Handlebars.registerHelper("respondentThey", function() {
+        return genderPronoun(dvaf1Data.respondentGender, "she", "he", "they");
+    }), Handlebars.registerHelper("respondentThem", function() {
+        return genderPronoun(dvaf1Data.respondentGender, "her", "him", "them");
     }), Handlebars.registerHelper("respondentTheyKnow", function() {
         return "they know";
+    }), Handlebars.registerHelper("plus1", function(n) {
+        return parseFloat(n) + 1;
     });
 }), /* global Handlebars, dvaf1Data */
 $(function($) {
@@ -279,7 +300,22 @@ $(function($) {
                 }
             }
         },
-        "dvaf1-grounds-template": {},
+        "dvaf1-grounds-template": {
+            relevance: {
+                "#dvaf1-weapon-other-question": {
+                    name: "respondentWeaponThreat",
+                    value: "No"
+                },
+                "#dvaf1-weapon-details": {
+                    name: "respondentWeaponThreat",
+                    value: "Yes"
+                },
+                "#dvaf1-weapon-details2": {
+                    name: "respondentWeaponThreat2",
+                    value: "Yes"
+                }
+            }
+        },
         "dvaf1-conditions-template": {},
         "dvaf1-urgent-template": {},
         "dvaf1-aggrieved-template": {},
