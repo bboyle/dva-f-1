@@ -137,6 +137,19 @@
 
 						Did any of the domestic and family violence happen where the aggrieved lives? {{abuseAtResidence}}
 
+						{{#each event~}}
+						Event {{plus1 @index}}:
+
+						When: {{when}}
+						Where: {{where}}
+
+						Description: {{description}}
+
+						How did this make you feel? {{feel}}
+
+						Witnesses: {{witness}}
+						{{~/each}}
+
 						Is there any other background, or anything else you want the court to know about your day-to-day relationship or what has happened?
 						{{abuseGeneral}}">
 
