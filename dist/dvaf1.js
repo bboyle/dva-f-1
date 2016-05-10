@@ -1,4 +1,4 @@
-/*! dva-f-1 - v1.0.0 - 2016-05-09
+/*! dva-f-1 - v1.0.0 - 2016-05-10
 * https://github.com/bboyle/dva-f-1#readme
 * Copyright (c) 2016 Queensland Government; Licensed BSD-3-Clause */
 /* global Handlebars */
@@ -13,8 +13,21 @@ $(function($) {
     function parseGender(key, value) {
         data[key] = data.FEMININE_GENDER.test(value) ? "Woman" : data.MASCULINE_GENDER.test(value) ? "Man" : data[key];
     }
+    function renumberControls(section, n) {
+        var heading = $(".h3", section);
+        heading.text(heading.text().replace(/\d+/, n + 1)), $("input, select, textarea", section).each(function(j, control) {
+            control.id = control.id.replace(/\d+/, n), control.name = control.name.replace(/\d+/, n);
+        }), $("label", section).each(function(j, label) {
+            label.htmlFor = label.htmlFor.replace(/\d+/, n);
+        }), $("button.add, button.del", section).each(function(j, button) {
+            button = $(button), button.val(n).html(button.html().replace(/\d+/, n + 1));
+        });
+    }
     var data = window.dvaf1Data = {
-        selected: {}
+        selected: {},
+        event: [ {} ],
+        child: [ {} ],
+        associate: [ {} ]
     };
     data.MASCULINE_GENDER = /(^(man|male|he|him|his)$)|father|son|brother|nephew|uncle|husband|boy/i, 
     data.FEMININE_GENDER = /(^(her|she)$)|woman|female|mother|daughter|sister|neice|aunt|wife|girl/i;
@@ -36,6 +49,9 @@ $(function($) {
         },
         "dvaf1-aggrieved-existing-order-advice": {
             name: "infoExistingOrder"
+        },
+        "dvaf1-grounds-event": {
+            name: "repeatGroundsEvent"
         }
     };
     $.each(partials, function(key, partial) {
@@ -44,10 +60,12 @@ $(function($) {
         Handlebars.registerPartial(partial.name, partial.template), partial) : void delete partials[key];
     }), // relevance
     formView.on("click change", function(event) {
-        var question = $(event.target), name = event.target.name, value = $(event.target).val();
-        if (// store data
-        data[name] = parseValue(value), value.length && (value = value.replace(/\s+/g, "")), 
-        question.is("select,:radio,:checkbox")) // handle data changes
+        var index, question = $(event.target), name = event.target.name, value = $(event.target).val();
+        if (!question.is("button.add, button.del") && (// store data
+        /^(event|child|associate)[0-9]+\./.test(name) ? (index = name.replace(/^(?:event|child|associate)([0-9]+).*$/, "$1"), 
+        name = name.split(/[0-9]+\./), data[name[0]][index] = data[name[0]][index] || {}, 
+        data[name[0]][index][name[1]] = value) : (data[name] = parseValue(value), value.length && (value = value.replace(/\s+/g, ""))), 
+        question.is("select,:radio,:checkbox"))) // handle data changes
         switch (// store boolean helpers
         question.is(":checkbox") ? (data.selected[name] = data.selected[name] || {}, data.selected[name][value] = event.target.checked) : (data.selected[name] = {}, 
         data.selected[name][value] = !0), name) {
@@ -75,6 +93,26 @@ $(function($) {
           case "aggrievedExistingOrderJurisdiction":
             refreshPartial("dvaf1-aggrieved-existing-order-advice");
         }
+    }), // add repeating section
+    $(document).on("click", "button.add", function() {
+        var index = parseInt(this.value, 10), repeatData = data[this.name], section = $(this).closest(".section");
+        // clean up data
+        repeatData.splice(index + 1, 0, {}), 0 === section.find("button.del").length && section.find(".actions").append('<li><em><button type="button" class="del" name="' + this.name + '" value="0"><i class="fa fa-minus-square"></i> Remove ' + this.name + " 1</button></em></li>");
+        // insert new section
+        var clone = section.clone();
+        $("input, select, textarea", clone).each(function(j, control) {
+            control.value = "";
+        }), clone.insertAfter(section), index++, section.nextAll(".section").each(function(i, section) {
+            renumberControls(section, index + i);
+        });
+    }), // remove repeating section
+    $(document).on("click", "button.del", function() {
+        var index = parseInt(this.value, 10), repeatData = data[this.name];
+        // clean up data
+        repeatData.splice(index, 1), repeatData.length < 1 && (repeatData[0] = {}), // clean up UI
+        $(this).closest(".section").nextAll(".section").each(function(i, section) {
+            repeatData.length < 2 && $("button.del", section).remove(), renumberControls(section, index + i);
+        }), $(this).closest(".section").remove();
     });
 }), /* global Handlebars, dvaf1Data */
 $(function() {

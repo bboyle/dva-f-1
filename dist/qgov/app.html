@@ -9,7 +9,13 @@
 
 <!--#include virtual="global/head-assets-styles.html"-->
 <style type="text/css">
-	.choices .visuallyhidden { position: absolute }
+	.choices .visuallyhidden {
+		position: absolute
+	}
+	.add, .del {
+	    padding: .7em;
+	    font-size: 80%;
+	}
 </style>
 
 <!--#include virtual="global/head-assets-scripts.html"-->
@@ -25,7 +31,7 @@
 	<meta name="DCTERMS.creator" scheme="AGLSTERMS.GOLD" content="c=AU; o=The State of Queensland; ou=Department of Justice and Attorney-General; ou=Justice Services" />
 	<meta name="DCTERMS.publisher" scheme="AGLSTERMS.AglsAgent" content="corporateName=The State of Queensland; jurisdiction=Queensland" />
 	<meta name="DCTERMS.created" content="2016-04-26" />
-	<meta name="DCTERMS.modified" content="2016-04-29" />
+	<meta name="DCTERMS.modified" content="2016-05-10" />
 	<meta name="DCTERMS.title" content="Prepare your application for a protection order | Your rights, crime and the law" />
 	<meta name="DCTERMS.description" content="This form will guide help you prepare an application for a domestic violence protection order in Queensland. Your application must be lodged at a Queensland magistrates court." />
 	<meta name="DCTERMS.subject" scheme="AGLSTERMS.APAIS" content="Domestic Violence" />
@@ -77,6 +83,7 @@
 					<script id="dvaf1-situation-relationship-partial" type="text/x-handlebars-template"><!--#include virtual="view/partial/_question_situation_relationship.html"--></script>
 					<script id="dvaf1-aggrieved-existing-order-partial" type="text/x-handlebars-template"><!--#include virtual="view/partial/_question_aggrieved_existing_order.html"--></script>
 					<script id="dvaf1-aggrieved-existing-order-advice-partial" type="text/x-handlebars-template"><!--#include virtual="view/partial/_info_existing_order.html"--></script>
+					<script id="dvaf1-grounds-event-partial" type="text/x-handlebars-template"><!--#include virtual="view/partial/_repeat_grounds_event.html"--></script>
 
 
 					<script id="dvaf1-situation-template" type="text/x-handlebars-template"><!--#include virtual="view/dvaf1-02-situation.html"--></script>

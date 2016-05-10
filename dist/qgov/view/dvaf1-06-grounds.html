@@ -150,61 +150,11 @@
 				</ul>
 			</fieldset>
 		</li>
-<!--
-		<li class="section" ng-repeat="event in interview.event">
-			<fieldset>
-				<legend>
-					<span class="h3">Event {{plus1 $index}} details</span>
-					<small class="hint">Describe one event in detail that you want the court to know about—explain how the respondent behaved in violent, abusive or controlling ways during this event. You will be able to add more events after you describe this one.</small>
-				</legend>
-				<ol class="questions">
-					<li>
-						<label for="grounds-event{{$index}}-when">
-							<span class="label">When did this happen?</span>
-							<small class="hint">An approximate date is fine</small>
-						</label>
-						<input type="text" id="grounds-event{{$index}}-when" ng-model="event.when" size="15">
-					</li>
-					<li>
-						<label for="grounds-event{{$index}}-where">
-							<span class="label">Where did this happen?</span>
-							<small class="hint">Example: at home, work, an address or describe the place</small>
-						</label>
-						<input type="text" id="grounds-event{{$index}}-where" ng-model="event.where" size="30" list="placenames">
-					</li>
-					<li>
-						<label for="grounds-event{{$index}}-description">
-							<span class="label">What did {{respondentName}} do?</span>
-							<small class="hint">Stick to the facts. Describe exactly what {{respondentThey}} said and did. You may not feel comfortable explaining what happened to you but it is important to let the Magistrate know exactly what happened. Don't tone down, explain or apologise for the behaviour.</small>
-						</label>
-						<textarea id="grounds-event{{$index}}-description" ng-model="event.description" cols="40" rows="10" spellcheck="true"></textarea>
-					</li>
-					<li>
-						<label for="grounds-event{{$index}}-feel">
-							<span class="label">How did this make {{aggrievedYou}} feel?</span>
-							<small class="hint">Examples: threatened, fearful or scared?</small>
-						</label>
-						<textarea id="grounds-event{{$index}}-feel" ng-model="event.feel" cols="40" rows="3" spellcheck="true"></textarea>
-					</li>
-					<li>
-						<label for="grounds-event{{$index}}-witness">
-							<span class="label">Who else witnessed this?</span>
-							<small class="hint">Example: partners, children, parents, friends, neighbours.</small>
-						</label>
-						<input type="text" id="grounds-event{{$index}}-witness" ng-model="event.witness" size="30" list="witnesses">
-					</li>
 
-					<li class="footer">
-						<ul class="actions">
-							<li><em><button type="button" class="add" ng-click="interview.addEvent( $index )"><i class="fa fa-plus-square"></i> Describe another event</button></em></li>
-							<li ng-if="interview.event.length > 1"><em><button type="button" class="del" ng-click="interview.removeEvent( $index )"><i class="fa fa-minus-square"></i> Remove event {{plus1 $index}}</button></em></li>
-						</ul>
-					</li>
+		{{#each event}}
+		<li class="section">{{> repeatGroundsEvent n=@index}}</li>
+		{{/each}}
 
-				</ol>
-			</fieldset>
-		</li>
--->
 		<li>
 			<fieldset>
 				<legend>
