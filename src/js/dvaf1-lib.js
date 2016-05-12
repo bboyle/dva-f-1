@@ -31,7 +31,7 @@ $(function() {
 		return dvaf1Data.aggrievedNameGiven ? dvaf1Data.aggrievedNameGiven + ( define === true ? ' (the aggrieved)' : '' ) : 'the aggrieved';
 	}
 	function AggrievedName( define ) {
-		return dvaf1Data.respondentNameGiven ? dvaf1Data.aggrievedNameGiven + ( define === true ? ' (the aggrieved)' : '' ) : 'The aggrieved';
+		return dvaf1Data.aggrievedNameGiven ? dvaf1Data.aggrievedNameGiven + ( define === true ? ' (the aggrieved)' : '' ) : 'The aggrieved';
 	}
 
 	function respondentName( define ) {
