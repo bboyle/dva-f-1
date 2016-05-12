@@ -108,7 +108,24 @@ $(function( $ ) {
 			}
 		},
 		'dvaf1-conditions-template': {},
-		'dvaf1-urgent-template': {},
+		'dvaf1-urgent-template': {
+			relevance: {
+				'#dvaf1-tpo-info': [{
+					name: 'abuseRecent',
+					value: 'No'
+				}, {
+					name: 'abuseImmediateFear',
+					value: 'No'
+				}, {
+					name: 'abuseApplicationRetaliation',
+					value: 'No'
+				}],
+				'#dvaf1-tpo-grounds': {
+					name: 'tpoApply',
+					value: 'Yes'
+				}
+			}
+		},
 		'dvaf1-aggrieved-template': {},
 		'dvaf1-children-template': {},
 		'dvaf1-associates-template': {},

@@ -1,4 +1,4 @@
-/*! dva-f-1 - v1.0.0 - 2016-05-10
+/*! dva-f-1 - v1.0.0 - 2016-05-12
 * https://github.com/bboyle/dva-f-1#readme
 * Copyright (c) 2016 Queensland Government; Licensed BSD-3-Clause */
 /* global Handlebars */
@@ -133,7 +133,7 @@ $(function() {
         return dvaf1Data.aggrievedNameGiven ? dvaf1Data.aggrievedNameGiven + (define === !0 ? " (the aggrieved)" : "") : "the aggrieved";
     }
     function AggrievedName(define) {
-        return dvaf1Data.respondentNameGiven ? dvaf1Data.aggrievedNameGiven + (define === !0 ? " (the aggrieved)" : "") : "The aggrieved";
+        return dvaf1Data.aggrievedNameGiven ? dvaf1Data.aggrievedNameGiven + (define === !0 ? " (the aggrieved)" : "") : "The aggrieved";
     }
     function respondentName(define) {
         return dvaf1Data.respondentNameGiven ? dvaf1Data.respondentNameGiven + (define === !0 ? " (the respondent)" : "") : "the respondent";
@@ -174,6 +174,10 @@ $(function() {
         var she = genderPronoun(dvaf1Data.aggrievedGender, "she", "he", "they");
         return "they" === she ? "they need" : she + " needs";
     }
+    function respondentTheyReceive() {
+        var she = genderPronoun(dvaf1Data.respondentGender, "she", "he", "they");
+        return "they" === she ? "they receive" : she + " receives";
+    }
     function theAggrievedWants() {
         return dvaf1Data.userIsAggrieved ? "You want" : dvaf1Data.aggrievedNameGiven ? dvaf1Data.aggrievedNameGiven + " wants" : "The aggrieved wants";
     }
@@ -211,12 +215,13 @@ $(function() {
     Handlebars.registerHelper("aggrievedYour", aggrievedYour), Handlebars.registerHelper("we", we), 
     Handlebars.registerHelper("We", We), Handlebars.registerHelper("theRespondent", theRespondent), 
     Handlebars.registerHelper("RespondentName", RespondentName), Handlebars.registerHelper("respondentName", respondentName), 
-    Handlebars.registerHelper("doesTheAggrieved", doesTheAggrieved), Handlebars.registerHelper("DoesTheAggrieved", DoesTheAggrieved), 
-    Handlebars.registerHelper("aggrievedILive", aggrievedILive), Handlebars.registerHelper("aggrievedYouLive", aggrievedYouLive), 
-    Handlebars.registerHelper("aggrievedYouNeed", aggrievedYouNeed), Handlebars.registerHelper("TheAggrievedINeed", TheAggrievedINeed), 
-    Handlebars.registerHelper("TheAggrievedWants", TheAggrievedWants), Handlebars.registerHelper("theAggrievedWants", theAggrievedWants), 
-    Handlebars.registerHelper("aggrievedMe", aggrievedMe), Handlebars.registerHelper("aggrievedMy", aggrievedMy), 
-    Handlebars.registerHelper("theAggrievedThey", theAggrievedThey), Handlebars.registerHelper("TheAggrievedIs", function() {
+    Handlebars.registerHelper("respondentTheyReceive", respondentTheyReceive), Handlebars.registerHelper("doesTheAggrieved", doesTheAggrieved), 
+    Handlebars.registerHelper("DoesTheAggrieved", DoesTheAggrieved), Handlebars.registerHelper("aggrievedILive", aggrievedILive), 
+    Handlebars.registerHelper("aggrievedYouLive", aggrievedYouLive), Handlebars.registerHelper("aggrievedYouNeed", aggrievedYouNeed), 
+    Handlebars.registerHelper("TheAggrievedINeed", TheAggrievedINeed), Handlebars.registerHelper("TheAggrievedWants", TheAggrievedWants), 
+    Handlebars.registerHelper("theAggrievedWants", theAggrievedWants), Handlebars.registerHelper("aggrievedMe", aggrievedMe), 
+    Handlebars.registerHelper("aggrievedMy", aggrievedMy), Handlebars.registerHelper("theAggrievedThey", theAggrievedThey), 
+    Handlebars.registerHelper("TheAggrievedIs", function() {
         return dvaf1Data.userIsAggrieved ? "You are" : dvaf1Data.userRelationship ? "someone" === dvaf1Data.userRelationship ? "They are" : "Your " + dvaf1Data.userRelationship + " is" : "The aggrieved is";
     }), Handlebars.registerHelper("aggrievedTheir", function() {
         return dvaf1Data.userIsAggrieved ? "your" : genderPronoun(dvaf1Data.aggrievedGender, "her", "his", "their");
@@ -355,7 +360,24 @@ $(function($) {
             }
         },
         "dvaf1-conditions-template": {},
-        "dvaf1-urgent-template": {},
+        "dvaf1-urgent-template": {
+            relevance: {
+                "#dvaf1-tpo-info": [ {
+                    name: "abuseRecent",
+                    value: "No"
+                }, {
+                    name: "abuseImmediateFear",
+                    value: "No"
+                }, {
+                    name: "abuseApplicationRetaliation",
+                    value: "No"
+                } ],
+                "#dvaf1-tpo-grounds": {
+                    name: "tpoApply",
+                    value: "Yes"
+                }
+            }
+        },
         "dvaf1-aggrieved-template": {},
         "dvaf1-children-template": {},
         "dvaf1-associates-template": {},
