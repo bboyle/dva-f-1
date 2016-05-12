@@ -107,6 +107,11 @@ $(function() {
 		return she === 'they' ? 'they need' : she + ' needs';
 	}
 
+	function respondentTheyReceive() {
+		var she = genderPronoun( dvaf1Data.respondentGender, 'she', 'he', 'they' );
+		return she === 'they' ? 'they receive' : she + ' receives';
+	}
+
 	function theAggrievedWants() {
 		if ( dvaf1Data.userIsAggrieved ) {
 			return 'You want';
@@ -183,6 +188,7 @@ $(function() {
 	Handlebars.registerHelper( 'theRespondent', theRespondent );
 	Handlebars.registerHelper( 'RespondentName', RespondentName );
 	Handlebars.registerHelper( 'respondentName', respondentName );
+	Handlebars.registerHelper( 'respondentTheyReceive', respondentTheyReceive );
 
 	Handlebars.registerHelper( 'doesTheAggrieved', doesTheAggrieved );
 	Handlebars.registerHelper( 'DoesTheAggrieved', DoesTheAggrieved );
