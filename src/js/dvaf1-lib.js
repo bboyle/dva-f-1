@@ -88,6 +88,13 @@ $(function() {
 		var she = genderPronoun( dvaf1Data.aggrievedGender, 'she', 'he', 'they' );
 		return she === 'they' ? 'they live' : she + ' lives';
 	}
+	function aggrievedYouHave() {
+		if ( dvaf1Data.userIsAggrieved ) {
+			return 'you have';
+		}
+		var she = genderPronoun( dvaf1Data.aggrievedGender, 'she', 'he', 'they' );
+		return she === 'they' ? 'they have' : she + ' has';
+	}
 	function TheAggrievedINeed() {
 		if ( dvaf1Data.userIsAggrieved ) {
 			return 'I need';
@@ -143,9 +150,15 @@ $(function() {
 		}
 		return 'you';
 	}
-	function aggrievedYou() {
+	function aggrievedYou( define ) {
 		if ( dvaf1Data.userIsAggrieved === false ) {
-			return aggrievedName();
+			return aggrievedName() + ( define ? ' (the aggrieved)' : '' );
+		}
+		return 'you' + ( define ? ' (the aggrieved)' : '' );
+	}
+	function aggrievedYouThem() {
+		if ( dvaf1Data.userIsAggrieved === false ) {
+			return genderPronoun( dvaf1Data.aggrievedGender, 'her', 'him', 'them' );
 		}
 		return 'you';
 	}
@@ -179,6 +192,7 @@ $(function() {
 	Handlebars.registerHelper( 'theAggrieveds', theAggrieveds );
 	Handlebars.registerHelper( 'TheAggrieveds', TheAggrieveds );
 	Handlebars.registerHelper( 'aggrievedYou', aggrievedYou );
+	Handlebars.registerHelper( 'aggrievedYouThem', aggrievedYouThem );
 	Handlebars.registerHelper( 'aggrievedYouAre', aggrievedYouAre );
 	Handlebars.registerHelper( 'aggrievedYour', aggrievedYour );
 
@@ -194,6 +208,7 @@ $(function() {
 	Handlebars.registerHelper( 'DoesTheAggrieved', DoesTheAggrieved );
 
 	Handlebars.registerHelper( 'aggrievedILive', aggrievedILive );
+	Handlebars.registerHelper( 'aggrievedYouHave', aggrievedYouHave );
 	Handlebars.registerHelper( 'aggrievedYouLive', aggrievedYouLive );
 	Handlebars.registerHelper( 'aggrievedYouNeed', aggrievedYouNeed );
 	Handlebars.registerHelper( 'TheAggrievedINeed', TheAggrievedINeed );

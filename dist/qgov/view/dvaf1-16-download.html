@@ -225,13 +225,13 @@
 					<!-- repeat for children -->
 					{{#if conditionsNameChildren}}
 						<input type="hidden" name="nameChildrenGrounds" value="{{nameChildrenGrounds}}">
-						{{#each children as |child|}}
-						<input type="hidden" name="child{{@index}}Name" value="{{child.Name}}">
-						<input type="hidden" name="child{{@index}}Gender" value="{{child.Gender}}">
-						<input type="hidden" name="child{{@index}}DateBirth" value="{{child.DateBirth}}">
-						<input type="hidden" name="child{{@index}}Address" value="{{child.Address}}">
-						<input type="hidden" name="child{{@index}}AddressConfidential" value="{{child.AddressConfidential}}">
-						<input type="hidden" name="child{{@index}}Named" value="{{child.Named}}"> <!-- optional, default: true -->
+						{{#each children}}
+						<input type="hidden" name="child{{@index}}Name" value="{{name}}">
+						<input type="hidden" name="child{{@index}}Gender" value="{{gender}}">
+						<input type="hidden" name="child{{@index}}DateBirth" value="{{dateBirth}}">
+						<input type="hidden" name="child{{@index}}Address" value="{{address}}">
+						<input type="hidden" name="child{{@index}}AddressConfidential" value="{{addressConfidential}}">
+						<input type="hidden" name="child{{@index}}Named" value="{{named}}"> <!-- optional, default: true -->
 						<input type="hidden" name="child{{@index}}SPI" value="">
 						{{/each}}
 

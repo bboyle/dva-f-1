@@ -44,7 +44,7 @@ function itShouldVisitPagesInOrder() {
 	expect( page.form.getAttribute( 'name' )).toBe( 'formAggrieved' );
 	page.continue();
 
-	expect( page.title ).toEqual( 'Are there children who live or spend time with the aggrieved who need protection?' );
+	expect( page.title ).toEqual( 'Are there children who live or spend time with you (the aggrieved) who need protection?' );
 	expect( page.form.getAttribute( 'name' )).toBe( 'formChildren' );
 	page.continue();
 
