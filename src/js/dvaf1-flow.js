@@ -128,12 +128,12 @@ $(function( $ ) {
 		},
 		'dvaf1-aggrieved-template': {},
 		'dvaf1-children-template': {
-			relevance: {
-				'.dvaf1-children': {
-					name: 'conditionsNameChildren',
-					value: 'Yes'
-				}
-			}
+			// relevance: {
+			// 	'.dvaf1-children': {
+			// 		name: 'conditionsNameChildren',
+			// 		value: 'Yes'
+			// 	}
+			// }
 		},
 		'dvaf1-associates-template': {},
 		'dvaf1-respondent-template': {},

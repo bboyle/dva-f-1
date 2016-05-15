@@ -153,7 +153,7 @@ $(function( $ ) {
 	$( document ).on( 'click', 'button.add', function() {
 		var index = parseInt( this.value, 10 );
 		var repeatData = data[ this.name ];
-		var section = $( this ).closest( '.section' );
+		var section = $( this ).closest( '.section, .group' );
 
 		// clean up data
 		repeatData.splice( index + 1, 0, {} );

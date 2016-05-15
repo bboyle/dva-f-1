@@ -247,11 +247,11 @@
 					{{#if conditionsRespondentAbusedAssociated}}
 						<input type="hidden" name="nameAssociatesGrounds" value="{{nameAssociatesGrounds}}">
 						{{#each associates as |associate|}}
-						<input type="hidden" name="associate{{@index}}Name" value="{{associate.Name}}">
-						<input type="hidden" name="associate{{@index}}Gender" value="{{associate.Gender}}">
-						<input type="hidden" name="associate{{@index}}DateBirth" value="{{associate.DateBirth}}">
-						<input type="hidden" name="associate{{@index}}Address" value="{{associate.Address}}">
-						<input type="hidden" name="associate{{@index}}AddressConfidential" value="{{associate.AddressConfidential}}">
+						<input type="hidden" name="associate{{@index}}Name" value="{{name}}">
+						<input type="hidden" name="associate{{@index}}Gender" value="{{gender}}">
+						<input type="hidden" name="associate{{@index}}DateBirth" value="{{dateBirth}}">
+						<input type="hidden" name="associate{{@index}}Address" value="{{address}}">
+						<input type="hidden" name="associate{{@index}}AddressConfidential" value="{{addressConfidential}}">
 						<input type="hidden" name="associate{{@index}}SPI" value="">
 						{{/each}}
 
@@ -263,11 +263,11 @@
 					{{else if conditionsRespondentAbusedApplicant}}
 						<input type="hidden" name="nameAssociatesGrounds" value="{{nameAssociatesGrounds}}">
 						{{#each associates as |associate|}}
-						<input type="hidden" name="associate{{@index}}Name" value="{{associate.Name}}">
-						<input type="hidden" name="associate{{@index}}Gender" value="{{associate.Gender}}">
-						<input type="hidden" name="associate{{@index}}DateBirth" value="{{associate.DateBirth}}">
-						<input type="hidden" name="associate{{@index}}Address" value="{{associate.Address}}">
-						<input type="hidden" name="associate{{@index}}AddressConfidential" value="{{associate.AddressConfidential}}">
+						<input type="hidden" name="associate{{@index}}Name" value="{{name}}">
+						<input type="hidden" name="associate{{@index}}Gender" value="{{gender}}">
+						<input type="hidden" name="associate{{@index}}DateBirth" value="{{dateBirth}}">
+						<input type="hidden" name="associate{{@index}}Address" value="{{address}}">
+						<input type="hidden" name="associate{{@index}}AddressConfidential" value="{{addressConfidential}}">
 						<input type="hidden" name="associate{{@index}}SPI" value="">
 						{{/each}}
 

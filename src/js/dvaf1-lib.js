@@ -88,6 +88,13 @@ $(function() {
 		var she = genderPronoun( dvaf1Data.aggrievedGender, 'she', 'he', 'they' );
 		return she === 'they' ? 'they live' : she + ' lives';
 	}
+	function aggrievedYouKnow() {
+		if ( dvaf1Data.userIsAggrieved ) {
+			return 'you know';
+		}
+		var she = genderPronoun( dvaf1Data.aggrievedGender, 'she', 'he', 'they' );
+		return she === 'they' ? 'they know' : she + ' knows';
+	}
 	function aggrievedYouHave() {
 		if ( dvaf1Data.userIsAggrieved ) {
 			return 'you have';
@@ -210,6 +217,7 @@ $(function() {
 	Handlebars.registerHelper( 'aggrievedILive', aggrievedILive );
 	Handlebars.registerHelper( 'aggrievedYouHave', aggrievedYouHave );
 	Handlebars.registerHelper( 'aggrievedYouLive', aggrievedYouLive );
+	Handlebars.registerHelper( 'aggrievedYouKnow', aggrievedYouKnow );
 	Handlebars.registerHelper( 'aggrievedYouNeed', aggrievedYouNeed );
 	Handlebars.registerHelper( 'TheAggrievedINeed', TheAggrievedINeed );
 	Handlebars.registerHelper( 'TheAggrievedWants', TheAggrievedWants );

@@ -95,7 +95,7 @@ $(function($) {
         }
     }), // add repeating section
     $(document).on("click", "button.add", function() {
-        var index = parseInt(this.value, 10), repeatData = data[this.name], section = $(this).closest(".section");
+        var index = parseInt(this.value, 10), repeatData = data[this.name], section = $(this).closest(".section, .group");
         // clean up data
         repeatData.splice(index + 1, 0, {}), 0 === section.find("button.del").length && section.find(".actions").append('<li><em><button type="button" class="del" name="' + this.name + '" value="0"><i class="fa fa-minus-square"></i> Remove ' + this.name + " 1</button></em></li>");
         // insert new section
@@ -166,6 +166,11 @@ $(function() {
         var she = genderPronoun(dvaf1Data.aggrievedGender, "she", "he", "they");
         return "they" === she ? "they live" : she + " lives";
     }
+    function aggrievedYouKnow() {
+        if (dvaf1Data.userIsAggrieved) return "you know";
+        var she = genderPronoun(dvaf1Data.aggrievedGender, "she", "he", "they");
+        return "they" === she ? "they know" : she + " knows";
+    }
     function aggrievedYouHave() {
         if (dvaf1Data.userIsAggrieved) return "you have";
         var she = genderPronoun(dvaf1Data.aggrievedGender, "she", "he", "they");
@@ -226,10 +231,11 @@ $(function() {
     Handlebars.registerHelper("respondentTheyReceive", respondentTheyReceive), Handlebars.registerHelper("doesTheAggrieved", doesTheAggrieved), 
     Handlebars.registerHelper("DoesTheAggrieved", DoesTheAggrieved), Handlebars.registerHelper("aggrievedILive", aggrievedILive), 
     Handlebars.registerHelper("aggrievedYouHave", aggrievedYouHave), Handlebars.registerHelper("aggrievedYouLive", aggrievedYouLive), 
-    Handlebars.registerHelper("aggrievedYouNeed", aggrievedYouNeed), Handlebars.registerHelper("TheAggrievedINeed", TheAggrievedINeed), 
-    Handlebars.registerHelper("TheAggrievedWants", TheAggrievedWants), Handlebars.registerHelper("theAggrievedWants", theAggrievedWants), 
-    Handlebars.registerHelper("aggrievedMe", aggrievedMe), Handlebars.registerHelper("aggrievedMy", aggrievedMy), 
-    Handlebars.registerHelper("theAggrievedThey", theAggrievedThey), Handlebars.registerHelper("TheAggrievedIs", function() {
+    Handlebars.registerHelper("aggrievedYouKnow", aggrievedYouKnow), Handlebars.registerHelper("aggrievedYouNeed", aggrievedYouNeed), 
+    Handlebars.registerHelper("TheAggrievedINeed", TheAggrievedINeed), Handlebars.registerHelper("TheAggrievedWants", TheAggrievedWants), 
+    Handlebars.registerHelper("theAggrievedWants", theAggrievedWants), Handlebars.registerHelper("aggrievedMe", aggrievedMe), 
+    Handlebars.registerHelper("aggrievedMy", aggrievedMy), Handlebars.registerHelper("theAggrievedThey", theAggrievedThey), 
+    Handlebars.registerHelper("TheAggrievedIs", function() {
         return dvaf1Data.userIsAggrieved ? "You are" : dvaf1Data.userRelationship ? "someone" === dvaf1Data.userRelationship ? "They are" : "Your " + dvaf1Data.userRelationship + " is" : "The aggrieved is";
     }), Handlebars.registerHelper("aggrievedTheir", function() {
         return dvaf1Data.userIsAggrieved ? "your" : genderPronoun(dvaf1Data.aggrievedGender, "her", "his", "their");
@@ -387,14 +393,7 @@ $(function($) {
             }
         },
         "dvaf1-aggrieved-template": {},
-        "dvaf1-children-template": {
-            relevance: {
-                ".dvaf1-children": {
-                    name: "conditionsNameChildren",
-                    value: "Yes"
-                }
-            }
-        },
+        "dvaf1-children-template": {},
         "dvaf1-associates-template": {},
         "dvaf1-respondent-template": {},
         "dvaf1-orders-template": {
