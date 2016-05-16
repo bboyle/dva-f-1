@@ -68,6 +68,23 @@ $(function() {
 		return TitleCase( doesTheAggrieved() );
 	}
 
+	function isTheAggrieved() {
+		if ( dvaf1Data.userIsAggrieved ) {
+			return 'are you';
+		}
+		if ( dvaf1Data.aggrievedNameGiven ) {
+			return 'is ' + dvaf1Data.aggrievedNameGiven;
+		}
+		if ( dvaf1Data.userRelationship ) {
+			return dvaf1Data.userRelationship === 'someone' ? 'are they' : 'is your ' + dvaf1Data.userRelationship;
+		}
+
+		return 'does the aggrieved';
+	}
+	function IsTheAggrieved() {
+		return TitleCase( isTheAggrieved() );
+	}
+
 
 	function genderPronoun( gender, feminine, masculine, generic ) {
 		return dvaf1Data.FEMININE_GENDER.test( gender ) ? feminine : dvaf1Data.MASCULINE_GENDER.test( gender ) ? masculine : generic;
@@ -213,6 +230,8 @@ $(function() {
 
 	Handlebars.registerHelper( 'doesTheAggrieved', doesTheAggrieved );
 	Handlebars.registerHelper( 'DoesTheAggrieved', DoesTheAggrieved );
+	Handlebars.registerHelper( 'isTheAggrieved', isTheAggrieved );
+	Handlebars.registerHelper( 'IsTheAggrieved', IsTheAggrieved );
 
 	Handlebars.registerHelper( 'aggrievedILive', aggrievedILive );
 	Handlebars.registerHelper( 'aggrievedYouHave', aggrievedYouHave );

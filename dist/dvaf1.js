@@ -1,4 +1,4 @@
-/*! dva-f-1 - v1.0.0 - 2016-05-15
+/*! dva-f-1 - v1.0.0 - 2016-05-16
 * https://github.com/bboyle/dva-f-1#readme
 * Copyright (c) 2016 Queensland Government; Licensed BSD-3-Clause */
 /* global Handlebars */
@@ -153,6 +153,12 @@ $(function() {
     function DoesTheAggrieved() {
         return TitleCase(doesTheAggrieved());
     }
+    function isTheAggrieved() {
+        return dvaf1Data.userIsAggrieved ? "are you" : dvaf1Data.aggrievedNameGiven ? "is " + dvaf1Data.aggrievedNameGiven : dvaf1Data.userRelationship ? "someone" === dvaf1Data.userRelationship ? "are they" : "is your " + dvaf1Data.userRelationship : "does the aggrieved";
+    }
+    function IsTheAggrieved() {
+        return TitleCase(isTheAggrieved());
+    }
     function genderPronoun(gender, feminine, masculine, generic) {
         return dvaf1Data.FEMININE_GENDER.test(gender) ? feminine : dvaf1Data.MASCULINE_GENDER.test(gender) ? masculine : generic;
     }
@@ -229,7 +235,8 @@ $(function() {
     Handlebars.registerHelper("we", we), Handlebars.registerHelper("We", We), Handlebars.registerHelper("theRespondent", theRespondent), 
     Handlebars.registerHelper("RespondentName", RespondentName), Handlebars.registerHelper("respondentName", respondentName), 
     Handlebars.registerHelper("respondentTheyReceive", respondentTheyReceive), Handlebars.registerHelper("doesTheAggrieved", doesTheAggrieved), 
-    Handlebars.registerHelper("DoesTheAggrieved", DoesTheAggrieved), Handlebars.registerHelper("aggrievedILive", aggrievedILive), 
+    Handlebars.registerHelper("DoesTheAggrieved", DoesTheAggrieved), Handlebars.registerHelper("isTheAggrieved", isTheAggrieved), 
+    Handlebars.registerHelper("IsTheAggrieved", IsTheAggrieved), Handlebars.registerHelper("aggrievedILive", aggrievedILive), 
     Handlebars.registerHelper("aggrievedYouHave", aggrievedYouHave), Handlebars.registerHelper("aggrievedYouLive", aggrievedYouLive), 
     Handlebars.registerHelper("aggrievedYouKnow", aggrievedYouKnow), Handlebars.registerHelper("aggrievedYouNeed", aggrievedYouNeed), 
     Handlebars.registerHelper("TheAggrievedINeed", TheAggrievedINeed), Handlebars.registerHelper("TheAggrievedWants", TheAggrievedWants), 
@@ -392,7 +399,22 @@ $(function($) {
                 }
             }
         },
-        "dvaf1-aggrieved-template": {},
+        "dvaf1-aggrieved-template": {
+            relevance: {
+                "#dvaf1-aggrieved-interpreter-language": {
+                    name: "aggrievedRequiresInterpreter",
+                    value: "Yes"
+                },
+                "#dvaf1-aggrieved-disability-description": {
+                    name: "aggrievedHasDisability",
+                    value: "Yes"
+                },
+                "#dvaf1-aggrieved-parent-details": {
+                    name: "aggrievedUnder18",
+                    value: "Yes"
+                }
+            }
+        },
         "dvaf1-children-template": {},
         "dvaf1-associates-template": {},
         "dvaf1-respondent-template": {},

@@ -126,7 +126,22 @@ $(function( $ ) {
 				}
 			}
 		},
-		'dvaf1-aggrieved-template': {},
+		'dvaf1-aggrieved-template': {
+			relevance: {
+				'#dvaf1-aggrieved-interpreter-language': {
+					name: 'aggrievedRequiresInterpreter',
+					value: 'Yes'
+				},
+				'#dvaf1-aggrieved-disability-description': {
+					name: 'aggrievedHasDisability',
+					value: 'Yes'
+				},
+				'#dvaf1-aggrieved-parent-details': {
+					name: 'aggrievedUnder18',
+					value: 'Yes'
+				}
+			}
+		},
 		'dvaf1-children-template': {
 			// relevance: {
 			// 	'.dvaf1-children': {
