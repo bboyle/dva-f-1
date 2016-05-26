@@ -32,7 +32,7 @@ function itShouldVisitPagesInOrder() {
 	expect( page.form.getAttribute( 'name' )).toBe( 'formGrounds' );
 	page.continue();
 
-	expect( page.title ).toEqual( 'Request extra conditions' );
+	expect( page.title ).toEqual( 'What conditions are on a protection order?' );
 	expect( page.form.getAttribute( 'name' )).toBe( 'formConditions' );
 	page.continue();
 
@@ -105,7 +105,7 @@ describe( 'random access', function() {
 
 		page.continue();
 
-		expect( page.title ).toEqual( 'Request extra conditions' );
+		expect( page.title ).toEqual( 'What conditions are on a protection order?' );
 		expect( page.form.getAttribute( 'name' )).toBe( 'formConditions' );
 
 		page.goto( 'Download your application' );

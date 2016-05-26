@@ -1,4 +1,4 @@
-/*! dva-f-1 - v1.0.0 - 2016-05-16
+/*! dva-f-1 - v1.0.0 - 2016-05-26
 * https://github.com/bboyle/dva-f-1#readme
 * Copyright (c) 2016 Queensland Government; Licensed BSD-3-Clause */
 /* global Handlebars */
@@ -167,28 +167,25 @@ $(function() {
         var she = genderPronoun(dvaf1Data.aggrievedGender, "she", "he", "they");
         return "they" === she ? "they live" : she + " lives";
     }
-    function aggrievedYouLive() {
-        if (dvaf1Data.userIsAggrieved) return "you live";
+    function aggrievedYouPlurals(singular, plural) {
+        if (dvaf1Data.userIsAggrieved) return "you " + singular;
         var she = genderPronoun(dvaf1Data.aggrievedGender, "she", "he", "they");
-        return "they" === she ? "they live" : she + " lives";
+        return "they" === she ? "they " + singular : she + " " + plural;
+    }
+    function aggrievedYouLive() {
+        return aggrievedYouPlurals("live", "lives");
     }
     function aggrievedYouKnow() {
-        if (dvaf1Data.userIsAggrieved) return "you know";
-        var she = genderPronoun(dvaf1Data.aggrievedGender, "she", "he", "they");
-        return "they" === she ? "they know" : she + " knows";
+        return aggrievedYouPlurals("know", "knows");
     }
     function aggrievedYouHave() {
-        if (dvaf1Data.userIsAggrieved) return "you have";
-        var she = genderPronoun(dvaf1Data.aggrievedGender, "she", "he", "they");
-        return "they" === she ? "they have" : she + " has";
+        return aggrievedYouPlurals("have", "has");
     }
     function TheAggrievedINeed() {
         return dvaf1Data.userIsAggrieved ? "I need" : dvaf1Data.userRelationship && "someone" !== dvaf1Data.userRelationship ? "My " + dvaf1Data.userRelationship + " needs" : "The aggrieved needs";
     }
     function aggrievedYouNeed() {
-        if (dvaf1Data.userIsAggrieved) return "you need";
-        var she = genderPronoun(dvaf1Data.aggrievedGender, "she", "he", "they");
-        return "they" === she ? "they need" : she + " needs";
+        return aggrievedYouPlurals("need", "needs");
     }
     function respondentTheyReceive() {
         var she = genderPronoun(dvaf1Data.respondentGender, "she", "he", "they");
@@ -227,6 +224,12 @@ $(function() {
     function We() {
         return TitleCase(we());
     }
+    function respondentThey() {
+        return genderPronoun(dvaf1Data.respondentGender, "she", "he", "they");
+    }
+    function RespondentThey() {
+        return TitleCase(respondentThey());
+    }
     Handlebars.registerHelper("theAggrieved", theAggrieved), Handlebars.registerHelper("TheAggrieved", TheAggrieved), 
     Handlebars.registerHelper("aggrievedName", aggrievedName), Handlebars.registerHelper("AggrievedName", AggrievedName), 
     Handlebars.registerHelper("theAggrieveds", theAggrieveds), Handlebars.registerHelper("TheAggrieveds", TheAggrieveds), 
@@ -238,11 +241,11 @@ $(function() {
     Handlebars.registerHelper("DoesTheAggrieved", DoesTheAggrieved), Handlebars.registerHelper("isTheAggrieved", isTheAggrieved), 
     Handlebars.registerHelper("IsTheAggrieved", IsTheAggrieved), Handlebars.registerHelper("aggrievedILive", aggrievedILive), 
     Handlebars.registerHelper("aggrievedYouHave", aggrievedYouHave), Handlebars.registerHelper("aggrievedYouLive", aggrievedYouLive), 
-    Handlebars.registerHelper("aggrievedYouKnow", aggrievedYouKnow), Handlebars.registerHelper("aggrievedYouNeed", aggrievedYouNeed), 
-    Handlebars.registerHelper("TheAggrievedINeed", TheAggrievedINeed), Handlebars.registerHelper("TheAggrievedWants", TheAggrievedWants), 
-    Handlebars.registerHelper("theAggrievedWants", theAggrievedWants), Handlebars.registerHelper("aggrievedMe", aggrievedMe), 
-    Handlebars.registerHelper("aggrievedMy", aggrievedMy), Handlebars.registerHelper("theAggrievedThey", theAggrievedThey), 
-    Handlebars.registerHelper("TheAggrievedIs", function() {
+    Handlebars.registerHelper("aggrievedYouKnow", aggrievedYouKnow), Handlebars.registerHelper("aggrievedYouPlurals", aggrievedYouPlurals), 
+    Handlebars.registerHelper("aggrievedYouNeed", aggrievedYouNeed), Handlebars.registerHelper("TheAggrievedINeed", TheAggrievedINeed), 
+    Handlebars.registerHelper("TheAggrievedWants", TheAggrievedWants), Handlebars.registerHelper("theAggrievedWants", theAggrievedWants), 
+    Handlebars.registerHelper("aggrievedMe", aggrievedMe), Handlebars.registerHelper("aggrievedMy", aggrievedMy), 
+    Handlebars.registerHelper("theAggrievedThey", theAggrievedThey), Handlebars.registerHelper("TheAggrievedIs", function() {
         return dvaf1Data.userIsAggrieved ? "You are" : dvaf1Data.userRelationship ? "someone" === dvaf1Data.userRelationship ? "They are" : "Your " + dvaf1Data.userRelationship + " is" : "The aggrieved is";
     }), Handlebars.registerHelper("aggrievedTheir", function() {
         return dvaf1Data.userIsAggrieved ? "your" : genderPronoun(dvaf1Data.aggrievedGender, "her", "his", "their");
@@ -250,14 +253,19 @@ $(function() {
         return dvaf1Data.userIsAggrieved ? "your" : genderPronoun(dvaf1Data.aggrievedGender, "she", "he", "they");
     }), Handlebars.registerHelper("aggrievedThem", function() {
         return dvaf1Data.userIsAggrieved ? "your" : genderPronoun(dvaf1Data.aggrievedGender, "her", "him", "them");
-    }), Handlebars.registerHelper("respondentThey", function() {
-        return genderPronoun(dvaf1Data.respondentGender, "she", "he", "they");
-    }), Handlebars.registerHelper("respondentThem", function() {
+    }), Handlebars.registerHelper("respondentThey", respondentThey), Handlebars.registerHelper("RespondentThey", RespondentThey), 
+    Handlebars.registerHelper("respondentThem", function() {
         return genderPronoun(dvaf1Data.respondentGender, "her", "him", "them");
     }), Handlebars.registerHelper("respondentTheyKnow", function() {
         return "they know";
     }), Handlebars.registerHelper("plus1", function(n) {
         return parseFloat(n) + 1;
+    }), Handlebars.registerHelper("theChildren", function() {
+        return "the " + dvaf1Data.child.length === 1 ? "child" : "children";
+    }), Handlebars.registerHelper("theAggrievedsKids", function() {
+        return theAggrieveds() + " " + dvaf1Data.child.length === 1 ? "kid" : "kids";
+    }), Handlebars.registerHelper("theAssociatesNeed", function() {
+        return "the " + dvaf1Data.associate.length === 1 ? "associate needs" : "associates need";
     });
 }), /* global Handlebars, dvaf1Data */
 $(function($) {

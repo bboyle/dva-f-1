@@ -260,9 +260,15 @@ $(function() {
 	});
 
 
-	Handlebars.registerHelper( 'respondentThey', function() {
+	function respondentThey() {
 		return genderPronoun( dvaf1Data.respondentGender, 'she', 'he', 'they' );
-	});
+	}
+	function RespondentThey() {
+		return TitleCase( respondentThey() );
+	}
+
+	Handlebars.registerHelper( 'respondentThey', respondentThey );
+	Handlebars.registerHelper( 'RespondentThey', RespondentThey );
 	Handlebars.registerHelper( 'respondentThem', function() {
 		return genderPronoun( dvaf1Data.respondentGender, 'her', 'him', 'them' );
 	});
@@ -273,5 +279,17 @@ $(function() {
 
 	Handlebars.registerHelper( 'plus1', function( n ) {
 		return parseFloat( n ) + 1;
+	});
+
+	Handlebars.registerHelper( 'theChildren', function() {
+		return 'the ' + ( dvaf1Data.child.length === 1 ? 'child' : 'children' );
+	});
+
+	Handlebars.registerHelper( 'theAggrievedsKids', function() {
+		return theAggrieveds() + ' ' + dvaf1Data.child.length === 1 ? 'kid' : 'kids';
+	});
+
+	Handlebars.registerHelper( 'theAssociatesNeed', function() {
+		return 'the ' + dvaf1Data.associate.length === 1 ? 'associate needs' : 'associates need';
 	});
 });
