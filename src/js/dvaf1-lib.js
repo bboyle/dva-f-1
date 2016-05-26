@@ -98,26 +98,21 @@ $(function() {
 		var she = genderPronoun( dvaf1Data.aggrievedGender, 'she', 'he', 'they' );
 		return she === 'they' ? 'they live' : she + ' lives';
 	}
-	function aggrievedYouLive() {
+	function aggrievedYouPlurals(singular, plural) {
 		if ( dvaf1Data.userIsAggrieved ) {
-			return 'you live';
+			return 'you ' + singular;
 		}
 		var she = genderPronoun( dvaf1Data.aggrievedGender, 'she', 'he', 'they' );
-		return she === 'they' ? 'they live' : she + ' lives';
+		return she === 'they' ? 'they ' + singular : she + ' ' + plural;
+	}
+	function aggrievedYouLive() {
+		return aggrievedYouPlurals( 'live', 'lives' );
 	}
 	function aggrievedYouKnow() {
-		if ( dvaf1Data.userIsAggrieved ) {
-			return 'you know';
-		}
-		var she = genderPronoun( dvaf1Data.aggrievedGender, 'she', 'he', 'they' );
-		return she === 'they' ? 'they know' : she + ' knows';
+		return aggrievedYouPlurals( 'know', 'knows' );
 	}
 	function aggrievedYouHave() {
-		if ( dvaf1Data.userIsAggrieved ) {
-			return 'you have';
-		}
-		var she = genderPronoun( dvaf1Data.aggrievedGender, 'she', 'he', 'they' );
-		return she === 'they' ? 'they have' : she + ' has';
+		return aggrievedYouPlurals( 'have', 'has' );
 	}
 	function TheAggrievedINeed() {
 		if ( dvaf1Data.userIsAggrieved ) {
@@ -130,12 +125,7 @@ $(function() {
 		return 'The aggrieved needs';
 	}
 	function aggrievedYouNeed() {
-		if ( dvaf1Data.userIsAggrieved ) {
-			return 'you need';
-		}
-
-		var she = genderPronoun( dvaf1Data.aggrievedGender, 'she', 'he', 'they' );
-		return she === 'they' ? 'they need' : she + ' needs';
+		return aggrievedYouPlurals( 'need', 'needs' );
 	}
 
 	function respondentTheyReceive() {
@@ -237,6 +227,7 @@ $(function() {
 	Handlebars.registerHelper( 'aggrievedYouHave', aggrievedYouHave );
 	Handlebars.registerHelper( 'aggrievedYouLive', aggrievedYouLive );
 	Handlebars.registerHelper( 'aggrievedYouKnow', aggrievedYouKnow );
+	Handlebars.registerHelper( 'aggrievedYouPlurals', aggrievedYouPlurals );
 	Handlebars.registerHelper( 'aggrievedYouNeed', aggrievedYouNeed );
 	Handlebars.registerHelper( 'TheAggrievedINeed', TheAggrievedINeed );
 	Handlebars.registerHelper( 'TheAggrievedWants', TheAggrievedWants );
