@@ -183,7 +183,38 @@ $(function( $ ) {
 				}
 			}
 		},
-		'dvaf1-applicant-template': {},
+		'dvaf1-applicant-template': {
+			relevance: {
+				'#dvaf1-applicant-type': {
+					name: 'applicationLodgedBy',
+					values: [ 'user', 'thirdParty' ]
+				},
+				'#dvaf1-applicant-type-details': {
+					name: 'applicationLodgedBy',
+					values: [ 'user', 'thirdParty' ]
+				},
+				'#dvaf1-application-partA': {
+					name: 'applicantPart',
+					value: 'A'
+				},
+				'#dvaf1-application-partB': {
+					name: 'applicantPart',
+					value: 'B'
+				},
+				'#dvaf1-application-partD': {
+					name: 'applicantPart',
+					value: 'D'
+				},
+				'#dvaf1-application-authorisation-received': {
+					name: 'applicantAuthorisedInWriting',
+					value: 'No'
+				},
+				'#dvaf1-application-partB-other': {
+					name: 'applicantActingAs',
+					value: 'Other'
+				}
+			}
+		},
 		'dvaf1-court-template': {
 			relevance: {
 				'#dvaf1-court-safety-info': {

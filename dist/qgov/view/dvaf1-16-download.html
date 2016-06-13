@@ -87,13 +87,13 @@
 						<input type="hidden" name="applicantAddressConfidential" value="{{applicantAddressConfidential}}">
 						<input type="hidden" name="applicantAddress" value="{{applicantAddress}}">
 
-						{{#if applicantPartA}}
+						{{#if selected.applicantPart.A}}
 							<input type="hidden" name="applicantAuthorisedInWriting" value="{{applicantAuthorisedInWriting}}">
-							{{#unless applicantAuthorisationWritten}}<input type="hidden" name="applicantAuthorisedDescription" value="{{applicantAuthorisedDescription}}">{{/unless}}
-						{{else if applicantPartB}}
+							{{#unless selected.applicantAuthorisedInWriting.Yes}}<input type="hidden" name="applicantAuthorisedDescription" value="{{applicantAuthorisedDescription}}">{{/unless}}
+						{{else if selected.applicantPart.B}}
 							<input type="hidden" name="applicantActingAs" value="{{applicantActingAs}}"> <!-- Guardian OR Adult Guardian OR Enduring power of attorney OR Other -->
-							{{#if applicantActingOther}}<input type="hidden" name="applicantActingAsDescription" value="{{applicantActingAsDescription}}">{{/if}}
-						{{else if applicantPartD}}
+							{{#if selected.applicantActingAs.Other}}<input type="hidden" name="applicantActingAsDescription" value="{{applicantActingAsDescription}}">{{/if}}
+						{{else if selected.applicantPart.D}}
 							<input type="hidden" name="applicantChildProtectionPartyChild" value="{{applicantChildProtectionPartyChild}}">
 							<input type="hidden" name="applicantChildProtectionPartyLegalRepresentative" value="{{applicantChildProtectionPartyLegalRepresentative}}">
 							<input type="hidden" name="applicantChildProtectionPartyApplicant" value="{{applicantChildProtectionPartyApplicant}}">

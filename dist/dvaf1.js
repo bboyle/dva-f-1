@@ -261,6 +261,8 @@ $(function() {
     Handlebars.registerHelper("aggrievedMy", aggrievedMy), Handlebars.registerHelper("theAggrievedThey", theAggrievedThey), 
     Handlebars.registerHelper("TheAggrievedIs", function() {
         return dvaf1Data.userIsAggrieved ? "You are" : dvaf1Data.userRelationship ? "someone" === dvaf1Data.userRelationship ? "They are" : "Your " + dvaf1Data.userRelationship + " is" : "The aggrieved is";
+    }), Handlebars.registerHelper("TheApplicantIs", function() {
+        return "user" === dvaf1Data.applicationLodgedBy ? "I am" : "The applicant is";
     }), Handlebars.registerHelper("aggrievedTheir", function() {
         return dvaf1Data.userIsAggrieved ? "your" : genderPronoun(dvaf1Data.aggrievedGender, "her", "his", "their");
     }), Handlebars.registerHelper("aggrievedThey", function() {
@@ -473,7 +475,38 @@ $(function($) {
                 }
             }
         },
-        "dvaf1-applicant-template": {},
+        "dvaf1-applicant-template": {
+            relevance: {
+                "#dvaf1-applicant-type": {
+                    name: "applicationLodgedBy",
+                    values: [ "user", "thirdParty" ]
+                },
+                "#dvaf1-applicant-type-details": {
+                    name: "applicationLodgedBy",
+                    values: [ "user", "thirdParty" ]
+                },
+                "#dvaf1-application-partA": {
+                    name: "applicantPart",
+                    value: "A"
+                },
+                "#dvaf1-application-partB": {
+                    name: "applicantPart",
+                    value: "B"
+                },
+                "#dvaf1-application-partD": {
+                    name: "applicantPart",
+                    value: "D"
+                },
+                "#dvaf1-application-authorisation-received": {
+                    name: "applicantAuthorisedInWriting",
+                    value: "No"
+                },
+                "#dvaf1-application-partB-other": {
+                    name: "applicantActingAs",
+                    value: "Other"
+                }
+            }
+        },
         "dvaf1-court-template": {
             relevance: {
                 "#dvaf1-court-safety-info": {

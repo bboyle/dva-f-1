@@ -18,14 +18,12 @@ $(function() {
 
 		return 'the aggrieved';
 	}
-
 	function theRespondent() {
 		return 'the respondent';
 	}
 	function TheAggrieved() {
 		return TitleCase( theAggrieved() );
 	}
-
 
 	function aggrievedName( define ) {
 		return dvaf1Data.aggrievedNameGiven ? dvaf1Data.aggrievedNameGiven + ( define === true ? ' (the aggrieved)' : '' ) : 'the aggrieved';
@@ -270,6 +268,14 @@ $(function() {
 		}
 
 		return 'The aggrieved is';
+	});
+
+	Handlebars.registerHelper( 'TheApplicantIs', function() {
+		if ( dvaf1Data.applicationLodgedBy === 'user' ) {
+			return 'I am';
+		}
+
+		return 'The applicant is';
 	});
 
 
