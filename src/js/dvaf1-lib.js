@@ -185,9 +185,9 @@ $(function() {
 	}
 	function aggrievedYou( define ) {
 		if ( dvaf1Data.userIsAggrieved === false ) {
-			return aggrievedName() + ( define ? ' (the aggrieved)' : '' );
+			return aggrievedName() + ( define === true ? ' (the aggrieved)' : '' );
 		}
-		return 'you' + ( define ? ' (the aggrieved)' : '' );
+		return 'you' + ( define === true ? ' (the aggrieved)' : '' );
 	}
 	function aggrievedYouThem() {
 		if ( dvaf1Data.userIsAggrieved === false ) {

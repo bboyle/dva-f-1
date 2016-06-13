@@ -24,34 +24,26 @@
 							</legend>
 							<ul class="choices compact">
 								<li>
-									<input type="radio"
-									       name="interview-protect-children"
-									       id="interview-protect-children-false"
-									       ng-model="interview.conditions.nameChildren"
-									       ng-value="false">
-									<label for="interview-protect-children-false">No</label>
+									<input type="radio" name="conditionsNameChildren" id="name-children-yes" value="Yes"{{#if selected.conditionsNameChildren.Yes}} checked{{/if}}>
+									<label for="name-children-yes">Yes</label>
 								</li>
 								<li>
-									<input type="radio"
-									       name="interview-protect-children"
-									       id="interview-protect-children-true"
-									       ng-model="interview.conditions.nameChildren"
-									       ng-value="true">
-									<label for="interview-protect-children-true">Yes</label>
+									<input type="radio" name="conditionsNameChildren" id="name-children-no" value="No"{{#if selected.conditionsNameChildren.No}} checked{{/if}}>
+									<label for="name-children-no">No</label>
 								</li>
 							</ul>
 						</fieldset>
 					</li>
-					<li ng-show="interview.conditions.nameChildren">
+					<li id="dvaf1-children-grounds">
 						<div class="status info">
 							<h2>You must provide clear reasons why {{theChildren}} should be named on the order</h2>
 							<p>A child may be included on an order if the court is satisfied that naming the child on the order is necessary or desirable to protect the child from associated domestic violence, or being exposed to domestic violence committed by the respondent. Associated domestic violence is where domestic violence is committed against a child, relative or associate of an aggrieved.</p>
 						</div>
-						<label for="interview-children-grounds">
+						<label for="children-grounds">
 							<span class="label">Please provide details about of specific incidents where {{respondentName}} has committed domestic violence towards a child or exposed a child to domestic violence</span>
 							<small class="hint">Include date or approximate dates</small>
 						</label>
-						<textarea id="interview-children-grounds" ng-model="interview.grounds.children" cols="30" rows="7" spellcheck="true"></textarea>
+						<textarea id="children-grounds" name="nameChildrenGrounds" cols="30" rows="7" spellcheck="true">{{nameChildrenGrounds}}</textarea>
 					</li>
 
 					<li>
@@ -63,25 +55,18 @@
 							</legend>
 							<ul class="choices compact">
 								<li>
-									<input type="radio"
-									       name="interview-associates-suffered"
-									       id="interview-associates-suffered-false"
-									       ng-model="interview.conditions.respondent.abusedAssociates"
-									       ng-value="false">
-									<label for="interview-associates-suffered-false">No</label>
+									<input type="radio" name="associatesSuffered" id="associates-suffered-false" value="No"{{#if selectedassociates.Suffered.No}} checked{{/if}}>
+									<label for="associates-suffered-false">No</label>
 								</li>
 								<li>
-									<input type="radio"
-									       name="interview-associates-suffered"
-									       id="interview-associates-suffered-true"
-									       ng-model="interview.conditions.respondent.abusedAssociates"
-									       ng-value="true">
-									<label for="interview-associates-suffered-true">Yes</label>
+									<input type="radio" name="associatesSuffered" id="associates-suffered-true" value="Yes"{{#if selected.associates.SufferedYes}} checked{{/if}}>
+									<label for="associates-suffered-true">Yes</label>
 								</li>
 							</ul>
 						</fieldset>
 					</li>
-					<li ng-if="! interview.applicantIsAggrieved &amp;&amp; interview.conditions.respondent.abusedAssociates === false">
+					{{#unless userIsAggrieved}}
+					<li id="dvaf1-applicant-suffered">
 						<fieldset>
 							<legend>
 								<span class="label">Has {{respondentName}} behaved in way that is abusive, threating or unwelcome towards you?</span>
@@ -89,113 +74,48 @@
 							</legend>
 							<ul class="choices compact">
 								<li>
-									<input type="radio"
-									       name="interview-applicant-suffered"
-									       id="interview-applicant-suffered-false"
-									       ng-model="interview.conditions.respondent.abusedApplicant"
-									       ng-value="false">
-									<label for="interview-applicant-suffered-false">No</label>
+									<input type="radio" name="applicantSuffered" id="applicant-suffered-false" value="No"{{#if selected.applicantSuffered.No}} checked{{/if}}>
+									<label for="applicant-suffered-false">No</label>
 								</li>
 								<li>
-									<input type="radio"
-									       name="interview-applicant-suffered"
-									       id="interview-applicant-suffered-true"
-									       ng-model="interview.conditions.respondent.abusedApplicant"
-									       ng-value="true">
-									<label for="interview-applicant-suffered-true">Yes</label>
+									<input type="radio" name="applicantSuffered" id="applicant-suffered-true" value="Yes"{{#if selected.applicantSuffered.Yes}} checked{{/if}}>
+									<label for="applicant-suffered-true">Yes</label>
 								</li>
 							</ul>
 						</fieldset>
 					</li>
-					<li ng-show="interview.conditions.respondent.abusedAssociates || interview.conditions.respondent.abusedApplicant">
+					{{/unless}}
+					<li id="dvaf1-associate-protection">
 						<fieldset>
 							<legend>
 								<span class="label">Do they need protection from {{respondentName}}?</span>
 							</legend>
 							<ul class="choices compact">
 								<li>
-									<input type="radio"
-									       name="interview-protect-associates"
-									       id="interview-protect-associates-false"
-									       ng-model="interview.conditions.nameAssociates"
-									       ng-value="false">
-									<label for="interview-protect-associates-false">No</label>
+									<input type="radio" name="conditionsNameAssociates" id="protect-associates-false" value="No"{{#if selected.conditionsNameAssociates.No}} checked{{/if}}>
+									<label for="protect-associates-false">No</label>
 								</li>
 								<li>
-									<input type="radio"
-									       name="interview-protect-associates"
-									       id="interview-protect-associates-true"
-									       ng-model="interview.conditions.nameAssociates"
-									       ng-value="true">
-									<label for="interview-protect-associates-true">Yes</label>
+									<input type="radio" name="conditionsNameAssociates" id="protect-associates-true" value="Yes"{{#if selected.conditionsNameAssociates.Yes}} checked{{/if}}>
+									<label for="protect-associates-true">Yes</label>
 								</li>
 							</ul>
 						</fieldset>
 					</li>
-					<li ng-show="(interview.conditions.respondent.abusedAssociates || interview.conditions.respondent.abusedApplicant) &amp;&amp; interview.conditions.nameAssociates">
+					<li id="dvaf1-associate-protection-grounds">
 						<div class="status info">
 							<h2>You must explain why the {{theAssociatesNeed}} to be named on the order</h2>
 							<p>You need to provide clear reasons why it is necessary or desirable to protect {{aggrievedYour}} relative or associate from associated domestic violence.</p>
 						</div>
-						<label for="interview-associates-grounds">
+						<label for="associates-grounds">
 							<span class="label">Please provide details of specific incidents where {{respondentName}} has committed associated domestic violence or exposed the relative or associate to domestic violence</span>
 							<small class="hint">Include date or approximate dates</small>
 						</label>
-						<textarea id="interview-associates-grounds" ng-model="interview.grounds.associates" cols="30" rows="7" spellcheck="true"></textarea>
+						<textarea id="associates-grounds" name="nameAssociatesGrounds" cols="30" rows="7" spellcheck="true">{{nameAssociatesGrounds}}</textarea>
 					</li>
 				</ol>
 			</fieldset>
 		</li>
-
-
-		<li class="section">
-			<fieldset>
-				<legend>
-					<span class="h3">Ouster Order</span>
-					<small class="hint">The court must consider whether to make an order that {{respondentName}} must leave a named house or dwelling (this is also known as an <dfn>ouster order</dfn>). The court must take {{aggrievedYour}} wishes into account.</small>
-				</legend>
-				<ol class="questions">
-					<li>
-						<fieldset>
-							<legend>
-								<span class="label">Do you want {{respondentName}} to leave the premises?</span>
-							</legend>
-							<ul class="choices compact">
-								<li>
-									<input type="radio"
-									       name="interview-conditions-ousters"
-									       id="interview-conditions-ousters-false"
-									       ng-model="interview.conditions.ouster.requested"
-									       ng-value="false">
-									<label for="interview-conditions-ousters-false">No</label>
-								</li>
-								<li>
-									<input type="radio"
-									       name="interview-conditions-ousters"
-									       id="interview-conditions-ousters-true"
-									       ng-model="interview.conditions.ouster.requested"
-									       ng-value="true">
-									<label for="interview-conditions-ousters-true">Yes</label>
-								</li>
-							</ul>
-						</fieldset>
-					</li>
-					<li ng-show="interview.conditions.ouster.requested">
-						<label for="interview-conditions-ouster-grounds">
-							<span class="label">Address</span>
-						</label>
-						<textarea id="interview-conditions-ouster-address" ng-model="interview.conditions.ouster.address" rows="3" cols="30" autocomplete="street-address" spellcheck="true"></textarea>
-					</li>
-					<li ng-show="interview.conditions.ouster.requested">
-						<label for="interview-conditions-ouster-grounds">
-							<span class="label">Please explain to the court the reasons why {{respondentName}} must leave</span>
-						</label>
-						<textarea id="interview-conditions-ouster-grounds" ng-model="interview.conditions.ouster.grounds" rows="7" cols="30" spellcheck="true"></textarea>
-					</li>
-				</ol>
-			</fieldset>
-		</li>
-
 
 		<li class="section">
 			<fieldset>
@@ -211,29 +131,21 @@
 							</legend>
 							<ul class="choices compact">
 								<li>
-									<input type="radio"
-									       name="interview-conditions-distance-aggrieved"
-									       id="interview-conditions-distance-aggrieved-false"
-									       ng-model="interview.conditions.distance.aggrieved.requested"
-									       ng-value="false">
-									<label for="interview-conditions-distance-aggrieved-false">No</label>
+									<input type="radio" name="conditionsDistanceAggrieved" id="conditions-distance-aggrieved-false" value="No"{{#if selected.conditionsDistanceAggrieved.No}} checked{{/if}}>
+									<label for="conditions-distance-aggrieved-false">No</label>
 								</li>
 								<li>
-									<input type="radio"
-									       name="interview-conditions-distance-aggrieved"
-									       id="interview-conditions-distance-aggrieved-true"
-									       ng-model="interview.conditions.distance.aggrieved.requested"
-									       ng-value="true">
-									<label for="interview-conditions-distance-aggrieved-true">Yes</label>
+									<input type="radio" name="conditionsDistanceAggrieved" id="conditions-distance-aggrieved-true" value="Yes"{{#if selected.conditionsDistanceAggrieved.Yes}} checked{{/if}}>
+									<label for="conditions-distance-aggrieved-true">Yes</label>
 								</li>
 							</ul>
 						</fieldset>
 					</li>
-					<li ng-show="interview.conditions.distance.aggrieved.requested">
-						<label for="interview-conditions-distance-aggrieved-grounds">
+					<li id="dvaf1-conditions-distance-aggrieved-grounds">
+						<label for="conditions-distance-aggrieved-grounds">
 							<span class="label">Please explain to the court the reasons why {{respondentName}} must stay away from {{aggrievedYou}}</span>
 						</label>
-						<textarea id="interview-conditions-distance-aggrieved-grounds" ng-model="interview.conditions.distance.aggrieved.grounds" rows="7" cols="30" spellcheck="true"></textarea>
+						<textarea id="conditions-distance-aggrieved-grounds" name="conditionsDistanceAggrievedGrounds" rows="7" cols="30" spellcheck="true">{{conditionsDistanceAggrievedGrounds}}</textarea>
 					</li>
 
 					<li>
@@ -243,83 +155,100 @@
 							</legend>
 							<ul class="choices compact">
 								<li>
-									<input type="radio"
-									       name="interview-conditions-distance-aggrieved-places"
-									       id="interview-conditions-distance-aggrieved-places-false"
-									       ng-model="interview.conditions.distance.aggrieved.places.requested"
-									       ng-value="false">
-									<label for="interview-conditions-distance-aggrieved-places-false">No</label>
+									<input type="radio" name="conditionsDistanceAggrievedPlaces" id="conditions-distance-aggrieved-places-false" value="No"{{#if selected.conditionsDistanceAggrievedPlaces.No}} checked{{/if}}>
+									<label for="conditions-distance-aggrieved-places-false">No</label>
 								</li>
 								<li>
-									<input type="radio"
-									       name="interview-conditions-distance-aggrieved-places"
-									       id="interview-conditions-distance-aggrieved-places-true"
-									       ng-model="interview.conditions.distance.aggrieved.places.requested"
-									       ng-value="true">
-									<label for="interview-conditions-distance-aggrieved-places-true">Yes</label>
+									<input type="radio" name="conditionsDistanceAggrievedPlaces" id="conditions-distance-aggrieved-places-true" value="Yes"{{#if selected.conditionsDistanceAggrievedPlaces.Yes}} checked{{/if}}>
+									<label for="conditions-distance-aggrieved-places-true">Yes</label>
 								</li>
 							</ul>
 						</fieldset>
 					</li>
-					<li ng-show="interview.conditions.distance.aggrieved.places.requested">
+					<li id="dvaf1-conditions-distance-aggrieved-list">
 						<fieldset>
 							<legend>
 								<span class="label">Prohibit {{respondentName}} from approaching:</span>
 							</legend>
 							<ul class="choices">
 								<li>
-									<input type="checkbox"
-									       name="interview-conditions-distance-aggrieved-home"
-									       id="interview-conditions-distance-aggrieved-home"
-									       ng-model="interview.conditions.distance.aggrieved.home.requested"
-									       ng-value="true">
-									<label for="interview-conditions-distance-aggrieved-home">{{aggrievedYour}} home</label>
+									<input type="checkbox" name="conditionsDistanceAggrievedHome" id="conditions-distance-aggrieved-home" value="Yes"{{#if selected.conditionsDistanceAggrievedHome.Yes}} checked{{/if}}>
+									<label for="conditions-distance-aggrieved-home">{{aggrievedYour}} home</label>
 								</li>
 								<li>
-									<input type="checkbox"
-									       name="interview-conditions-distance-aggrieved-work"
-									       id="interview-conditions-distance-aggrieved-work-true"
-									       ng-model="interview.conditions.distance.aggrieved.work.requested"
-									       ng-value="true">
-									<label for="interview-conditions-distance-aggrieved-work-true">{{aggrievedYour}} workplace</label>
+									<input type="checkbox" name="conditionsDistanceAggrievedWork" id="conditions-distance-aggrieved-work-true" value="Yes"{{#if selected.conditionsDistanceAggrievedWork.Yes}} checked{{/if}}>
+									<label for="conditions-distance-aggrieved-work-true">{{aggrievedYour}} workplace</label>
 								</li>
 								<li>
-									<input type="checkbox"
-									       name="interview-conditions-distance-aggrieved-staying"
-									       id="interview-conditions-distance-aggrieved-staying-true"
-									       ng-model="interview.conditions.distance.aggrieved.staying.requested"
-									       ng-value="true">
-									<label for="interview-conditions-distance-aggrieved-staying-true">where {{aggrievedYouAre}} currently staying</label>
+									<input type="checkbox" name="conditionsDistanceAggrievedStaying" id="conditions-distance-aggrieved-staying-true" value="Yes"{{#if selected.conditionsDistanceAggrievedStaying.Yes}} checked{{/if}}>
+									<label for="conditions-distance-aggrieved-staying-true">where {{aggrievedYouAre}} currently staying</label>
 								</li>
 								<li>
-									<input type="checkbox"
-									       name="interview-conditions-distance-aggrieved-other"
-									       id="interview-conditions-distance-aggrieved-other-true"
-									       ng-model="interview.conditions.distance.aggrieved.other.requested"
-									       ng-value="true">
-									<label for="interview-conditions-distance-aggrieved-other-true">places {{aggrievedYouPlurals 'visit' 'visits'}} often</label>
+									<input type="checkbox" name="conditionsDistanceAggrievedOther" id="conditions-distance-aggrieved-other-true" value="Yes"{{#if selected.conditionsDistanceAggrievedOther.Yes}} checked{{/if}}>
+									<label for="conditions-distance-aggrieved-other-true">places {{aggrievedYouPlurals 'visit' 'visits'}} often</label>
 								</li>
 							</ul>
 						</fieldset>
 					</li>
 
-					<li ng-show="interview.conditions.distance.aggrieved.places &amp;&amp; interview.conditions.distance.aggrieved.other.requested">
-						<label for="interview-conditions-distance-aggrieved-other-title">
+					<li id="dvaf1-conditions-distance-aggrieved-other">
+						<label for="conditions-distance-aggrieved-other-title">
 							<span class="label">Name the places {{aggrievedYouPlurals 'visit' 'visits'}} often</span>
 						</label>
-						<input type="text" id="interview-conditions-distance-aggrieved-other-title" ng-model="interview.conditions.distance.aggrieved.other.title" size="30" spellcheck="true">
+						<input type="text" id="conditions-distance-aggrieved-other-title" name="conditionProhibitEntryOtherTitle" size="30" spellcheck="true" value="{{conditionProhibitEntryOtherTitle}}">
 					</li>
-					<li ng-show="interview.conditions.distance.aggrieved.places &amp;&amp; ( interview.conditions.distance.aggrieved.home.requested || interview.conditions.distance.aggrieved.work.requested || interview.conditions.distance.aggrieved.staying.requested || interview.conditions.distance.aggrieved.other.requested )">
-						<label for="interview-conditions-distance-aggrieved-home-grounds">
+
+					<li id="dvaf1-conditions-distance-aggrieved-places-grounds">
+						<label for="conditions-distance-aggrieved-home-grounds">
 							<span class="label">Please explain to the court the reasons why {{respondentName}} must stay away from these places</span>
 						</label>
-						<textarea id="interview-conditions-distance-aggrieved-home-grounds" ng-model="interview.conditions.distance.aggrieved.home.grounds" rows="7" cols="30" spellcheck="true"></textarea>
+						<textarea id="conditions-distance-aggrieved-home-grounds" name="conditionProhibitEntryGrounds" rows="7" cols="30" spellcheck="true">{{conditionProhibitEntryGrounds}}</textarea>
 					</li>
 				</ol>
 			</fieldset>
 		</li>
 
-		<li ng-show="interview.conditions.nameChildren" class="section">
+		<li class="section">
+			<fieldset>
+				<legend>
+					<span class="h3">Ouster Order</span>
+					<small class="hint">The court must consider whether to make an order that {{respondentName}} must leave a named house or dwelling (this is also known as an <dfn>ouster order</dfn>). The court must take {{aggrievedYour}} wishes into account.</small>
+				</legend>
+				<ol class="questions">
+					<li>
+						<fieldset>
+							<legend>
+								<span class="label">Do you want {{respondentName}} to leave the premises?</span>
+							</legend>
+							<ul class="choices compact">
+								<li>
+									<input type="radio" name="conditionOuster" id="conditions-ousters-false" value="No"{{#if selected.conditionOuster.No}} checked{{/if}}>
+									<label for="conditions-ousters-false">No</label>
+								</li>
+								<li>
+									<input type="radio" name="conditionOuster" id="conditions-ousters-true" value="Yes"{{#if selected.conditionOuster.Yes}} checked{{/if}}>
+									<label for="conditions-ousters-true">Yes</label>
+								</li>
+							</ul>
+						</fieldset>
+					</li>
+					<li class="dvaf1-conditions-ouster-data">
+						<label for="conditions-ouster-address">
+							<span class="label">Address</span>
+						</label>
+						<textarea id="conditions-ouster-address" name="conditionOusterAddress" rows="3" cols="30" autocomplete="street-address" spellcheck="true">{{conditionOusterAddress}}</textarea>
+					</li>
+					<li class="dvaf1-conditions-ouster-data">
+						<label for="conditions-ouster-grounds">
+							<span class="label">Please explain to the court the reasons why {{respondentName}} must leave</span>
+						</label>
+						<textarea id="conditions-ouster-grounds" name="conditionOusterGrounds" rows="7" cols="30" spellcheck="true">{{conditionOusterGrounds}}</textarea>
+					</li>
+				</ol>
+			</fieldset>
+		</li>
+
+		<li id="dvaf1-conditions-children" class="section">
 			<fieldset>
 				<legend>
 					<span class="h3">Prohibit {{respondentName}} from approaching {{aggrievedYour}} kids</span>
@@ -332,36 +261,27 @@
 							</legend>
 							<ul class="choices compact">
 								<li>
-									<input type="radio"
-									       name="interview-conditions-distance-children"
-									       id="interview-conditions-distance-children-false"
-									       ng-model="interview.conditions.distance.children.requested"
-									       ng-value="false">
-									<label for="interview-conditions-distance-children-false">No</label>
+									<input type="radio" name="conditionsDistanceChildrenRequested" id="conditions-distance-children-false" value="No"{{#if selected.conditionsDistanceChildrenRequested.No}} checked{{/if}}>
+									<label for="conditions-distance-children-false">No</label>
 								</li>
 								<li>
-									<input type="radio"
-									       name="interview-conditions-distance-children"
-									       id="interview-conditions-distance-children-true"
-									       ng-model="interview.conditions.distance.children.requested"
-									       ng-value="true">
-									<label for="interview-conditions-distance-children-true">Yes</label>
+									<input type="radio" name="conditionsDistanceChildrenRequested" id="conditions-distance-children-true" value="Yes"{{#if selected.conditionsDistanceChildrenRequested.Yes}} checked{{/if}}>
+									<label for="conditions-distance-children-true">Yes</label>
 								</li>
 							</ul>
 						</fieldset>
 					</li>
-					<li ng-show="interview.conditions.distance.children.requested">
-						<label for="interview-conditions-distance-children-grounds">
+					<li id="dvaf1-children-distance-grounds">
+						<label for="conditions-distance-children-grounds">
 							<span class="label">Please explain to the court the reasons why {{respondentName}} must stay away from {{theAggrieveds}} kids</span>
 						</label>
-						<textarea id="interview-conditions-distance-children-grounds" ng-model="interview.conditions.distance.children.grounds" rows="7" cols="30" spellcheck="true"></textarea>
+						<textarea id="conditions-distance-children-grounds" name="conditionProhibitChildLocationsGrounds" rows="7" cols="30" spellcheck="true">{{conditionProhibitChildLocationsGrounds}}</textarea>
 					</li>
 				</ol>
 			</fieldset>
 		</li>
 
-
-		<li ng-show="(interview.conditions.respondent.abusedAssociates || interview.conditions.respondent.abusedApplicant) &amp;&amp; interview.conditions.nameAssociates" class="section">
+		<li id="dvaf1-conditions-associates" class="section">
 			<fieldset>
 				<legend>
 					<span class="h3">Prohibit {{respondentName}} from approaching {{aggrievedYour}} associates</span>
@@ -374,29 +294,21 @@
 							</legend>
 							<ul class="choices compact">
 								<li>
-									<input type="radio"
-									       name="interview-conditions-distance-associates"
-									       id="interview-conditions-distance-associates-false"
-									       ng-model="interview.conditions.distance.associates.requested"
-									       ng-value="false">
-									<label for="interview-conditions-distance-associates-false">No</label>
+									<input type="radio" name="conditionsDistanceAssociatesRequested" id="conditions-distance-associates-false" value="No"{{#if selected.conditionsDistanceAssociatesRequested.No}} checked{{/if}}>
+									<label for="conditions-distance-associates-false">No</label>
 								</li>
 								<li>
-									<input type="radio"
-									       name="interview-conditions-distance-associates"
-									       id="interview-conditions-distance-associates-true"
-									       ng-model="interview.conditions.distance.associates.requested"
-									       ng-value="true">
-									<label for="interview-conditions-distance-associates-true">Yes</label>
+									<input type="radio" name="conditionsDistanceAssociatesRequested" id="conditions-distance-associates-true" value="Yes"{{#if selected.conditionsDistanceAssociatesRequested.Yes}} checked{{/if}}>
+									<label for="conditions-distance-associates-true">Yes</label>
 								</li>
 							</ul>
 						</fieldset>
 					</li>
-					<li ng-show="interview.conditions.distance.associates.requested">
-						<label for="interview-conditions-distance-associates-grounds">
+					<li id="dvaf1-conditions-associates-grounds">
+						<label for="conditions-distance-associates-grounds">
 							<span class="label">Please explain to the court the reasons why {{respondentName}} must stay away from {{theAggrieveds}} associates</span>
 						</label>
-						<textarea id="interview-conditions-distance-associates-grounds" ng-model="interview.conditions.distance.associates.grounds" rows="7" cols="30" spellcheck="true"></textarea>
+						<textarea id="conditions-distance-associates-grounds" name="conditionProhibitApproachAssociatesGrounds" rows="7" cols="30" spellcheck="true">{{conditionProhibitApproachAssociatesGrounds}}</textarea>
 					</li>
 
 					<li>
@@ -406,34 +318,25 @@
 							</legend>
 							<ul class="choices compact">
 								<li>
-									<input type="radio"
-									       name="interview-conditions-distance-associate-home"
-									       id="interview-conditions-distance-associate-home-false"
-									       ng-model="interview.conditions.distance.associate.home.requested"
-									       ng-value="false">
-									<label for="interview-conditions-distance-associate-home-false">No</label>
+									<input type="radio" name="conditionProhibitEntryAssociates" id="conditions-distance-associate-home-false" value="No"{{#if selected.conditionProhibitEntryAssociates.No}} checked{{/if}}>
+									<label for="conditions-distance-associate-home-false">No</label>
 								</li>
 								<li>
-									<input type="radio"
-									       name="interview-conditions-distance-associate-home"
-									       id="interview-conditions-distance-associate-home-true"
-									       ng-model="interview.conditions.distance.associate.home.requested"
-									       ng-value="true">
-									<label for="interview-conditions-distance-associate-home-true">Yes</label>
+									<input type="radio" name="conditionProhibitEntryAssociates" id="conditions-distance-associate-home-true" value="Yes"{{#if selected.conditionProhibitEntryAssociates.Yes}} checked{{/if}}>
+									<label for="conditions-distance-associate-home-true">Yes</label>
 								</li>
 							</ul>
 						</fieldset>
 					</li>
-					<li ng-show="interview.conditions.distance.associate.home.requested">
-						<label for="interview-conditions-distance-associate-home-grounds">
+					<li id="dvaf1-conditions-distance-associates-home-grounds">
+						<label for="conditions-distance-associate-home-grounds">
 							<span class="label">Please explain why you want {{respondentName}} to stay away from {{theAggrieveds}} associates’ homes</span>
 						</label>
-						<textarea id="interview-conditions-distance-associate-home-grounds" ng-model="interview.conditions.distance.associate.home.grounds" rows="7" cols="30" spellcheck="true"></textarea>
+						<textarea id="conditions-distance-associate-home-grounds" name="conditionProhibitEntryAssociatesGrounds" rows="7" cols="30" spellcheck="true">{{conditionProhibitEntryAssociatesGrounds}}</textarea>
 					</li>
 				</ol>
 			</fieldset>
 		</li>
-
 
 		<li class="section">
 			<fieldset>
@@ -448,110 +351,85 @@
 							</legend>
 							<ul class="choices compact">
 								<li>
-									<input type="radio"
-									       name="interview-conditions-respondent-contact-aggrieved"
-									       id="interview-conditions-respondent-contact-aggrieved-false"
-									       ng-model="interview.conditions.respondent.hasContactedAggrieved"
-									       ng-value="false">
-									<label for="interview-conditions-respondent-contact-aggrieved-false">No</label>
+									<input type="radio" name="conditionsRespondentHasContactedAggrieved" id="conditions-respondent-contact-aggrieved-false" value="No"{{#if selected.conditionsRespondentHasContactedAggrieved.No}} checked{{/if}}>
+									<label for="conditions-respondent-contact-aggrieved-false">No</label>
 								</li>
 								<li>
-									<input type="radio"
-									       name="interview-conditions-respondent-contact-aggrieved"
-									       id="interview-conditions-respondent-contact-aggrieved-true"
-									       ng-model="interview.conditions.respondent.hasContactedAggrieved"
-									       ng-value="true">
-									<label for="interview-conditions-respondent-contact-aggrieved-true">Yes</label>
+									<input type="radio" name="conditionsRespondentHasContactedAggrieved" id="conditions-respondent-contact-aggrieved-true" value="Yes"{{#if selected.conditionsRespondentHasContactedAggrieved.Yes}} checked{{/if}}>
+									<label for="conditions-respondent-contact-aggrieved-true">Yes</label>
 								</li>
 							</ul>
 						</fieldset>
 					</li>
-					<li ng-if="interview.conditions.respondent.hasContactedAggrieved">
+					<li id="dvaf1-conditions-respondent-contact-aggrieved">
 						<fieldset>
 							<legend>
-								<span class="label" ng-if="interview.applicantIsAggrieved">I want {{respondentName}} to stop contacting me</span>
-								<span class="label" ng-if="! interview.applicantIsAggrieved">{{respondentName}} should be prohibited from contacting {{aggrievedYou}}</span>
+								<span class="label">
+								{{#if userIsAggrieved}}
+									I want {{respondentName}} to stop contacting me
+								{{else}}
+									{{RespondentName}} should be prohibited from contacting {{aggrievedYou}}
+								{{/if}}
+								</span>
 								<small class="hint">{{RespondentThey}} won't be allowed to ask anyone else to contact {{aggrievedYou}} either.</small>
 							</legend>
 							<ul class="choices compact">
 								<li>
-									<input type="radio"
-									       name="interview-conditions-aggrieved-stop-contact"
-									       id="interview-conditions-aggrieved-stop-contact-false"
-									       ng-model="interview.conditions.aggrieved.noContact.requested"
-									       ng-value="false">
-									<label for="interview-conditions-aggrieved-stop-contact-false">No</label>
+									<input type="radio" name="conditionProhibitContact" id="conditions-aggrieved-stop-contact-false" value="No"{{#if selected.conditionProhibitContact.No}} checked{{/if}}>
+									<label for="conditions-aggrieved-stop-contact-false">No</label>
 								</li>
 								<li>
-									<input type="radio"
-									       name="interview-conditions-aggrieved-stop-contact"
-									       id="interview-conditions-aggrieved-stop-contact-true"
-									       ng-model="interview.conditions.aggrieved.noContact.requested"
-									       ng-value="true">
-									<label for="interview-conditions-aggrieved-stop-contact-true">Yes</label>
+									<input type="radio" name="conditionProhibitContact" id="conditions-aggrieved-stop-contact-true" value="Yes"{{#if selected.conditionProhibitContact.Yes}} checked{{/if}}>
+									<label for="conditions-aggrieved-stop-contact-true">Yes</label>
 								</li>
 							</ul>
 						</fieldset>
 					</li>
-					<li ng-show="interview.conditions.aggrieved.noContact.requested">
+					<li id="dvaf1-conditions-contact-associates">
 						<fieldset>
 							<legend>
 								<span class="label">Has {{respondentName}} been contacting {{aggrievedYour}} friends or family in way that is threatening or abusive?</span>
 							</legend>
 							<ul class="choices compact">
 								<li>
-									<input type="radio"
-									       name="interview-conditions-respondent-contact-associates"
-									       id="interview-conditions-respondent-contact-associates-false"
-									       ng-model="interview.respondent.hasContactedAssociates"
-									       ng-value="false">
-									<label for="interview-conditions-respondent-contact-associates-false">No</label>
+									<input type="radio" name="respondentHasContactedAssociates" id="conditions-respondent-contact-associates-false" value="No"{{#if selected.respondentHasContactedAssociates.No}} checked{{/if}}>
+									<label for="conditions-respondent-contact-associates-false">No</label>
 								</li>
 								<li>
-									<input type="radio"
-									       name="interview-conditions-respondent-contact-associates"
-									       id="interview-conditions-respondent-contact-associates-true"
-									       ng-model="interview.respondent.hasContactedAssociates"
-									       ng-value="true">
-									<label for="interview-conditions-respondent-contact-associates-true">Yes</label>
+									<input type="radio" name="respondentHasContactedAssociates" id="conditions-respondent-contact-associates-true" value="Yes"{{#if selected.respondentHasContactedAssociates.Yes}} checked{{/if}}>
+									<label for="conditions-respondent-contact-associates-true">Yes</label>
 								</li>
 							</ul>
 						</fieldset>
 					</li>
-					<li ng-show="interview.conditions.aggrieved.noContact.requested &amp;&amp; interview.respondent.hasContactedAssociates">
+					<li id="dvaf1-conditions-contact-associates-stop">
 						<fieldset>
 							<legend>
 								<span class="label">Do you want {{respondentThem}} to stop that contact?</span>
 							</legend>
 							<ul class="choices compact">
 								<li>
-									<input type="radio"
-									       name="interview-conditions-associates-stop-contact"
-									       id="interview-conditions-associates-stop-contact-false"
-									       ng-model="interview.conditions.associates.noContact.requested"
-									       ng-value="false">
-									<label for="interview-conditions-associates-stop-contact-false">No</label>
+									<input type="radio" name="conditionProhibitContactAssociates" id="conditions-associates-stop-contact-false" value="No"{{#if selected.conditionProhibitContactAssociates.No}} checked{{/if}}>
+									<label for="conditions-associates-stop-contact-false">No</label>
 								</li>
 								<li>
-									<input type="radio"
-									       name="interview-conditions-associates-stop-contact"
-									       id="interview-conditions-associates-stop-contact-true"
-									       ng-model="interview.conditions.associates.noContact.requested"
-									       ng-value="true">
-									<label for="interview-conditions-associates-stop-contact-true">Yes</label>
+									<input type="radio" name="conditionProhibitContactAssociates" id="conditions-associates-stop-contact-true" value="Yes"{{#if selected.conditionProhibitContactAssociates.Yes}} checked{{/if}}>
+									<label for="conditions-associates-stop-contact-true">Yes</label>
 								</li>
 							</ul>
 						</fieldset>
 					</li>
-					<li ng-show="interview.conditions.aggrieved.noContact.requested">
-						<label for="interview-conditions-aggrieved-stop-contact-grounds">
+					<li id="dvaf1-conditions-stop-contact-grounds">
+						<label for="conditions-aggrieved-stop-contact-grounds">
 							<span class="label">
 								Please explain why you want {{respondentName}} to stop contacting
-								{{aggrievedYou}}<span ng-if="interview.respondent.hasContactedAssociates &amp;&amp; interview.conditions.associates.noContact.requested">, {{aggrievedYour}} friends and family</span>
+								{{aggrievedYou}}{{#if selected.conditionProhibitContactAssociates.Yes}}, {{aggrievedYour}} friends and family{{/if}}
 							</span>
-							<small class="hint" ng-if="interview.respondent.hasContactedAssociates &amp;&amp; interview.conditions.associates.noContact.requested">You need to include the names of family and friends later in this application.</small>
+							{{#if selected.conditionProhibitContactAssociates.Yes}}
+								<small class="hint">You need to include the names of family and friends later in this application.</small>
+							{{/if}}
 						</label>
-						<textarea id="interview-conditions-aggrieved-stop-contact-grounds" ng-model="interview.conditions.aggrieved.noContact.grounds" rows="7" cols="30" spellcheck="true"></textarea>
+						<textarea id="conditions-aggrieved-stop-contact-grounds" name="conditionProhibitContactGrounds" rows="7" cols="30" spellcheck="true">{{conditionProhibitContactGrounds}}</textarea>
 					</li>
 
 					<li>
@@ -562,29 +440,21 @@
 							</legend>
 							<ul class="choices compact">
 								<li>
-									<input type="radio"
-									       name="interview-conditions-social-media"
-									       id="interview-conditions-social-media-false"
-									       ng-model="interview.conditions.socialMedia.requested"
-									       ng-value="false">
-									<label for="interview-conditions-social-media-false">No</label>
+									<input type="radio" name="conditionsProhibtSocialMedia" id="conditions-social-media-false" value="No"{{#if selected.conditionsProhibitSocialMedia.No}} checked{{/if}}>
+									<label for="conditions-social-media-false">No</label>
 								</li>
 								<li>
-									<input type="radio"
-									       name="interview-conditions-social-media"
-									       id="interview-conditions-social-media-true"
-									       ng-model="interview.conditions.socialMedia.requested"
-									       ng-value="true">
-									<label for="interview-conditions-social-media-true">Yes</label>
+									<input type="radio" name="conditionsProhibtSocialMedia" id="conditions-social-media-true" value="Yes"{{#if selected.conditionsProhibitSocialMedia.Yes}} checked{{/if}}>
+									<label for="conditions-social-media-true">Yes</label>
 								</li>
 							</ul>
 						</fieldset>
 					</li>
-					<li ng-show="interview.conditions.socialMedia.requested">
-						<label for="interview-conditions-social-media-grounds">
+					<li id="dvaf1-conditions-social-media-grounds">
+						<label for="conditions-social-media-grounds">
 							<span class="label">Please explain why you want {{respondentName}} to stop publishing anything online that mentions {{aggrievedYou}}</span>
 						</label>
-						<textarea id="interview-conditions-social-media-grounds" ng-model="interview.conditions.socialMedia.grounds" rows="7" cols="30" spellcheck="true"></textarea>
+						<textarea id="conditions-social-media-grounds" name="conditionsProhibtSocialMediaGrounds" rows="7" cols="30" spellcheck="true">{{conditionsProhibtSocialMediaGrounds}}</textarea>
 					</li>
 					<li>
 						<fieldset>
@@ -593,34 +463,25 @@
 							</legend>
 							<ul class="choices compact">
 								<li>
-									<input type="radio"
-									       name="interview-conditions-aggrieved-locate"
-									       id="interview-conditions-aggrieved-locate-false"
-									       ng-model="interview.conditions.aggrieved.locate.requested"
-									       ng-value="false">
-									<label for="interview-conditions-aggrieved-locate-false">No</label>
+									<input type="radio" name="conditionProhibitLocating" id="conditions-aggrieved-locate-false" value="No"{{#if selected.conditionProhibitLocating.No}} checked{{/if}}>
+									<label for="conditions-aggrieved-locate-false">No</label>
 								</li>
 								<li>
-									<input type="radio"
-									       name="interview-conditions-aggrieved-locate"
-									       id="interview-conditions-aggrieved-locate-true"
-									       ng-model="interview.conditions.aggrieved.locate.requested"
-									       ng-value="true">
-									<label for="interview-conditions-aggrieved-locate-true">Yes</label>
+									<input type="radio" name="conditionProhibitLocating" id="conditions-aggrieved-locate-true" value="Yes"{{#if selected.conditionProhibitLocating.Yes}} checked{{/if}}>
+									<label for="conditions-aggrieved-locate-true">Yes</label>
 								</li>
 							</ul>
 						</fieldset>
 					</li>
-					<li ng-show="interview.conditions.aggrieved.locate.requested">
-						<label for="interview-conditions-aggrieved-locate-grounds">
+					<li id="dvaf1-conditions-aggrieved-locate-grounds">
+						<label for="conditions-aggrieved-locate-grounds">
 							<span class="label">Please explain why you want {{respondentName}} to stop trying to find {{aggrievedYou}}</span>
 						</label>
-						<textarea id="interview-conditions-aggrieved-locate-grounds" ng-model="interview.conditions.aggrieved.locate.grounds" rows="7" cols="30" spellcheck="true"></textarea>
+						<textarea id="conditions-aggrieved-locate-grounds" name="conditionProhibitLocatingGrounds" rows="7" cols="30" spellcheck="true">{{conditionProhibitLocatingGrounds}}</textarea>
 					</li>
 				</ol>
 			</fieldset>
 		</li>
-
 
 		<li>
 			<fieldset>
@@ -629,29 +490,21 @@
 				</legend>
 				<ul class="choices compact">
 					<li>
-						<input type="radio"
-						       name="interview-conditions-property"
-						       id="interview-conditions-property-false"
-						       ng-model="interview.conditions.property.requested"
-						       ng-value="false">
-						<label for="interview-conditions-property-false">No</label>
+						<input type="radio" name="conditionsRecoverProperty" id="conditions-property-false" value="No"{{#if selected.conditionsRecoverProperty.No}} checked{{/if}}>
+						<label for="conditions-property-false">No</label>
 					</li>
 					<li>
-						<input type="radio"
-						       name="interview-conditions-property"
-						       id="interview-conditions-property-true"
-						       ng-model="interview.conditions.property.requested"
-						       ng-value="true">
-						<label for="interview-conditions-property-true">Yes</label>
+						<input type="radio" name="conditionsRecoverProperty" id="conditions-property-true" value="Yes"{{#if selected.conditionsRecoverProperty.Yes}} checked{{/if}}>
+						<label for="conditions-property-true">Yes</label>
 					</li>
 				</ul>
 			</fieldset>
 		</li>
-		<li ng-show="interview.conditions.property.requested">
-			<label for="interview-conditions-property-grounds">
+		<li id="dvaf1-conditions-property-grounds">
+			<label for="conditions-property-grounds">
 				<span class="label">Please list the property you want returned</span>
 			</label>
-			<textarea id="interview-conditions-property-grounds" ng-model="interview.conditions.property.grounds" rows="7" cols="30" spellcheck="true"></textarea>
+			<textarea id="conditions-property-grounds" name="conditionRecoverPropertyDescription" rows="7" cols="30" spellcheck="true">{{conditionRecoverPropertyDescription}}</textarea>
 		</li>
 
 		<li>
@@ -662,30 +515,24 @@
 				</legend>
 				<ul class="choices compact">
 					<li>
-						<input type="radio"
-						       name="interview-conditions-behaviour"
-						       id="interview-conditions-behaviour-false"
-						       ng-model="interview.conditions.behaviour.requested"
-						       ng-value="false">
-						<label for="interview-conditions-behaviour-false">No</label>
+						<input type="radio" name="conditionProhibitConduct" id="conditions-behaviour-false" value="No"{{#if selected.conditionProhibitConduct.No}} checked{{/if}}>
+						<label for="conditions-behaviour-false">No</label>
 					</li>
 					<li>
-						<input type="radio"
-						       name="interview-conditions-behaviour"
-						       id="interview-conditions-behaviour-true"
-						       ng-model="interview.conditions.behaviour.requested"
-						       ng-value="true">
-						<label for="interview-conditions-behaviour-true">Yes</label>
+						<input type="radio" name="conditionProhibitConduct" id="conditions-behaviour-true" value="Yes"{{#if selected.conditionProhibitConduct.Yes}} checked{{/if}}>
+						<label for="conditions-behaviour-true">Yes</label>
 					</li>
 				</ul>
 			</fieldset>
 		</li>
-		<li ng-show="interview.conditions.behaviour.requested">
-			<label for="interview-conditions-behaviour-grounds">
+
+		<li id="dvaf1-conditions-behaviour-grounds">
+			<label for="conditions-behaviour-grounds">
 				<span class="label">Please explain how you want {{respondentName}} to behave differently</span>
 			</label>
-			<textarea id="interview-conditions-behaviour-grounds" ng-model="interview.conditions.behaviour.grounds" rows="7" cols="30" spellcheck="true"></textarea>
+			<textarea id="conditions-behaviour-grounds" name="conditionProhibitConductGrounds" rows="7" cols="30" spellcheck="true">{{conditionProhibitConductGrounds}}</textarea>
 		</li>
+
 		<li>
 			<ul class="actions">
 				<li><strong><button>Continue</button></strong></li>

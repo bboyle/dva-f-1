@@ -208,18 +208,18 @@
 						<input type="hidden" name="conditionProhibitContact" value="{{conditionProhibitContact}}">
 						{{#if conditionsAggrievedNoContactRequested}}
 							<input type="hidden" name="conditionProhibitContactGrounds" value="{{conditionProhibitContactGrounds}}">
-							{{#if respondentHasContactedAssociated}}<input type="hidden" name="conditionProhibitContactAssociates" value="{{conditionProhibitContactAssociates}}">{{/if}}
+							{{#if respondentHasContactedAssociates}}<input type="hidden" name="conditionProhibitContactAssociates" value="{{conditionProhibitContactAssociates}}">{{/if}}
 						{{/if}}
 					{{/if}}
 
 					<input type="hidden" name="conditionProhibitLocating" value="{{conditionProhibitLocating}}">
-					{{#if conditionsAggrievedLocateRequested}}<input type="hidden" name="conditionProhibitLocatingGrounds" value="{{conditionProhibitLocatingGrounds}}">{{/if}}
+					{{#if conditionProhibitLocating}}<input type="hidden" name="conditionProhibitLocatingGrounds" value="{{conditionProhibitLocatingGrounds}}">{{/if}}
 
 					<input type="hidden" name="conditionRecoverProperty" value="{{conditionRecoverProperty}}">
-					{{#if conditionsPropertyRequested}}<input type="hidden" name="conditionRecoverPropertyDescription" value="{{conditionRecoverPropertyDescription}}">{{/if}}
+					{{#if conditionsRecoverProperty}}<input type="hidden" name="conditionRecoverPropertyDescription" value="{{conditionRecoverPropertyDescription}}">{{/if}}
 
 					<input type="hidden" name="conditionProhibitConduct" value="{{conditionProhibitConduct}}">
-					{{#if conditionsBehaviourRequested}}<input type="hidden" name="conditionProhibitConductGrounds" value="{{conditionProhibitConductGrounds}}">{{/if}}
+					{{#if conditionProhibitConduct}}<input type="hidden" name="conditionProhibitConductGrounds" value="{{conditionProhibitConductGrounds}}">{{/if}}
 
 
 					<!-- repeat for children -->

@@ -107,7 +107,113 @@ $(function( $ ) {
 				}
 			}
 		},
-		'dvaf1-conditions-template': {},
+		'dvaf1-conditions-template': {
+			relevance: {
+				'#dvaf1-children-grounds': {
+					name: 'conditionsNameChildren',
+					value: 'Yes'
+				},
+				'#dvaf1-applicant-suffered': {
+					name: 'associatesSuffered',
+					value: 'No'
+				},
+				'#dvaf1-associate-protection': [{
+					name: 'associatesSuffered',
+					value: 'Yes'
+				}, {
+					name: 'applicantSuffered',
+					value: 'Yes'
+				}],
+				'#dvaf1-associate-protection-grounds': {
+					name: 'conditionsNameAssociates',
+					value: 'Yes'
+				},
+				'#dvaf1-conditions-distance-aggrieved-grounds': {
+					name: 'conditionsDistanceAggrieved',
+					value: 'Yes'
+				},
+				'#dvaf1-conditions-distance-aggrieved-list': {
+					name: 'conditionsDistanceAggrievedPlaces',
+					value: 'Yes'
+				},
+				'#dvaf1-conditions-distance-aggrieved-other': {
+					name: 'conditionsDistanceAggrievedOther',
+					value: 'Yes'
+				},
+				'#dvaf1-conditions-distance-aggrieved-places-grounds': [{
+					name: 'conditionsDistanceAggrievedHome',
+					value: 'Yes'
+				}, {
+					name: 'conditionsDistanceAggrievedWork',
+					value: 'Yes'
+				}, {
+					name: 'conditionsDistanceAggrievedStaying',
+					value: 'Yes'
+				}, {
+					name: 'conditionsDistanceAggrievedOther',
+					value: 'Yes'
+				}],
+				'.dvaf1-conditions-ouster-data': {
+					name: 'conditionOuster',
+					value: 'Yes'
+				},
+				'#dvaf1-conditions-children': {
+					name: 'conditionsNameChildren',
+					value: 'Yes'
+				},
+				'#dvaf1-children-distance-grounds': {
+					name: 'conditionsDistanceChildrenRequested',
+					value: 'Yes'
+				},
+				'#dvaf1-conditions-associates': {
+					name: 'conditionsNameAssociates',
+					value: 'Yes'
+				},
+				'#dvaf1-conditions-associates-grounds': {
+					name: 'conditionsDistanceAssociatesRequested',
+					value: 'Yes'
+				},
+				'#dvaf1-conditions-distance-associates-home-grounds': {
+					name: 'conditionProhibitEntryAssociates',
+					value: 'Yes'
+				},
+				'#dvaf1-conditions-respondent-contact-aggrieved': {
+					name: 'conditionsRespondentHasContactedAggrieved',
+					value: 'Yes'
+				},
+				'#dvaf1-conditions-contact-associates': {
+					name: 'conditionProhibitContact',
+					value: 'Yes'
+				},
+				'#dvaf1-conditions-contact-associates-stop': {
+					name: 'respondentHasContactedAssociates',
+					value: 'Yes'
+				},
+				'#dvaf1-conditions-stop-contact-grounds': [{
+					name: 'conditionProhibitContact',
+					value: 'Yes'
+				}, {
+					name: 'conditionProhibitContactAssociates',
+					value: 'Yes'
+				}],
+				'#dvaf1-conditions-social-media-grounds': {
+					name: 'conditionsProhibtSocialMedia',
+					value: 'Yes'
+				},
+				'#dvaf1-conditions-aggrieved-locate-grounds': {
+					name: 'conditionProhibitLocating',
+					value: 'Yes'
+				},
+				'#dvaf1-conditions-property-grounds': {
+					name: 'conditionsRecoverProperty',
+					value: 'Yes'
+				},
+				'#dvaf1-conditions-behaviour-grounds': {
+					name: 'conditionProhibitConduct',
+					value: 'Yes'
+				}
+			}
+		},
 		'dvaf1-urgent-template': {
 			relevance: {
 				'#dvaf1-tpo-info': [{
