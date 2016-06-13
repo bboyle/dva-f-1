@@ -164,6 +164,18 @@ $(function( $ ) {
 				'#dvaf1-respondent-parent-details': {
 					name: 'respondentUnder18',
 					value: 'Yes'
+				},
+				'#dvaf1-respondent-weapon-access-description': {
+					name: 'respondentWeaponsAccess',
+					values: [ 'Yes', 'Unsure' ]
+				},
+				'#dvaf1-weapon-licence-info': {
+					name: 'respondentWeaponsLicence',
+					value: 'Yes'
+				},
+				'#dvaf1-weapon-licence-details': {
+					name: 'respondentWeaponsLicence',
+					value: 'Yes'
 				}
 			}
 		},

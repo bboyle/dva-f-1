@@ -200,6 +200,65 @@
 		</li>
 
 		<li>
+			<fieldset>
+				<legend>
+					<span class="label">Does {{respondentName}} have a weapon?</span>
+				</legend>
+				<ul class="choices compact">
+					<li>
+						<input type="radio" name="respondentWeaponsAccess" value="No" id="weapon-access-no"{{#if selected.respondentWeaponsAccess.No}} checked{{/if}}>
+						<label for="weapon-access-no">No</label>
+					</li>
+					<li>
+						<input type="radio" name="respondentWeaponsAccess" value="Unsure" id="weapon-access-unsure"{{#if selected.respondentWeaponsAccess.Unsure}} checked{{/if}}>
+						<label for="weapon-access-unsure">Unsure</label>
+					</li>
+					<li>
+						<input type="radio" name="respondentWeaponsAccess" value="Yes" id="weapon-access-yes"{{#if selected.respondentWeaponsAccess.Yes}} checked{{/if}}>
+						<label for="weapon-access-yes">Yes</label>
+					</li>
+				</ul>
+			</fieldset>
+		</li>
+		<li id="dvaf1-respondent-weapon-access-description">
+			<label for="weapon-access-details">
+				<span class="label">Please state the number of weapons, the type of weapons and all likely places where they may be found</span>
+			</label>
+			<textarea id="weapon-access-details" name="respondentWeaponsAccessDescription" cols="40" rows="10" spellcheck="true">{{respondentWeaponsAccessDescription}}</textarea>
+		</li>
+
+		<li>
+			<fieldset>
+				<legend>
+					<span class="label">Does {{respondentName}} have a weapons or firearms licence?</span>
+				</legend>
+				<ul class="choices compact">
+					<li>
+						<input type="radio" name="respondentWeaponsLicence" value="No" id="weapon-licence-no"{{#if selected.respondentWeaponsLicence.No}} checked{{/if}}>
+						<label for="weapon-licence-no">No</label>
+					</li>
+					<li>
+						<input type="radio" name="respondentWeaponsLicence" value="Yes" id="weapon-licence-yes"{{#if selected.respondentWeaponsLicence.Yes}} checked{{/if}}>
+						<label for="weapon-licence-yes">Yes</label>
+					</li>
+				</ul>
+			</fieldset>
+		</li>
+		<li id="dvaf1-weapon-licence-info">
+			<div class="status warn">
+				<h2>Access to licensed weapon storage</h2>
+				<p><strong>DO NOT</strong> accept the key to any secure weapons storage from {{respondentName}}. It is against the law to have a key to weapons unless you have a licence and permit.</p>
+				<p>Contact <a href="https://www.police.qld.gov.au/forms/wlb.asp" target="_blank">Weapons Licensing (Queensland Police)</a> as soon as possible for advice.</p>
+			</div>
+		</li>
+		<li id="dvaf1-weapon-licence-details">
+			<label for="weapon-licence-details">
+				<span class="label">Please provide details of any weapons {{respondentName}} has access to and where they are located</span>
+			</label>
+			<textarea id="weapon-licence-details" name="respondentWeaponsLicenceDescription" cols="40" rows="10" spellcheck="true">{{respondentWeaponsLicenceDescription}}</textarea>
+		</li>
+
+		<li>
 			<ul class="actions">
 				<li><strong><button>Continue</button></strong></li>
 			</ul>

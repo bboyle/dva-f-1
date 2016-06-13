@@ -110,9 +110,9 @@ $(function($) {
         var index = parseInt(this.value, 10), repeatData = data[this.name];
         // clean up data
         repeatData.splice(index, 1), repeatData.length < 1 && (repeatData[0] = {}), // clean up UI
-        $(this).closest(".group").nextAll(".group").each(function(i, section) {
+        $(this).closest(".section, .group").nextAll(".section, .group").each(function(i, section) {
             repeatData.length < 2 && $("button.del", section).remove(), renumberControls(section, index + i);
-        }), $(this).closest(".group").remove();
+        }), $(this).closest(".section, .group").remove();
     });
 }), /* global Handlebars, dvaf1Data */
 $(function() {
@@ -462,6 +462,18 @@ $(function($) {
                 },
                 "#dvaf1-respondent-parent-details": {
                     name: "respondentUnder18",
+                    value: "Yes"
+                },
+                "#dvaf1-respondent-weapon-access-description": {
+                    name: "respondentWeaponsAccess",
+                    values: [ "Yes", "Unsure" ]
+                },
+                "#dvaf1-weapon-licence-info": {
+                    name: "respondentWeaponsLicence",
+                    value: "Yes"
+                },
+                "#dvaf1-weapon-licence-details": {
+                    name: "respondentWeaponsLicence",
                     value: "Yes"
                 }
             }
