@@ -14,7 +14,7 @@ $(function($) {
         data[key] = data.FEMININE_GENDER.test(value) ? "Woman" : data.MASCULINE_GENDER.test(value) ? "Man" : data[key];
     }
     function renumberControls(section, n) {
-        var heading = $(".h3", section);
+        var heading = $(".label", section).eq(0);
         heading.text(heading.text().replace(/\d+/, n + 1)), $("input, select, textarea", section).each(function(j, control) {
             control.id = control.id.replace(/\d+/, n), control.name = control.name.replace(/\d+/, n);
         }), $("label", section).each(function(j, label) {
@@ -102,7 +102,7 @@ $(function($) {
         var clone = section.clone();
         $("input, select, textarea", clone).each(function(j, control) {
             control.value = "";
-        }), clone.insertAfter(section), index++, section.nextAll(".section").each(function(i, section) {
+        }), clone.insertAfter(section), index++, section.nextAll(".section, .group").each(function(i, section) {
             renumberControls(section, index + i);
         });
     }), // remove repeating section
@@ -110,9 +110,9 @@ $(function($) {
         var index = parseInt(this.value, 10), repeatData = data[this.name];
         // clean up data
         repeatData.splice(index, 1), repeatData.length < 1 && (repeatData[0] = {}), // clean up UI
-        $(this).closest(".section").nextAll(".section").each(function(i, section) {
+        $(this).closest(".group").nextAll(".group").each(function(i, section) {
             repeatData.length < 2 && $("button.del", section).remove(), renumberControls(section, index + i);
-        }), $(this).closest(".section").remove();
+        }), $(this).closest(".group").remove();
     });
 }), /* global Handlebars, dvaf1Data */
 $(function() {
@@ -441,7 +441,14 @@ $(function($) {
                 }
             }
         },
-        "dvaf1-children-template": {},
+        "dvaf1-children-template": {
+            relevance: {
+                ".dvaf1-children": {
+                    name: "conditionsNameChildren",
+                    value: "Yes"
+                }
+            }
+        },
         "dvaf1-associates-template": {},
         "dvaf1-respondent-template": {
             relevance: {

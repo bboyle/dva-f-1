@@ -132,7 +132,7 @@ $(function( $ ) {
 
 
 	function renumberControls( section, n ) {
-		var heading = $( '.h3', section );
+		var heading = $( '.label', section ).eq( 0 );
 		heading.text( heading.text().replace( /\d+/, n + 1 ));
 
 		$( 'input, select, textarea', section ).each(function( j, control ) {
@@ -170,7 +170,7 @@ $(function( $ ) {
 		clone.insertAfter( section );
 
 		index++;
-		section.nextAll( '.section' ).each(function( i, section ) {
+		section.nextAll( '.section, .group' ).each(function( i, section ) {
 			renumberControls( section, index + i );
 		});
 	});
@@ -187,13 +187,13 @@ $(function( $ ) {
 		}
 
 		// clean up UI
-		$( this ).closest( '.section' ).nextAll( '.section' ).each(function( i, section ) {
+		$( this ).closest( '.section, .group' ).nextAll( '.section, .group' ).each(function( i, section ) {
 			if ( repeatData.length < 2 ) {
 				$( 'button.del', section ).remove();
 			}
 			renumberControls( section, index + i );
 		});
-		$( this ).closest( '.section' ).remove();
+		$( this ).closest( '.section, .group' ).remove();
 	});
 
 

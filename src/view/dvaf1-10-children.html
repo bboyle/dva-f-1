@@ -18,13 +18,13 @@
 					</li>
 					<li>
 						<input type="radio" name="conditionsNameChildren" id="name-children-no" value="No"{{#if selected.conditionsNameChildren.No}} checked{{/if}}>
-						<label for="name-children2-no">No</label>
+						<label for="name-children-no">No</label>
 					</li>
 				</ul>
 			</fieldset>
 		</li>
 
-		{{#each children}}
+		{{#each child}}
 		<li class="dvaf1-children group">
 			<fieldset>
 				<legend>
@@ -121,8 +121,8 @@
 					</li>
 					<li class="footer">
 						<ul class="actions">
-							<li><em><button type="button" class="add" value="{{@index}}"><i class="fa fa-plus-square"></i> Add another child</button></em></li>
-							{{#if @index}}<li><em><button type="button" class="del" value="{{@index}}"><i class="fa fa-minus-square"></i> Remove child {{plus1 @index}}</button></em></li>{{/if}}
+							<li><em><button type="button" class="add" name="child" value="{{@index}}"><i class="fa fa-plus-square"></i> Add another child</button></em></li>
+							{{#if @index}}<li><em><button type="button" class="del" name="child" value="{{@index}}"><i class="fa fa-minus-square"></i> Remove child {{plus1 @index}}</button></em></li>{{/if}}
 						</ul>
 					</li>
 				</ol>
