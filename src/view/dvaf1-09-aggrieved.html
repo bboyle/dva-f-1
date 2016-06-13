@@ -201,7 +201,7 @@
 		</li>
 		<li id="dvaf1-aggrieved-disability-description">
 			<label for="aggrieved-disability-details">
-				<span class="label">Please provide details about {{ interview.aggrieved.pronoun.your }} needs</span>
+				<span class="label">Please provide details about {{aggrievedYour}} needs</span>
 			</label>
 			<textarea name="aggrievedDisabilityDescription" id="aggrieved-disability-details" rows="3" cols="40" spellcheck="true">{{aggrievedDisabilityDescription}}</textarea>
 		</li>
@@ -227,13 +227,13 @@
 		<li class="section" id="dvaf1-aggrieved-parent-details">
 			<fieldset>
 				<legend>
-					<span class="h2">Parent's details</span>
+					<span class="h2">Parent’s details</span>
 					<p>All documents must be given to a parent unless the court orders otherwise.</p>
 				</legend>
 				<ol class="questions">
 					<li>
 						<label for="aggrieved-parent-name">
-							<span class="label">Parent's name</span>
+							<span class="label">Parent’s name</span>
 						</label>
 						<input name="aggrievedParentName" size="30" type="text" id="aggrieved-parent-name" value="{{aggrievedParentName}}">
 					</li>
@@ -256,7 +256,7 @@
 					</li>
 					<li>
 						<label for="aggrieved-parent-address">
-							<span class="label">Parent's address</span>
+							<span class="label">Parent’s address</span>
 							{{#if selected.aggrievedParentAddressConfidential.Yes}}<small class="hint">CONFIDENTIAL (not shared with {{respondentName}})</small>{{/if}}
 						</label>
 						<textarea name="aggrievedParentAddress" id="aggrieved-parent-address" rows="3" cols="4" spellcheck="true">{{aggrievedParentAddress}}</textarea>

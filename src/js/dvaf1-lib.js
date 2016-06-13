@@ -68,6 +68,16 @@ $(function() {
 		return TitleCase( doesTheAggrieved() );
 	}
 
+	function doesTheRespondent() {
+		if ( dvaf1Data.respondentNameGiven ) {
+			return 'does ' + dvaf1Data.respondentNameGiven;
+		}
+		return 'does the respondent';
+	}
+	function DoesTheRespondent() {
+		return TitleCase( doesTheRespondent() );
+	}
+
 	function isTheAggrieved() {
 		if ( dvaf1Data.userIsAggrieved ) {
 			return 'are you';
@@ -79,10 +89,21 @@ $(function() {
 			return dvaf1Data.userRelationship === 'someone' ? 'are they' : 'is your ' + dvaf1Data.userRelationship;
 		}
 
-		return 'does the aggrieved';
+		return 'is the aggrieved';
 	}
 	function IsTheAggrieved() {
 		return TitleCase( isTheAggrieved() );
+	}
+
+	function isTheRespondent() {
+		if ( dvaf1Data.respondentNameGiven ) {
+			return 'is ' + dvaf1Data.respondentNameGiven;
+		}
+
+		return 'is the respondent';
+	}
+	function IsTheRespondent() {
+		return TitleCase( isTheRespondent() );
 	}
 
 
@@ -217,6 +238,9 @@ $(function() {
 	Handlebars.registerHelper( 'RespondentName', RespondentName );
 	Handlebars.registerHelper( 'respondentName', respondentName );
 	Handlebars.registerHelper( 'respondentTheyReceive', respondentTheyReceive );
+	Handlebars.registerHelper( 'doesTheRespondent', doesTheRespondent );
+	Handlebars.registerHelper( 'DoesTheRespondent', DoesTheRespondent );
+	Handlebars.registerHelper( 'IsTheRespondent', IsTheRespondent );
 
 	Handlebars.registerHelper( 'doesTheAggrieved', doesTheAggrieved );
 	Handlebars.registerHelper( 'DoesTheAggrieved', DoesTheAggrieved );
@@ -266,6 +290,10 @@ $(function() {
 	function RespondentThey() {
 		return TitleCase( respondentThey() );
 	}
+
+	Handlebars.registerHelper( 'respondentTheir', function() {
+		return genderPronoun( dvaf1Data.respondentGender, 'her', 'his', 'their' );
+	});
 
 	Handlebars.registerHelper( 'respondentThey', respondentThey );
 	Handlebars.registerHelper( 'RespondentThey', RespondentThey );

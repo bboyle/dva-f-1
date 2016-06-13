@@ -151,7 +151,22 @@ $(function( $ ) {
 			// }
 		},
 		'dvaf1-associates-template': {},
-		'dvaf1-respondent-template': {},
+		'dvaf1-respondent-template': {
+			relevance: {
+				'#dvaf1-respondent-interpreter-language': {
+					name: 'respondentRequiresInterpreter',
+					value: 'Yes'
+				},
+				'#dvaf1-respondent-disability-description': {
+					name: 'respondentHasDisability',
+					value: 'Yes'
+				},
+				'#dvaf1-respondent-parent-details': {
+					name: 'respondentUnder18',
+					value: 'Yes'
+				}
+			}
+		},
 		'dvaf1-orders-template': {
 			relevance: {
 				'#dvfa1-orders-existing': {

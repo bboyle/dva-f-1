@@ -1,4 +1,4 @@
-/*! dva-f-1 - v1.0.0 - 2016-05-26
+/*! dva-f-1 - v1.0.0 - 2016-06-13
 * https://github.com/bboyle/dva-f-1#readme
 * Copyright (c) 2016 Queensland Government; Licensed BSD-3-Clause */
 /* global Handlebars */
@@ -153,11 +153,23 @@ $(function() {
     function DoesTheAggrieved() {
         return TitleCase(doesTheAggrieved());
     }
+    function doesTheRespondent() {
+        return dvaf1Data.respondentNameGiven ? "does " + dvaf1Data.respondentNameGiven : "does the respondent";
+    }
+    function DoesTheRespondent() {
+        return TitleCase(doesTheRespondent());
+    }
     function isTheAggrieved() {
-        return dvaf1Data.userIsAggrieved ? "are you" : dvaf1Data.aggrievedNameGiven ? "is " + dvaf1Data.aggrievedNameGiven : dvaf1Data.userRelationship ? "someone" === dvaf1Data.userRelationship ? "are they" : "is your " + dvaf1Data.userRelationship : "does the aggrieved";
+        return dvaf1Data.userIsAggrieved ? "are you" : dvaf1Data.aggrievedNameGiven ? "is " + dvaf1Data.aggrievedNameGiven : dvaf1Data.userRelationship ? "someone" === dvaf1Data.userRelationship ? "are they" : "is your " + dvaf1Data.userRelationship : "is the aggrieved";
     }
     function IsTheAggrieved() {
         return TitleCase(isTheAggrieved());
+    }
+    function isTheRespondent() {
+        return dvaf1Data.respondentNameGiven ? "is " + dvaf1Data.respondentNameGiven : "is the respondent";
+    }
+    function IsTheRespondent() {
+        return TitleCase(isTheRespondent());
     }
     function genderPronoun(gender, feminine, masculine, generic) {
         return dvaf1Data.FEMININE_GENDER.test(gender) ? feminine : dvaf1Data.MASCULINE_GENDER.test(gender) ? masculine : generic;
@@ -237,15 +249,17 @@ $(function() {
     Handlebars.registerHelper("aggrievedYouAre", aggrievedYouAre), Handlebars.registerHelper("aggrievedYour", aggrievedYour), 
     Handlebars.registerHelper("we", we), Handlebars.registerHelper("We", We), Handlebars.registerHelper("theRespondent", theRespondent), 
     Handlebars.registerHelper("RespondentName", RespondentName), Handlebars.registerHelper("respondentName", respondentName), 
-    Handlebars.registerHelper("respondentTheyReceive", respondentTheyReceive), Handlebars.registerHelper("doesTheAggrieved", doesTheAggrieved), 
-    Handlebars.registerHelper("DoesTheAggrieved", DoesTheAggrieved), Handlebars.registerHelper("isTheAggrieved", isTheAggrieved), 
-    Handlebars.registerHelper("IsTheAggrieved", IsTheAggrieved), Handlebars.registerHelper("aggrievedILive", aggrievedILive), 
-    Handlebars.registerHelper("aggrievedYouHave", aggrievedYouHave), Handlebars.registerHelper("aggrievedYouLive", aggrievedYouLive), 
-    Handlebars.registerHelper("aggrievedYouKnow", aggrievedYouKnow), Handlebars.registerHelper("aggrievedYouPlurals", aggrievedYouPlurals), 
-    Handlebars.registerHelper("aggrievedYouNeed", aggrievedYouNeed), Handlebars.registerHelper("TheAggrievedINeed", TheAggrievedINeed), 
-    Handlebars.registerHelper("TheAggrievedWants", TheAggrievedWants), Handlebars.registerHelper("theAggrievedWants", theAggrievedWants), 
-    Handlebars.registerHelper("aggrievedMe", aggrievedMe), Handlebars.registerHelper("aggrievedMy", aggrievedMy), 
-    Handlebars.registerHelper("theAggrievedThey", theAggrievedThey), Handlebars.registerHelper("TheAggrievedIs", function() {
+    Handlebars.registerHelper("respondentTheyReceive", respondentTheyReceive), Handlebars.registerHelper("doesTheRespondent", doesTheRespondent), 
+    Handlebars.registerHelper("DoesTheRespondent", DoesTheRespondent), Handlebars.registerHelper("IsTheRespondent", IsTheRespondent), 
+    Handlebars.registerHelper("doesTheAggrieved", doesTheAggrieved), Handlebars.registerHelper("DoesTheAggrieved", DoesTheAggrieved), 
+    Handlebars.registerHelper("isTheAggrieved", isTheAggrieved), Handlebars.registerHelper("IsTheAggrieved", IsTheAggrieved), 
+    Handlebars.registerHelper("aggrievedILive", aggrievedILive), Handlebars.registerHelper("aggrievedYouHave", aggrievedYouHave), 
+    Handlebars.registerHelper("aggrievedYouLive", aggrievedYouLive), Handlebars.registerHelper("aggrievedYouKnow", aggrievedYouKnow), 
+    Handlebars.registerHelper("aggrievedYouPlurals", aggrievedYouPlurals), Handlebars.registerHelper("aggrievedYouNeed", aggrievedYouNeed), 
+    Handlebars.registerHelper("TheAggrievedINeed", TheAggrievedINeed), Handlebars.registerHelper("TheAggrievedWants", TheAggrievedWants), 
+    Handlebars.registerHelper("theAggrievedWants", theAggrievedWants), Handlebars.registerHelper("aggrievedMe", aggrievedMe), 
+    Handlebars.registerHelper("aggrievedMy", aggrievedMy), Handlebars.registerHelper("theAggrievedThey", theAggrievedThey), 
+    Handlebars.registerHelper("TheAggrievedIs", function() {
         return dvaf1Data.userIsAggrieved ? "You are" : dvaf1Data.userRelationship ? "someone" === dvaf1Data.userRelationship ? "They are" : "Your " + dvaf1Data.userRelationship + " is" : "The aggrieved is";
     }), Handlebars.registerHelper("aggrievedTheir", function() {
         return dvaf1Data.userIsAggrieved ? "your" : genderPronoun(dvaf1Data.aggrievedGender, "her", "his", "their");
@@ -253,6 +267,8 @@ $(function() {
         return dvaf1Data.userIsAggrieved ? "your" : genderPronoun(dvaf1Data.aggrievedGender, "she", "he", "they");
     }), Handlebars.registerHelper("aggrievedThem", function() {
         return dvaf1Data.userIsAggrieved ? "your" : genderPronoun(dvaf1Data.aggrievedGender, "her", "him", "them");
+    }), Handlebars.registerHelper("respondentTheir", function() {
+        return genderPronoun(dvaf1Data.respondentGender, "her", "his", "their");
     }), Handlebars.registerHelper("respondentThey", respondentThey), Handlebars.registerHelper("RespondentThey", RespondentThey), 
     Handlebars.registerHelper("respondentThem", function() {
         return genderPronoun(dvaf1Data.respondentGender, "her", "him", "them");
@@ -261,7 +277,7 @@ $(function() {
     }), Handlebars.registerHelper("plus1", function(n) {
         return parseFloat(n) + 1;
     }), Handlebars.registerHelper("theChildren", function() {
-        return "the " + dvaf1Data.child.length === 1 ? "child" : "children";
+        return "the " + (1 === dvaf1Data.child.length ? "child" : "children");
     }), Handlebars.registerHelper("theAggrievedsKids", function() {
         return theAggrieveds() + " " + dvaf1Data.child.length === 1 ? "kid" : "kids";
     }), Handlebars.registerHelper("theAssociatesNeed", function() {
@@ -425,7 +441,22 @@ $(function($) {
         },
         "dvaf1-children-template": {},
         "dvaf1-associates-template": {},
-        "dvaf1-respondent-template": {},
+        "dvaf1-respondent-template": {
+            relevance: {
+                "#dvaf1-respondent-interpreter-language": {
+                    name: "respondentRequiresInterpreter",
+                    value: "Yes"
+                },
+                "#dvaf1-respondent-disability-description": {
+                    name: "respondentHasDisability",
+                    value: "Yes"
+                },
+                "#dvaf1-respondent-parent-details": {
+                    name: "respondentUnder18",
+                    value: "Yes"
+                }
+            }
+        },
         "dvaf1-orders-template": {
             relevance: {
                 "#dvfa1-orders-existing": {
