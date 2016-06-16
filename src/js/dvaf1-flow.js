@@ -386,8 +386,18 @@ $(function( $ ) {
 	formView.on( 'relevant irrelevant', refresh );
 
 
+	function updateNavigation( pageId ) {
+		var links = $( 'a' ).filter( '[href $= "' + pageId + '"]' );
+
+		$( '.current-page, .current' ).not( links.parents( '.current-page, .current' )).removeClass( 'current', 'current-page' );
+		links.closest( '.has-submenu' ).addClass( 'current-page' );
+		links.closest( 'li' ).addClass( 'current' );
+	}
+
+
 	function showPage( index ) {
-		var view = views[ viewSequence[ index ]];
+		var pageId = viewSequence[ index ];
+		var view = views[ pageId ];
 
 		page = index;
 		formView.html( $( view.template( dvaf1Data )) );
@@ -403,6 +413,8 @@ $(function( $ ) {
 				}
 			});
 		}
+
+		updateNavigation( pageId );
 
 		$( 'html, body' ).scrollTop( scrollReset.top ).scrollLeft( scrollReset.left );
 		refresh();
