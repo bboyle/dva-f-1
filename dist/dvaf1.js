@@ -1,4 +1,4 @@
-/*! dva-f-1 - v1.0.0 - 2016-06-13
+/*! dva-f-1 - v1.0.0 - 2016-06-16
 * https://github.com/bboyle/dva-f-1#readme
 * Copyright (c) 2016 Queensland Government; Licensed BSD-3-Clause */
 /* global Handlebars */
@@ -296,13 +296,19 @@ $(function($) {
     function refresh() {
         formView.trigger("x-height-change");
     }
+    function updateNavigation(pageId) {
+        var links = $("a").filter('[href $= "' + pageId + '"]');
+        $(".current-page, .current").not(links.parents(".current-page, .current")).removeClass("current", "current-page"), 
+        links.closest(".has-submenu").addClass("current-page"), links.closest("li").addClass("current");
+    }
     function showPage(index) {
-        var view = views[viewSequence[index]];
+        var pageId = viewSequence[index], view = views[pageId];
         page = index, formView.html($(view.template(dvaf1Data))), view.relevance && $.each(view.relevance, function(target, condition) {
             $.isArray(condition) ? $.each(condition, function(i, condition) {
                 formView.find(target).relevance("relevantWhen", processCondition(formView, condition));
             }) : formView.find(target).relevance("relevantWhen", processCondition(formView, condition));
-        }), $("html, body").scrollTop(scrollReset.top).scrollLeft(scrollReset.left), refresh();
+        }), updateNavigation(pageId), $("html, body").scrollTop(scrollReset.top).scrollLeft(scrollReset.left), 
+        refresh();
     }
     var formView = $("#dvaf1-form-view"), scrollReset = formView.offset(), views = {
         "dvaf1-preamble-template": {
