@@ -6,7 +6,8 @@ $(function( $ ) {
 		selected: {},
 		event: [ {} ],
 		child: [ {} ],
-		associate: [ {} ]
+		associate: [ {} ],
+		nearby: {}
 	};
 	data.MASCULINE_GENDER = /(^(man|male|he|him|his)$)|father|son|brother|nephew|uncle|husband|boy/i;
 	data.FEMININE_GENDER  = /(^(her|she)$)|woman|female|mother|daughter|sister|neice|aunt|wife|girl/i;
@@ -34,6 +35,21 @@ $(function( $ ) {
 		},
 		'dvaf1-grounds-event': {
 			name: 'repeatGroundsEvent'
+		}
+	};
+
+	var DATASET = {
+		court: {
+			resource: '400eeff4-d3d4-4d5a-9e99-7f993e768daf',
+			where: '"Title" LIKE \'%Magistrates%\''
+		},
+		jp: {
+			resource: 'ca0f717e-b038-4596-96c4-b006b60314a8',
+			where: '1=1'
+		},
+		victimService: {
+			resource: '96d6b499-e402-409c-9c91-e8c02f2801c8',
+			where: '"Support services" LIKE \'%domestic violence%\''
 		}
 	};
 
@@ -67,6 +83,41 @@ $(function( $ ) {
 		data[ key ] = data.FEMININE_GENDER.test( value ) ? 'Woman' : data.MASCULINE_GENDER.test( value ) ? 'Man' : data[ key ];
 	}
 
+	function findServicesNearGeo( geo ) {
+		var distance = '(3959*acos(cos(radians(' + geo.y + '))*cos(radians("Latitude"))*cos(radians("Longitude")-radians(' + geo.x + '))+sin(radians(' + geo.y + '))*sin(radians("Latitude"))))';
+		var select = [ '*' ];
+		select.push( distance + ' AS "Distance"' );
+
+		$.each(DATASET, function( key, dataset ) {
+			$.ajax( 'https://data.qld.gov.au/api/action/datastore_search_sql', {
+				data: {
+					sql: 'SELECT ' + select.join( ',') + ' FROM "' + dataset.resource + '" WHERE ' + dataset.where + ' ORDER BY "Distance" LIMIT 3'
+				},
+				dataType: 'json',
+				cache: true
+			}).then(function( response ) {
+				data.nearby[ key ] = response.result.records.length ? response.result.records : [];
+			});
+		});
+	}
+
+	function findServicesNearAddress( address ) {
+		// get geocode for address
+		$.ajax( '//geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates', {
+			data: {
+				f: 'json',
+				countryCode: 'AU',
+				singleLine: address
+			},
+			dataType: 'json',
+			cache: true
+		}).then(function( response ) {
+			if ( response.candidates.length ) {
+				findServicesNearGeo( response.candidates[ 0 ].location );
+			}
+		});
+	}
+
 	// relevance
 	formView.on( 'click change', function( event ) {
 		var question = $( event.target );
@@ -89,12 +140,12 @@ $(function( $ ) {
 		} else {
 			data[ name ] = parseValue( value );
 			if ( value.length ) {
-				value = value.replace( /\s+/g, '' );
+				value = $.trim( value ).replace( /\s\s+/g, ' ' );
 			}
 		}
 
 		if ( question.is( 'select,:radio,:checkbox' )) {
-			// store boolean helpers
+			// store boolean helpers (select controls)
 			if ( question.is( ':checkbox' )) {
 				data.selected[ name ] = data.selected[ name ] || {};
 				data.selected[ name ][ value ] = event.target.checked;
@@ -125,6 +176,16 @@ $(function( $ ) {
 				break;
 			case 'aggrievedExistingOrderJurisdiction':
 				refreshPartial( 'dvaf1-aggrieved-existing-order-advice' );
+				break;
+			}
+
+		} else {
+			// handle data changes (not select)
+			switch ( name ) {
+			case 'aggrievedAddress':
+				if ( value.length ) {
+					findServicesNearAddress( value );
+				}
 				break;
 			}
 		}

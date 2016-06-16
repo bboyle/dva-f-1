@@ -378,14 +378,15 @@
 	<p>Once the application has been lodged, {{theRespondent}} has the right to get a copy of it so that {{respondentTheyKnow}} what has been said and can respond in court. Police will serve the respondent with a copy of the application.</p>
 </div>
 
-{{#if nearbyVictimServices}}<div class="section">
+{{#if nearby.victimService}}
+<div class="section">
 	<h2>Nearby support services</h2>
 	<ul>
-		{{#each nearbyVictimServices as |service|}}
+		{{#each nearby.victimService}}
 		<li>
-			<h3>{{service.Name}}</h3>
-			<p>{{service.Description}}</p>
-			<p>{{service.Contact}}</p>
+			<h3>{{Name}}</h3>
+			<p>{{Description}}</p>
+			<p>{{Contact}}</p>
 		</li>
 		{{/each}}
 	</ul>
@@ -403,26 +404,3 @@
 		<li><a href="http://www.legalaid.qld.gov.au/Find-legal-information/Publications/Legal-information-guides/How-to-apply-for-a-domestic-violence-order">How to apply for a domestic violence order (Legal Aid Queensland)</a></li>
 	</ul>
 </div>
-
-<!--
-<form>
-<ol class="questions">
-	<li class="footer">
-		<ul class="actions">
-			<li>
-				<button type="button" ng-click="interview.reset()">
-					Start new application
-					<small class="hint">Erase all data and start again</small>
-				</button>
-			</li>
-			<li>
-				<button type="button" ng-click="interview.quickExit()">
-					Exit this site
-					<small class="hint">Clear your browser history after</small>
-				</button>
-			</li>
-		</ul>
-	</li>
-</ol>
-</form>
--->
