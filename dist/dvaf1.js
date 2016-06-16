@@ -13,6 +13,34 @@ $(function($) {
     function parseGender(key, value) {
         data[key] = data.FEMININE_GENDER.test(value) ? "Woman" : data.MASCULINE_GENDER.test(value) ? "Man" : data[key];
     }
+    function findServicesNearGeo(geo) {
+        var distance = "(3959*acos(cos(radians(" + geo.y + '))*cos(radians("Latitude"))*cos(radians("Longitude")-radians(' + geo.x + "))+sin(radians(" + geo.y + '))*sin(radians("Latitude"))))', select = [ "*" ];
+        select.push(distance + ' AS "Distance"'), $.each(DATASET, function(key, dataset) {
+            $.ajax("https://data.qld.gov.au/api/action/datastore_search_sql", {
+                data: {
+                    sql: "SELECT " + select.join(",") + ' FROM "' + dataset.resource + '" WHERE ' + dataset.where + ' ORDER BY "Distance" LIMIT 3'
+                },
+                dataType: "json",
+                cache: !0
+            }).then(function(response) {
+                data.nearby[key] = response.result.records.length ? response.result.records : [];
+            });
+        });
+    }
+    function findServicesNearAddress(address) {
+        // get geocode for address
+        $.ajax("//geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/findAddressCandidates", {
+            data: {
+                f: "json",
+                countryCode: "AU",
+                singleLine: address
+            },
+            dataType: "json",
+            cache: !0
+        }).then(function(response) {
+            response.candidates.length && findServicesNearGeo(response.candidates[0].location);
+        });
+    }
     function renumberControls(section, n) {
         var heading = $(".label", section).eq(0);
         heading.text(heading.text().replace(/\d+/, n + 1)), $("input, select, textarea", section).each(function(j, control) {
@@ -27,7 +55,8 @@ $(function($) {
         selected: {},
         event: [ {} ],
         child: [ {} ],
-        associate: [ {} ]
+        associate: [ {} ],
+        nearby: {}
     };
     data.MASCULINE_GENDER = /(^(man|male|he|him|his)$)|father|son|brother|nephew|uncle|husband|boy/i, 
     data.FEMININE_GENDER = /(^(her|she)$)|woman|female|mother|daughter|sister|neice|aunt|wife|girl/i;
@@ -53,6 +82,19 @@ $(function($) {
         "dvaf1-grounds-event": {
             name: "repeatGroundsEvent"
         }
+    }, DATASET = {
+        court: {
+            resource: "400eeff4-d3d4-4d5a-9e99-7f993e768daf",
+            where: "\"Title\" LIKE '%Magistrates%'"
+        },
+        jp: {
+            resource: "ca0f717e-b038-4596-96c4-b006b60314a8",
+            where: "1=1"
+        },
+        victimService: {
+            resource: "96d6b499-e402-409c-9c91-e8c02f2801c8",
+            where: "\"Support services\" LIKE '%domestic violence%'"
+        }
     };
     $.each(partials, function(key, partial) {
         var template = $("#" + key + "-partial").remove();
@@ -61,12 +103,12 @@ $(function($) {
     }), // relevance
     formView.on("click change", function(event) {
         var index, question = $(event.target), name = event.target.name, value = $(event.target).val();
-        if (!question.is("button.add, button.del") && (// store data
+        if (!question.is("button.add, button.del")) if (// store data
         /^(event|child|associate)[0-9]+\./.test(name) ? (index = name.replace(/^(?:event|child|associate)([0-9]+).*$/, "$1"), 
         name = name.split(/[0-9]+\./), data[name[0]][index] = data[name[0]][index] || {}, 
-        data[name[0]][index][name[1]] = value) : (data[name] = parseValue(value), value.length && (value = value.replace(/\s+/g, ""))), 
-        question.is("select,:radio,:checkbox"))) // handle data changes
-        switch (// store boolean helpers
+        data[name[0]][index][name[1]] = value) : (data[name] = parseValue(value), value.length && (value = $.trim(value).replace(/\s\s+/g, " "))), 
+        question.is("select,:radio,:checkbox")) // handle data changes
+        switch (// store boolean helpers (select controls)
         question.is(":checkbox") ? (data.selected[name] = data.selected[name] || {}, data.selected[name][value] = event.target.checked) : (data.selected[name] = {}, 
         data.selected[name][value] = !0), name) {
           case "situationParty":
@@ -92,6 +134,10 @@ $(function($) {
 
           case "aggrievedExistingOrderJurisdiction":
             refreshPartial("dvaf1-aggrieved-existing-order-advice");
+        } else // handle data changes (not select)
+        switch (name) {
+          case "aggrievedAddress":
+            value.length && findServicesNearAddress(value);
         }
     }), // add repeating section
     $(document).on("click", "button.add", function() {

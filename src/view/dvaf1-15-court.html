@@ -13,7 +13,7 @@
 		<li class="group">
 			<fieldset>
 				<legend>
-					<span class="label">Are you concerned that {{ interview.aggrieved.pronoun.you }} may be in danger when going to court?</span>
+					<span class="label">Are you concerned that {{aggrievedYou}} may be in danger when going to court?</span>
 				</legend>
 				<ul class="choices compact">
 					<li>
@@ -57,6 +57,103 @@
 		<li>
 			<p>If your safety concerns change for future court dates, you should complete another safety form for court staff.</p>
 		</li>
+
+		{{#if nearby.jp}}
+		<li>
+			<div class="status info">
+				<h2>Nearby JPs</h2>
+				<ul>
+					{{#each nearby.jp}}
+					<li>
+						<h3>{{Title}}</h3>
+						<p>{{[Address 1]}}, {{[Address 2]}}, {{Suburb}} {{Postcode}}
+						<a target="_blank" href="https://maps.google.com.au/?ll={{Latitude}},{{Longitude}}&amp;q={{Title}}">view map</a></p>
+						<p>{{Phone}}</p>
+						<p>{{[Operating hours]}}</p>
+					</li>
+					{{/each}}
+				</ul>
+			</div>
+		</li>
+		{{/if}}
+
+		{{#if nearby.court}}
+		<li>
+			<table>
+				<caption>Nearby magistrates courts</caption>
+
+				<thead>
+					<tr>
+						<th>Court</th>
+						<th>Lodge applications</th>
+						<th>DV hearings</th>
+					</tr>
+					<!-- TODO pattern lib format
+		<div class="vcard">
+		<h2 class="fn org">Aboriginal and Torres Strait Islander Partnerships</h2>
+		<dl>
+		<dt>Phone:</dt>
+		<dd class="tel">
+		<span class="type">Work</span>
+		13 QGOV (<span class="value">13 74 68</span>)
+		</dd>
+		<dt>Email:</dt>
+		<dd><a href="mailto:askatsip@communities.qld.gov.au" class="email">askatsip@communities.qld.gov.au</a></dd>
+		<dt>Fax:</dt>
+		<dd class="tel">
+		<span class="type">Fax</span>
+		<span class="value">07 3224 2070</span>
+		</dd>
+		<dt>Website:</dt>
+		<dd><a href="http://www.communities.qld.gov.au/atsis/" class="url">www.communities.qld.gov.au/atsis/</a></dd>
+		<dt>Postal address:</dt>
+		<dd>
+		<span class="adr">
+		<span class="type">Post</span>
+		<span class="post-office-box">GPO Box 806</span><br />
+		<span class="locality">BRISBANE</span>&nbsp;
+		<span class="region">QLD</span>&nbsp;
+		<span class="postal-code">4001</span>
+		</span>
+		</dd>
+		<dt>Address:</dt>
+		<dd>
+		<span class="adr">
+		<span class="type">Work</span>
+		<span class="street-extended">Level 6A, Neville Bonner Building</span><br />
+		<span class="street-address">75 William Street</span><br />
+		<span class="locality">Brisbane</span>
+		<abbr title="Queensland" class="region">Qld</abbr>
+		<span class="postal-code">4000</span>
+		</span>
+		</dd>
+		</dl>
+		</div>
+
+							-->
+				<tbody>
+					{{#each nearby.court}}
+					<tr>
+						<td>
+							<strong>{{Title}}</strong><br>
+							<small>{{[Address 1]}}
+							{{[Address 2]}}
+							{{Suburb}}
+							{{Postcode}}<br>
+							<a target="_blank" href="https://maps.google.com.au/?ll={{Latitude}},{{Longitude}}&amp;q={{Title}}" title="Map to {{Title}}">view map</a></small>
+							<p>{{Phone}}</p>
+						</td>
+						<td>{{hours}}</td>
+						<td>{{DV}}</td>
+					</tr>
+					{{/each}}
+				</tbody>
+			</table>
+
+			Based on {{aggrievedYour}} address: {{aggrievedAddress}}
+		</li>
+		{{/if}}
+
 		<li>
 			<ul class="actions">
 				<li><strong><button>Continue</button></strong></li>
