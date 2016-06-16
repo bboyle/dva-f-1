@@ -1,7 +1,215 @@
-<h2>Why does the aggrieved need protection?</h2>
+<h2>Why {{doesTheAggrieved}} need protection?</h2>
 
 <form class="form" name="formGrounds">
+	<div class="status info">
+		<h2>What has {{respondentName}} done to {{aggrievedYou}}?</h2>
+		<p>
+			Domestic and family violence is when one
+			person in a relationship uses violence or
+			abuse to have power and control over
+			the other person. Abuse is not always
+			physical—it can be emotional, verbal,
+			sexual, financial or other controlling
+			behaviours that cause the person being
+			abused to live in fear.
+		</p>
+	</div>
+
 	<ol class="questions">
+		<li>
+			<fieldset>
+				<legend>
+					<span class="h3">Has {{respondentName}} behaved in a way that is</span>
+				</legend>
+				<ul class="choices">
+					<li>
+						<input type="checkbox" id="abuse-physical" name="abuse" value="physicallyAbusive"{{#if selected.abuse.physicallyAbusive}} checked{{/if}}>
+						<label for="abuse-physical">physically abusive</label>
+					</li>
+					<li>
+						<input type="checkbox" id="abuse-sexual" name="abuse" value="sexuallyAbusive"{{#if selected.abuse.sexuallyAbusive}} checked{{/if}}>
+						<label for="abuse-sexual">sexually abusive</label>
+					</li>
+					<li>
+						<input type="checkbox" id="abuse-emotional" name="abuse" value="emotionallyOrPsychologiallyAbusive"{{#if selected.abuse.emotionallyOrPsychologiallyAbusive}} checked{{/if}}>
+						<label for="abuse-emotional">emotionally or psychologially abusive</label>
+					</li>
+					<li>
+						<input type="checkbox" id="abuse-financial" name="abuse" value="financiallyAbusive"{{#if selected.abuse.financiallyAbusive}} checked{{/if}}>
+						<label for="abuse-financial">financially abusive</label>
+						<small class="hint">Examples: controlling access to money and bank accounts, making {{aggrievedName}} borrow money for {{respondentThem}}.</small>
+					</li>
+					<li>
+						<input type="checkbox" id="abuse-threat" name="abuse" value="threatening"{{#if selected.abuse.threatening}} checked{{/if}}>
+						<label for="abuse-threat">threatening</label>
+					</li>
+					<li>
+						<input type="checkbox" id="abuse-coercive" name="abuse" value="coercive"{{#if selected.abuse.coercive}} checked{{/if}}>
+						<label for="abuse-coercive">coercive</label>
+					</li>
+					<li>
+						<input type="checkbox" id="abuse-other" name="abuse" value="controlling"{{#if selected.abuse.controlling}} checked{{/if}}>
+						<label for="abuse-other">controlling {{aggrievedYou}} and causes {{aggrievedThem}} to fear for {{aggrievedTheir}} safety or wellbeing</label>
+					</li>
+				</ul>
+			</fieldset>
+		</li>
+		<li>
+			<fieldset>
+				<legend>
+					<span class="h3">Has {{respondentName}}</span>
+				</legend>
+				<ul class="choices">
+					<li>
+						<input type="checkbox" id="abuse-injury" name="abuse" value="injury"{{#if selected.abuse.injury}} checked{{/if}}>
+						<label for="abuse-injury">caused personal injury to {{aggrievedYou}} or threatened to do so</label>
+					</li>
+					<li>
+						<input type="checkbox" id="abuse-coercedSexually" name="abuse" value="coercedSexually"{{#if selected.abuse.coercedSexually}} checked{{/if}}>
+						<label for="abuse-coercedSexually">coerced {{aggrievedYou}} into sexual activity or attempted to do so</label>
+					</li>
+					<li>
+						<input type="checkbox" id="abuse-propertyDamage" name="abuse" value="propertyDamage"{{#if selected.abuse.propertyDamage}} checked{{/if}}>
+						<label for="abuse-propertyDamage">damaged {{aggrievedYour}} property or threatened to do so</label>
+					</li>
+					<li>
+						<input type="checkbox" id="abuse-liberty" name="abuse" value="liberty"{{#if selected.abuse.liberty}} checked{{/if}}>
+						<label for="abuse-liberty">deprived {{aggrievedYou}} of {{aggrievedYour}} liberty or threatened to do so</label>
+					</li>
+					<li>
+						<input type="checkbox" id="abuse-selfHarm" name="abuse" value="selfHarm"{{#if selected.abuse.selfHarm}} checked{{/if}}>
+						<label for="abuse-selfHarm">threatened to harm {{respondentThem}}self or suicide to scare {{aggrievedYou}} or someone else</label>
+					</li>
+					<li>
+						<input type="checkbox" id="abuse-threatenPerson" name="abuse" value="threatenPerson"{{#if selected.abuse.threatenPerson}} checked{{/if}}>
+						<label for="abuse-threatenPerson">caused or threatened to harm another person</label>
+					</li>
+					<li>
+						<input type="checkbox" id="abuse-threatenAnimal" name="abuse" value="threatenAnimal"{{#if selected.abuse.threatenAnimal}} checked{{/if}}>
+						<label for="abuse-threatenAnimal">caused or threatened to harm or kill an animal</label>
+					</li>
+					<li>
+						<input type="checkbox" id="abuse-stalking" name="abuse" value="stalking"{{#if selected.abuse.stalking}} checked{{/if}}>
+						<label for="abuse-stalking">stalked {{aggrievedYou}} or undertaken surveillance (including social media, telephone, email etc.) without {{aggrievedYour}} permission.</label>
+					</li>
+				</ul>
+			</fieldset>
+		</li>
+		<li>
+			<fieldset>
+				<legend>
+					<span class="label">Did any of the domestic and family violence happen where {{aggrievedYouLive}}?</span>
+				</legend>
+				<ul class="choices compact">
+					<li>
+						<input type="radio" name="abuseAtResidence" value="No" id="abuse-at-residence-no"{{#if selected.abuseAtResidence.Yes}} checked{{/if}}>
+						<label for="abuse-at-residence-no">No</label>
+					</li>
+					<li>
+						<input type="radio" name="abuseAtResidence" value="Yes" id="abuse-at-residence-yes"{{#if selected.abuseAtResidence.No}} checked{{/if}}>
+						<label for="abuse-at-residence-yes">Yes</label>
+					</li>
+				</ul>
+			</fieldset>
+		</li>
+	</ol>
+</form>
+
+<div class="status info">
+	<h2>Explaining what has happened</h2>
+	<p>Now please expand upon the domestic violence you have indicated above, including the date or the approximate dates, (e.g. March–April 2015) of specific incidents.</p>
+
+	<p>We understand it may be difficult for {{aggrievedYou}} to relive these events.
+	If at any time {{aggrievedTheyNeed}} someone to talk to, {{aggrievedThey}} can call a support service such as DVConnect:</p>
+	<ul>
+		{{#if selected.aggrievedGender.Male}}<li><a href="tel:1800.600.636">1800 600 636 (Mensline)</a></li>{{/if}}
+		<li><a href="tel:1800.811.811">1800 811 811 (Womensline)</a></li>
+		{{#unless selected.aggrievedGender.Male}}<li><a href="tel:1800.600.636">1800 600 636 (Mensline)</a></li>{{/unless}}
+	</ul>
+	<p>1800 numbers are free to call and do not show up on phone bills.</p>
+	</p>
+</div>
+
+<form class="form" name="formGrounds2">
+	<ol class="questions">
+		<li>
+			<fieldset>
+				<legend>
+					<span class="label">How many events do you want to describe?</span>
+					<small class="hint">Providing more information helps the magistrate to understand the situation.</small>
+				</legend>
+				<ul class="choices compact">
+					<li>
+						<input type="radio" name="abuse-events" value="1" id="abuse-events-one">
+						<label for="abuse-events-one">One</label>
+					</li>
+					<li>
+						<input type="radio" name="abuse-events" value="multiple" id="abuse-events-multiple">
+						<label for="abuse-events-multiple">More than one</label>
+					</li>
+				</ul>
+			</fieldset>
+		</li>
+
+		{{#each event}}
+		<li class="section">{{> repeatGroundsEvent n=@index}}</li>
+		{{/each}}
+
+		<li>
+			<fieldset>
+				<legend>
+					<span class="label">Did {{respondentName}} use, or threaten to use, a weapon?</span>
+				</legend>
+				<ul class="choices compact">
+					<li>
+						<input type="radio" name="respondentWeaponThreat" value="No" id="weapon-threat-no"{{#if selected.respondentWeaponThreat.No}} checked{{/if}}>
+						<label for="weapon-threat-no">No</label>
+					</li>
+					<li>
+						<input type="radio" name="respondentWeaponThreat" value="Yes" id="weapon-threat-yes"{{#if selected.respondentWeaponThreat.Yes}} checked{{/if}}>
+						<label for="weapon-threat-yes">Yes</label>
+					</li>
+				</ul>
+			</fieldset>
+		</li>
+		<li id="dvaf1-weapon-other-question">
+			<fieldset>
+				<legend>
+					<span class="label">Did {{respondentName}} use, or threaten to use, something else as a weapon?</span>
+					<small class="hint">Example: sporting equipment (bats), appliances, tools (hammer), or other items.</small>
+				</legend>
+				<ul class="choices compact">
+					<li>
+						<input type="radio" name="respondentWeaponThreat2" value="No" id="weapon-threat2-no"{{#if selected.respondentWeaponThreat2.No}} checked{{/if}}>
+						<label for="weapon-threat2-no">No</label>
+					</li>
+					<li>
+						<input type="radio" name="respondentWeaponThreat2" value="Yes" id="weapon-threat2-yes"{{#if selected.respondentWeaponThreat2.Yes}} checked{{/if}}>
+						<label for="weapon-threat2-yes">Yes</label>
+					</li>
+				</ul>
+			</fieldset>
+		</li>
+		<li id="dvaf1-weapon-details">
+			<label for="weapon-threat-details">
+				<span class="label">Provide details of what {{respondentThey}} did</span>
+			</label>
+			<textarea id="weapon-threat-details" name="respondentWeaponsUsedDescription" cols="40" rows="10" spellcheck="true">{{respondentWeaponsUsedDescription}}</textarea>
+		</li>
+		<li id="dvaf1-weapon-details2">
+			<label for="weapon-threat-details2">
+				<span class="label">Provide details of what {{respondentThey}} did</span>
+			</label>
+			<textarea id="weapon-threat-details2" name="respondentWeaponsUsedDescription" cols="40" rows="10" spellcheck="true">{{respondentWeaponsUsedDescription}}</textarea>
+		</li>
+
+		<li>
+			<label for="grounds-general">
+				<span class="label">Is there any other background, or anything else you want the court to know about your day-to-day relationship or what has happened?</span>
+			</label>
+			<textarea name="abuseGeneral" id="grounds-general" cols="30" rows="10">{{abuseGeneral}}</textarea>
+		</li>
+
 		<li>
 			<ul class="actions">
 				<li><strong><button>Continue</button></strong></li>

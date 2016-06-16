@@ -24,21 +24,21 @@
 					<input type="hidden" name="aggrievedSPI" value="">
 
 					<input type="hidden" name="aggrievedInterpreter" value="{{aggrievedInterpreter}}">
-					{{#if aggrievedRequiresInterpreterYes}}<input type="hidden" name="aggrievedLanguage" value="{{aggrievedLanguage}}">{{/if}}
+					{{#if selected.aggrievedRequiresInterpreter.Yes}}<input type="hidden" name="aggrievedLanguage" value="{{aggrievedLanguage}}">{{/if}}
 
 					<input type="hidden" name="aggrievedIdentifiesAsAboriginal" value="{{aggrievedIdentifiesAsAboriginal}}">
 					<input type="hidden" name="aggrievedIdentifiesAsTorresStraitIslander" value="{{aggrievedIdentifiesAsTorresStraitIslander}}">
 					<input type="hidden" name="aggrievedDisability" value="{{aggrievedDisability}}">
-					{{#if aggrievedHasDisabilityYes}}<input type="hidden" name="aggrievedDisabilityDescription" value="{{aggrievedDisabilityDescription}}">{{/if}}
+					{{#if selected.aggrievedHasDisability.Yes}}<input type="hidden" name="aggrievedDisabilityDescription" value="{{aggrievedDisabilityDescription}}">{{/if}}
 
 					<input type="hidden" name="aggrievedUnder18" value="{{aggrievedUnder18}}">
-					{{#if aggrievedUnder18Yes}}
+					{{#if selected.aggrievedUnder18.Yes}}
 					<input type="hidden" name="aggrievedParentName" value="{{aggrievedParentName}}">
 					<input type="hidden" name="aggrievedParentAddressConfidential" value="{{aggrievedParentAddressConfidential}}">
 					<input type="hidden" name="aggrievedParentAddress" value="{{aggrievedParentAddress}}">
 					{{/if}}
 
-					{{#if aggrievedCourtSafetyConcernYes}}
+					{{#if selected.aggrievedCourtSafetyConcern.Yes}}
 					<input type="hidden" name="aggrievedCourtSafetyAttending" value="{{aggrievedCourtSafetyAttending}}">
 					<input type="hidden" name="aggrievedCourtSafetyLeaving" value="{{aggrievedCourtSafetyLeaving}}">
 					{{/if}}
@@ -58,19 +58,19 @@
 					<input type="hidden" name="respondentSPI" value="">
 
 					<input type="hidden" name="respondentInterpreter" value="{{respondentInterpreter}}">
-					{{#if respondentRequiresInterpeterYes}}<input type="hidden" name="respondentLanguage" value="{{respondentLanguage}}">{{/if}}
+					{{#if selected.respondentRequiresInterpeter.Yes}}<input type="hidden" name="respondentLanguage" value="{{respondentLanguage}}">{{/if}}
 
 					<input type="hidden" name="respondentIdentifiesAsAboriginal" value="{{respondentIdentifiesAsAboriginal}}">
 					<input type="hidden" name="respondentIdentifiesAsTorresStraitIslander" value="{{respondentIdentifiesAsTorresStraitIslander}}">
 					<input type="hidden" name="respondentDisability" value="{{respondentDisability}}">
-					{{#if respondentHasDisabilityYes}}<input type="hidden" name="respondentDisabilityDescription" value="{{respondentDisabilityDescription}}">{{/if}}
+					{{#if selected.respondentHasDisability.Yes}}<input type="hidden" name="respondentDisabilityDescription" value="{{respondentDisabilityDescription}}">{{/if}}
 
 					<input type="hidden" name="respondentEmploymentPlace" value="{{respondentEmploymentPlace}}">
 					<input type="hidden" name="respondentVehicleModel" value="{{respondentVehicleModel}}">
 					<input type="hidden" name="respondentVehicleRegistration" value="{{respondentVehicleRegistration}}">
 
 					<input type="hidden" name="respondentUnder18" value="{{respondentUnder18}}">
-					{{#if respondentUnder18Yes}}
+					{{#if selected.respondentUnder18.Yes}}
 					<input type="hidden" name="respondentParentName" value="{{respondentParentName}}">
 					<input type="hidden" name="respondentParentAddress" value="{{respondentParentAddress}}">
 					{{/if}}
@@ -87,13 +87,13 @@
 						<input type="hidden" name="applicantAddressConfidential" value="{{applicantAddressConfidential}}">
 						<input type="hidden" name="applicantAddress" value="{{applicantAddress}}">
 
-						{{#if applicantPartA}}
+						{{#if selected.applicantPart.A}}
 							<input type="hidden" name="applicantAuthorisedInWriting" value="{{applicantAuthorisedInWriting}}">
-							{{#unless applicantAuthorisationWritten}}<input type="hidden" name="applicantAuthorisedDescription" value="{{applicantAuthorisedDescription}}">{{/unless}}
-						{{else if applicantPartB}}
+							{{#unless selected.applicantAuthorisedInWriting.Yes}}<input type="hidden" name="applicantAuthorisedDescription" value="{{applicantAuthorisedDescription}}">{{/unless}}
+						{{else if selected.applicantPart.B}}
 							<input type="hidden" name="applicantActingAs" value="{{applicantActingAs}}"> <!-- Guardian OR Adult Guardian OR Enduring power of attorney OR Other -->
-							{{#if applicantActingOther}}<input type="hidden" name="applicantActingAsDescription" value="{{applicantActingAsDescription}}">{{/if}}
-						{{else if applicantPartD}}
+							{{#if selected.applicantActingAs.Other}}<input type="hidden" name="applicantActingAsDescription" value="{{applicantActingAsDescription}}">{{/if}}
+						{{else if selected.applicantPart.D}}
 							<input type="hidden" name="applicantChildProtectionPartyChild" value="{{applicantChildProtectionPartyChild}}">
 							<input type="hidden" name="applicantChildProtectionPartyLegalRepresentative" value="{{applicantChildProtectionPartyLegalRepresentative}}">
 							<input type="hidden" name="applicantChildProtectionPartyApplicant" value="{{applicantChildProtectionPartyApplicant}}">
@@ -132,7 +132,26 @@
 
 
 					<!-- TODO construct grounds -->
-					<input type="hidden" name="grounds" value="{{grounds}}">
+					<input type="hidden" name="grounds" value="
+						Types of abuse: {{abuse}}
+
+						Did any of the domestic and family violence happen where the aggrieved lives? {{abuseAtResidence}}
+
+						{{#each event~}}
+						Event {{plus1 @index}}:
+
+						When: {{when}}
+						Where: {{where}}
+
+						Description: {{description}}
+
+						How did this make you feel? {{feel}}
+
+						Witnesses: {{witness}}
+						{{~/each}}
+
+						Is there any other background, or anything else you want the court to know about your day-to-day relationship or what has happened?
+						{{abuseGeneral}}">
 
 
 					<input type="hidden" name="respondentWeaponsAccess" value="{{respondentWeaponsAccess}}">
@@ -148,20 +167,20 @@
 
 
 					{{#if ordersExistYes}}
-						<input type="hidden" name="ordersChildrensCourtCurrent" value="{{ordersChildrensCourtCurrent}}">
-						<input type="hidden" name="ordersChildrensCourtPast" value="{{ordersChildrensCourtPast}}">
-						<input type="hidden" name="ordersQldDVOCurrent" value="{{ordersQldDVOCurrent}}">
-						<input type="hidden" name="ordersQldDVOPast" value="{{ordersQldDVOPast}}">
-						<input type="hidden" name="ordersPoliceProtectionCurrent" value="{{ordersPoliceProtectionCurrent}}">
-						<input type="hidden" name="ordersPoliceProtectionPast" value="{{ordersPoliceProtectionPast}}">
-						<input type="hidden" name="ordersVoluntaryInterventionCurrent" value="{{ordersVoluntaryInterventionCurrent}}">
-						<input type="hidden" name="ordersVoluntaryInterventionPast" value="{{ordersVoluntaryInterventionPast}}">
-						<input type="hidden" name="ordersInterstateDVOCurrent" value="{{ordersInterstateDVOCurrent}}">
-						<input type="hidden" name="ordersInterstateDVOPast" value="{{ordersInterstateDVOPast}}">
-						<input type="hidden" name="ordersNZDVOCurrent" value="{{ordersNZDVOCurrent}}">
-						<input type="hidden" name="ordersNZDVOPast" value="{{ordersNZDVOPast}}">
-						<input type="hidden" name="ordersFamilyCourtCurrent" value="{{ordersFamilyCourtCurrent}}">
-						<input type="hidden" name="ordersFamilyCourtPast" value="{{ordersFamilyCourtPast}}">
+						<input type="hidden" name="ordersChildrensCourtCurrent" value="{{selected.ordersChildrensCourt.Current}}">
+						<input type="hidden" name="ordersChildrensCourtPast" value="{{selected.ordersChildrensCourt.Past}}">
+						<input type="hidden" name="ordersQldDVOCurrent" value="{{selected.ordersQldDVO.Current}}">
+						<input type="hidden" name="ordersQldDVOPast" value="{{selected.ordersQldDVO.Past}}">
+						<input type="hidden" name="ordersPoliceProtectionCurrent" value="{{selected.ordersPoliceProtection.Current}}">
+						<input type="hidden" name="ordersPoliceProtectionPast" value="{{selected.ordersPoliceProtection.Past}}">
+						<input type="hidden" name="ordersVoluntaryInterventionCurrent" value="{{selected.ordersVoluntaryIntervention.Current}}">
+						<input type="hidden" name="ordersVoluntaryInterventionPast" value="{{selected.ordersVoluntaryIntervention.Past}}">
+						<input type="hidden" name="ordersInterstateDVOCurrent" value="{{selected.ordersInterstateDVO.Current}}">
+						<input type="hidden" name="ordersInterstateDVOPast" value="{{selected.ordersInterstateDVO.Past}}">
+						<input type="hidden" name="ordersNZDVOCurrent" value="{{selected.ordersNZDVO.Current}}">
+						<input type="hidden" name="ordersNZDVOPast" value="{{selected.ordersNZDVO.Past}}">
+						<input type="hidden" name="ordersFamilyCourtCurrent" value="{{selected.ordersFamilyCourt.Current}}">
+						<input type="hidden" name="ordersFamilyCourtPast" value="{{selected.ordersFamilyCourt.Past}}">
 						{{#if ordersOther}}
 							<input type="hidden" name="ordersOtherTitle" value="{{ordersOtherTitle}}">
 							<input type="hidden" name="ordersOtherCurrent" value="">
@@ -189,30 +208,30 @@
 						<input type="hidden" name="conditionProhibitContact" value="{{conditionProhibitContact}}">
 						{{#if conditionsAggrievedNoContactRequested}}
 							<input type="hidden" name="conditionProhibitContactGrounds" value="{{conditionProhibitContactGrounds}}">
-							{{#if respondentHasContactedAssociated}}<input type="hidden" name="conditionProhibitContactAssociates" value="{{conditionProhibitContactAssociates}}">{{/if}}
+							{{#if respondentHasContactedAssociates}}<input type="hidden" name="conditionProhibitContactAssociates" value="{{conditionProhibitContactAssociates}}">{{/if}}
 						{{/if}}
 					{{/if}}
 
 					<input type="hidden" name="conditionProhibitLocating" value="{{conditionProhibitLocating}}">
-					{{#if conditionsAggrievedLocateRequested}}<input type="hidden" name="conditionProhibitLocatingGrounds" value="{{conditionProhibitLocatingGrounds}}">{{/if}}
+					{{#if conditionProhibitLocating}}<input type="hidden" name="conditionProhibitLocatingGrounds" value="{{conditionProhibitLocatingGrounds}}">{{/if}}
 
 					<input type="hidden" name="conditionRecoverProperty" value="{{conditionRecoverProperty}}">
-					{{#if conditionsPropertyRequested}}<input type="hidden" name="conditionRecoverPropertyDescription" value="{{conditionRecoverPropertyDescription}}">{{/if}}
+					{{#if conditionsRecoverProperty}}<input type="hidden" name="conditionRecoverPropertyDescription" value="{{conditionRecoverPropertyDescription}}">{{/if}}
 
 					<input type="hidden" name="conditionProhibitConduct" value="{{conditionProhibitConduct}}">
-					{{#if conditionsBehaviourRequested}}<input type="hidden" name="conditionProhibitConductGrounds" value="{{conditionProhibitConductGrounds}}">{{/if}}
+					{{#if conditionProhibitConduct}}<input type="hidden" name="conditionProhibitConductGrounds" value="{{conditionProhibitConductGrounds}}">{{/if}}
 
 
 					<!-- repeat for children -->
 					{{#if conditionsNameChildren}}
 						<input type="hidden" name="nameChildrenGrounds" value="{{nameChildrenGrounds}}">
-						{{#each children as |child|}}
-						<input type="hidden" name="child{{@index}}Name" value="{{child.Name}}">
-						<input type="hidden" name="child{{@index}}Gender" value="{{child.Gender}}">
-						<input type="hidden" name="child{{@index}}DateBirth" value="{{child.DateBirth}}">
-						<input type="hidden" name="child{{@index}}Address" value="{{child.Address}}">
-						<input type="hidden" name="child{{@index}}AddressConfidential" value="{{child.AddressConfidential}}">
-						<input type="hidden" name="child{{@index}}Named" value="{{child.Named}}"> <!-- optional, default: true -->
+						{{#each children}}
+						<input type="hidden" name="child{{@index}}Name" value="{{name}}">
+						<input type="hidden" name="child{{@index}}Gender" value="{{gender}}">
+						<input type="hidden" name="child{{@index}}DateBirth" value="{{dateBirth}}">
+						<input type="hidden" name="child{{@index}}Address" value="{{address}}">
+						<input type="hidden" name="child{{@index}}AddressConfidential" value="{{addressConfidential}}">
+						<input type="hidden" name="child{{@index}}Named" value="{{named}}"> <!-- optional, default: true -->
 						<input type="hidden" name="child{{@index}}SPI" value="">
 						{{/each}}
 
@@ -228,11 +247,11 @@
 					{{#if conditionsRespondentAbusedAssociated}}
 						<input type="hidden" name="nameAssociatesGrounds" value="{{nameAssociatesGrounds}}">
 						{{#each associates as |associate|}}
-						<input type="hidden" name="associate{{@index}}Name" value="{{associate.Name}}">
-						<input type="hidden" name="associate{{@index}}Gender" value="{{associate.Gender}}">
-						<input type="hidden" name="associate{{@index}}DateBirth" value="{{associate.DateBirth}}">
-						<input type="hidden" name="associate{{@index}}Address" value="{{associate.Address}}">
-						<input type="hidden" name="associate{{@index}}AddressConfidential" value="{{associate.AddressConfidential}}">
+						<input type="hidden" name="associate{{@index}}Name" value="{{name}}">
+						<input type="hidden" name="associate{{@index}}Gender" value="{{gender}}">
+						<input type="hidden" name="associate{{@index}}DateBirth" value="{{dateBirth}}">
+						<input type="hidden" name="associate{{@index}}Address" value="{{address}}">
+						<input type="hidden" name="associate{{@index}}AddressConfidential" value="{{addressConfidential}}">
 						<input type="hidden" name="associate{{@index}}SPI" value="">
 						{{/each}}
 
@@ -244,11 +263,11 @@
 					{{else if conditionsRespondentAbusedApplicant}}
 						<input type="hidden" name="nameAssociatesGrounds" value="{{nameAssociatesGrounds}}">
 						{{#each associates as |associate|}}
-						<input type="hidden" name="associate{{@index}}Name" value="{{associate.Name}}">
-						<input type="hidden" name="associate{{@index}}Gender" value="{{associate.Gender}}">
-						<input type="hidden" name="associate{{@index}}DateBirth" value="{{associate.DateBirth}}">
-						<input type="hidden" name="associate{{@index}}Address" value="{{associate.Address}}">
-						<input type="hidden" name="associate{{@index}}AddressConfidential" value="{{associate.AddressConfidential}}">
+						<input type="hidden" name="associate{{@index}}Name" value="{{name}}">
+						<input type="hidden" name="associate{{@index}}Gender" value="{{gender}}">
+						<input type="hidden" name="associate{{@index}}DateBirth" value="{{dateBirth}}">
+						<input type="hidden" name="associate{{@index}}Address" value="{{address}}">
+						<input type="hidden" name="associate{{@index}}AddressConfidential" value="{{addressConfidential}}">
 						<input type="hidden" name="associate{{@index}}SPI" value="">
 						{{/each}}
 

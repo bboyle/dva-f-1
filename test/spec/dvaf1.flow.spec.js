@@ -24,7 +24,7 @@ function itShouldVisitPagesInOrder() {
 	expect( page.form.getAttribute( 'name' )).toBe( 'formRespondentBasic' );
 	page.continue();
 
-	expect( page.title ).toEqual( 'Relationship to the respondent' );
+	expect( page.title ).toEqual( 'The aggrieved wants protection from the respondent' );
 	expect( page.form.getAttribute( 'name' )).toBe( 'formRelationship' );
 	page.continue();
 
@@ -32,7 +32,7 @@ function itShouldVisitPagesInOrder() {
 	expect( page.form.getAttribute( 'name' )).toBe( 'formGrounds' );
 	page.continue();
 
-	expect( page.title ).toEqual( 'Request extra conditions' );
+	expect( page.title ).toEqual( 'What conditions are on a protection order?' );
 	expect( page.form.getAttribute( 'name' )).toBe( 'formConditions' );
 	page.continue();
 
@@ -44,7 +44,7 @@ function itShouldVisitPagesInOrder() {
 	expect( page.form.getAttribute( 'name' )).toBe( 'formAggrieved' );
 	page.continue();
 
-	expect( page.title ).toEqual( 'Are there children who live or spend time with the aggrieved who need protection?' );
+	expect( page.title ).toEqual( 'Are there children who live or spend time with you (the aggrieved) who need protection?' );
 	expect( page.form.getAttribute( 'name' )).toBe( 'formChildren' );
 	page.continue();
 
@@ -105,7 +105,7 @@ describe( 'random access', function() {
 
 		page.continue();
 
-		expect( page.title ).toEqual( 'Request extra conditions' );
+		expect( page.title ).toEqual( 'What conditions are on a protection order?' );
 		expect( page.form.getAttribute( 'name' )).toBe( 'formConditions' );
 
 		page.goto( 'Download your application' );

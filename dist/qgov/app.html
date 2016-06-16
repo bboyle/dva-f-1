@@ -9,7 +9,13 @@
 
 <!--#include virtual="global/head-assets-styles.html"-->
 <style type="text/css">
-	.choices .visuallyhidden { position: absolute }
+	.choices .visuallyhidden {
+		position: absolute
+	}
+	.add, .del {
+	    padding: .7em;
+	    font-size: 80%;
+	}
 </style>
 
 <!--#include virtual="global/head-assets-scripts.html"-->
@@ -25,7 +31,7 @@
 	<meta name="DCTERMS.creator" scheme="AGLSTERMS.GOLD" content="c=AU; o=The State of Queensland; ou=Department of Justice and Attorney-General; ou=Justice Services" />
 	<meta name="DCTERMS.publisher" scheme="AGLSTERMS.AglsAgent" content="corporateName=The State of Queensland; jurisdiction=Queensland" />
 	<meta name="DCTERMS.created" content="2016-04-26" />
-	<meta name="DCTERMS.modified" content="2016-04-29" />
+	<meta name="DCTERMS.modified" content="2016-05-19" />
 	<meta name="DCTERMS.title" content="Prepare your application for a protection order | Your rights, crime and the law" />
 	<meta name="DCTERMS.description" content="This form will guide help you prepare an application for a domestic violence protection order in Queensland. Your application must be lodged at a Queensland magistrates court." />
 	<meta name="DCTERMS.subject" scheme="AGLSTERMS.APAIS" content="Domestic Violence" />
@@ -77,6 +83,7 @@
 					<script id="dvaf1-situation-relationship-partial" type="text/x-handlebars-template"><!--#include virtual="view/partial/_question_situation_relationship.html"--></script>
 					<script id="dvaf1-aggrieved-existing-order-partial" type="text/x-handlebars-template"><!--#include virtual="view/partial/_question_aggrieved_existing_order.html"--></script>
 					<script id="dvaf1-aggrieved-existing-order-advice-partial" type="text/x-handlebars-template"><!--#include virtual="view/partial/_info_existing_order.html"--></script>
+					<script id="dvaf1-grounds-event-partial" type="text/x-handlebars-template"><!--#include virtual="view/partial/_repeat_grounds_event.html"--></script>
 
 
 					<script id="dvaf1-situation-template" type="text/x-handlebars-template"><!--#include virtual="view/dvaf1-02-situation.html"--></script>
@@ -136,31 +143,31 @@
 					<li class="current-page has-submenu">
 						<a href="#dvaf1-situation-template">What you need</a>
 						<ol>
-							<li><a href="#dvaf1-situation-template"><span class="page-number">2</span>Your situation</a></li>
-							<li><a href="#dvaf1-aggrieved-basic-template"><span class="page-number">3</span>Who needs protection?</a></li>
-							<li><a href="#dvaf1-respondent-basic-template"><span class="page-number">4</span>Who do they need protection from?</a></li>
-							<li><a href="#dvaf1-relationship-template"><span class="page-number">5</span>Relationship</a></li>
-							<li><a href="#dvaf1-grounds-template"><span class="page-number">6</span>Grounds</a></li>
-							<li><a href="#dvaf1-conditions-template"><span class="page-number">7</span>Conditions</a></li>
-							<li><a href="#dvaf1-urgent-template"><span class="page-number">8</span>Urgent applications</a></li>
+							<li><a href="#dvaf1-situation-template"><span class="page-number">1</span>Your situation</a></li>
+							<li><a href="#dvaf1-aggrieved-basic-template"><span class="page-number">2</span>Who needs protection?</a></li>
+							<li><a href="#dvaf1-respondent-basic-template"><span class="page-number">3</span>Who do they need protection from?</a></li>
+							<li><a href="#dvaf1-relationship-template"><span class="page-number">4</span>Relationship</a></li>
+							<li><a href="#dvaf1-grounds-template"><span class="page-number">5</span>Grounds</a></li>
+							<li><a href="#dvaf1-conditions-template"><span class="page-number">6</span>Conditions</a></li>
+							<li><a href="#dvaf1-urgent-template"><span class="page-number">7</span>Urgent applications</a></li>
 						</ol>
 					</li>
 					<li class="current-page has-submenu">
 						<a href="#dvaf1-aggrieved-template">What we need to know at court</a>
 						<ol>
-							<li><a href="#dvaf1-aggrieved-template"><span class="page-number">9</span>Aggrieved details</a></li>
-							<li><a href="#dvaf1-children-template"><span class="page-number">10</span>Children</a></li>
-							<li><a href="#dvaf1-associates-template"><span class="page-number">11</span>Relatives/associates</a></li>
-							<li><a href="#dvaf1-respondent-template"><span class="page-number">12</span>Respondent details</a></li>
-							<li><a href="#dvaf1-orders-template"><span class="page-number">13</span>Other orders</a></li>
-							<li><a href="#dvaf1-applicant-template"><span class="page-number">14</span>Applicant details</a></li>
+							<li><a href="#dvaf1-aggrieved-template"><span class="page-number">8</span>Aggrieved details</a></li>
+							<li><a href="#dvaf1-children-template"><span class="page-number">9</span>Children</a></li>
+							<li><a href="#dvaf1-associates-template"><span class="page-number">10</span>Relatives/associates</a></li>
+							<li><a href="#dvaf1-respondent-template"><span class="page-number">11</span>Respondent details</a></li>
+							<li><a href="#dvaf1-orders-template"><span class="page-number">12</span>Other orders</a></li>
+							<li><a href="#dvaf1-applicant-template"><span class="page-number">13</span>Applicant details</a></li>
 						</ol>
 					</li>
 					<li class="current-page has-submenu">
 						<a href="#dvaf1-court-template">Applying for a protection order</a>
 						<ol>
-							<li><a href="#dvaf1-court-template"><span class="page-number">15</span>Preparing for court</a></li>
-							<li><a href="#dvaf1-download-template"><span class="page-number">16</span>Download your application</a></li>
+							<li><a href="#dvaf1-court-template"><span class="page-number">14</span>Preparing for court</a></li>
+							<li><a href="#dvaf1-download-template"><span class="page-number">15</span>Download your application</a></li>
 						</ol>
 					</li>
 				</ul>

@@ -1,7 +1,263 @@
 <h2>Respondent’s details (person the aggrieved is seeking protection from)</h2>
 
+<p>The more information you provide about where {{respondentName}} lives or spends {{respondentTheir}} time the easier and quicker it will be for police to serve the application.</p>
+
 <form class="form" name="formRespondent">
 	<ol class="questions">
+		<li class="group atomic">
+			<fieldset>
+				<legend>
+					<span class="label">Who {{doesTheAggrieved}} need protection from?</span>
+				</legend>
+				<ol class="questions compact">
+					<li>
+						<label for="respondent-name-given">
+							<span class="label">Given name</span>
+						</label>
+						<input type="text" size="15" id="respondent-name-given" name="respondentNameGiven" value="{{respondentNameGiven}}">
+					</li>
+					<li>
+						<label for="respondent-name-family">
+							<span class="label">Family name</span>
+						</label>
+						<input type="text" size="15" id="respondent-name-family" name="respondentNameFamily" value="{{respondentNameFamily}}">
+					</li>
+				</ol>
+			</fieldset>
+		</li>
+
+		<li>
+			<label for="respondent-address">
+				<span class="label">Address</span>
+			</label>
+			<textarea id="respondent-address" name="respondentAddress" rows="3" cols="30" spellcheck="true">{{respondentAddress}}</textarea>
+		</li>
+
+		<li>
+			<label for="respondent-date-birth">
+				<span class="label">Date of birth</span>
+			</label>
+			<input type="text" id="respondent-date-birth" name="respondentDateBirth" value="{{respondentDateBirth}}">
+		</li>
+
+		<li>
+			<label for="respondent-gender">
+				<span class="label">Gender</span>
+			</label>
+			<input type="text" id="respondent-gender" name="respondentGender" value="{{respondentGender}}" list="datalist-gender">
+		</li>
+
+		<li>
+			<label for="respondent-phone-home">
+				<span class="label">Home phone</span>
+			</label>
+			<input type="tel" id="respondent-phone-home" name="respondentContactPhoneHome" size="20" value="{{respondentContactPhoneHome}}">
+		</li>
+		<li>
+			<label for="respondent-phone-mobile">
+				<span class="label">Mobile</span>
+			</label>
+			<input type="tel" id="respondent-phone-mobile" name="respondentContactPhoneMobile" size="20" value="{{respondentContactPhoneMobile}}">
+		</li>
+		<li>
+			<label for="respondent-phone-work">
+				<span class="label">Work phone</span>
+			</label>
+			<input type="tel" id="respondent-phone-work" name="respondentContactPhoneWork" size="20" value="{{respondentContactPhoneWork}}">
+		</li>
+		<li>
+			<label for="respondent-email">
+				<span class="label">Email</span>
+			</label>
+			<input type="email" id="respondent-email" name="respondentContactEmail" size="30" value="{{respondentContactEmail}}">
+		</li>
+
+		<li>
+			<fieldset>
+				<legend>
+					<span class="label">{{DoesTheRespondent}} require an interpreter?</span>
+				</legend>
+				<ul class="choices compact">
+					<li>
+						<input type="radio" name="respondentRequiresInterpreter" value="No" id="respondent-interpreter-no"{{#if selected.respondentRequiresInterpreter.No}} checked{{/if}}>
+						<label for="respondent-interpreter-no">No</label>
+					</li>
+					<li>
+						<input type="radio" name="respondentRequiresInterpreter" value="Yes" id="respondent-interpreter-yes"{{#if selected.respondentRequiresInterpreter.Yes}} checked{{/if}}>
+						<label for="respondent-interpreter-yes">Yes</label>
+					</li>
+				</ul>
+			</fieldset>
+		</li>
+		<li id="dvaf1-respondent-interpreter-language">
+			<label for="respondent-language-dialect">
+				<span class="label">Language/Dialect</span>
+			</label>
+			<input type="text" name="respondentLanguage" size="20" id="respondent-language-dialect" value="{{respondentLanguage}}">
+		</li>
+
+		<li>
+			<fieldset>
+				<legend>
+					<span class="label">{{DoesTheRespondent}} identify as</span>
+				</legend>
+				<ul class="choices">
+					<li>
+						<input type="checkbox" name="respondentIdentifiesAsAboriginal" value="Yes" id="respondent-identify-as-aboriginal"{{#if selected.respondentIdentifiesAsAboriginal.Yes}} checked{{/if}}>
+						<label for="respondent-identify-as-aboriginal">Aboriginal</label>
+					</li>
+					<li>
+						<input type="checkbox" name="respondentIdentifiesAsTorresStraitIslander" value="Yes" id="respondent-identify-as-torres-strait-islander"{{#if selected.respondentIdentifiesAsTorresStraitIslander.Yes}} checked{{/if}}>
+						<label for="respondent-identify-as-torres-strait-islander">Torres Strait Islander</label>
+					</li>
+				</ul>
+			</fieldset>
+		</li>
+
+		<li>
+			<fieldset>
+				<legend>
+					<span class="label">{{DoesTheRespondent}} have a disability, illness or impairment where support and/or special arrangements are required?</span>
+				</legend>
+				<ul class="choices compact">
+					<li>
+						<input type="radio" name="respondentHasDisability" value="No" id="respondent-have-a-disability-no"{{#if selected.respondentHasDisability.No}} checked{{/if}}>
+						<label for="respondent-have-a-disability-no">No</label>
+					</li>
+					<li>
+						<input type="radio" name="respondentHasDisability" value="Yes" id="respondent-have-a-disability-yes"{{#if selected.respondentHasDisability.Yes}} checked{{/if}}>
+						<label for="respondent-have-a-disability-yes">Yes</label>
+					</li>
+				</ul>
+			</fieldset>
+		</li>
+		<li id="dvaf1-respondent-disability-description">
+			<label for="respondent-disability-details">
+				<span class="label">Please provide details about {{respondentTheir}} needs</span>
+			</label>
+			<textarea name="respondentDisabilityDescription" id="respondent-disability-details" rows="3" cols="40" spellcheck="true">{{respondentDisabilityDescription}}</textarea>
+		</li>
+
+		<li>
+			<label for="respondent-employment">
+				<span class="label">Current place of employment</span>
+			</label>
+			<textarea id="respondent-employment" name="respondentEmploymentPlace" rows="3" cols="30" spellcheck="true">{{respondentEmploymentPlace}}</textarea>
+		</li>
+
+		<li>
+			<label for="respondent-vehicle-model">
+				<span class="label">Vehicle model</span>
+			</label>
+			<input type="text" id="respondent-vehicle-model" name="respondentVehicleModel" size="30" value="{{respondentVehicleModel}}">
+		</li>
+		<li>
+			<label for="respondent-vehicle-registration">
+				<span class="label">Vehicle registration</span>
+			</label>
+			<input type="text" id="respondent-vehicle-registration" name="respondentVehicleRegistration" size="30" value="{{respondentVehicleRegistration}}">
+		</li>
+
+		<li>
+			<fieldset>
+				<legend>
+					<span class="label">{{IsTheRespondent}} under 18 years of age?</span>
+				</legend>
+				<ul class="choices compact">
+					<li>
+						<input type="radio" name="respondentUnder18" value="No" id="respondent-under-18-no"{{#if selected.respondentUnder18.No}} checked{{/if}}>
+						<label for="respondent-under-18-no">No</label>
+					</li>
+					<li>
+						<input type="radio" name="respondentUnder18" value="Yes" id="respondent-under-18-yes"{{#if selected.respondentUnder18.Yes}} checked{{/if}}>
+						<label for="respondent-under-18-yes">Yes</label>
+					</li>
+				</ul>
+			</fieldset>
+		</li>
+
+		<li class="section" id="dvaf1-respondent-parent-details">
+			<fieldset>
+				<legend>
+					<span class="h2">Parent’s details</span>
+					<p>All documents must be given to a parent unless the court orders otherwise.</p>
+				</legend>
+				<ol class="questions">
+					<li>
+						<label for="respondent-parent-name">
+							<span class="label">Parent’s name</span>
+						</label>
+						<input name="respondentParentName" size="30" type="text" id="respondent-parent-name" value="{{respondentParentName}}">
+					</li>
+					<li>
+						<label for="respondent-parent-address">
+							<span class="label">Parent’s address</span>
+						</label>
+						<textarea name="respondentParentAddress" id="respondent-parent-address" rows="3" cols="4" spellcheck="true">{{respondentParentAddress}}</textarea>
+					</li>
+				</ol>
+			</fieldset>
+		</li>
+
+		<li>
+			<fieldset>
+				<legend>
+					<span class="label">Does {{respondentName}} have a weapon?</span>
+				</legend>
+				<ul class="choices compact">
+					<li>
+						<input type="radio" name="respondentWeaponsAccess" value="No" id="weapon-access-no"{{#if selected.respondentWeaponsAccess.No}} checked{{/if}}>
+						<label for="weapon-access-no">No</label>
+					</li>
+					<li>
+						<input type="radio" name="respondentWeaponsAccess" value="Unsure" id="weapon-access-unsure"{{#if selected.respondentWeaponsAccess.Unsure}} checked{{/if}}>
+						<label for="weapon-access-unsure">Unsure</label>
+					</li>
+					<li>
+						<input type="radio" name="respondentWeaponsAccess" value="Yes" id="weapon-access-yes"{{#if selected.respondentWeaponsAccess.Yes}} checked{{/if}}>
+						<label for="weapon-access-yes">Yes</label>
+					</li>
+				</ul>
+			</fieldset>
+		</li>
+		<li id="dvaf1-respondent-weapon-access-description">
+			<label for="weapon-access-details">
+				<span class="label">Please state the number of weapons, the type of weapons and all likely places where they may be found</span>
+			</label>
+			<textarea id="weapon-access-details" name="respondentWeaponsAccessDescription" cols="40" rows="10" spellcheck="true">{{respondentWeaponsAccessDescription}}</textarea>
+		</li>
+
+		<li>
+			<fieldset>
+				<legend>
+					<span class="label">Does {{respondentName}} have a weapons or firearms licence?</span>
+				</legend>
+				<ul class="choices compact">
+					<li>
+						<input type="radio" name="respondentWeaponsLicence" value="No" id="weapon-licence-no"{{#if selected.respondentWeaponsLicence.No}} checked{{/if}}>
+						<label for="weapon-licence-no">No</label>
+					</li>
+					<li>
+						<input type="radio" name="respondentWeaponsLicence" value="Yes" id="weapon-licence-yes"{{#if selected.respondentWeaponsLicence.Yes}} checked{{/if}}>
+						<label for="weapon-licence-yes">Yes</label>
+					</li>
+				</ul>
+			</fieldset>
+		</li>
+		<li id="dvaf1-weapon-licence-info">
+			<div class="status warn">
+				<h2>Access to licensed weapon storage</h2>
+				<p><strong>DO NOT</strong> accept the key to any secure weapons storage from {{respondentName}}. It is against the law to have a key to weapons unless you have a licence and permit.</p>
+				<p>Contact <a href="https://www.police.qld.gov.au/forms/wlb.asp" target="_blank">Weapons Licensing (Queensland Police)</a> as soon as possible for advice.</p>
+			</div>
+		</li>
+		<li id="dvaf1-weapon-licence-details">
+			<label for="weapon-licence-details">
+				<span class="label">Please provide details of any weapons {{respondentName}} has access to and where they are located</span>
+			</label>
+			<textarea id="weapon-licence-details" name="respondentWeaponsLicenceDescription" cols="40" rows="10" spellcheck="true">{{respondentWeaponsLicenceDescription}}</textarea>
+		</li>
+
 		<li>
 			<ul class="actions">
 				<li><strong><button>Continue</button></strong></li>

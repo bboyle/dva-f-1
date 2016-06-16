@@ -1,7 +1,135 @@
-<h2>Are there children who live or spend time with the aggrieved who need protection?</h2>
+<div class="status info">
+	<h2>Are there children who live or spend time with {{aggrievedYou true}} who need protection?</h2>
+	<p>If {{aggrievedYouHave}} a child who lives with {{aggrievedYouThem}}, or spends time at {{aggrievedYour}} house on a regular basis, they can be included in this application. If the court is satisfied it is appropriate, the court can include a child on the order to ensure that {{respondentName}} must also be of good behaviour towards the child, and not to expose the child to domestic violence.</p>
+	<p>If you do not want {{respondentName}} to know the address details of the child, please provide an alternate address (e.g. of a friend or relative or a post office box).</p>
+</div>
 
 <form class="form" name="formChildren">
 	<ol class="questions">
+		<li>
+			<fieldset>
+				<legend>
+					<span class="label">{{DoesTheAggrieved}} have children who need protection from {{respondentName}}?</span>
+				</legend>
+				<ul class="choices compact">
+					<li>
+						<input type="radio" name="conditionsNameChildren" id="name-children-yes" value="Yes"{{#if selected.conditionsNameChildren.Yes}} checked{{/if}}>
+						<label for="name-children-yes">Yes</label>
+					</li>
+					<li>
+						<input type="radio" name="conditionsNameChildren" id="name-children-no" value="No"{{#if selected.conditionsNameChildren.No}} checked{{/if}}>
+						<label for="name-children-no">No</label>
+					</li>
+				</ul>
+			</fieldset>
+		</li>
+
+		{{#each child}}
+		<li class="dvaf1-children group">
+			<fieldset>
+				<legend>
+					<span class="label">Child {{plus1 @index}}</span>
+				</legend>
+				<ol class="questions">
+					<li>
+						<label for="child{{@index}}-name">
+							<span class="label">Full name</span>
+						</label>
+						<input type="text" id="child{{@index}}-name" name="child{{@index}}.name" size="30" value="{{name}}">
+					</li>
+					<li>
+						<label for="child{{@index}}-gender">
+							<span class="label">Gender</span>
+						</label>
+						<input type="text" id="child{{@index}}-gender" name="child{{@index}}.gender" list="datalist-gender" value="{{gender}}">
+					</li>
+					<li>
+						<label for="child{{@index}}-date-birth">
+							<span class="label">Date of birth</span>
+						</label>
+						<input type="text" id="child{{@index}}-date-birth" name="child{{@index}}.dateBirth" value="{{dateBirth}}">
+					</li>
+					<li>
+						<fieldset>
+							<legend>
+								<span class="label">Where do they live?</span>
+								<!-- TODO <small class="hint">CONFIDENTIAL (not shared with {{respondentName}})</small> -->
+							</legend>
+							<ul class="choices">
+								<li>
+									<input type="radio" name="child{{@index}}.livesWith" value="aggrieved" id="child{{@index}}-lives-with-aggrieved">
+									<label for="child{{@index}}-lives-with-aggrieved">
+										with {{aggrievedMe}}
+										{{#if selected.aggrievedAddressConfidential.Yes}}<em>(CONFIDENTIAL)</em>{{/if}}
+										{{#if aggrievedAddress}}<span><br /><small>{{aggrievedAddress}}</small></span>{{/if}}
+									</label>
+								</li>
+								{{#unless userIsAggrieved}}
+								<li>
+									<input type="radio" name="child{{@index}}.livesWith" value="applicant" id="child{{@index}}-lives-with-applicant">
+									<label for="child{{@index}}-lives-with-applicant">
+										with me
+										{{#if selected.applicantAddressConfidential.Yes}}<em>(CONFIDENTIAL)</em>{{/if}}
+										{{#if applicantAddress}}<span><br /><small>{{applicantAddress}}</small></span>{{/if}}
+									</label>
+								</li>
+								{{/unless}}
+								<li>
+									<input type="radio" name="child{{@index}}-lives-with" value="respondent" id="child{{@index}}-lives-with-respondent">
+									<label for="child{{@index}}-lives-with-respondent">
+										with {{respondentName}}
+										{{#if respondentAddress}}<span><br /><small>{{respondentAddress}}</small></span>{{/if}}
+									</label>
+								</li>
+								<li>
+									<input type="radio" name="child{{@index}}-lives-with" value="other" id="child{{@index}}-lives-with-other">
+									<label for="child{{@index}}-lives-with-other">
+										another address
+										{{#if selected.childAddressConfidential.Yes}}<em>(CONFIDENTIAL)</em>{{/if}}
+									</label>
+								</li>
+							</ul>
+						</fieldset>
+					</li>
+
+					<!-- TODO relevance inside repeating field -->
+					<li id="dvaf1-child-address-confidential">
+						<fieldset>
+							<legend>
+								<span class="label">Keep address secret from {{respondentName}}?</span>
+							</legend>
+							<ul class="choices compact">
+								<li>
+									<input type="radio" name="child{{@index}}-confidential-address" value="No" id="child{{@index}}-confidential-address-no">
+									<label for="child{{@index}}-confidential-address-no">No</label>
+								</li>
+								<li>
+									<input type="radio" name="child{{@index}}-confidential-address" value="Yes" id="child{{@index}}-confidential-address-yes">
+									<label for="child{{@index}}-confidential-address-yes">Yes</label>
+								</li>
+							</ul>
+						</fieldset>
+					</li>
+
+					<!-- TODO ng-class="{confidential: child.confidential.address}" -->
+					<li id="dvaf1-child-address">
+						<label for="child{{@index}}-address">
+							<span class="label">Address</span>
+							<!-- TODO <small class="hint">CONFIDENTIAL (not shared with {{respondentName}})</small> -->
+						</label>
+						<textarea id="child{{@index}}-address" name="child{{@index}}.address" rows="3" cols="30" spellcheck="true">{{address}}</textarea>
+					</li>
+					<li class="footer">
+						<ul class="actions">
+							<li><em><button type="button" class="add" name="child" value="{{@index}}"><i class="fa fa-plus-square"></i> Add another child</button></em></li>
+							{{#if @index}}<li><em><button type="button" class="del" name="child" value="{{@index}}"><i class="fa fa-minus-square"></i> Remove child {{plus1 @index}}</button></em></li>{{/if}}
+						</ul>
+					</li>
+				</ol>
+			</fieldset>
+		</li>
+		{{/each}}
+
 		<li>
 			<ul class="actions">
 				<li><strong><button>Continue</button></strong></li>

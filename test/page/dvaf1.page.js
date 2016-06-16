@@ -104,6 +104,12 @@ DvaForm1Page.prototype = Object.create( {}, {
 		}
 	},
 
+	gotoRelationshipView: {
+		value: function() {
+			this.goto( 'Relationship' );
+		}
+	},
+
 	gotoCourtView: {
 		value: function() {
 			this.goto( 'Preparing for court' );

@@ -5,7 +5,7 @@ var PreambleView = require( '../page/dvaf1.preamble.view.js' );
 var preamble;
 
 
-describe( 'preamble page', function() {
+describe( 'app accessibility', function() {
 	beforeEach(function() {
 		preamble = new PreambleView();
 	});

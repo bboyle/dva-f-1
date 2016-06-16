@@ -3,6 +3,183 @@
 <form class="form" name="formOrders">
 	<ol class="questions">
 		<li>
+			<fieldset>
+				<legend>
+					<span class="label">Have {{aggrievedYou}} and {{respondentName}} been involved in other court proceedings where an order has been made?</span>
+				</legend>
+				<ul class="choices compact">
+					<li>
+						<input type="radio" name="ordersExist" value="No" id="orders-exist-no"{{#if selected.ordersExist.No}} checked{{/if}}>
+						<label for="orders-exist-no">No</label>
+					</li>
+					<li>
+						<input type="radio" name="ordersExist" value="Yes" id="orders-exist-yes"{{#if selected.ordersExist.Yes}} checked{{/if}}>
+						<label for="orders-exist-yes">Yes</label>
+					</li>
+				</ul>
+			</fieldset>
+		</li>
+		<li id="dvfa1-orders-existing">
+			<fieldset>
+				<legend>
+					<span class="label">Please tick the box next to the type of order</span>
+					<small class="hint">Attach copies to each order to inform the court when the order was made and whether it is still current</small>
+				</legend>
+				<table class="matrix">
+					<thead>
+						<tr>
+							<th>Type of order</th>
+							<th>Current</th>
+							<th>Not current</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th>Child Protection Order</th>
+							<td>
+								<input type="checkbox" name="ordersChildProtection" value="Current" id="orders-child-protection"{{#if selected.ordersChildProtection.Current}} checked{{/if}}>
+								<label for="orders-child-protection">Current</label>
+							</td>
+							<td>
+								<input type="checkbox" name="ordersChildProtection" value="Past" id="orders-child-protection-past"{{#if selected.ordersChildProtection.Past}} checked{{/if}}>
+								<label for="orders-child-protection-past">Not current</label>
+							</td>
+						</tr>
+						<tr>
+							<th>Queensland Domestic Violence Order</th>
+							<td>
+								<input type="checkbox" name="ordersQldDVO" value="Current" id="orders-qld-dvo"{{#if selected.ordersQldDVO.Current}} checked{{/if}}>
+								<label for="orders-qld-dvo"> Current</label>
+							</td>
+							<td>
+								<input type="checkbox" name="ordersQldDVO" value="Past" id="orders-qld-dvo-past"{{#if selected.ordersQldDVO.Past}} checked{{/if}}>
+								<label for="orders-qld-dvo-past"> Not current</label>
+							</td>
+						</tr>
+						<tr>
+							<th>Police Protection Notice</th>
+							<td>
+								<input type="checkbox" name="ordersPoliceProtection" value="Current" id="orders-police-protection"{{#if selected.ordersPoliceProtection.Current}} checked{{/if}}>
+								<label for="orders-police-protection">Current</label>
+							</td>
+							<td>
+								<input type="checkbox" name="ordersPoliceProtection" value="Past" id="orders-police-protection-past"{{#if selected.ordersPoliceProtection.Past}} checked{{/if}}>
+								<label for="orders-police-protection-past">Not current</label>
+							</td>
+						</tr>
+						<tr>
+							<th>Voluntary Intervention Order</th>
+							<td>
+								<input type="checkbox" name="ordersVoluntaryIntervention" value="Current" id="orders-voluntary-intervention"{{#if selected.ordersVoluntaryIntervention.Current}} checked{{/if}}>
+								<label for="orders-voluntary-intervention">Current</label>
+							</td>
+							<td>
+								<input type="checkbox" name="ordersVoluntaryIntervention" value="Past" id="orders-voluntary-intervention-past"{{#if selected.ordersVoluntaryIntervention.Past}} checked{{/if}}>
+								<label for="orders-voluntary-intervention-past">Not current</label>
+							</td>
+						</tr>
+						<tr>
+							<th>Interstate Domestic Violence Order</th>
+							<td>
+								<input type="checkbox" name="ordersInterstateDVO" value="Current" id="orders-interstate-dvo"{{#if selected.ordersInterstateDVO.Current}} checked{{/if}}>
+								<label for="orders-interstate-dvo"> Current</label>
+							</td>
+							<td>
+								<input type="checkbox" name="ordersInterstateDVO" value="Past" id="orders-interstate-dvo-past"{{#if selected.ordersInterstateDVO.Past}} checked{{/if}}>
+								<label for="orders-interstate-dvo-past"> Not current</label>
+							</td>
+						</tr>
+						<tr>
+							<th>New Zealand Domestic Violence Order</th>
+							<td>
+								<input type="checkbox" name="ordersNZ_DVO" value="Current" id="orders-nz-dvo"{{#if selected.ordersNZ_DVO.Current}} checked{{/if}}>
+								<label for="orders-nz-dvo">Current</label>
+							</td>
+							<td>
+								<input type="checkbox" name="ordersNZ_DVO" value="Past" id="orders-nz-dvo-past"{{#if selected.ordersNZ_DVO.Past}} checked{{/if}}>
+								<label for="orders-nz-dvo-past">Not current</label>
+							</td>
+						</tr>
+						<tr>
+							<th>Family Court Order</th>
+							<td>
+								<input type="checkbox" name="ordersFamilyCourt" value="Current" id="orders-family-court"{{#if selected.ordersFamilyCourt.Current}} checked{{/if}}>
+								<label for="orders-family-court">Current</label>
+							</td>
+							<td>
+								<input type="checkbox" name="ordersFamilyCourt" value="Past" id="orders-family-court-past"{{#if selected.ordersFamilyCourt.Past}} checked{{/if}}>
+								<label for="orders-family-court-past">Not current</label>
+							</td>
+						</tr>
+						<tr>
+							<th>Other relevant court order</th>
+							<td>
+								<input type="checkbox" name="ordersOther" value="Current" id="orders-other"{{#if selected.ordersOther.Current}} checked{{/if}}>
+								<label for="orders-other">Current</label>
+							</td>
+							<td>
+								<input type="checkbox" name="ordersOther" value="Past" id="orders-other-past"{{#if selected.ordersOther.Past}} checked{{/if}}>
+								<label for="orders-other-past">Not current</label>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</fieldset>
+		</li>
+
+		<li id="dvfa1-orders-existing-other">
+			<label for="orders-other-type">
+				<span class="label">Type of order</span>
+			</label>
+			<input type="text" id="orders-other-type" name="ordersOtherTitle" value="{{ordersOtherTitle}}">
+		</li>
+
+		<li>
+			<fieldset>
+				<legend>
+					<span class="label">Is there a current Protection Order application, between {{aggrievedYou}} and {{respondentName}} that has not yet been decided by the court?</span>
+				</legend>
+				<ul class="choices compact">
+					<li>
+						<input type="radio" name="ordersProtectionOrderInProgress" value="No" id="orders-protection-progress-no"{{#if selected.ordersProtectionOrderInProgress.No}} checked{{/if}}>
+						<label for="orders-protection-progress-no">No</label>
+					</li>
+					<li>
+						<input type="radio" name="ordersProtectionOrderInProgress" value="Yes" id="orders-protection-progress-yes"{{#if selected.ordersProtectionOrderInProgress.Yes}} checked{{/if}}>
+						<label for="orders-protection-progress-yes">Yes</label>
+					</li>
+				</ul>
+			</fieldset>
+		</li>
+
+		<li>
+			<fieldset>
+				<legend>
+					<span class="label">Is there another application for a protection order before a court, where {{aggrievedYouAre}} named as the respondent, and {{respondentName}} is named as the aggrieved?</span>
+					<small class="hint">This is known as a <dfn>cross application</dfn>. You must tell the court about the cross application. The court must consider whether it is appropriate for both applications to be heard together.</small>
+				</legend>
+				<ul class="choices compact">
+					<li>
+						<input type="radio" name="ordersCrossApplicationInProgress" value="No" id="orders-cross-application-no"{{#if selected.ordersCrossApplicationInProgress.No}} checked{{/if}}>
+						<label for="orders-cross-application-no">No</label>
+					</li>
+					<li>
+						<input type="radio" name="ordersCrossApplicationInProgress" value="Yes" id="orders-cross-application-yes"{{#if selected.ordersCrossApplicationInProgress.Yes}} checked{{/if}}>
+						<label for="orders-cross-application-yes">Yes</label>
+					</li>
+				</ul>
+			</fieldset>
+		</li>
+
+		<li id="dvaf1-orders-cross-application-status">
+			<div class="status info">
+				<h2>Attach a copy of the cross application</h2>
+				<p>The court must consider whether it is appropriate for both applications to be heard together.</p>
+			</div>
+		</li>
+
+
+		<li>
 			<ul class="actions">
 				<li><strong><button>Continue</button></strong></li>
 			</ul>
