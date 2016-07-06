@@ -1,47 +1,44 @@
 <h2>Respondent’s details (person the aggrieved is seeking protection from)</h2>
-
-<form class="form" name="formRespondentBasic">
-	<ol class="questions">
-		<li class="group atomic">
-			<fieldset>
-				<legend>
-					<span class="label">Who {{doesTheAggrieved}} need protection from?</span>
-				</legend>
-				<ol class="questions compact">
-					<li>
-						<label for="respondent-name-given">
-							<span class="label">Given name</span>
-						</label>
-						<input type="text" size="15" id="respondent-name-given" name="respondentNameGiven" value="{{respondentNameGiven}}">
-					</li>
-					<li>
-						<label for="respondent-name-family">
-							<span class="label">Family name</span>
-						</label>
-						<input type="text" size="15" id="respondent-name-family" name="respondentNameFamily" value="{{respondentNameFamily}}">
-					</li>
-				</ol>
-			</fieldset>
-		</li>
-
-		<li>
-			<label for="respondent-date-birth">
-				<span class="label">Date of birth</span>
-			</label>
-			<input type="text" id="respondent-date-birth" name="respondentDateBirth" value="{{respondentDateBirth}}">
-		</li>
-
-		<li>
-			<label for="respondent-gender">
-				<span class="label">Gender</span>
-			</label>
-			<input type="text" id="respondent-gender" name="respondentGender" value="{{respondentGender}}" list="datalist-gender">
-		</li>
-
-		<li>
-			<ul class="actions">
-				<li><strong><button>Continue</button></strong></li>
-			</ul>
-		</li>
-	</ol>
-</form>
+	<form class="form" name="formRespondentBasic">
+		<ol class="questions">
+			<li class="group atomic">
+				<fieldset>
+					<legend>
+						<span class="label">Who {{doesTheAggrieved}} need protection from?</span>
+					</legend>
+					<ol class="questions compact">
+						<li>
+							<label for="respondent-name-given">
+								<span class="label">Given name</span>
+							</label>
+							<input type="text" size="15" id="respondent-name-given" name="respondentNameGiven" value="{{respondentNameGiven}}">
+						</li>
+						<li>
+							<label for="respondent-name-family">
+								<span class="label">Family name</span>
+							</label>
+							<input type="text" size="15" id="respondent-name-family" name="respondentNameFamily" value="{{respondentNameFamily}}">
+						</li>
+					</ol>
+				</fieldset>
+			</li>
+			<li>
+				<label for="respondent-date-birth">
+					<span class="label">Date of birth</span>
+				</label>
+				<input type="text" id="respondent-date-birth" name="respondentDateBirth" value="{{respondentDateBirth}}">
+			</li>
+			<li>
+				<label for="respondent-gender">
+					<span class="label">Gender</span>
+				</label>
+				<input type="text" id="respondent-gender" name="respondentGender" value="{{respondentGender}}" list="datalist-gender">
+			</li>
+			<li>
+				<ul class="actions">
+					<li><strong><button>Continue</button></strong></li>
+					<li><i>or</i> <a href="#dvaf1-download-template">I want to fill out the rest by hand later</a></li>
+				</ul>
+			</li>
+		</ol>
+	</form>
