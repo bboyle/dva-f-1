@@ -1,274 +1,268 @@
 <h2>Aggrieved’s details (person in need of protection)</h2>
-
-<form class="form" name="formAggrieved">
-	<ol class="questions">
-		<li class="group atomic">
-			<fieldset>
-				<legend>
-					<span class="label">
-					{{#if userIsAggrieved}}
-						What is your name?
-					{{else if selected.userRelationship.someone}}
-						What is the name of the person in need of protection?
-					{{else if userRelationship}}
-						What is your {{userRelationship}}’s name?
-					{{else}}
-						What is the name of the person in need of protection?
-					{{/if}}
-					</span>
-				</legend>
-				<ol class="questions compact">
-					<li>
-						<label for="aggrieved-name-given">
-							<span class="label">Given name</span>
-						</label>
-						<input type="text" size="15" id="aggrieved-name-given" name="aggrievedNameGiven" value="{{aggrievedNameGiven}}" autocomplete="given-name">
-					</li>
-					<li>
-						<label for="aggrieved-name-family">
-							<span class="label">Family name</span>
-						</label>
-						<input type="text" size="15" id="aggrieved-name-family" name="aggrievedNameFamily" value="{{aggrievedNameFamily}}" autocomplete="family-name">
-					</li>
-				</ol>
-			</fieldset>
-		</li>
-
-		<li>
-			<fieldset>
-				<legend>
-					<span class="label">Keep {{aggrievedMy}} address secret from {{respondentName}}?</span>
-				</legend>
-				<ul class="choices compact">
-					<li>
-						<input type="radio" name="aggrievedAddressConfidential" value="No" id="aggrieved-confidential-address-no"{{#if selected.aggrievedAddressConfidential.No}} checked{{/if}}>
-						<label for="aggrieved-confidential-address-no">No</label>
-					</li>
-					<li>
-						<input type="radio" name="aggrievedAddressConfidential" value="Yes" id="aggrieved-confidential-address-yes"{{#if selected.aggrievedAddressConfidential.Yes}} checked{{/if}}>
-						<label for="aggrieved-confidential-address-yes">Yes</label>
-					</li>
-				</ul>
-			</fieldset>
-		</li>
-
-		<li>
-			<label for="aggrieved-address">
-				<span class="label">Address</span>
-				{{#if selected.aggrievedAddressConfidential.Yes}}
-				<small class="hint">CONFIDENTIAL (not shared with {{respondentName}})</small>
-				{{/if}}
-				<small class="hint">
-					Give an address where court documents can be sent.
-					This can be the address of a trusted friend, {{aggrievedYour}} lawyer, or a <abbr title="post office box">PO box</abbr>.
-				</small>
-			</label>
-			<textarea id="aggrieved-address" name="aggrievedAddress" rows="3" cols="30" autocomplete="street-address" spellcheck="true">{{aggrievedAddress}}</textarea>
-		</li>
-
-		<li>
-			<label for="aggrieved-date-birth">
-				<span class="label">Date of birth</span>
-			</label>
-			<input type="text" id="aggrieved-date-birth" name="aggrievedDateBirth" value="{{aggrievedDateBirth}}" autocomplete="bday">
-		</li>
-
-		<li>
-			<label for="aggrieved-gender">
-				<span class="label">Gender</span>
-			</label>
-			<input type="text" id="aggrieved-gender" name="aggrievedGender" value="{{aggrievedGender}}" autocomplete="sex" list="datalist-gender">
-		</li>
-
-		<li class="section">
-			<fieldset>
-				<legend>
-					<span class="h3">Contact details</span>
+	<form class="form" name="formAggrieved">
+		<ol class="questions">
+			<li class="group atomic">
+				<fieldset>
+					<legend>
+						<span class="label">
+						{{#if userIsAggrieved}}
+							What is your name?
+						{{else if selected.userRelationship.someone}}
+							What is the name of the person in need of protection?
+						{{else if userRelationship}}
+							What is your {{userRelationship}}’s name?
+						{{else}}
+							What is the name of the person in need of protection?
+						{{/if}}
+						</span>
+					</legend>
+					<ol class="questions compact">
+						<li>
+							<label for="aggrieved-name-given">
+								<span class="label">Given name</span>
+							</label>
+							<input type="text" size="15" id="aggrieved-name-given" name="aggrievedNameGiven" value="{{aggrievedNameGiven}}" autocomplete="given-name">
+						</li>
+						<li>
+							<label for="aggrieved-name-family">
+								<span class="label">Family name</span>
+							</label>
+							<input type="text" size="15" id="aggrieved-name-family" name="aggrievedNameFamily" value="{{aggrievedNameFamily}}" autocomplete="family-name">
+						</li>
+					</ol>
+				</fieldset>
+			</li>
+			<li>
+				<fieldset>
+					<legend>
+						<span class="label">Keep {{aggrievedMy}} address secret from {{respondentName}}?</span>
+					</legend>
+					<ul class="choices compact">
+						<li>
+							<input type="radio" name="aggrievedAddressConfidential" value="Yes" checked="true" id="aggrieved-confidential-address-yes"{{#if selected.aggrievedAddressConfidential.Yes}} checked{{/if}}>
+							<label for="aggrieved-confidential-address-yes">Yes</label>
+						</li>
+						<li>
+							<input type="radio" name="aggrievedAddressConfidential" value="No" id="aggrieved-confidential-address-no"{{#if selected.aggrievedAddressConfidential.No}} checked{{/if}}>
+							<label for="aggrieved-confidential-address-no">No</label>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+			<li class="confidential confidentialArea1">
+				<label for="aggrieved-address">
+					<span class="label">Postal address</span>
+					<small class="hint confidentialArea1Hint">CONFIDENTIAL (not shared with {{respondentName}})</small>
 					<small class="hint">
-						Provide contact details so the court can contact {{aggrievedYou}}.
-						A phone number or email of a trusted friend or {{aggrievedYour}} lawyer is acceptable.
+						Give an address where court documents can be sent.
+						This can be the address of a trusted friend, {{aggrievedYour}} lawyer, or a <abbr title="post office box">PO box</abbr>.
 					</small>
-				</legend>
-				<ol class="questions">
-					<li>
-						<fieldset>
-							<legend>
-								<span class="label">Keep contact details secret from {{respondentName}}?</span>
-							</legend>
-							<ul class="choices compact">
-								<li>
-									<input type="radio" name="aggrievedContactConfidential" value="No" id="aggrieved-confidential-contact-no"{{#if selected.aggrievedContactConfidential.No}} checked{{/if}}>
-									<label for="aggrieved-confidential-contact-no">No</label>
-								</li>
-								<li>
-									<input type="radio" name="aggrievedContactConfidential" value="No" id="aggrieved-confidential-contact-yes"{{#if selected.aggrievedContactConfidential.Yes}} checked{{/if}}>
-									<label for="aggrieved-confidential-contact-yes">Yes</label>
-								</li>
-							</ul>
-						</fieldset>
-					</li>
-
-					<li>
-						<label for="aggrieved-phone-home">
-							<span class="label">Home phone</span>
-							{{#if selected.aggrievedContactConfidential.Yes}}<small class="hint">CONFIDENTIAL (not shared with {{respondentName}})</small>{{/if}}
-						</label>
-						<input type="tel" id="aggrieved-phone-home" name="aggrievedContactPhoneHome" size="20" autocomplete="tel" value="{{aggrievedContactPhoneHome}}">
-					</li>
-					<li>
-						<label for="aggrieved-phone-mobile">
-							<span class="label">Mobile</span>
-							{{#if selected.aggrievedContactConfidential.Yes}}<small class="hint">CONFIDENTIAL (not shared with {{respondentName}})</small>{{/if}}
-						</label>
-						<input type="tel" id="aggrieved-phone-mobile" name="aggrievedContactPhoneMobile" size="20" autocomplete="tel" value="{{aggrievedContactPhoneMobile}}">
-					</li>
-					<li>
-						<label for="aggrieved-phone-work">
-							<span class="label">Work phone</span>
-							{{#if selected.aggrievedContactConfidential.Yes}}<small class="hint">CONFIDENTIAL (not shared with {{respondentName}})</small>{{/if}}
-						</label>
-						<input type="tel" id="aggrieved-phone-work" name="aggrievedContactPhoneWork" size="20" autocomplete="tel" value="{{aggrievedContactPhoneWork}}">
-					</li>
-					<li>
-						<label for="aggrieved-email">
-							<span class="label">Email</span>
-							{{#if selected.aggrievedContactConfidential.Yes}}<small class="hint">CONFIDENTIAL (not shared with {{respondentName}})</small>{{/if}}
-						</label>
-						<input type="email" id="aggrieved-email" name="aggrievedContactEmail" size="30" autocomplete="email" value="{{aggrievedContactEmail}}">
-					</li>
-				</ol>
-			</fieldset>
-		</li>
-
-		<li>
-			<fieldset>
-				<legend>
-					<span class="label">{{DoesTheAggrieved}} require an interpreter?</span>
-				</legend>
-				<ul class="choices compact">
-					<li>
-						<input type="radio" name="aggrievedRequiresInterpreter" value="No" id="aggrieved-interpreter-no"{{#if selected.aggrievedRequiresInterpreter.No}} checked{{/if}}>
-						<label for="aggrieved-interpreter-no">No</label>
-					</li>
-					<li>
-						<input type="radio" name="aggrievedRequiresInterpreter" value="Yes" id="aggrieved-interpreter-yes"{{#if selected.aggrievedRequiresInterpreter.Yes}} checked{{/if}}>
-						<label for="aggrieved-interpreter-yes">Yes</label>
-					</li>
+				</label>
+				<textarea id="aggrieved-address" name="aggrievedAddress" rows="3" cols="30" autocomplete="street-address" placeholder="Please enter a full postal address (or PO Box) including postcode for documents to be sent to." spellcheck="true">{{aggrievedAddress}}</textarea>
+			</li>
+			<li>
+				<label for="aggrieved-date-birth">
+					<span class="label">Date of birth</span>
+				</label>
+				<input type="text" id="aggrieved-date-birth" name="aggrievedDateBirth" value="{{aggrievedDateBirth}}" autocomplete="bday">
+			</li>
+			<li>
+				<label for="aggrieved-gender">
+					<span class="label">Gender</span>
+				</label>
+				<input type="text" id="aggrieved-gender" name="aggrievedGender" value="{{aggrievedGender}}" autocomplete="sex" list="datalist-gender">
+			</li>
+			<li class="section">
+				<fieldset>
+					<legend>
+						<span class="h3">Contact details</span>
+						<small class="hint">
+							Provide contact details so the court can contact {{aggrievedYou}}.
+							A phone number or email of a trusted friend or {{aggrievedYour}} lawyer is acceptable.
+						</small>
+					</legend>
+					<ol class="questions">
+						<li>
+							<fieldset>
+								<legend>
+									<span class="label">Keep contact details secret from {{respondentName}}?</span>
+								</legend>
+								<ul class="choices compact">
+									<li>
+										<input type="radio" name="aggrievedContactConfidential" value="Yes" checked="true" id="aggrieved-confidential-contact-yes"{{#if selected.aggrievedContactConfidential.Yes}} checked{{/if}}>
+										<label for="aggrieved-confidential-contact-yes">Yes</label>
+									</li>
+									<li>
+										<input type="radio" name="aggrievedContactConfidential" value="No" id="aggrieved-confidential-contact-no"{{#if selected.aggrievedContactConfidential.No}} checked{{/if}}>
+										<label for="aggrieved-confidential-contact-no">No</label>
+									</li>
+								</ul>
+							</fieldset>
+						</li>
+						<li class="confidential confidentialArea2">
+							<label for="aggrieved-phone-home">
+								<span class="label">Home phone</span>
+								<small class="hint confidentialArea2Hint">CONFIDENTIAL (not shared with {{respondentName}})</small>
+							</label>
+							<input type="tel" id="aggrieved-phone-home" name="aggrievedContactPhoneHome" size="20" autocomplete="tel" value="{{aggrievedContactPhoneHome}}">
+						</li>
+						<li class="confidential confidentialArea2">
+							<label for="aggrieved-phone-mobile">
+								<span class="label">Mobile</span>
+								<small class="hint confidentialArea2Hint">CONFIDENTIAL (not shared with {{respondentName}})</small>
+							</label>
+							<input type="tel" id="aggrieved-phone-mobile" name="aggrievedContactPhoneMobile" size="20" autocomplete="tel" value="{{aggrievedContactPhoneMobile}}">
+						</li>
+						<li class="confidential confidentialArea2">
+							<label for="aggrieved-phone-work">
+								<span class="label">Work phone</span>
+								<small class="hint confidentialArea2Hint">CONFIDENTIAL (not shared with {{respondentName}})</small>
+							</label>
+							<input type="tel" id="aggrieved-phone-work" name="aggrievedContactPhoneWork" size="20" autocomplete="tel" value="{{aggrievedContactPhoneWork}}">
+						</li>
+						<li class="confidential confidentialArea2">
+							<label for="aggrieved-email">
+								<span class="label">Email</span>
+								<small class="hint confidentialArea2Hint">CONFIDENTIAL (not shared with {{respondentName}})</small>
+							</label>
+							<input type="email" id="aggrieved-email" name="aggrievedContactEmail" size="30" autocomplete="email" value="{{aggrievedContactEmail}}">
+						</li>
+					</ol>
+				</fieldset>
+			</li>
+			<li>
+				<fieldset>
+					<legend>
+						<span class="label">{{DoesTheAggrieved}} require an interpreter?</span>
+					</legend>
+					<ul class="choices compact">
+						<li>
+							<input type="radio" name="aggrievedRequiresInterpreter" value="Yes" id="aggrieved-interpreter-yes"{{#if selected.aggrievedRequiresInterpreter.Yes}} checked{{/if}}>
+							<label for="aggrieved-interpreter-yes">Yes</label>
+						</li>
+						<li>
+							<input type="radio" name="aggrievedRequiresInterpreter" value="No" id="aggrieved-interpreter-no"{{#if selected.aggrievedRequiresInterpreter.No}} checked{{/if}}>
+							<label for="aggrieved-interpreter-no">No</label>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+			<li id="dvaf1-aggrieved-interpreter-language">
+				<label for="aggrieved-language-dialect">
+					<span class="label">Language/Dialect</span>
+				</label>
+				<input type="text" name="aggrievedLanguage" size="20" id="aggrieved-language-dialect" autocomplete="language" value="{{aggrievedLanguage}}">
+			</li>
+			<li>
+				<fieldset>
+					<legend>
+						<span class="label">{{IsTheAggrieved}} from an Aboriginal or Torres Strait Islander background?</span>
+					</legend>
+					<ul class="choices">
+						<li>
+							<input type="radio" name="aggrievedIdentifiesAs" value="Aboriginal" id="aggrieved-identify-as-aboriginal"{{#if selected.aggrievedIdentifiesAs.Aboriginal}} checked{{/if}}>
+							<label for="aggrieved-identify-as-aboriginal">Aboriginal</label>
+						</li>
+						<li>
+							<input type="radio" name="aggrievedIdentifiesAs" value="TorresStraitIslander" id="aggrieved-identify-as-torres-strait-islander"{{#if selected.aggrievedIdentifiesAs.TorresStraitIslander}} checked{{/if}}>
+							<label for="aggrieved-identify-as-torres-strait-islander">Torres Strait Islander</label>
+						</li>
+						<li>
+							<input type="radio" name="aggrievedIdentifiesAs" value="ATSI" id="aggrieved-identify-as-aboriginal-and-tsi"{{#if selected.aggrievedIdentifiesAs.ATSI}} checked{{/if}}>
+							<label for="aggrieved-identify-as-aboriginal-and-tsi">Aboriginal and Torres Strait Islander</label>
+						</li>
+						<li>
+							<input type="radio" name="aggrievedIdentifiesAs" value="No" id="aggrieved-identify-as-no"{{#if selected.aggrievedIdentifiesAs.No}} checked{{/if}}>
+							<label for="aggrieved-identify-as-no">No</label>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+			<li>
+				<fieldset>
+					<legend>
+						<span class="label">{{DoesTheAggrieved}} have a disability, illness or impairment where support and/or special arrangements are required?</span>
+					</legend>
+					<ul class="choices compact">
+						<li>
+							<input type="radio" name="aggrievedHasDisability" value="Yes" id="aggrieved-have-a-disability-yes"{{#if selected.aggrievedHasDisability.Yes}} checked{{/if}}>
+							<label for="aggrieved-have-a-disability-yes">Yes</label>
+						</li>
+						<li>
+							<input type="radio" name="aggrievedHasDisability" value="No" id="aggrieved-have-a-disability-no"{{#if selected.aggrievedHasDisability.No}} checked{{/if}}>
+							<label for="aggrieved-have-a-disability-no">No</label>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+			<li id="dvaf1-aggrieved-disability-description">
+				<label for="aggrieved-disability-details">
+					<span class="label">Please provide details about {{aggrievedYour}} needs</span>
+				</label>
+				<textarea name="aggrievedDisabilityDescription" id="aggrieved-disability-details" rows="3" cols="40" spellcheck="true">{{aggrievedDisabilityDescription}}</textarea>
+			</li>
+			<li>
+				<fieldset>
+					<legend>
+						<span class="label">{{IsTheAggrieved}} under 18 years of age?</span>
+					</legend>
+					<ul class="choices compact">
+						<li>
+							<input type="radio" name="aggrievedUnder18" value="Yes" id="aggrieved-under-18-yes"{{#if selected.aggrievedUnder18.Yes}} checked{{/if}}>
+							<label for="aggrieved-under-18-yes">Yes</label>
+						</li>
+						<li>
+							<input type="radio" name="aggrievedUnder18" value="No" id="aggrieved-under-18-no"{{#if selected.aggrievedUnder18.No}} checked{{/if}}>
+							<label for="aggrieved-under-18-no">No</label>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+			<li class="section" id="dvaf1-aggrieved-parent-details">
+				<fieldset>
+					<legend>
+						<span class="h2">Parent’s details</span>
+						<p>All documents must be given to a parent unless the court orders otherwise.</p>
+					</legend>
+					<ol class="questions">
+						<li>
+							<label for="aggrieved-parent-name">
+								<span class="label">Parent’s name</span>
+							</label>
+							<input name="aggrievedParentName" size="30" type="text" id="aggrieved-parent-name" value="{{aggrievedParentName}}">
+						</li>
+						<li>
+							<fieldset>
+								<legend>
+									<span class="label">Keep {{aggrievedMy}} parent address secret from {{respondentName}}?</span>
+								</legend>
+								<ul class="choices compact">
+									<li>
+										<input type="radio" name="aggrievedParentAddressConfidential" value="Yes" checked="true" id="aggrieved-confidential-parent-address-yes"{{#if selected.aggrievedParentAddressConfidential.Yes}} checked{{/if}}>
+										<label for="aggrieved-confidential-parent-address-yes">Yes</label>
+									</li>
+									<li>
+										<input type="radio" name="aggrievedParentAddressConfidential" value="No" id="aggrieved-confidential-parent-address-no"{{#if selected.aggrievedParentAddressConfidential.No}} checked{{/if}}>
+										<label for="aggrieved-confidential-parent-address-no">No</label>
+									</li>
+								</ul>
+							</fieldset>
+						</li>
+						<li class="confidential confidentialArea3">
+							<label for="aggrieved-parent-address">
+								<span class="label">Parent’s address</span>
+								<small class="hint confidentialArea3Hint">CONFIDENTIAL (not shared with {{respondentName}})</small>
+							</label>
+							<textarea name="aggrievedParentAddress" id="aggrieved-parent-address" rows="3" cols="4" spellcheck="true">{{aggrievedParentAddress}}</textarea>
+						</li>
+					</ol>
+				</fieldset>
+			</li>
+			<li>
+				<ul class="actions">
+					<li><strong><button>Continue</button></strong></li>
+					<li><i>or</i> <a href="#dvaf1-download-template">I want to fill out the rest by hand later</a></li>
 				</ul>
-			</fieldset>
-		</li>
-		<li id="dvaf1-aggrieved-interpreter-language">
-			<label for="aggrieved-language-dialect">
-				<span class="label">Language/Dialect</span>
-			</label>
-			<input type="text" name="aggrievedLanguage" size="20" id="aggrieved-language-dialect" autocomplete="language" value="{{aggrievedLanguage}}">
-		</li>
-
-		<li>
-			<fieldset>
-				<legend>
-					<span class="label">{{DoesTheAggrieved}} identify as</span>
-				</legend>
-				<ul class="choices">
-					<li>
-						<input type="checkbox" name="aggrievedIdentifiesAsAboriginal" value="Yes" id="aggrieved-identify-as-aboriginal"{{#if selected.aggrievedIdentifiesAsAboriginal.Yes}} checked{{/if}}>
-						<label for="aggrieved-identify-as-aboriginal">Aboriginal</label>
-					</li>
-					<li>
-						<input type="checkbox" name="aggrievedIdentifiesAsTorresStraitIslander" value="Yes" id="aggrieved-identify-as-torres-strait-islander"{{#if selected.aggrievedIdentifiesAsTorresStraitIslander.Yes}} checked{{/if}}>
-						<label for="aggrieved-identify-as-torres-strait-islander">Torres Strait Islander</label>
-					</li>
-				</ul>
-			</fieldset>
-		</li>
-
-		<li>
-			<fieldset>
-				<legend>
-					<span class="label">{{DoesTheAggrieved}} have a disability, illness or impairment where support and/or special arrangements are required?</span>
-				</legend>
-				<ul class="choices compact">
-					<li>
-						<input type="radio" name="aggrievedHasDisability" value="No" id="aggrieved-have-a-disability-no"{{#if selected.aggrievedHasDisability.No}} checked{{/if}}>
-						<label for="aggrieved-have-a-disability-no">No</label>
-					</li>
-					<li>
-						<input type="radio" name="aggrievedHasDisability" value="Yes" id="aggrieved-have-a-disability-yes"{{#if selected.aggrievedHasDisability.Yes}} checked{{/if}}>
-						<label for="aggrieved-have-a-disability-yes">Yes</label>
-					</li>
-				</ul>
-			</fieldset>
-		</li>
-		<li id="dvaf1-aggrieved-disability-description">
-			<label for="aggrieved-disability-details">
-				<span class="label">Please provide details about {{aggrievedYour}} needs</span>
-			</label>
-			<textarea name="aggrievedDisabilityDescription" id="aggrieved-disability-details" rows="3" cols="40" spellcheck="true">{{aggrievedDisabilityDescription}}</textarea>
-		</li>
-
-		<li>
-			<fieldset>
-				<legend>
-					<span class="label">{{IsTheAggrieved}} under 18 years of age?</span>
-				</legend>
-				<ul class="choices compact">
-					<li>
-						<input type="radio" name="aggrievedUnder18" value="No" id="aggrieved-under-18-no"{{#if selected.aggrievedUnder18.No}} checked{{/if}}>
-						<label for="aggrieved-under-18-no">No</label>
-					</li>
-					<li>
-						<input type="radio" name="aggrievedUnder18" value="Yes" id="aggrieved-under-18-yes"{{#if selected.aggrievedUnder18.Yes}} checked{{/if}}>
-						<label for="aggrieved-under-18-yes">Yes</label>
-					</li>
-				</ul>
-			</fieldset>
-		</li>
-
-		<li class="section" id="dvaf1-aggrieved-parent-details">
-			<fieldset>
-				<legend>
-					<span class="h2">Parent’s details</span>
-					<p>All documents must be given to a parent unless the court orders otherwise.</p>
-				</legend>
-				<ol class="questions">
-					<li>
-						<label for="aggrieved-parent-name">
-							<span class="label">Parent’s name</span>
-						</label>
-						<input name="aggrievedParentName" size="30" type="text" id="aggrieved-parent-name" value="{{aggrievedParentName}}">
-					</li>
-					<li>
-						<fieldset>
-							<legend>
-								<span class="label">Keep {{aggrievedMy}} parent address secret from {{respondentName}}?</span>
-							</legend>
-							<ul class="choices compact">
-								<li>
-									<input type="radio" name="aggrievedParentAddressConfidential" value="No" id="aggrieved-confidential-parent-address-no"{{#if selected.aggrievedParentAddressConfidential.No}} checked{{/if}}>
-									<label for="aggrieved-confidential-parent-address-no">No</label>
-								</li>
-								<li>
-									<input type="radio" name="aggrievedParentAddressConfidential" value="Yes" id="aggrieved-confidential-parent-address-yes"{{#if selected.aggrievedParentAddressConfidential.Yes}} checked{{/if}}>
-									<label for="aggrieved-confidential-parent-address-yes">Yes</label>
-								</li>
-							</ul>
-						</fieldset>
-					</li>
-					<li>
-						<label for="aggrieved-parent-address">
-							<span class="label">Parent’s address</span>
-							{{#if selected.aggrievedParentAddressConfidential.Yes}}<small class="hint">CONFIDENTIAL (not shared with {{respondentName}})</small>{{/if}}
-						</label>
-						<textarea name="aggrievedParentAddress" id="aggrieved-parent-address" rows="3" cols="4" spellcheck="true">{{aggrievedParentAddress}}</textarea>
-					</li>
-				</ol>
-			</fieldset>
-		</li>
-
-		<li>
-			<ul class="actions">
-				<li><strong><button>Continue</button></strong></li>
-			</ul>
-		</li>
-	</ol>
-</form>
+			</li>
+		</ol>
+	</form>
