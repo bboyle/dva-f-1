@@ -1,240 +1,217 @@
 <h2>Is this application being made on someone else’s behalf?</h2>
-
-{{#if userIsAggrieved}}
-<div class="status info">
-	<h2>Will you be lodging the application at the court?</h2>
-	<p>You can authorise someone else (preferably in writing) to lodge the application on your behalf. This person is called the <dfn>applicant</dfn>.</p>
-	<p>You will need to include their details on the form. Remember that {{respondentName}} receives a copy!</p>
-</div>
-{{else}}
-<div class="status info">
-	<h2>Will you be lodging this application for {{aggrievedName}}?</h2>
-	<p>To lodge an application on behalf of {{aggrievedName}} you need their authorisation (preferably in writing).</p>
-	<p>Or you can prepare these documents for them—they can lodge them at the magistrates court.</p>
-	<p>If you are lodging the application, your details will be included on the form. Remember that {{respondentName}} receives a copy!</p>
-</div>
-{{/if}}
-
-<form class="form" name="formApplicant">
-	<ol class="questions">
-		<li class="group atomic">
-			<fieldset>
-				<legend>
-					<span class="label">Who will lodge the application at the magistrates court?</span>
-				</legend>
-				<ul class="choices">
-					{{#unless userIsAggrieved}}
-					<li>
-						<input type="radio" name="applicationLodgedBy" value="user" id="application-lodged-by-user"{{#if selected.applicationLodgedBy.user}} checked{{/if}}>
-						<label for="application-lodged-by-user">I will lodge the application</label>
-					</li>
-					{{/unless}}
-					<li>
-						<input type="radio" name="applicationLodgedBy" value="aggrieved" id="application-lodged-by-aggrieved"{{#if selected.applicationLodgedBy.aggrieved}} checked{{/if}}>
-						<label for="application-lodged-by-aggrieved">{{#if userIsAggrieved}}I will lodge it myself{{else}}{{TheAggrieved}} will lodge it{{/if}}</label>
-					</li>
-					<li>
-						<input type="radio" name="applicationLodgedBy" value="thirdParty" id="application-lodged-by-another"{{#if selected.applicationLodgedBy.thirdParty}} checked{{/if}}>
-						<label for="application-lodged-by-another">Someone else</label>
-						<small class="hint">You will be asked for their details later.</small>
-					</li>
-					<li>
-						<input type="radio" name="applicationLodgedBy" value="unknown" id="application-lodged-by-unknown"{{#if selected.applicationLodgedBy.unknown}} checked{{/if}}>
-						<label for="application-lodged-by-unknown">Don't know</label>
-						<small class="hint">Leave the applicant details section blank on the form. You will need to complete it when the form is signed and witnessed, before you lodge at court.</small>
-					</li>
-				</ul>
-			</fieldset>
-		</li>
-
-		<li id="dvaf1-applicant-type">
-			<div class="status info">
-				<h2>This section only applies if a person other than {{aggrievedName}} is making the application</h2>
+	{{#if userIsAggrieved}}
+	<div class="status info">
+		<h2>Will you be lodging the application at the court?</h2>
+		<p>You can authorise someone else (preferably in writing) to lodge the application on your behalf. This person is called the <dfn>applicant</dfn>.</p>
+		<p>You will need to include their details on the form. Remember that {{respondentName}} will get a copy.</p>
+	</div>
+	{{else}}
+	<div class="status info">
+		<h2>Will you be lodging this application for {{aggrievedName}}?</h2>
+		<p>To lodge an application on behalf of {{aggrievedName}} you need their authorisation (preferably in writing).</p>
+		<p>Or you can prepare these documents for them—they can lodge them at the magistrates court.</p>
+		<p>If you are lodging the application, your details will be included on the form. Remember that {{respondentName}} receives a copy!</p>
+	</div>
+	{{/if}}
+	<form class="form" name="formApplicant">
+		<ol class="questions">
+			<li class="group atomic">
+				<fieldset>
+					<legend>
+						<span class="label">Who will lodge the application at the magistrates court?</span>
+					</legend>
+					<ul class="choices">
+						{{#unless userIsAggrieved}}
+						<li>
+							<input type="radio" name="applicationLodgedBy" value="user" id="application-lodged-by-user"{{#if selected.applicationLodgedBy.user}} checked{{/if}}>
+							<label for="application-lodged-by-user">I will lodge the application</label>
+						</li>
+						{{/unless}}
+						<li>
+							<input type="radio" name="applicationLodgedBy" value="aggrieved" id="application-lodged-by-aggrieved"{{#if selected.applicationLodgedBy.aggrieved}} checked{{/if}}>
+							<label for="application-lodged-by-aggrieved">{{#if userIsAggrieved}}I will lodge it myself{{else}}{{TheAggrieved}} will lodge it{{/if}}</label>
+						</li>
+						<li>
+							<input type="radio" name="applicationLodgedBy" value="thirdParty" id="application-lodged-by-another"{{#if selected.applicationLodgedBy.thirdParty}} checked{{/if}}>
+							<label for="application-lodged-by-another">Someone else</label>
+							<small class="hint">You will be asked for their details later.</small>
+						</li>
+						<li>
+							<input type="radio" name="applicationLodgedBy" value="unknown" id="application-lodged-by-unknown"{{#if selected.applicationLodgedBy.unknown}} checked{{/if}}>
+							<label for="application-lodged-by-unknown">Don't know</label>
+							<small class="hint">Leave the applicant details section blank on the form. You will need to complete it when the form is signed and witnessed, before you lodge at court.</small>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+			<li id="dvaf1-applicant-type">
+				<div class="status info">
+					<p>This section only applies if a person other than {{aggrievedName}} is making the application.</p>
+				</div>
+					<ol class="questions">
+						<li>
+							<fieldset>
+								<legend>
+									<span class="label">Which of the following describes {{#if selected.applicationLodgedBy.user}}you{{else}}the applicant{{/if}}?</span>
+									<small class="hint"></small>
+								</legend>
+								<ul class="choices">
+									<li>
+										<input type="radio" name="applicantPart" value="A" id="applicant-part-a"{{#if selected.applicantPart.A}} checked{{/if}}>
+										<label for="applicant-part-a">A person {{#if userIsAggrieved}}I authorised{{else}}being authorised by {{aggrievedName}}{{/if}}</label>
+									</li>
+									<li>
+										<input type="radio" name="applicantPart" value="B" id="applicant-part-b"{{#if selected.applicantPart.B}} checked{{/if}}>
+										<label for="applicant-part-b">A person acting under another Act for {{aggrievedMe}}</label>
+									</li>
+									<li>
+										<input type="radio" name="applicantPart" value="D" id="applicant-part-d"{{#if selected.applicantPart.D}} checked{{/if}}>
+										<label for="applicant-part-d">A party to a child protection proceeding</label>
+									</li>
+								</ul>
+							</fieldset>
+						</li>
+					</ol>
+			</li>
+			<li class="section" id="dvaf1-applicant-type-details">
 				<ol class="questions">
+					<li class="atomic group">
+						<fieldset>
+							<legend>
+								<span class="label">Name</span>
+							</legend>
+							<ol class="questions compact">
+								<li>
+									<label for="applicant-name-given">
+										<span class="label">Given name</span>
+									</label>
+									<input name="applicantNameGiven" size="15" type="text" id="applicant-name-given" autocomplete="given-name" value="{{applicantNameGiven}}">
+								</li>
+								<li>
+									<label for="applicant-name-family">
+										<span class="label">Family name</span>
+									</label>
+									<input name="applicantNameFamily" size="15" type="text" id="applicant-name-family" autocomplete="family-name" value="{{applicantNameFamily}}">
+								</li>
+							</ol>
+						</fieldset>
+					</li>
 					<li>
 						<fieldset>
 							<legend>
-								<span class="label">Which of the following describes {{#if selected.applicationLodgedBy.user}}you{{else}}the applicant{{/if}}?</span>
-								<small class="hint"></small>
+								<span class="label">Keep address secret from {{respondentName}}?</span>
+							</legend>
+							<ul class="choices compact">
+								<li>
+									<input type="radio" name="applicantConfidentialAddress" value="Yes" checked="true" id="applicant-confidential-address-yes"{{#if selected.applicantConfidentialAddress.Yes}} checked{{/if}}>
+									<label for="applicant-confidential-address-yes">Yes</label>
+								</li>
+								<li>
+									<input type="radio" name="applicantConfidentialAddress" value="No" id="applicant-confidential-address-no"{{#if selected.applicantConfidentialAddress.No}} checked{{/if}}>
+									<label for="applicant-confidential-address-no">No</label>
+								</li>
+							</ul>
+						</fieldset>
+					</li>
+					<li class="confidential confidentialArea4">
+						<label for="applicant-address">
+							<span class="label">Address</span>
+							<small class="hint confidentialArea4Hint">CONFIDENTIAL (not shared with {{respondentName}})</small>
+						</label>
+						<textarea id="applicant-address" name="applicantAddress" rows="3" cols="30" autocomplete="street-address" spellcheck="true">{{applicantAddress}}</textarea>
+					<li>
+					<li>
+						<label for="applicant-gender">
+							<span class="label">Gender</span>
+						</label>
+						<input type="text" name="applicantGenderIdentity" id="applicant-gender" autocomplete="sex" list="datalist-gender" value="{{applicantGenderIdentity}}">
+					</li>
+					<li id="dvaf1-application-partA">
+						<fieldset>
+							<legend>
+								<span class="label">Is the authorisation of the aggrieved in writing?</span>
+							</legend>
+							<ul class="choices compact">
+								<li>
+									<input type="radio" name="applicantAuthorisedInWriting" value="No" id="application-authorised-no"{{#if selected.applicantAuthorisedInWriting.No}} checked{{/if}}>
+									<label for="application-authorised-no">No</label>
+								</li>
+								<li>
+									<input type="radio" name="applicantAuthorisedInWriting" value="Yes" id="application-authorised-yes"{{#if selected.applicantAuthorisedInWriting.Yes}} checked{{/if}}>
+									<label for="application-authorised-yes">Yes</label>
+								</li>
+							</ul>
+						</fieldset>
+					</li>
+					<li id="dvaf1-application-authorisation-received">
+						<label for="application-authorisation-received">
+							<span class="label">How is authorisation communicated from {{aggrievedName}}?</span>
+						</label>
+						<textarea name="applicantAuthorisedDescription" rows="2" cols="40" id="application-authorisation-received" spellcheck="true">{{applicantAuthorisedDescription}}</textarea>
+					</li>
+					<li id="dvaf1-application-partB">
+						<fieldset>
+							<legend>
+								<span class="label">{{TheApplicantIs}}:</span>
+							</legend>
+						<ul class="choices">
+							<li>
+								<input type="radio" name="applicantActingAs" value="Guardian" id="applicant-acting-a-guardian"{{#if selected.applicantActingAs.Guardian}} checked{{/if}}>
+								<label for="applicant-acting-a-guardian">A guardian</label>
+							</li>
+							<li>
+								<input type="radio" name="applicantActingAs" value="AdultGuardian" id="applicant-acting-adult-guardian"{{#if selected.applicantActingAs.AdultGuardian}} checked{{/if}}>
+								<label for="applicant-acting-adult-guardian">Adult Guardian</label>
+							</li>
+							<li>
+								<input type="radio" name="applicantActingAs" value="EnduringPowerOfAttorney" id="applicant-acting-enduring-power-of-attorney"{{#if selected.applicantActingAs.EnduringPowerOfAttorney}} checked{{/if}}>
+								<label for="applicant-acting-enduring-power-of-attorney">Enduring power of attorney</label>
+							</li>
+							<li>
+								<input type="radio" name="applicantActingAs" value="Other" id="applicant-acting-other"{{#if selected.applicantActingAs.Other}} checked{{/if}}>
+								<label for="applicant-acting-other">Other</label>
+							</li>
+						</ul>
+						</fieldset>
+					</li>
+					<li id="dvaf1-application-partB-other">
+						<label for="applicant-acting-other-specified">
+							<span class="label">Please specify</span>
+						</label>
+						<input type="text" name="applicantActingAsDescription" size="40" id="applicant-acting-other-specified" value="{{applicantActingAsDescription}}">
+					</li>
+					<li id="dvaf1-application-partD">
+						<fieldset>
+							<legend>
+								<span class="label">{{TheApplicantIs}}:</span>
 							</legend>
 							<ul class="choices">
 								<li>
-									<input type="radio" name="applicantPart" value="A" id="applicant-part-a"{{#if selected.applicantPart.A}} checked{{/if}}>
-									<label for="applicant-part-a">A person {{#if userIsAggrieved}}I authorised{{else}}being authorised by {{aggrievedName}}{{/if}}</label>
+									<input type="checkbox" name="applicantChildProtectionPartyChild" id="applicant-child-protection-party-child" value="Yes"{{#if selected.applicantChildProtectionPartyChild.Yes}} checked{{/if}}>
+									<label for="applicant-child-protection-party-child">A child for whom an order is sought in a child protection proceeding</label>
 								</li>
 								<li>
-									<input type="radio" name="applicantPart" value="B" id="applicant-part-b"{{#if selected.applicantPart.B}} checked{{/if}}>
-									<label for="applicant-part-b">A person acting under another Act for {{aggrievedMe}}</label>
+									<input type="checkbox" name="applicantChildProtectionPartyLegalRepresentative" id="applicant-child-protection-party-legal-representative" value="Yes"{{#if selected.applicantChildProtectionPartyLegalRepresentative.Yes}} checked{{/if}}>
+									<label for="applicant-child-protection-party-legal-representative">A separate legal representative for a child for whom an order is sought in a child protection proceeding</label>
 								</li>
- 								<li>
-									<input type="radio" name="applicantPart" value="D" id="applicant-part-d"{{#if selected.applicantPart.C}} checked{{/if}}>
-									<label for="applicant-part-d">A party to a child protection proceeding</label>
+								<li>
+									<input type="checkbox" name="applicantChildProtectionPartyApplicant" id="applicant-child-protection-party-applicant" value="Yes"{{#if selected.applicantChildProtectionPartyApplicant.Yes}} checked{{/if}}>
+									<label for="applicant-child-protection-party-applicant">An applicant in a child protection proceeding</label>
+								</li>
+								<li>
+									<input type="checkbox" name="applicantChildProtectionPartyRespondent" id="applicant-child-protection-party-respondent" value="Yes"{{#if selected.applicantChildProtectionPartyRespondent.Yes}} checked{{/if}}>
+									<label for="applicant-child-protection-party-respondent">A respondent in a child protection proceeding</label>
 								</li>
 							</ul>
 						</fieldset>
 					</li>
 				</ol>
-			</div>
-		</li>
-
-		<li class="section" id="dvaf1-applicant-type-details">
-			<header>
-				<h3>
-					{{#if selected.applicantPart.A}}
-						A person being authorised by {{aggrievedName}}
-					{{else if selected.applicantPart.B}}
-						A person acting under another Act for {{theAggrieved}}
-					{{else}}
-						A party to a child protection proceeding
-					{{/if}}
-				</h3>
-			</header>
-			<ol class="questions">
-				<li class="atomic group">
-					<fieldset>
-						<legend>
-							<span class="label">Name</span>
-						</legend>
-						<ol class="questions compact">
-							<li>
-								<label for="applicant-name-given">
-									<span class="label">Given name</span>
-								</label>
-								<input name="applicantNameGiven" size="15" type="text" id="applicant-name-given" autocomplete="given-name" value="{{applicantNameGiven}}">
-							</li>
-							<li>
-								<label for="applicant-name-family">
-									<span class="label">Family name</span>
-								</label>
-								<input name="applicantNameFamily" size="15" type="text" id="applicant-name-family" autocomplete="family-name" value="{{applicantNameFamily}}">
-							</li>
-						</ol>
-					</fieldset>
-				</li>
-
-				<li>
-					<fieldset>
-						<legend>
-							<span class="label">Keep address secret from {{respondentName}}?</span>
-						</legend>
-						<ul class="choices compact">
-							<li>
-								<input type="radio" name="applicantConfidentialAddress" value="No" id="applicant-confidential-address-no"{{#if selected.applicantConfidentialAddress.No}} checked{{/if}}>
-								<label for="applicant-confidential-address-no">No</label>
-							</li>
-							<li>
-								<input type="radio" name="applicantConfidentialAddress" value="Yes" id="applicant-confidential-address-yes"{{#if selected.applicantConfidentialAddress.Yes}} checked{{/if}}>
-								<label for="applicant-confidential-address-yes">Yes</label>
-							</li>
-						</ul>
-					</fieldset>
-				</li>
-
-				<li>
-					<label for="applicant-address">
-						<span class="label">Address</span>
-						<!-- TODO <small class="hint">CONFIDENTIAL (not shared with {{respondentName}})</small> -->
-					</label>
-					<textarea id="applicant-address" name="applicantAddress" rows="3" cols="30" autocomplete="street-address" spellcheck="true">{{applicantAddress}}</textarea>
-				<li>
-				<li>
-					<label for="applicant-gender">
-						<span class="label">Gender</span>
-					</label>
-					<input type="text" name="applicantGenderIdentity" id="applicant-gender" autocomplete="sex" list="datalist-gender" value="{{applicantGenderIdentity}}">
-				</li>
-
-				<li id="dvaf1-application-partA">
-					<fieldset>
-						<legend>
-							<span class="label">Is the authorisation of the aggrieved in writing?</span>
-						</legend>
-						<ul class="choices compact">
-							<li>
-								<input type="radio" name="applicantAuthorisedInWriting" value="No" id="application-authorised-no"{{#if selected.applicantAuthorisedInWriting.No}} checked{{/if}}>
-								<label for="application-authorised-no">No</label>
-							</li>
-							<li>
-								<input type="radio" name="applicantAuthorisedInWriting" value="Yes" id="application-authorised-yes"{{#if selected.applicantAuthorisedInWriting.Yes}} checked{{/if}}>
-								<label for="application-authorised-yes">Yes</label>
-							</li>
-						</ul>
-					</fieldset>
-				</li>
-
-				<li id="dvaf1-application-authorisation-received">
-					<label for="application-authorisation-received">
-						<span class="label">How is authorisation communicated from {{aggrievedName}}?</span>
-					</label>
-					<textarea name="applicantAuthorisedDescription" rows="2" cols="40" id="application-authorisation-received" spellcheck="true">{{applicantAuthorisedDescription}}</textarea>
-				</li>
-
-
-				<li id="dvaf1-application-partB">
-					<fieldset>
-						<legend>
-							<span class="label">{{TheApplicantIs}}:</span>
-						</legend>
-					<ul class="choices">
-						<li>
-							<input type="radio" name="applicantActingAs" value="Guardian" id="applicant-acting-a-guardian"{{#if selected.applicantActingAs.Guardian}} checked{{/if}}>
-							<label for="applicant-acting-a-guardian">A guardian</label>
-						</li>
-						<li>
-							<input type="radio" name="applicantActingAs" value="AdultGuardian" id="applicant-acting-adult-guardian"{{#if selected.applicantActingAs.AdultGuardian}} checked{{/if}}>
-							<label for="applicant-acting-adult-guardian">Adult Guardian</label>
-						</li>
-						<li>
-							<input type="radio" name="applicantActingAs" value="EnduringPowerOfAttorney" id="applicant-acting-enduring-power-of-attorney"{{#if selected.applicantActingAs.EnduringPowerOfAttorney}} checked{{/if}}>
-							<label for="applicant-acting-enduring-power-of-attorney">Enduring power of attorney</label>
-						</li>
-						<li>
-							<input type="radio" name="applicantActingAs" value="Other" id="applicant-acting-other"{{#if selected.applicantActingAs.Other}} checked{{/if}}>
-							<label for="applicant-acting-other">Other</label>
-						</li>
-					</ul>
-					</fieldset>
-				</li>
-
-				<li id="dvaf1-application-partB-other">
-					<label for="applicant-acting-other-specified">
-						<span class="label">Please specify</span>
-					</label>
-					<input type="text" name="applicantActingAsDescription" size="40" id="applicant-acting-other-specified" value="{{applicantActingAsDescription}}">
-				</li>
-
-				<li id="dvaf1-application-partD">
-					<fieldset>
-						<legend>
-							<span class="label">{{TheApplicantIs}}:</span>
-						</legend>
-						<ul class="choices">
-							<li>
-								<input type="checkbox" name="applicantChildProtectionPartyChild" id="applicant-child-protection-party-child" value="Yes"{{#if selected.applicantChildProtectionPartyChild.Yes}} checked{{/if}}>
-								<label for="applicant-child-protection-party-child">a child for whom an order is sought in a child protection proceeding</label>
-							</li>
-							<li>
-								<input type="checkbox" name="applicantChildProtectionPartyLegalRepresentative" id="applicant-child-protection-party-legal-representative" value="Yes"{{#if selected.applicantChildProtectionPartyLegalRepresentative.Yes}} checked{{/if}}>
-								<label for="applicant-child-protection-party-legal-representative">a separate legal representative for a child for whom an order is sought in a child protection proceeding</label>
-							</li>
-							<li>
-								<input type="checkbox" name="applicantChildProtectionPartyApplicant" id="applicant-child-protection-party-applicant" value="Yes"{{#if selected.applicantChildProtectionPartyApplicant.Yes}} checked{{/if}}>
-								<label for="applicant-child-protection-party-applicant">an applicant in a child protection proceeding</label>
-							</li>
-							<li>
-								<input type="checkbox" name="applicantChildProtectionPartyRespondent" id="applicant-child-protection-party-respondent" value="Yes"{{#if selected.applicantChildProtectionPartyRespondent.Yes}} checked{{/if}}>
-								<label for="applicant-child-protection-party-respondent">a respondent in a child protection proceeding</label>
-							</li>
-						</ul>
-					</fieldset>
-				</li>
-			</ol>
-		</li>
-
-		<li>
-			<ul class="actions">
-				<li><strong><button>Continue</button></strong></li>
-			</ul>
-		</li>
-	</ol>
-</form>
+			</li>
+			<li>
+				<ul class="actions">
+					<li><strong><button>Continue</button></strong></li>
+					<li><i>or</i> <a href="#dvaf1-download-template">I want to fill out the rest by hand later</a></li>
+				</ul>
+			</li>
+		</ol>
+	</form>
