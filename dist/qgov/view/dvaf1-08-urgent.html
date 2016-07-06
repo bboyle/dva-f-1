@@ -1,104 +1,100 @@
 <div class="status info">
-	<h2>Do you require urgent protection?</h2>
-	<p>The hearing of an application for a protection order will not be held immediately. It may be a few weeks until your court date.</p>
-	<p>{{RespondentName true}} has the right to get a copy of the application so that {{respondentThey}} {{respondentTheyKnow}} what has been said and can respond in court. Police will serve the respondent with a copy of the application.</p>
-	<p>You can ask the clerk of the court to arrange an earlier court date (before {{respondentName}} has been served)
-	so the magistrate can consider whether to make a temporary protection order.</p>
-	<p>You will still need to go to court later. {{RespondentName}} will be given a copy of your application which includes a notice to appear in court at the same time.
-	A temporary protection order will cover {{aggrievedYou}} until then.</p>
-</p>
-</div>
-
-<form class="form" name="formUrgent">
-	<ol class="questions">
-		<li>
-			<fieldset>
-				<legend>
-					<span class="label">Has {{respondentName}} committed domestic and/or family violence recently?</span>
-				</legend>
-				<ul class="choices compact">
-					<li>
-						<input type="radio" id="abuse-recent-no" name="abuseRecent" value="No"{{#if selected.abuseRecent.No}} checked{{/if}}>
-						<label for="abuse-recent-no">No</label>
-					</li>
-					<li>
-						<input type="radio" id="abuse-recent-yes" name="abuseRecent" value="Yes"{{#if selected.abuseRecent.Yes}} checked{{/if}}>
-						<label for="abuse-recent-yes">Yes</label>
-					</li>
+		<h2>Do you require urgent protection?</h2>
+		<p>The hearing of an application for a protection order will not be held immediately. It may be a few weeks until your court date.</p>
+		<p>{{RespondentName true}} has the right to get a copy of the application so that {{respondentThey}} {{respondentTheyKnow}} what has been said and can respond in court. Police will serve the respondent with a copy of the application.</p>
+		<p>You can ask the clerk of the court to arrange an earlier court date (before {{respondentName}} has been served) so the magistrate can consider whether to make a temporary protection order.</p>
+		<p>You will still need to go to court later. {{RespondentName}} will be given a copy of your application which includes a notice to appear in court at the same time.	A temporary protection order will cover {{aggrievedYou}} until then.</p>
+	</div>
+	<form class="form" name="formUrgent">
+		<ol class="questions">
+			<li>
+				<fieldset>
+					<legend>
+						<span class="label">Has {{respondentName}} committed domestic and/or family violence recently?</span>
+					</legend>
+					<ul class="choices compact">
+						<li>
+							<input type="radio" id="abuse-recent-yes" name="abuseRecent" value="Yes"{{#if selected.abuseRecent.Yes}} checked{{/if}}>
+							<label for="abuse-recent-yes">Yes</label>
+						</li>
+						<li>
+							<input type="radio" id="abuse-recent-no" name="abuseRecent" value="No"{{#if selected.abuseRecent.No}} checked{{/if}}>
+							<label for="abuse-recent-no">No</label>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+			<li>
+				<fieldset>
+					<legend>
+						<span class="label">Are you concerned {{aggrievedYou}} will be harmed again before {{aggrievedYour}} court date?</span>
+						<small class="hint">It could be a few weeks before the court will hear your application.</small>
+					</legend>
+					<ul class="choices compact">
+						<li>
+							<input type="radio" id="abuse-fear-immediate-future-yes" name="abuseImmediateFear" value="Yes"{{#if selected.abuseImmediateFear.No}} checked{{/if}}>
+							<label for="abuse-fear-immediate-future-yes">Yes</label>
+						</li>
+						<li>
+							<input type="radio" id="abuse-fear-immediate-future-no" name="abuseImmediateFear" value="No"{{#if selected.abuseImmediateFear.No}} checked{{/if}}>
+							<label for="abuse-fear-immediate-future-no">No</label>
+						</li>
+					</ul>
+				</fieldset>
+			<li>
+				<fieldset>
+					<legend>
+						<span class="label">Do you think {{respondentName}} will harm {{aggrievedYou}} once {{respondentTheyReceive}} a copy of this application?</span>
+					</legend>
+					<ul class="choices compact">
+						<li>
+							<input type="radio" id="abuse-fear-application-retaliation-yes" name="abuseApplicationRetaliation" value="Yes"{{#if selected.abuseApplicationRetaliation.Yes}} checked{{/if}}>
+							<label for="abuse-fear-application-retaliation-yes">Yes</label>
+						</li>
+						<li>
+							<input type="radio" id="abuse-fear-application-retaliation-no" name="abuseApplicationRetaliation" value="No"{{#if selected.abuseApplicationRetaliation.Yes}} checked{{/if}}>
+							<label for="abuse-fear-application-retaliation-no">No</label>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+			<li id="dvaf1-tpo-info">
+				<div class="status info">
+					<h2>Is there another reason why urgent protection is required?</h2>
+					<p>It is your choice to apply for a temporary protection order.
+					However, you must have clear reasons for the magistrate to grant this
+					without giving {{respondentName}} a chance to have {{respondentTheir}} say.</p>
+				</div>
+			</li>
+			<li>
+				<fieldset>
+					<legend>
+						<span class="label">Do you want to apply for a temporary protection order?</span>
+					</legend>
+					<ul class="choices compact">
+						<li>
+							<input type="radio" name="tpoApply" id="tpo-apply-yes" value="Yes"{{#if selected.tpoApply.Yes}} checked{{/if}}>
+							<label for="tpo-apply-yes">Yes</label>
+						</li>
+						<li>
+							<input type="radio" name="tpoApply" id="tpo-apply-no" value="No"{{#if selected.tpoApply.No}} checked{{/if}}>
+							<label for="tpo-apply-no">No</label>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+			<li id="dvaf1-tpo-grounds">
+				<label for="tpo">
+					<span class="label">Tell us why a temporary protection order is necessary</span>
+					<small class="hint">Describe domestic violence that has happened recently and why you are concerned about {{theAggrieveds}} immediate safety.</small>
+				</label>
+				<textarea id="tpo-grounds" name="tpoGrounds" cols="40" rows="10" spellcheck="true">{{tpoGrounds}}</textarea>
+			</li>
+			<li>
+				<ul class="actions">
+					<li><strong><button>Continue</button></strong></li>
+					<li><i>or</i> <a href="#dvaf1-download-template">I want to fill out the rest by hand later</a></li>
 				</ul>
-			</fieldset>
-		</li>
-		<li>
-			<fieldset>
-				<legend>
-					<span class="label">Are you concerned {{aggrievedYou}} will be harmed again before {{ interview.aggrieved.pronoun.your }} court date?</span>
-					<small class="hint">It could be a few weeks before the court will hear your application.</small>
-				</legend>
-				<ul class="choices compact">
-					<li>
-						<input type="radio" id="abuse-fear-immediate-future-no" name="abuseImmediateFear" value="No"{{#if selected.abuseImmediateFear.No}} checked{{/if}}>
-						<label for="abuse-fear-immediate-future-no">No</label>
-					</li>
-					<li>
-						<input type="radio" id="abuse-fear-immediate-future-yes" name="abuseImmediateFear" value="Yes"{{#if selected.abuseImmediateFear.No}} checked{{/if}}>
-						<label for="abuse-fear-immediate-future-yes">Yes</label>
-					</li>
-				</ul>
-			</fieldset>
-		<li>
-			<fieldset>
-				<legend>
-					<span class="label">Do you think {{respondentName}} will harm {{aggrievedYou}} once {{respondentTheyReceive}} a copy of this application?</span>
-				</legend>
-				<ul class="choices compact">
-					<li>
-						<input type="radio" id="abuse-fear-application-retaliation-no" name="abuseApplicationRetaliation" value="No"{{#if selected.abuseApplicationRetaliation.Yes}} checked{{/if}}>
-						<label for="abuse-fear-application-retaliation-no">No</label>
-					</li>
-					<li>
-						<input type="radio" id="abuse-fear-application-retaliation-yes" name="abuseApplicationRetaliation" value="Yes"{{#if selected.abuseApplicationRetaliation.Yes}} checked{{/if}}>
-						<label for="abuse-fear-application-retaliation-yes">Yes</label>
-					</li>
-				</ul>
-			</fieldset>
-		</li>
-		<li id="dvaf1-tpo-info">
-			<div class="status info">
-				<h2>Is there another reason why urgent protection is required?</h2>
-				<p>It is your choice to apply for a temporary protection order.
-				However, you must have clear reasons for the magistrate to grant this
-				without giving {{respondentName}} a chance to have {{respondentTheir}} say.</p>
-			</div>
-		</li>
-		<li>
-			<fieldset>
-				<legend>
-					<span class="label">Do you want to apply for a temporary protection order?</span>
-				</legend>
-				<ul class="choices compact">
-					<li>
-						<input type="radio" name="tpoApply" id="tpo-apply-no" value="No"{{#if selected.tpoApply.No}} checked{{/if}}>
-						<label for="tpo-apply-no">No</label>
-					</li>
-					<li>
-						<input type="radio" name="tpoApply" id="tpo-apply-yes" value="Yes"{{#if selected.tpoApply.Yes}} checked{{/if}}>
-						<label for="tpo-apply-yes">Yes</label>
-					</li>
-				</ul>
-			</fieldset>
-		</li>
-		<li id="dvaf1-tpo-grounds">
-			<label for="tpo">
-				<span class="label">Tell us why a temporary protection order is necessary</span>
-				<small class="hint">Describe domestic violence that has happened recently and why you are concerned about {{theAggrieveds}} immediate safety.</small>
-			</label>
-			<textarea id="tpo-grounds" name="tpoGrounds" cols="40" rows="10" spellcheck="true">{{tpoGrounds}}</textarea>
-		</li>
-
-		<li>
-			<ul class="actions">
-				<li><strong><button>Continue</button></strong></li>
-			</ul>
-		</li>
-	</ol>
-</form>
+			</li>
+		</ol>
+	</form>
