@@ -1,163 +1,115 @@
 <div class="status info">
-	<h2>Preparing for court</h2>
-
-	<p>{{RespondentName true}} will be given a copy of the application which includes a notice to appear in court at the same time.</p>
-
-	<p>Courthouses have safety measures in place such as safe rooms (or other rooms or areas where {{theAggrievedYou}} can wait separately).
-	   Most courthouses also have security officers and security cameras.</p>
-	<p>Court staff follow domestic violence protocols which place safety as top priority for all people seeking protection from domestic violence.</p>
-</div>
-
-<form class="form" name="formCourt">
-	<ol class="questions">
-		<li class="group">
-			<fieldset>
-				<legend>
-					<span class="label">Are you concerned that {{ interview.aggrieved.pronoun.you}} may be in danger when going to court?</span>
-				</legend>
-				<ul class="choices compact">
-					<li>
-						<input type="radio" name="aggrievedCourtSafetyConcern" value="No" id="aggrieved-court-safety-concern-no"{{#if selected.aggrievedCourtSafetyConcern.Yes}} checked{{/if}}>
-						<label for="aggrieved-court-safety-concern-no">No</label>
-					</li>
-					<li>
-						<input type="radio" name="aggrievedCourtSafetyConcern" value="Yes" id="aggrieved-court-safety-concern-yes"{{#if selected.aggrievedCourtSafetyConcern.Yes}} checked{{/if}}>
-						<label for="aggrieved-court-safety-concern-yes">Yes</label>
-					</li>
+		<h2>Preparing for court</h2>
+		<p>{{RespondentName true}} will be given a copy of the application which includes a notice to appear in court at the same time.</p>
+		<p>Courthouses have safety measures in place such as safe rooms (or other rooms or areas where {{theAggrievedYou}} can wait separately). Most courthouses also have security officers and security cameras.</p>
+		<p>Court staff follow domestic violence protocols which place safety as top priority for all people seeking protection from domestic violence.</p>
+	</div>
+	<form class="form" name="formCourt">
+		<ol class="questions">
+			<li class="group">
+				<fieldset>
+					<legend>
+						<span class="label">Are you concerned that {{ interview.aggrieved.pronoun.you}} may be in danger when going to court?</span>
+					</legend>
+					<ul class="choices compact">
+						<li>
+							<input type="radio" name="aggrievedCourtSafetyConcern" value="Yes" id="aggrieved-court-safety-concern-yes"{{#if selected.aggrievedCourtSafetyConcern.Yes}} checked{{/if}}>
+							<label for="aggrieved-court-safety-concern-yes">Yes</label>
+						</li>
+						<li>
+							<input type="radio" name="aggrievedCourtSafetyConcern" value="No" id="aggrieved-court-safety-concern-no"{{#if selected.aggrievedCourtSafetyConcern.Yes}} checked{{/if}}>
+							<label for="aggrieved-court-safety-concern-no">No</label>
+						</li>
+					</ul>
+				</fieldset>
+			</li>
+			<li id="dvaf1-court-safety-info">
+				<div class="status info">
+					<h2>Complete a court safety form</h2>
+					<p>Give this form to court staff when you lodge the application.</p>
+					<p>The court staff will copy the form and give it to the security officer, domestic violence protection worker, registrar and any other relevant court staff to arrange for your safety. It will also be placed on your court file, but will not be part of the application.</p>
+					<p>{{RespondentName}} will not see this form.</p>
+				</div>
+			</li>
+			<li id="dvaf1-court-safety-attending" class="confidential">
+				<label for="court-safety-attending">
+					<span class="label">Are you concerned that {{theAggrievedThey}} may be in danger while attending court?</span>
+					<small class="hint">CONFIDENTIAL (not shared with {{respondentName}})</small>
+				</label>
+				<textarea id="court-safety-attending" name="aggrievedCourtSafetyAttending" spellcheck="true" cols="40" rows="10">{{aggrievedCourtSafetyAttending}}</textarea>
+			</li>
+			<li id="dvaf1-court-safety-leaving" class="confidential">
+				<label for="court-safety-leaving">
+					<span class="label">Are you concerned about {{theAggrievedYour}} safety when leaving the court building?</span>
+					<small class="hint">CONFIDENTIAL (not shared with {{respondentName}})</small>
+				</label>
+				<textarea id="court-safety-leaving" name="aggrievedCourtSafetyLeaving" spellcheck="true" cols="40" rows="10">{{aggrievedCourtSafetyAttending}}</textarea>
+			</li>
+			<li>
+				<p>If your safety concerns change for future court dates, you should complete another safety form for court staff.</p>
+			</li>
+			{{#if nearby.jp}}
+			<h2>Signing your application with a JP, C.dec or solicitor</h2>
+			<li>
+				<div class="status info">
+					<p>Once you download and print your application for a protection order, the applicant must sign it in front of a JP, C.dec or a solicitor before lodging it at a courthouse.</p>
+					<p>Most courthouses have JPs available at certain times. However, JPs and C.decs are also available in other locations too.</p>
+					<h3>JPs near {{theAggrieveds}} postal address</h3>
+					<table class="serviceTables">
+					<tbody>
+						{{#each nearby.jp}}
+						<tr>
+							<td>
+								<strong>{{Title}}</strong><br>
+								<small>{{[Address 1]}}
+								{{[Address 2]}}
+								{{Suburb}}
+								{{Postcode}}<br>
+								<a target="_blank" href="https://maps.google.com.au/?ll={{Latitude}},{{Longitude}}&amp;q={{Title}}" title="Map to {{Title}}">view map</a></small>
+								<p>{{Phone}}</p>
+								<p>{{[Operating hours]}}</p>
+							</td>
+						</tr>
+						{{/each}}
+					</tbody>
+				</table>
+				</div>
+			{{/if}}
+			{{#if nearby.court}}
+			<h2>Lodging your application at a nearby courthouse</h2>
+			<li>
+				<div class="status info">
+					<p>The applicant needs to take the forms (that you will download from this online form) to a magistrates court.</p>
+					<h3>Magistrates courts near {{theAggrieveds}} postal address</h3>
+					<table class="serviceTables">
+					<tbody>
+						{{#each nearby.court}}
+						<tr>
+							<td>
+								<strong>{{Title}}</strong><br>
+								<small>{{[Address 1]}}
+								{{[Address 2]}}
+								{{Suburb}}
+								{{Postcode}}<br>
+								<a target="_blank" href="https://maps.google.com.au/?ll={{Latitude}},{{Longitude}}&amp;q={{Title}}" title="Map to {{Title}}">view map</a></small>
+								<p>{{Phone}}</p>
+							</td>
+							<td>{{hours}}</td>
+							<td>{{DV}}</td>
+						</tr>
+						{{/each}}
+					</tbody>
+				</table>
+				</div>	
+			</li>
+			<li>
+				Based on {{aggrievedYour}} address: {{aggrievedAddress}}
+			</li>
+			{{/if}}
+			<li>
+				<ul class="actions">
+					<li><strong><button>Continue</button></strong></li>
 				</ul>
-			</fieldset>
-		</li>
-
-		<li id="dvaf1-court-safety-info">
-			<div class="status info">
-				<h2>Complete a court safety form</h2>
-				<p>Give this form to court staff when you lodge the application.</p>
-				<p>The court staff will copy the form and give it to the security officer, domestic violence protection worker,
-				   registrar and any other relevant court staff to arrange for your safety.
-				   It will also be placed on your court file, but will not be part of the application.</p>
-				<p>{{RespondentName}} will not see this form.</p>
-			</div>
-		</li>
-
-		<li id="dvaf1-court-safety-attending" class="confidential">
-			<label for="court-safety-attending">
-				<span class="label">Are you concerned that {{theAggrievedThey}} may be in danger while attending court?</span>
-				<small class="hint">CONFIDENTIAL (not shared with {{respondentName}})</small>
-			</label>
-			<textarea id="court-safety-attending" name="aggrievedCourtSafetyAttending" spellcheck="true" cols="40" rows="10">{{aggrievedCourtSafetyAttending}}</textarea>
-		</li>
-		<li id="dvaf1-court-safety-leaving" class="confidential">
-			<label for="court-safety-leaving">
-				<span class="label">Are you concerned about {{theAggrievedYour}} safety when leaving the court building?</span>
-				<small class="hint">CONFIDENTIAL (not shared with {{respondentName}})</small>
-			</label>
-			<textarea id="court-safety-leaving" name="aggrievedCourtSafetyLeaving" spellcheck="true" cols="40" rows="10">{{aggrievedCourtSafetyAttending}}</textarea>
-		</li>
-
-		<li>
-			<p>If your safety concerns change for future court dates, you should complete another safety form for court staff.</p>
-		</li>
-
-		{{#if nearby.jp}}
-		<li>
-			<div class="status info">
-				<h2>Nearby JPs</h2>
-				<ul>
-					{{#each nearby.jp}}
-					<li ng-repeat="jp in interview.nearby.jp">
-						<h3>{{Title}}</h3>
-						<p>{{[Address 1]}}, {{[Address 2]}}, {{Suburb}} {{Postcode}}
-						<a target="_blank" href="https://maps.google.com.au/?ll={{Latitude}},{{Longitude}}&amp;q={{Title}}">view map</a></p>
-						<p>{{Phone}}</p>
-						<p>{{[Operating hours]}}</p>
-					</li>
-					{{/each}}
-				</ul>
-			</div>
-		</li>
-		{{/if}}
-
-		{{#if nearby.court}}
-		<li>
-			<table>
-				<caption>Nearby magistrates courts</caption>
-
-				<thead>
-					<tr>
-						<th>Court</th>
-						<th>Lodge applications</th>
-						<th>DV hearings</th>
-					</tr>
-					<!-- TODO pattern lib format
-		<div class="vcard">
-		<h2 class="fn org">Aboriginal and Torres Strait Islander Partnerships</h2>
-		<dl>
-		<dt>Phone:</dt>
-		<dd class="tel">
-		<span class="type">Work</span>
-		13 QGOV (<span class="value">13 74 68</span>)
-		</dd>
-		<dt>Email:</dt>
-		<dd><a href="mailto:askatsip@communities.qld.gov.au" class="email">askatsip@communities.qld.gov.au</a></dd>
-		<dt>Fax:</dt>
-		<dd class="tel">
-		<span class="type">Fax</span>
-		<span class="value">07 3224 2070</span>
-		</dd>
-		<dt>Website:</dt>
-		<dd><a href="http://www.communities.qld.gov.au/atsis/" class="url">www.communities.qld.gov.au/atsis/</a></dd>
-		<dt>Postal address:</dt>
-		<dd>
-		<span class="adr">
-		<span class="type">Post</span>
-		<span class="post-office-box">GPO Box 806</span><br />
-		<span class="locality">BRISBANE</span>&nbsp;
-		<span class="region">QLD</span>&nbsp;
-		<span class="postal-code">4001</span>
-		</span>
-		</dd>
-		<dt>Address:</dt>
-		<dd>
-		<span class="adr">
-		<span class="type">Work</span>
-		<span class="street-extended">Level 6A, Neville Bonner Building</span><br />
-		<span class="street-address">75 William Street</span><br />
-		<span class="locality">Brisbane</span>
-		<abbr title="Queensland" class="region">Qld</abbr>
-		<span class="postal-code">4000</span>
-		</span>
-		</dd>
-		</dl>
-		</div>
-
-							-->
-				<tbody>
-					{{#each nearby.court}}
-					<tr>
-						<td>
-							<strong>{{Title}}</strong><br>
-							<small>{{[Address 1]}}
-							{{[Address 2]}}
-							{{Suburb}}
-							{{Postcode}}<br>
-							<a target="_blank" href="https://maps.google.com.au/?ll={{Latitude}},{{Longitude}}&amp;q={{Title}}" title="Map to {{Title}}">view map</a></small>
-							<p>{{Phone}}</p>
-						</td>
-						<td>{{hours}}</td>
-						<td>{{DV}}</td>
-					</tr>
-					{{/each}}
-				</tbody>
-			</table>
-
-			Based on {{aggrievedYour}} address: {{aggrievedAddress}}
-		</li>
-		{{/if}}
-
-		<li>
-			<ul class="actions">
-				<li><strong><button>Continue</button></strong></li>
-			</ul>
-		</li>
-	</ol>
-</form>
+			</li>
+		</ol>
+	</form>
