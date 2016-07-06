@@ -145,12 +145,20 @@ $(function($) {
         // clean up data
         repeatData.splice(index + 1, 0, {}), 0 === section.find("button.del").length && section.find(".actions").append('<li><em><button type="button" class="del" name="' + this.name + '" value="0"><i class="fa fa-minus-square"></i> Remove ' + this.name + " 1</button></em></li>");
         // insert new section
-        var clone = section.clone();
-        $("input, select, textarea", clone).each(function(j, control) {
-            control.value = "";
-        }), clone.insertAfter(section), index++, section.nextAll(".section, .group").each(function(i, section) {
-            renumberControls(section, index + i);
-        });
+				var clone = section.clone();
+				$( 'input, select, textarea', clone ).each(function( j, control ) {
+					control.value = '';
+				});
+
+				// update following field names (e.g. child2 -> child3)
+				index++;
+				section.nextAll( '.section, .group' ).each(function( i, section ) {
+					renumberControls( section, index + i + 1 );
+				});
+
+				// set names for clone (e.g. child1 clone -> child2)
+				renumberControls( clone, index );
+				clone.insertAfter( section );
     }), // remove repeating section
     $(document).on("click", "button.del", function() {
         var index = parseInt(this.value, 10), repeatData = data[this.name];
@@ -455,6 +463,10 @@ $(function($) {
                 "#dvaf1-weapon-details2": {
                     name: "respondentWeaponThreat2",
                     value: "Yes"
+                },
+                "#dvaf1-ground-info": {
+                    name: "abuseEvents",
+                    value: "multiple"
                 }
             }
         },
@@ -464,17 +476,10 @@ $(function($) {
                     name: "conditionsNameChildren",
                     value: "Yes"
                 },
-                "#dvaf1-applicant-suffered": {
+                "#dvaf1-associate-protection": {
                     name: "associatesSuffered",
-                    value: "No"
+                    value: "Yes"
                 },
-                "#dvaf1-associate-protection": [ {
-                    name: "associatesSuffered",
-                    value: "Yes"
-                }, {
-                    name: "applicantSuffered",
-                    value: "Yes"
-                } ],
                 "#dvaf1-associate-protection-grounds": {
                     name: "conditionsNameAssociates",
                     value: "Yes"
@@ -607,7 +612,14 @@ $(function($) {
                 }
             }
         },
-        "dvaf1-associates-template": {},
+        "dvaf1-associates-template": {
+            relevance: {
+                ".dvaf1-associate": {
+                    name: "conditionsNameAssociates",
+                    value: "Yes"
+                }
+            }
+        },
         "dvaf1-respondent-template": {
             relevance: {
                 "#dvaf1-respondent-interpreter-language": {
@@ -659,8 +671,8 @@ $(function($) {
                     values: [ "user", "thirdParty" ]
                 },
                 "#dvaf1-applicant-type-details": {
-                    name: "applicationLodgedBy",
-                    values: [ "user", "thirdParty" ]
+                    name: "applicantPart",
+                    values: [ "A", "B", "D" ]
                 },
                 "#dvaf1-application-partA": {
                     name: "applicantPart",
