@@ -116,6 +116,12 @@ DvaForm1Page.prototype = Object.create( {}, {
 		}
 	},
 
+	gotoChildrenView: {
+		value: function() {
+			this.goto( 'Children' );
+		}
+	},
+
 	gotoDownloadView: {
 		value: function() {
 			this.goto( 'Download your application' );

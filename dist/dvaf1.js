@@ -1,4 +1,4 @@
-/*! dva-f-1 - v1.0.0 - 2016-06-16
+/*! dva-f-1 - v1.0.0 - 2016-07-07
 * https://github.com/bboyle/dva-f-1#readme
 * Copyright (c) 2016 Queensland Government; Licensed BSD-3-Clause */
 /* global Handlebars */
