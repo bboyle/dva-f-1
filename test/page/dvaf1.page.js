@@ -141,6 +141,36 @@ DvaForm1Page.prototype = Object.create( {}, {
 		}
 	},
 
+	radioNameChildren: {
+		get: function() {
+			return element( by.id( 'name-children-yes' ));
+		}
+	},
+
+	radioDoNotNameChildren: {
+		get: function() {
+			return element( by.id( 'name-children-no' ));
+		}
+	},
+
+	repeatField: {
+		value: function( selector ) {
+			return element.all( by.css( selector )).filter( filterIsDisplayed );
+		}
+	},
+
+	addRepeat: {
+		value: function( selector, n ) {
+			return this.repeatField( selector ).get( n - 1 ).element( by.css( '.add' ));
+		}
+	},
+
+	delRepeat: {
+		value: function( selector, n ) {
+			return this.repeatField( selector ).get( n - 1 ).element( by.css( '.del' ));
+		}
+	},
+
 	select: {
 		value: function( name, value ) {
 			element( by.name( name )).element( by.css( 'option[value="' + value + '"]' )).click();

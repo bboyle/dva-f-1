@@ -15,4 +15,20 @@ describe( 'children view', function() {
 		expect( childrenView.title ).toEqual( 'Are there children who live or spend time with you (the aggrieved) who need protection?' );
 	});
 
+	it( 'should allow a child to be added', function() {
+		expect( childrenView.repeatField( '.dvaf1-children' ).count() ).toEqual( 0 );
+		childrenView.radioNameChildren.click();
+		expect( childrenView.repeatField( '.dvaf1-children' ).count() ).toEqual( 1 );
+	});
+
+	it( 'should allow children to be added and removed', function() {
+		childrenView.radioNameChildren.click();
+		childrenView.addRepeat( '.dvaf1-children', 1 ).click();
+		expect( childrenView.repeatField( '.dvaf1-children' ).count() ).toEqual( 2 );
+		childrenView.addRepeat( '.dvaf1-children', 1 ).click();
+		expect( childrenView.repeatField( '.dvaf1-children' ).count() ).toEqual( 3 );
+		childrenView.delRepeat( '.dvaf1-children', 1 ).click();
+		expect( childrenView.repeatField( '.dvaf1-children' ).count() ).toEqual( 2 );
+	});
+
 });
