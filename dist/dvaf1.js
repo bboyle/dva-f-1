@@ -1,4 +1,4 @@
-/*! dva-f-1 - v1.0.0 - 2016-07-07
+/*! dva-f-1 - v1.0.1 - 2016-07-08
 * https://github.com/bboyle/dva-f-1#readme
 * Copyright (c) 2016 Queensland Government; Licensed BSD-3-Clause */
 /* global Handlebars */
@@ -100,8 +100,9 @@ $(function($) {
         var template = $("#" + key + "-partial").remove();
         return template.length ? (partial.template = Handlebars.compile(template.html()), 
         Handlebars.registerPartial(partial.name, partial.template), partial) : void delete partials[key];
-    }), // relevance
-    formView.on("click change", function(event) {
+    });
+    // relevance
+    var clickChange = function(event) {
         var index, question = $(event.target), name = event.target.name, value = $(event.target).val();
         if (!question.is("button.add, button.del")) if (// store data
         /^(event|child|associate)[0-9]+\./.test(name) ? (index = name.replace(/^(?:event|child|associate)([0-9]+).*$/, "$1"), 
@@ -109,7 +110,11 @@ $(function($) {
         data[name[0]][index][name[1]] = value) : (data[name] = parseValue(value), value.length && (value = $.trim(value).replace(/\s\s+/g, " "))), 
         question.is("select,:radio,:checkbox")) // handle data changes
         switch (// store boolean helpers (select controls)
-        question.is(":checkbox") ? (data.selected[name] = data.selected[name] || {}, data.selected[name][value] = event.target.checked) : (data.selected[name] = {}, 
+        question.is(":checkbox") ? $.isArray(name) ? (data[name[0]][index].selected = data[name[0]][index].selected || {}, 
+        data[name[0]][index].selected[name[1]] = data[name[0]][index].selected[name[1]] || {}, 
+        data[name[0]][index].selected[name[1]][value] = event.target.checked) : (data.selected[name] = data.selected[name] || {}, 
+        data.selected[name][value] = event.target.checked) : $.isArray(name) ? (data[name[0]][index].selected = data[name[0]][index].selected || {}, 
+        data[name[0]][index].selected[name[1]] = {}, data[name[0]][index].selected[name[1]][value] = !0) : (data.selected[name] = {}, 
         data.selected[name][value] = !0), name) {
           case "situationParty":
             parseGender("respondentGender", value);
@@ -139,18 +144,22 @@ $(function($) {
           case "aggrievedAddress":
             value.length && findServicesNearAddress(value);
         }
-    }), // add repeating section
+    };
+    formView.on("change", ":text, select, textarea", clickChange), formView.on("click", ":radio, :checkbox", clickChange), 
+    // add repeating section
     $(document).on("click", "button.add", function() {
         var index = parseInt(this.value, 10), repeatData = data[this.name], section = $(this).closest(".section, .group");
         // clean up data
         repeatData.splice(index + 1, 0, {}), 0 === section.find("button.del").length && section.find(".actions").append('<li><em><button type="button" class="del" name="' + this.name + '" value="0"><i class="fa fa-minus-square"></i> Remove ' + this.name + " 1</button></em></li>");
         // insert new section
         var clone = section.clone();
-        $("input, select, textarea", clone).each(function(j, control) {
+        $(":text, select, textarea", clone).each(function(j, control) {
             control.value = "";
-        }), clone.insertAfter(section), index++, section.nextAll(".section, .group").each(function(i, section) {
+        }), $(":radio, :checkbox", clone).each(function(j, control) {
+            control.checked = !1;
+        }), index++, renumberControls(clone, index), section.nextAll(".section, .group").each(function(i, section) {
             renumberControls(section, index + i);
-        });
+        }), clone.insertAfter(section);
     }), // remove repeating section
     $(document).on("click", "button.del", function() {
         var index = parseInt(this.value, 10), repeatData = data[this.name];

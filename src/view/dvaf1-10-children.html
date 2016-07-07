@@ -57,7 +57,7 @@
 							</legend>
 							<ul class="choices">
 								<li>
-									<input type="radio" name="child{{@index}}.livesWith" value="aggrieved" id="child{{@index}}-lives-with-aggrieved">
+									<input type="radio" name="child{{@index}}.livesWith" value="aggrieved" id="child{{@index}}-lives-with-aggrieved"{{#if selected.livesWith.aggrieved}} checked{{/if}}>
 									<label for="child{{@index}}-lives-with-aggrieved">
 										with {{aggrievedMe}}
 										{{#if selected.aggrievedAddressConfidential.Yes}}<em>(CONFIDENTIAL)</em>{{/if}}
@@ -66,7 +66,7 @@
 								</li>
 								{{#unless userIsAggrieved}}
 								<li>
-									<input type="radio" name="child{{@index}}.livesWith" value="applicant" id="child{{@index}}-lives-with-applicant">
+									<input type="radio" name="child{{@index}}.livesWith" value="applicant" id="child{{@index}}-lives-with-applicant"{{#if selected.livesWith.applicant}} checked{{/if}}>
 									<label for="child{{@index}}-lives-with-applicant">
 										with me
 										{{#if selected.applicantAddressConfidential.Yes}}<em>(CONFIDENTIAL)</em>{{/if}}
@@ -75,14 +75,14 @@
 								</li>
 								{{/unless}}
 								<li>
-									<input type="radio" name="child{{@index}}-lives-with" value="respondent" id="child{{@index}}-lives-with-respondent">
+									<input type="radio" name="child{{@index}}.livesWith" value="respondent" id="child{{@index}}-lives-with-respondent"{{#if selected.livesWith.respondent}} checked{{/if}}>
 									<label for="child{{@index}}-lives-with-respondent">
 										with {{respondentName}}
 										{{#if respondentAddress}}<span><br /><small>{{respondentAddress}}</small></span>{{/if}}
 									</label>
 								</li>
 								<li>
-									<input type="radio" name="child{{@index}}-lives-with" value="other" id="child{{@index}}-lives-with-other">
+									<input type="radio" name="child{{@index}}.livesWith" value="other" id="child{{@index}}-lives-with-other"{{#if selected.livesWith.other}} checked{{/if}}>
 									<label for="child{{@index}}-lives-with-other">
 										another address
 										{{#if selected.childAddressConfidential.Yes}}<em>(CONFIDENTIAL)</em>{{/if}}
@@ -100,11 +100,11 @@
 							</legend>
 							<ul class="choices compact">
 								<li>
-									<input type="radio" name="child{{@index}}-confidential-address" value="No" id="child{{@index}}-confidential-address-no">
+									<input type="radio" name="child{{@index}}.addressConfidential" value="No" id="child{{@index}}-confidential-address-no"{{#if selected.addressConfidential.No}} checked{{/if}}>
 									<label for="child{{@index}}-confidential-address-no">No</label>
 								</li>
 								<li>
-									<input type="radio" name="child{{@index}}-confidential-address" value="Yes" id="child{{@index}}-confidential-address-yes">
+									<input type="radio" name="child{{@index}}.addressConfidential" value="Yes" id="child{{@index}}-confidential-address-yes"{{#if selected.addressConfidential.Yes}} checked{{/if}}>
 									<label for="child{{@index}}-confidential-address-yes">Yes</label>
 								</li>
 							</ul>

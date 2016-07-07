@@ -31,4 +31,25 @@ describe( 'children view', function() {
 		expect( childrenView.repeatField( '.dvaf1-children' ).count() ).toEqual( 2 );
 	});
 
+	it( 'should remember child data when navigating between pages', function() {
+		childrenView.radioNameChildren.click();
+		childrenView.answer( 'child0.name', 'James Smith' );
+		childrenView.choose( 'child0.livesWith', 'applicant' );
+
+		childrenView.addRepeat( '.dvaf1-children', 1 ).click();
+		childrenView.answer( 'child1.name', 'Jessie Smith' );
+		childrenView.choose( 'child0.livesWith', 'aggrieved' );
+
+		childrenView.gotoCourtView();
+		childrenView.gotoChildrenView();
+
+		expect( element( by.name( 'child0.name' )).getAttribute( 'value' )).toBe( 'James Smith' );
+		expect( element.all( by.css( '[name="child0.livesWith"][value="applicant"]' )).count()).toBe( 1 );
+		// TODO fix test
+		// expect( element( by.css( '[name="child0.livesWith"][value="applicant"]' )).getAttribute( 'checked' )).toBeTruthy();
+		expect( element( by.name( 'child1.name' )).getAttribute( 'value' )).toBe( 'Jessie Smith' );
+		// TODO fix test
+		// expect( element( by.css( '[name="child1.livesWith"][value="aggrieved"]' )).getAttribute( 'checked' )).toBeTruthy();
+	});
+
 });
