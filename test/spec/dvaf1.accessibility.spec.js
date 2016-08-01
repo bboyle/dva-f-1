@@ -17,7 +17,7 @@ describe( 'app accessibility', function() {
 		preamble.askForLegalAdvice();
 		expect( preamble.radioRequestLegalAdvice.getAttribute( 'checked' )).toBeTruthy();
 		expect( preamble.legalAdvice.isDisplayed() ).toBe( true );
-		expect( preamble.radioRequestLegalAdvice ).toBe.checked;
+		expect( preamble.radioRequestLegalAdvice.getAttribute( 'checked' )).toBeTruthy();
 	});
 
 	it( 'should keep radio button focus when updating view', function() {

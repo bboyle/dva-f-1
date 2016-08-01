@@ -116,6 +116,12 @@ DvaForm1Page.prototype = Object.create( {}, {
 		}
 	},
 
+	gotoChildrenView: {
+		value: function() {
+			this.goto( 'Children' );
+		}
+	},
+
 	gotoDownloadView: {
 		value: function() {
 			this.goto( 'Download your application' );
@@ -132,6 +138,36 @@ DvaForm1Page.prototype = Object.create( {}, {
 	radioUserIsNotAggrieved: {
 		get: function() {
 			return element( by.id( 'user-is-aggrieved-No' ));
+		}
+	},
+
+	radioNameChildren: {
+		get: function() {
+			return element( by.id( 'name-children-yes' ));
+		}
+	},
+
+	radioDoNotNameChildren: {
+		get: function() {
+			return element( by.id( 'name-children-no' ));
+		}
+	},
+
+	repeatField: {
+		value: function( selector ) {
+			return element.all( by.css( selector )).filter( filterIsDisplayed );
+		}
+	},
+
+	addRepeat: {
+		value: function( selector, n ) {
+			return this.repeatField( selector ).get( n - 1 ).element( by.css( '.add' ));
+		}
+	},
+
+	delRepeat: {
+		value: function( selector, n ) {
+			return this.repeatField( selector ).get( n - 1 ).element( by.css( '.del' ));
 		}
 	},
 

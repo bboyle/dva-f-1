@@ -119,7 +119,7 @@ $(function( $ ) {
 	}
 
 	// relevance
-	formView.on( 'click change', function( event ) {
+	var clickChange = function( event ) {
 		var question = $( event.target );
 		var name = event.target.name;
 		var value = $( event.target ).val();
@@ -130,7 +130,7 @@ $(function( $ ) {
 		}
 
 		// store data
-		if (/^(event|child|associate)[0-9]+\./.test( name )) {
+		if ( /^(event|child|associate)[0-9]+\./.test( name )) {
 			// repeating fields
 			index = name.replace( /^(?:event|child|associate)([0-9]+).*$/, '$1' ),
 			name = name.split( /[0-9]+\./ );
@@ -147,11 +147,23 @@ $(function( $ ) {
 		if ( question.is( 'select,:radio,:checkbox' )) {
 			// store boolean helpers (select controls)
 			if ( question.is( ':checkbox' )) {
-				data.selected[ name ] = data.selected[ name ] || {};
-				data.selected[ name ][ value ] = event.target.checked;
+				if ( $.isArray( name )) {
+					data[ name[ 0 ]][ index ].selected = data[ name[ 0 ]][ index ].selected || {};
+					data[ name[ 0 ]][ index ].selected[ name[ 1 ]] = data[ name[ 0 ]][ index ].selected[ name[ 1 ]] || {};
+					data[ name[ 0 ]][ index ].selected[ name[ 1 ]][ value ] = event.target.checked;
+				} else {
+					data.selected[ name ] = data.selected[ name ] || {};
+					data.selected[ name ][ value ] = event.target.checked;
+				}
 			} else {
-				data.selected[ name ] = {};
-				data.selected[ name ][ value ] = true;
+				if ( $.isArray( name )) {
+					data[ name[ 0 ]][ index ].selected = data[ name[ 0 ]][ index ].selected || {};
+					data[ name[ 0 ]][ index ].selected[ name[ 1 ]] = {};
+					data[ name[ 0 ]][ index ].selected[ name[ 1 ]][ value ] = true;
+				} else {
+					data.selected[ name ] = {};
+					data.selected[ name ][ value ] = true;
+				}
 			}
 
 			// handle data changes
@@ -189,7 +201,9 @@ $(function( $ ) {
 				break;
 			}
 		}
-	});
+	};
+	formView.on( 'change', ':text, select, textarea', clickChange);
+	formView.on( 'click', ':radio, :checkbox', clickChange);
 
 
 	function renumberControls( section, n ) {
@@ -225,15 +239,20 @@ $(function( $ ) {
 
 		// insert new section
 		var clone = section.clone();
-		$( 'input, select, textarea', clone ).each(function( j, control ) {
+		$( ':text, select, textarea', clone ).each(function( j, control ) {
 			control.value = '';
 		});
-		clone.insertAfter( section );
+		$( ':radio, :checkbox', clone ).each(function( j, control ) {
+			control.checked = false;
+		});
 
 		index++;
+		renumberControls( clone, index );
 		section.nextAll( '.section, .group' ).each(function( i, section ) {
 			renumberControls( section, index + i );
 		});
+
+		clone.insertAfter( section );
 	});
 
 
